@@ -60,7 +60,7 @@ def al(data):
 	n = 32
 	d_v = 4
 	d_c = 8
-	snr = 5
+	snr = 20
 	H, G = make_ldpc(n, d_v, d_c, systematic=True, sparse=True)
 	gruplar = [data[i:i+32] for i in range(0, len(data), 32)]
 	ana_ort=np.abs(np.mean(data))
