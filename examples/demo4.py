@@ -71,15 +71,15 @@ def al(data):
 		else:
 			ortalamalar.append(ortalama)
 	ortalamalar=np.array(ortalamalar)	
-	print(ortalamalar[0])	
+	#print(ortalamalar[0])	
 	d = decode(H, ortalamalar, snr)
 	x=get_message(G, d)
 			
 	return x
 
 # Frekans aralığı
-lowcut = 14800.0
-highcut = 15200.0
+lowcut = 9600.0
+highcut = 10300.0
 
 # Grafik hazırlıkları
 fig, ax = plt.subplots()
