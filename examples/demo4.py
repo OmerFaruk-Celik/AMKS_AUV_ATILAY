@@ -114,7 +114,7 @@ def update_frame(frame):
 
     
     # Band-pass filtre uygulama
-    filtered_data = bandpass_filter(data_int, lowcut, highcut, RATE, order=6)*10
+    filtered_data = bandpass_filter(data_int, lowcut, highcut, RATE, order=6)*5
     
     # Frekans spektrumunu hesapla
     frekans = np.fft.rfftfreq(len(data_int), 1/RATE)
