@@ -138,7 +138,7 @@ def update_frame(frame):
         #print(genis_veri[:19])
         aa=al(genis_veri)
         if aa is not None:
-			print(aa)
+            print(aa)
     
     # Frekans değerini güncelle
     text.set_text(f'Frekans: {frekans_peak:.2f} Hz')
