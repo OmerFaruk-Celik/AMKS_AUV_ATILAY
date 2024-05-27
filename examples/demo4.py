@@ -75,7 +75,7 @@ def al(data):
 	d = decode(H, ortalamalar, snr)
 	x=get_message(G, d)
 	
-	if b_biti==x[:3]:
+	if np.array_equal(b_biti, x[:3]):
 		return x
 			
 	return None
