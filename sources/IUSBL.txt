@@ -1,0 +1,504 @@
+1. Giriş
+
+    Problem: Çoklu AUV navigasyonunda kullanılan geleneksel konumlandırma yöntemleri (LBL ve USBL) dezavantajlara sahip. LBL karmaşık, sınırlı kullanım alanına sahip ve yavaş. USBL ise ağır, pahalı ve az sayıda kullanıcıya hizmet verebiliyor.
+
+    Çözüm: Makale, çoklu AUV navigasyonunda kullanılabilecek yeni bir konumlandırma modeli olan "Ters Yönlü Ultra Kısa Baz Çizgisi" (iUSBL) öneriyor.
+
+2. iUSBL Sistemi
+
+    Çalışma Mantığı:
+
+        Ana AUV'de 4 elemanlı bir dizi bulunur ve bu dizi ortogonal kodlu sinyaller gönderir.
+
+        Köle AUV'lerde sadece alıcı hidrofonlar bulunur.
+
+        Köle AUV'ler, ana AUV'den gelen sinyallerin zaman gecikmelerini ölçerek konumlarını hesaplar.
+
+    Avantajlar:
+
+        Çoklu kullanıcı (tek bir ana AUV, çok sayıda köle AUV'yi konumlandırabilir)
+
+        Düşük maliyet ve ağırlık
+
+        Geniş çalışma alanı
+
+        Gizlilik (köle AUV'lerin konumları gizli kalır)
+
+3. Sinyal Tasarımı
+
+    Amaç: iUSBL sistemi için en uygun sinyalin bulunması.
+
+    Karşılaştırılan Sinyaller: DSSS (Doğrudan Dizi Yayılım Spektrumu), FH (Frekans Atlama), COSTAS
+
+    Testler: Oto-korelasyon, çapraz-korelasyon, gürültü direnci, çoklu yol etkisi direnci ve çoklu erişim müdahalesi direnci.
+
+    Sonuç: Simülasyon ve anekoik tank deneyleri, DSSS sinyalinin en iyi performansı gösterdiğini ortaya koyuyor.
+
+4. Deneysel Doğrulama
+
+    Amaç: DSSS, FH ve COSTAS sinyallerinin gerçek dünya performansını karşılaştırmak.
+
+    Yöntem: iUSBL sisteminin donanım prototipi oluşturulup anekoik tank ortamında test ediliyor.
+
+    Sonuçlar: DSSS sinyalinin zaman ölçümü, eş eksenli zaman gecikme farkı ve konumlandırma doğruluğu açısından en iyi performansı gösterdiği doğrulanıyor.
+
+5. Sonuç
+
+    iUSBL, çoklu AUV navigasyonunda yüksek doğruluk sağlayan, verimli ve pratik bir konumlandırma modeli.
+
+    DSSS sinyali, iUSBL sistemi için en uygun sinyal seçeneği olarak öneriliyor.
+
+Özetle: Makale, iUSBL modeli ve DSSS sinyal tasarımını kullanarak, çoklu AUV navigasyonunda daha etkili ve pratik bir konumlandırma sistemi sunuyor.
+
+
+
+USBL (Ultra Short Baseline) Sistemi
+
+    Çalışma Mantığı: USBL sisteminde, konumu bilinen bir referans noktasında (genellikle bir gemi veya denizaltı) bir USBL dizisi yer alır ve konumu belirlenmesi gereken hedef üzerinde bir transponder bulunur. USBL dizisi, hedef transponderine ses sinyalleri gönderir ve transponderden gelen yankı sinyallerinin zaman gecikmelerini ölçerek hedefin mesafesini ve açısını belirler.
+
+    Avantajları:
+
+        Nispeten yüksek doğruluk sağlayabilir.
+
+        Daha kompakt ve taşınabilir olabilir.
+
+    Dezavantajları:
+
+        Sadece tek bir hedef (transponder) konumlandırabilir.
+
+        Hedef transponderine bağımlıdır.
+
+        Hedef, USBL dizisine yakın olmak zorundadır.
+
+        Daha karmaşık sinyal işleme gerektirir.
+
+iUSBL (Inverted Ultra Short Baseline) Sistemi
+
+    Çalışma Mantığı: iUSBL'de, konumu bilinen bir ana AUV (Otonom Su Altı Aracı) üzerinde bir USBL dizisi yer alır ve konumu belirlenmesi gereken köle AUV'ler üzerinde sadece bir alıcı hidrofon bulunur. Ana AUV, dizi üzerinden dört ortogonal (birbirine dik) kodlu sinyal gönderir. Köle AUV'ler bu sinyalleri alır ve her bir sinyalin zaman gecikmesini analiz ederek ana AUV'ye göre konumlarını belirler.
+
+    Avantajları:
+
+        Çoklu kullanıcıya hizmet verebilir (tek bir ana AUV, çok sayıda köle AUV'yi konumlandırabilir).
+
+        Düşük maliyetli ve hafiftir (köle AUV'lerde sadece bir alıcı hidrofon bulunur).
+
+        Geniş çalışma alanına sahiptir.
+
+        Gizlilik sağlar (köle AUV'lerin konumları gizli kalır).
+
+    Dezavantajları:
+
+        Sinyal gücü ve işlemleme yetenekleri sınırlı olabilir.
+
+        Çoklu yol etkisi nedeniyle konumlandırma hassasiyeti etkilenebilir.
+
+Özetle:
+
+    USBL: Tek hedef konumlandırma için daha yüksek doğruluk sağlarken, daha karmaşık ve pahalı olabilir.
+
+    iUSBL: Çoklu hedef konumlandırma için daha uygun, daha hafif ve daha az maliyetli bir seçenektir, ancak hassasiyet konusunda USBL'den biraz daha düşük olabilir.
+
+
+
+
+
+LBL (Long Baseline) sistemi, USBL ve iUSBL sistemlerinden farklı olarak, deniz tabanına yerleştirilmiş sabit bir dizi transponder kullanır. İşte LBL, USBL ve iUSBL sistemlerinin temel farkları:
+
+LBL (Long Baseline) Sistemi
+
+    Çalışma Mantığı: LBL sisteminde, deniz tabanına sabit olarak yerleştirilmiş bir dizi transponder bulunur. Konumu belirlenmesi gereken hedef üzerinde ise bir transponder veya hidrofon yer alır. Hedef transponderi, LBL transponderlerinden sinyal alır ve her bir transponderden gelen sinyallerin zaman gecikmelerini ölçer. Bu zaman gecikmelerine göre hedef transponderinin konumu hesaplanır.
+
+    Avantajlar:
+
+        Yüksek doğruluk sağlayabilir.
+
+        Geniş bir çalışma alanına sahiptir (transponderler geniş bir alanı kapsayabilir).
+
+        Daha az çoklu yol etkisi yaşanır (transponderler sabit olduğu için, ses dalgalarının yansıması daha az olur).
+
+    Dezavantajlar:
+
+        Kurulum ve kalibrasyon oldukça karmaşık ve zaman alıcıdır.
+
+        Transponderlerin deniz tabanına yerleştirilmesi ve bakımı zor olabilir.
+
+        Sınırlı sayıda kullanıcıya hizmet verebilir (genellikle bir veya iki hedef).
+
+        Hedefin LBL dizisine yakın olması gerekir.
+
+USBL (Ultra Short Baseline) Sistemi
+
+    Çalışma Mantığı: USBL sisteminde, konumu bilinen bir referans noktasında (genellikle bir gemi veya denizaltı) bir USBL dizisi yer alır ve konumu belirlenmesi gereken hedef üzerinde bir transponder bulunur. USBL dizisi, hedef transponderine ses sinyalleri gönderir ve transponderden gelen yankı sinyallerinin zaman gecikmelerini ölçerek hedefin mesafesini ve açısını belirler.
+
+    Avantajları:
+
+        LBL'den daha basit kurulum ve kalibrasyon.
+
+        Daha az ekipman gerektirir.
+
+        Daha taşınabilir olabilir.
+
+    Dezavantajları:
+
+        LBL'den daha düşük doğruluk sağlayabilir.
+
+        Sınırlı çalışma alanı (hedefin USBL dizisine yakın olması gerekir).
+
+        Daha fazla çoklu yol etkisi yaşanabilir (hedefin yüzeye yakın olması durumunda).
+
+iUSBL (Inverted Ultra Short Baseline) Sistemi
+
+    Çalışma Mantığı: iUSBL'de, konumu bilinen bir ana AUV (Otonom Su Altı Aracı) üzerinde bir USBL dizisi yer alır ve konumu belirlenmesi gereken köle AUV'ler üzerinde sadece bir alıcı hidrofon bulunur. Ana AUV, dizi üzerinden dört ortogonal (birbirine dik) kodlu sinyal gönderir. Köle AUV'ler bu sinyalleri alır ve her bir sinyalin zaman gecikmesini analiz ederek ana AUV'ye göre konumlarını belirler.
+
+    Avantajları:
+
+        Çoklu kullanıcıya hizmet verebilir (tek bir ana AUV, çok sayıda köle AUV'yi konumlandırabilir).
+
+        Düşük maliyetli ve hafiftir (köle AUV'lerde sadece bir alıcı hidrofon bulunur).
+
+        Geniş çalışma alanına sahiptir.
+
+        Gizlilik sağlar (köle AUV'lerin konumları gizli kalır).
+
+    Dezavantajları:
+
+        Sinyal gücü ve işlemleme yetenekleri sınırlı olabilir.
+
+        Çoklu yol etkisi nedeniyle konumlandırma hassasiyeti etkilenebilir.
+
+Özetle:
+
+    LBL: Yüksek doğruluk için ideal, ancak kurulumu ve bakımı zor.
+
+    USBL: LBL'den daha pratik, ancak doğruluk daha düşük.
+
+    iUSBL: Çoklu kullanıcı, düşük maliyet ve gizlilik için avantajlı, ancak doğruluk ve çoklu yol etkisi direnci açısından sınırlamaları olabilir.
+
+Hangisinin daha uygun olduğu, uygulamaya ve ihtiyaçlara göre değişir.
+
+
+
+
+
+SBL (Short Baseline) sistemi, USBL (Ultra Short Baseline) ve iUSBL (Inverted Ultra Short Baseline) gibi, su altı konumlandırma için kullanılan bir sistemdir. Ancak SBL, USBL'ye benzer bir yapıya sahip olmasına rağmen, dizi boyutunda ve doğrulukta farklılık gösterir.
+
+SBL (Short Baseline) Sistemi
+
+    Çalışma Mantığı: SBL sisteminde, konumu bilinen bir referans noktasında (genellikle bir gemi veya denizaltı) iki veya daha fazla sensör (hidrofon) bulunan bir dizi yer alır. Konumu belirlenmesi gereken hedef üzerinde ise bir transponder bulunur. Dizi, hedef transponderine ses sinyalleri gönderir ve transponderden gelen yankı sinyallerinin zaman gecikmelerini ölçer. Bu zaman gecikmelerine göre hedefin konumu hesaplanır.
+
+    Avantajları:
+
+        USBL'ye göre daha yüksek doğruluk sağlayabilir.
+
+        USBL'den daha kompakt ve taşınabilir olabilir.
+
+        Daha az çoklu yol etkisi yaşanabilir.
+
+    Dezavantajları:
+
+        USBL'den daha az çalışma alanına sahiptir (hedefin SBL dizisine daha yakın olması gerekir).
+
+        USBL'den daha yüksek maliyetli olabilir (daha fazla sensöre ihtiyaç duyulur).
+
+        Daha karmaşık sinyal işleme gerektirir.
+
+USBL (Ultra Short Baseline) Sistemi
+
+    Çalışma Mantığı: USBL sisteminde, konumu bilinen bir referans noktasında (genellikle bir gemi veya denizaltı) bir USBL dizisi yer alır ve konumu belirlenmesi gereken hedef üzerinde bir transponder bulunur. USBL dizisi, hedef transponderine ses sinyalleri gönderir ve transponderden gelen yankı sinyallerinin zaman gecikmelerini ölçerek hedefin mesafesini ve açısını belirler.
+
+    Avantajları:
+
+        Nispeten yüksek doğruluk sağlayabilir.
+
+        Daha kompakt ve taşınabilir olabilir.
+
+    Dezavantajları:
+
+        Sadece tek bir hedef (transponder) konumlandırabilir.
+
+        Hedef transponderine bağımlıdır.
+
+        Hedef, USBL dizisine yakın olmak zorundadır.
+
+        Daha karmaşık sinyal işleme gerektirir.
+
+iUSBL (Inverted Ultra Short Baseline) Sistemi
+
+    Çalışma Mantığı: iUSBL'de, konumu bilinen bir ana AUV (Otonom Su Altı Aracı) üzerinde bir USBL dizisi yer alır ve konumu belirlenmesi gereken köle AUV'ler üzerinde sadece bir alıcı hidrofon bulunur. Ana AUV, dizi üzerinden dört ortogonal (birbirine dik) kodlu sinyal gönderir. Köle AUV'ler bu sinyalleri alır ve her bir sinyalin zaman gecikmesini analiz ederek ana AUV'ye göre konumlarını belirler.
+
+    Avantajları:
+
+        Çoklu kullanıcıya hizmet verebilir (tek bir ana AUV, çok sayıda köle AUV'yi konumlandırabilir).
+
+        Düşük maliyetli ve hafiftir (köle AUV'lerde sadece bir alıcı hidrofon bulunur).
+
+        Geniş çalışma alanına sahiptir.
+
+        Gizlilik sağlar (köle AUV'lerin konumları gizli kalır).
+
+    Dezavantajları:
+
+        Sinyal gücü ve işlemleme yetenekleri sınırlı olabilir.
+
+        Çoklu yol etkisi nedeniyle konumlandırma hassasiyeti etkilenebilir.
+
+SBL ve USBL Arasındaki Farklar:
+
+    Dizi Boyutu: SBL, USBL'den daha büyük bir dizi kullanır (genellikle iki veya daha fazla sensör).
+
+    Doğruluk: SBL, USBL'ye göre daha yüksek doğruluk sağlayabilir, çünkü daha fazla sensör kullanır.
+
+    Çalışma Alanı: SBL'nin çalışma alanı, USBL'ye göre daha sınırlıdır çünkü dizi daha büyük olduğundan, hedefin diziye daha yakın olması gerekir.
+
+    Maliyet: SBL, USBL'den daha maliyetli olabilir çünkü daha fazla sensöre ihtiyaç duyar.
+
+Özetle:
+
+    SBL: USBL'ye göre daha yüksek doğruluk sunar, ancak daha büyük bir dizi, daha yüksek maliyet ve daha sınırlı çalışma alanı anlamına gelir.
+
+    USBL: SBL'den daha kompakt, daha az maliyetli ve daha geniş bir çalışma alanına sahip, ancak doğruluk daha düşük olabilir.
+
+SBL, yüksek doğruluk gerektiren uygulamalarda (örneğin, su altı araçlarının hassas konumlandırılması) tercih edilebilir. USBL ise, daha az doğruluk gereksiniminin olduğu veya daha kompakt bir çözüme ihtiyaç duyulan uygulamalarda tercih edilebilir.
+
+Umarım bu açıklama yardımcı olmuştur. Başka sorularınız varsa lütfen sormaktan çekinmeyin!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    LBL Sistemleri: Deniz tabanına yerleştirilen transponder ağlarını kullanarak sualtı araçları ve dalgıçların konumunu belirleyen sistemlerdir. LBL, yüksek doğruluk ve kararlılık sağlayan ve derinlikten bağımsız bir sistemdir. Genellikle hassas sualtı araştırmaları ve araştırmalarında kullanılır.
+
+    SBL Sistemleri: Tekne veya gemiye monte edilen sonar dönüştürücüler kullanarak konum belirleyen sistemlerdir. SBL sistemleri, dönüştürücü aralığına bağlı olarak doğruluk değişir. Geniş aralıklar, LBL sistemlerine benzer doğruluk sağlar. Daha kısa aralıklar, daha az doğrulukla sonuçlanır. SBL, genellikle küçük botlarla veya belirli uygulamalarla çalışır.
+
+    USBL Sistemleri: Tekne veya gemiye monte edilen küçük bir dönüştürücü dizisi kullanarak konum belirleyen sistemlerdir. USBL, mesafeyi ve yönü hesaplamak için dönüştürücü dizisindeki faz kaymasını kullanır. USBL sistemleri, LBL'den daha az hassas ve kararlıdır ancak deniz tabanında hiçbir donanım gerektirmez. Genellikle sualtı araçlarını ve dalgıçları izlemek için kullanılır.
+
+Makale, ayrıca GPS Akıllı Şamandıra (GIB) sistemlerini ele alıyor. GIB, tersine çevrilmiş LBL sistemleridir ve GPS donanımlı şamandıralar kullanarak konum belirlenir. GIB, sualtı araçlarını ve dalgıçları izlemek, uçak kara kutularını bulmak ve silah testlerinde darbe koordinatlarını belirlemek için kullanılabilir.
+
+Makalede ayrıca her sistemin tarihçesi, çalışma prensipleri, performans özellikleri ve gerçek kullanım örnekleri açıklanmaktadır. Bu örnekler, USS Thresher'ın batığını arama, I-52'nin batığını arama, SCINI ROV'nin Antarktika'da deniz buzunun altında çalışması ve TARGT silah tespiti sistemi dahildir.
+
+
+
+
+    Konum belirleme: Tüm sistemler, triangülasyon prensibine dayanır. Yani, bilinen noktalardan hedef noktasına olan mesafeleri ölçerek hedef noktasının konumunu hesaplarlar.
+
+    Mesafenin ölçülmesi: Mesafeler, sesin suda yayılma hızını kullanarak ses dalgalarının gidiş-dönüş süresini ölçerek belirlenir.
+
+    Yönün ölçülmesi: USBL sistemleri, ses dalgalarının dönüştürücü dizisindeki farklı elemanlara ulaşma zamanlarındaki farkı ölçerek faz kaymasını hesaplar. Bu fark, hedefe olan yönü belirlemek için kullanılır.
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+Makale, Otonom Su Altı Araçları (AUV'ler) için yeni bir akustik-eylemsizlik navigasyon sistemi (AINS) sunmaktadır. Makale, AUV'lerin konumlandırılması için düşük maliyetli ve düşük gecikmeli bir çözüm sunmayı amaçlamaktadır.
+
+Makaledeki Ana Noktalar:
+
+    Giriş: AUV'lerin konumlandırılması için mevcut sistemlerin genellikle yüksek doğruluk sağlayan fakat yüksek maliyetli eylemsizlik sensörleri kullandığı belirtilmektedir. Bu nedenle, daha düşük maliyetli bir çözüm arayışı bulunmaktadır.
+
+    Sorun Tanımı: Makalede, 2D ileri bakışlı sonar (FLS) ve bir MEMS eylemsizlik ölçüm birimi (IMU) kullanarak AUV'lerin konumlandırılması problemi ele alınmaktadır. IMU'nun kinematik modeli ve sonar ölçüm modeli, Kalman Filtresi (KF) çerçevesinde açıklanmıştır.
+
+    Akustik-Eylemsizlik Odometrisi: Makalede, akustik ve eylemsizlik bilgilerini birleştiren yeni bir akustik-eylemsizlik odometri algoritması önerilmektedir. Bu algoritma, sonar özelliklerini durum vektöründe tutmadan, hesaplama karmaşıklığını çevrenin ölçeğinden bağımsız hale getirmektedir.
+
+    Akustik Özellik Üçgenlemesi: Makalede, akustik özelliklerin konumunu belirlemek için doğrusal bir üçgenleme yöntemi sunulmuştur. Bu yöntem, tekrarlayan çözücüler için daha doğru başlangıç tahminleri sağlar. Ayrıca, sensör hareketinin üçgenleme üzerindeki etkilerini inceleyen ayrıntılı bir gözlenebilirlik analizi yapılmıştır.
+
+    Çevrimiçi Dışsal Kalibrasyon: IMU ve sonar arasındaki dışsal kalibrasyonun su altında önceden gerçekleştirilmesinin zor olduğuna dikkat çekilmektedir. Bu nedenle, IMU ve sonar arasındaki dışsal kalibrasyonun çevrimiçi olarak gerçekleştirilmesini önermektedir.
+
+    Simülasyon Sonuçları: Önerilen AINS algoritması, Monte Carlo simülasyonları kullanılarak değerlendirilmiştir. Simülasyon sonuçları, algoritmanın iyi doğruluk ve tutarlılık sağladığını göstermektedir.
+
+Matematiksel Formüller:
+
+    IMU Kinematik Modeli:
+
+        IG q̄: Küresel çerçeve {G} den IMU çerçevesine {I} dönme için birim kuaterniyon
+
+        bg ve ba: IMU ölçümlerindeki jiroskop ve ivmeölçer önyargıları
+
+        G vI ve G pI: IMU'nun küresel çerçevedeki hızı ve konumu
+
+    Sonar Ölçüm Modeli:
+
+        Si pfj: i.inci sonar çerçevesinde {Si} görünen fj özelliğinin konumu
+
+        G pfj: Küresel çerçevedeki fj özelliğinin konumu
+
+        rSi: fj özelliğinin i.inci sonar çerçevesindeki menzili
+
+        φSi: fj özelliğinin i.inci sonar çerçevesindeki azimut açısı
+
+        θSi: fj özelliğinin i.inci sonar çerçevesindeki yükselti açısı
+
+    EKF ile Stokastik Klonlama:
+
+        xk: k zaman adımındaki durum vektörü
+
+        xIMUk: k zaman adımındaki IMU durumu
+
+        xcalib: IMU ve sonar arasındaki dışsal kalibrasyon
+
+        xIi: klonlanan i.inci IMU durumu
+
+        xf: tespit edilen tüm özellikler
+
+    Akustik Özellik Üçgenlemesi:
+
+        bSi: fj özelliğinin {Si} çerçevesindeki yön vektörü
+
+        bSi⊥: bSi'nin dik vektörü
+
+        SN pSi: i.inci sonar çerçevesinde {Si} sonarın konumu
+
+    Doğrusal En Küçük Kareler Optimizasyonu:
+
+        B: Doğrusal üçgenleme için denklem sistemini temsil eden matris
+
+        b: Doğrusal üçgenleme için denklem sistemini temsil eden vektör
+
+Sonuç:
+
+Makale, düşük maliyetli bir AUV navigasyon sistemi için umut vadeden bir çözüm sunmaktadır. AINS algoritması, sonar ve IMU ölçümlerini etkili bir şekilde birleştirerek doğruluk ve tutarlılık sağlamaktadır. Özelliklerin durum vektöründen çıkarılması, hesaplama karmaşıklığını azaltırken, üçgenleme yöntemi ve gözlenebilirlik analizi, doğruluğun iyileştirilmesi için önemli adımlar sağlamaktadır.
+
+
+
+
+
+
+Makalede verilen matematiksel formüller, AUV'lerin konumlandırılması için kullanılan akustik-eylemsizlik navigasyon sistemini (AINS) modellemek ve açıklamak için kullanılıyor. Bu formüller, IMU'nun kinematik modelini, sonar ölçüm modelini, EKF algoritmasını ve akustik özellik üçgenlemesini temsil ediyor.
+
+İşte makalede kullanılan temel matematiksel formüller:
+
+IMU Kinematik Modeli:
+
+    Dönme:
+
+        IG q̄: Küresel çerçeve {G} den IMU çerçevesine {I} dönme için birim kuaterniyon.
+
+    Ω(ω) =
+
+    − ω ×
+    −ω T
+    0
+    : Açısal hız vektörü ω ile ilgili skew-symmetric matris.
+
+        bg ve ba: IMU ölçümlerindeki jiroskop ve ivmeölçer önyargıları.
+
+    Hız ve Konum:
+
+        G vI ve G pI: IMU'nun küresel çerçevedeki hızı ve konumu.
+
+    Dinamik Denklemler:
+
+        G q̄(t) = 1/2 Ω(ωm (t) − bg (t) − ng (t))IG q̄(t)
+
+        G v̇I (t) = RT (IG q̄)(I am − ba (t) − na (t)) + G g
+
+        G ṗI (t) = G vI (t)
+
+Sonar Ölçüm Modeli:
+
+    Sonar Çerçevesinde Özellik Konumu:
+
+        Si pfj: i.inci sonar çerçevesinde {Si} görünen fj özelliğinin konumu.
+
+        rSi: fj özelliğinin i.inci sonar çerçevesindeki menzili.
+
+        φSi: fj özelliğinin i.inci sonar çerçevesindeki azimut açısı.
+
+        θSi: fj özelliğinin i.inci sonar çerçevesindeki yükselti açısı.
+
+    Ölçüm Denklemi:
+
+        zSi =
+        ⎡
+        rSi
+        Si y
+        φ Si
+        ⎤
+        =
+        ⎣
+        Si x 2 + Si y 2 + Si z 2
+        Si xjj
+        arctan Si xjj
+        ⎦
+
+        nSi
+
+EKF ile Stokastik Klonlama:
+
+    Durum Vektörü:
+
+        xk: k zaman adımındaki durum vektörü.
+
+        xIMUk: k zaman adımındaki IMU durumu.
+
+        xcalib: IMU ve sonar arasındaki dışsal kalibrasyon.
+
+        xIi: klonlanan i.inci IMU durumu.
+
+        xf: tespit edilen tüm özellikler.
+
+Akustik Özellik Üçgenlemesi:
+
+    Yön Vektörü ve Dik Vektör:
+
+        bSi: fj özelliğinin {Si} çerçevesindeki yön vektörü.
+
+        bSi⊥: bSi'nin dik vektörü.
+
+    Doğrusal Üçgenleme Denklemleri:
+    *
+    ⎡
+    bS1⊥ T R(SS1N q̄)
+    bS2⊥ T R(SS2N q̄)
+    ...
+    bSn⊥ T R(SSnN q̄)
+    ⎤
+    pfj =
+    ⎣
+    bS1⊥ T R(SS1N q̄) pS1
+    bS2⊥ T R(SS2N q̄) pS2
+    ...
+    bSn⊥ T R(SSnN q̄) pSn
+    ⎦
+
+Doğrusal En Küçük Kareler Optimizasyonu:
+
+    Doğrusal Üçgenleme Denklemleri:
+
+        B: Doğrusal üçgenleme için denklem sistemini temsil eden matris.
+
+        b: Doğrusal üçgenleme için denklem sistemini temsil eden vektör.
+
+Gözlem Analizi:
+
+    Matris R(SSiN q̄): IMU ve sonar arasındaki dönme matrisi.
+
+    Vektör SN pSi: i.inci sonar çerçevesinde {Si} sonarın konumu.
+
+Bu formüller, makalede açıklanan AINS sisteminin temel matematiksel temellerini oluşturmaktadır.
