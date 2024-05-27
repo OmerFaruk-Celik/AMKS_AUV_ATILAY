@@ -143,6 +143,7 @@ while True:
         aa=al(genis_veri)
         if aa is not None:
             print(aa)
+    print(gecen_sure )
     
     # Frekans değerini güncelle
     #text.set_text(f'Frekans: {frekans_peak:.2f} Hz')
