@@ -97,6 +97,7 @@ text2 = ax.text(0.4, 0.9, '', transform=ax.transAxes)
 
 # Mesaj için metin ekleyin
 message_text = ax.text(0.05, 0.85, '', transform=ax.transAxes)
+t = np.arange(0, CHUNK) / RATE
 
 def update_frame(frame):
     # Ses verilerini oku
