@@ -65,7 +65,7 @@ def al(data):
 	
 	for grup in gruplar:
 		ortalama=np.mean(grup)
-		if ortalama <0:
+		if ortalama <=0:
 			ortalamalar.append(ortalama)
 		else:
 			ortalamalar.append(ortalama)
