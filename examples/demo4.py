@@ -54,6 +54,7 @@ def bitleri_cozumle(data):
     
     
 def al(data):
+	b_biti=[1,1,1]
 	n = 32
 	d_v = 4
 	d_c = 8
@@ -74,9 +75,10 @@ def al(data):
 	d = decode(H, ortalamalar, snr)
 	x=get_message(G, d)
 	
-	#print(ortalamalar)
+	if b_biti==x[:3]:
+		return x
 			
-	return x
+	return None
 
 # Frekans aralığı
 lowcut = 4500.0
