@@ -57,7 +57,7 @@ def al(data):
 	n = 32
 	d_v = 4
 	d_c = 8
-	snr = 10
+	snr = 20
 	H, G = make_ldpc(n, d_v, d_c, systematic=True, sparse=True)
 	gruplar = [data[i:i+64] for i in range(0, len(data), 64)]
 	ana_ort=np.abs(np.mean(data))
@@ -118,11 +118,14 @@ def update_frame(frame):
     frekans = np.fft.rfftfreq(len(data_int), 1/RATE)
     spektrum = np.fft.rfft(data_int)
     frekans_peak = frekans[np.argmax(np.abs(spektrum))]
+    m2=filtered_data/32767
+    genis_veri=(m2/tasiyici_dalga +1)/2
+
     
     # Veriyi güncelle
     line.set_ydata(filtered_data)
     if frekans_peak >lowcut  and frekans_peak<highcut:
-        print(al(filtered_data))
+        print(al(genis_veri))
     
     # Frekans değerini güncelle
     text.set_text(f'Frekans: {frekans_peak:.2f} Hz')
