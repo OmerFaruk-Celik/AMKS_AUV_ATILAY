@@ -121,6 +121,7 @@ def update_frame(frame):
     spektrum = np.fft.rfft(data_int)
     frekans_peak = frekans[np.argmax(np.abs(spektrum))]
     m2=filtered_data/32767
+    print("eleman :",m2[0])
     d=np.array(m2)
     print("m2 :",np.sum(d<=0))
     genis_veri=(m2/tasiyici_dalga +1)/2
