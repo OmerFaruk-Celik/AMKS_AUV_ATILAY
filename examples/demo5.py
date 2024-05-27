@@ -6,7 +6,7 @@ from scipy.signal import hilbert, butter, filtfilt
 import time
 from pyldpc import make_ldpc, encode, decode, get_message
 # Ses kayıt parametreleri
-CHUNK = 1024 * 2  # Her seferde alınacak örnek sayısı
+CHUNK = 1024 * 1  # Her seferde alınacak örnek sayısı
 FORMAT = pyaudio.paInt16  # Örnek formatı
 CHANNELS = 1  # Kanal sayısı
 RATE = 44100  # Örnekleme hızı
@@ -62,7 +62,7 @@ def al(data):
 	d_c = 8
 	snr = 20
 	H, G = make_ldpc(n, d_v, d_c, systematic=True, sparse=True)
-	gruplar = [data[i:i+64] for i in range(0, len(data), 64)]
+	gruplar = [data[i:i+32] for i in range(0, len(data), 32)]
 	ana_ort=np.abs(np.mean(data))
 	ortalamalar =[]
 	
