@@ -83,8 +83,8 @@ def al(data):
 	return None
 
 # Frekans aralığı
-lowcut = tasiyici_frekans-200
-highcut = tasiyici_frekans+200
+lowcut = tasiyici_frekans-300
+highcut = tasiyici_frekans+300
 
 # Grafik hazırlıkları
 #fig, ax = plt.subplots()
@@ -125,7 +125,7 @@ while True:
     frekans = np.fft.rfftfreq(len(data_int), 1/RATE)
     spektrum = np.fft.rfft(data_int)
     frekans_peak = frekans[np.argmax(np.abs(spektrum))]
-    print(frekans_peak)
+    #print(frekans_peak)
     m2=filtered_data
     #print("eleman :",m2[0])
     d=np.array(m2)
