@@ -120,7 +120,7 @@ while True:
     
     # Band-pass filtre uygulama
     filtered_data = bandpass_filter(data_int, lowcut, highcut, RATE, order=5)
-    filtered_data = hilbert(filtered_data).real
+    #filtered_data = hilbert(filtered_data).real
     
     # Frekans spektrumunu hesapla
     frekans = np.fft.rfftfreq(len(data_int), 1/RATE)
