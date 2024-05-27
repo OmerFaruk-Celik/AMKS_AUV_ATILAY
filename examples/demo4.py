@@ -73,6 +73,8 @@ def al(data):
 	#print(ortalamalar[0])	
 	d = decode(H, ortalamalar, snr)
 	x=get_message(G, d)
+	
+	print(ortalamalar)
 			
 	return x
 
