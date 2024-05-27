@@ -77,8 +77,8 @@ def al(data):
 	return x
 
 # Frekans aralığı
-lowcut = 8800.0
-highcut = 9200.0
+lowcut = 9800.0
+highcut = 10200.0
 
 # Grafik hazırlıkları
 fig, ax = plt.subplots()
@@ -120,6 +120,7 @@ def update_frame(frame):
     frekans_peak = frekans[np.argmax(np.abs(spektrum))]
     m2=filtered_data/32767
     genis_veri=(m2/tasiyici_dalga +1)/2
+    genis_veri=np.where(genis_veri <=0,-1,genis_veri)
     
 
     
