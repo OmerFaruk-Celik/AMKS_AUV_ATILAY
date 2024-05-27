@@ -1,9 +1,10 @@
 import pyaudio
 import numpy as np
+import matplotlib.pyplot as plt
+import matplotlib.animation as animation
+from scipy.signal import hilbert, butter, filtfilt
 import time
 from pyldpc import make_ldpc, encode, decode, get_message
-from scipy.signal import hilbert, butter, filtfilt
-
 # Ses kayıt parametreleri
 CHUNK = 1024 * 2  # Her seferde alınacak örnek sayısı
 FORMAT = pyaudio.paInt16  # Örnek formatı
@@ -53,6 +54,7 @@ def bitleri_cozumle(data):
     
     
 def al(data):
+	b_biti=[1,1,1]
 	n = 32
 	d_v = 4
 	d_c = 8
@@ -73,13 +75,25 @@ def al(data):
 	d = decode(H, ortalamalar, snr)
 	x=get_message(G, d)
 	
-	#print(ortalamalar)
+	if np.array_equal(b_biti, x[:3]):
+		return x
 			
-	return x
+	return None
 
 # Frekans aralığı
-lowcut = 4700.0
-highcut = 5100.0
+lowcut = 4500.0
+highcut = 5500.0
+
+# Grafik hazırlıkları
+#fig, ax = plt.subplots()
+#x = np.arange(0, 2 * CHUNK, 2)
+#line, = ax.plot(x, np.random.rand(CHUNK))
+
+#ax.set_ylim(-2000, 2000)
+#ax.set_xlim(0, 2 * CHUNK)
+#plt.xlabel('Zaman')
+#plt.ylabel('Genlik')
+#plt.title('Osiloskop')
 
 # Frekans değeri için metin ekleyin
 #text = ax.text(0.05, 0.9, '', transform=ax.transAxes)
@@ -91,6 +105,7 @@ t = np.arange(0, CHUNK) / RATE
 tasiyici_dalga = np.sin(2 * np.pi * 5000 * t)
 tasiyici_dalga=np.where(tasiyici_dalga==0,1e-10,tasiyici_dalga)
 
+#def update_frame(frame):
 while True:
     # Ses verilerini oku
     baslama_zamani = time.time()
@@ -99,8 +114,10 @@ while True:
     bitme_zamani = time.time()
     gecen_sure = bitme_zamani - baslama_zamani
 
+
+    
     # Band-pass filtre uygulama
-    filtered_data = bandpass_filter(data_int, lowcut, highcut, RATE, order=6)*5
+    filtered_data = bandpass_filter(data_int, lowcut, highcut, RATE, order=5)*2
     
     # Frekans spektrumunu hesapla
     frekans = np.fft.rfftfreq(len(data_int), 1/RATE)
@@ -113,27 +130,36 @@ while True:
     genis_veri=(m2/tasiyici_dalga +1)/2
     #print("genis_veri :",np.sum(genis_veri<=0))
     genis_veri=np.where(genis_veri <=0,-1,1)
+    
 
     
     # Veriyi güncelle
     #line.set_ydata(filtered_data)
     if frekans_peak >lowcut  and frekans_peak<highcut:
         #print(genis_veri[:19])
-        print(al(genis_veri))
+        aa=al(genis_veri)
+        if aa is not None:
+            print(aa)
     
     # Frekans değerini güncelle
     #text.set_text(f'Frekans: {frekans_peak:.2f} Hz')
     #text2.set_text(f'Sure: {gecen_sure:.4f} ms')
 
     # Bitleri çözümle ve mesajı yazdır
-    demodulated_signal = hilbert(filtered_data).real
-    mesaj = bitleri_cozumle(demodulated_signal)
-    if mesaj is not None:
-        print(f'Mesaj: {mesaj}')
+    #demodulated_signal = hilbert(filtered_data).real
+    #mesaj = bitleri_cozumle(demodulated_signal)
+    #if mesaj is not None:
+    #    message_text.set_text(f'Mesaj: {mesaj}')
     #else:
     #    message_text.set_text('Mesaj: None')
     
     #return line, text, message_text
+
+# Animasyonu başlat
+#ani = animation.FuncAnimation(fig, update_frame, interval=1, blit=True)
+
+# Grafik gösterimi
+#plt.show()
 
 # Akışı kapat ve kaynakları serbest bırak
 stream.stop_stream()
