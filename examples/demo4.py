@@ -62,6 +62,7 @@ def al(data):
 	gruplar = [data[i:i+128] for i in range(0, len(data), 128)]
 	ana_ort=np.abs(np.mean(data))
 	ortalamalar =[]
+	print(data[0])
 	for grup in gruplar:
 		ortalama=np.mean(grup)
 		if ortalama <0:
