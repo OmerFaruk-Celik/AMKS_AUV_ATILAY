@@ -68,10 +68,10 @@ def al(data):
 			ortalamalar.append(0)
 		else:
 			ortalamalar.append(1)
-			
+	ortalamalar=np.array(ortalamalar)		
 	d = decode(H, ortalamalar, snr)
 	x=get_message(G, d)
-	print(x)			
+			
 	return x
 
 # Frekans aralığı
