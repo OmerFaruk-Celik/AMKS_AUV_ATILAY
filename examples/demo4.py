@@ -77,7 +77,7 @@ def al(data):
 	return x
 
 # Frekans aralığı
-lowcut = 9800.0
+lowcut = 9600.0
 highcut = 10200.0
 
 # Grafik hazırlıkları
