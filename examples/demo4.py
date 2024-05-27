@@ -59,6 +59,7 @@ def al(data):
 	d_c = 8
 	snr = 20
 	H, G = make_ldpc(n, d_v, d_c, systematic=True, sparse=True)
+	data=data/5000
 	gruplar = [data[i:i+128] for i in range(0, len(data), 128)]
 	ana_ort=np.abs(np.mean(data))
 	ortalamalar =[]
