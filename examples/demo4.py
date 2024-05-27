@@ -136,7 +136,9 @@ def update_frame(frame):
     line.set_ydata(filtered_data)
     if frekans_peak >lowcut  and frekans_peak<highcut:
         #print(genis_veri[:19])
-        print(al(genis_veri))
+        aa=al(genis_veri)
+        if aa is not None:
+			print(aa)
     
     # Frekans değerini güncelle
     text.set_text(f'Frekans: {frekans_peak:.2f} Hz')
