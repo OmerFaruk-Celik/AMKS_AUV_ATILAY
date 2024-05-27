@@ -120,6 +120,7 @@ def update_frame(frame):
     frekans_peak = frekans[np.argmax(np.abs(spektrum))]
     m2=filtered_data/32767
     genis_veri=(m2/tasiyici_dalga +1)/2
+    print(genis_veri[:16])
 
     
     # Veriyi güncelle
