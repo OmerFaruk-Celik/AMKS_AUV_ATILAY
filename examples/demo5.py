@@ -58,9 +58,9 @@ def bitleri_cozumle(data):
 def al(data):
 	b_biti=[1,1]
 	n = 32
-	d_v = 4
-	d_c = 8
-	snr = 100
+	d_v = 8
+	d_c = 16
+	snr = 20
 	H, G = make_ldpc(n, d_v, d_c, systematic=True, sparse=True)
 	gruplar = [data[i:i+32] for i in range(0, len(data), 32)]
 	ana_ort=np.abs(np.mean(data))
