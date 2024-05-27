@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 import matplotlib.animation as animation
 from scipy.signal import hilbert, butter, filtfilt
 import time
+from pyldpc import make_ldpc, encode, decode, get_message
 # Ses kayıt parametreleri
 CHUNK = 2048 * 2  # Her seferde alınacak örnek sayısı
 FORMAT = pyaudio.paInt16  # Örnek formatı
@@ -58,8 +59,7 @@ def al(data):
     d_c = 8
     snr = 20
     H, G = make_ldpc(n, d_v, d_c, systematic=True, sparse=True)
-    k = G.shape[1]	
-    
+
     
 	gruplar = [data[i:i+128] for i in range(0, len(data), 128)]
 	ana_ort=np.abs(np.mean(data))
@@ -71,8 +71,9 @@ def al(data):
 		else:
 			ortalamalar.append(1)
 			
-    d = decode(H, ortalamalar, snr)			
-	return ortalamalar
+    d = decode(H, ortalamalar, snr)
+    x=get_message(G, d)			
+	return x
 
 # Frekans aralığı
 lowcut = 19800.0
