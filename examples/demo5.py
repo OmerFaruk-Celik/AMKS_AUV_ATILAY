@@ -11,6 +11,8 @@ FORMAT = pyaudio.paInt16  # Örnek formatı
 CHANNELS = 1  # Kanal sayısı
 RATE = 44100  # Örnekleme hızı
 
+tasiyici_frekans = 10000
+
 # PyAudio nesnesi oluştur
 p = pyaudio.PyAudio()
 
@@ -81,8 +83,8 @@ def al(data):
 	return None
 
 # Frekans aralığı
-lowcut = 4500.0
-highcut = 5500.0
+lowcut = tasiyici_frekans-200
+highcut = tasiyici_frekans+200
 
 # Grafik hazırlıkları
 #fig, ax = plt.subplots()
@@ -102,7 +104,7 @@ highcut = 5500.0
 # Mesaj için metin ekleyin
 #message_text = ax.text(0.05, 0.85, '', transform=ax.transAxes)
 t = np.arange(0, CHUNK) / RATE
-tasiyici_dalga = np.sin(2 * np.pi * 5000 * t)
+tasiyici_dalga = np.sin(2 * np.pi * tasiyici_frekans * t)
 tasiyici_dalga=np.where(tasiyici_dalga==0,1e-10,tasiyici_dalga)
 
 #def update_frame(frame):
