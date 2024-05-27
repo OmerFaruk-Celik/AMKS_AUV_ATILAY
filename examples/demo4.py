@@ -79,8 +79,8 @@ def al(data):
 	return x
 
 # Frekans aralığı
-lowcut = 9600.0
-highcut = 10200.0
+lowcut = 4600.0
+highcut = 5200.0
 
 # Grafik hazırlıkları
 fig, ax = plt.subplots()
