@@ -63,14 +63,15 @@ def al(data):
 	gruplar = [data[i:i+128] for i in range(0, len(data), 128)]
 	ana_ort=np.abs(np.mean(data))
 	ortalamalar =[]
-	print(data[0])
+	
 	for grup in gruplar:
 		ortalama=np.mean(grup)
 		if ortalama <0:
 			ortalamalar.append(ortalama)
 		else:
 			ortalamalar.append(ortalama)
-	ortalamalar=np.array(ortalamalar)		
+	ortalamalar=np.array(ortalamalar)	
+	print(ortalamalar[0])	
 	d = decode(H, ortalamalar, snr)
 	x=get_message(G, d)
 			
