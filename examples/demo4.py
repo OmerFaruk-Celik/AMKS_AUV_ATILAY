@@ -77,8 +77,8 @@ def al(data):
 	return x
 
 # Frekans aralığı
-lowcut = 960.0
-highcut = 1400.0
+lowcut = 8800.0
+highcut = 9200.0
 
 # Grafik hazırlıkları
 fig, ax = plt.subplots()
@@ -98,7 +98,7 @@ text2 = ax.text(0.4, 0.9, '', transform=ax.transAxes)
 # Mesaj için metin ekleyin
 message_text = ax.text(0.05, 0.85, '', transform=ax.transAxes)
 t = np.arange(0, CHUNK) / RATE
-tasiyici_dalga = np.sin(2 * np.pi * 1000 * t)
+tasiyici_dalga = np.sin(2 * np.pi * 10000 * t)
 tasiyici_dalga=np.where(tasiyici_dalga==0,1e-10,tasiyici_dalga)
 
 def update_frame(frame):
