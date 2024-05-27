@@ -53,6 +53,14 @@ def bitleri_cozumle(data):
     
     
 def al(data):
+    n = 32
+    d_v = 4
+    d_c = 8
+    snr = 20
+    H, G = make_ldpc(n, d_v, d_c, systematic=True, sparse=True)
+    k = G.shape[1]	
+    
+    
 	gruplar = [data[i:i+128] for i in range(0, len(data), 128)]
 	ana_ort=np.abs(np.mean(data))
 	ortalamalar =[]
@@ -63,6 +71,7 @@ def al(data):
 		else:
 			ortalamalar.append(1)
 			
+    d = decode(H, ortalamalar, snr)			
 	return ortalamalar
 
 # Frekans aralığı
