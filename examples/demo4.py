@@ -70,7 +70,8 @@ def al(data):
 			ortalamalar.append(1)
 			
 	d = decode(H, ortalamalar, snr)
-	x=get_message(G, d)			
+	x=get_message(G, d)
+	print(x)			
 	return x
 
 # Frekans aralığı
