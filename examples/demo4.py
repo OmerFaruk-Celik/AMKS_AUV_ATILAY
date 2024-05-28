@@ -105,7 +105,7 @@ fig, ax = plt.subplots()
 x = np.arange(0, 2 * CHUNK, 2)
 line, = ax.plot(x, np.random.rand(CHUNK))
 
-ax.set_ylim(-2000, 2000)
+ax.set_ylim(-10, 10)
 ax.set_xlim(0, CHUNK)
 plt.xlabel('Zaman')
 plt.ylabel('Genlik')
@@ -141,18 +141,19 @@ def update_frame(frame):
     if frekans_peak > lowcut and frekans_peak < highcut:
         # Veriyi işleme ve grafiğe gönderme işlemlerini yap
         # Band-pass filtre uygulama
-        print(frekans_peak)
+        #print(frekans_peak)
         
         
         
-        genis_veri = (data_int / tasiyici_dalga + 1) / 2
+        
         
         filtered_data = bandpass_filter(data_int, lowcut, highcut, RATE, order=6)
+        genis_veri = (filtered_data / tasiyici_dalga + 1) / 2
         #print(filtered_data[:3])
-        #genis_veri = np.where(filtered_data <= 0, -1, 1)
+        genis_veri = np.where(filtered_data <= 0, 0, 1)
 
         # Veriyi güncelle
-        line.set_ydata(filtered_data )
+        line.set_ydata(genis_veri)
 
         # Frekans değerini güncelle
         text.set_text(f'Frekans: {frekans_peak:.2f} Hz')
