@@ -97,15 +97,15 @@ def filtrele(data, esik):
     return filtered_data
 
 # Frekans aralığı
-lowcut = 4700.0
-highcut = 5300.0
+lowcut = 4600.0
+highcut = 5400.0
 
 # Grafik hazırlıkları
 fig, ax = plt.subplots()
 x = np.arange(0, 2 * CHUNK, 2)
 line, = ax.plot(x, np.random.rand(CHUNK))
 
-ax.set_ylim(-10, 10)
+ax.set_ylim(-5, 5)
 ax.set_xlim(0, CHUNK)
 plt.xlabel('Zaman')
 plt.ylabel('Genlik')
