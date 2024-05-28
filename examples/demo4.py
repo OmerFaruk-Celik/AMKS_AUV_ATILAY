@@ -122,18 +122,18 @@ def update_frame(frame):
     frekans = np.fft.rfftfreq(len(data_int), 1/RATE)
     spektrum = np.fft.rfft(data_int)
     frekans_peak = frekans[np.argmax(np.abs(spektrum))]
-    #m2=filtered_data
+    m2=filtered_data
     #print("eleman :",m2[0])
     #d=np.array(m2)
     #print("m2 :",np.sum(d<=0))
-    #genis_veri=(m2/tasiyici_dalga +1)/2
+    genis_veri=(m2/tasiyici_dalga +1)/2
     #print("genis_veri :",np.sum(genis_veri<=0))
     #genis_veri=np.where(genis_veri <=0,-1,1)
     
 
     
     # Veriyi güncelle
-    line.set_ydata(filtered_data)
+    line.set_ydata(genis_veri)
     #if frekans_peak >lowcut  and frekans_peak<highcut:
     #    #print(genis_veri[:19])
     #    aa=al(genis_veri)
