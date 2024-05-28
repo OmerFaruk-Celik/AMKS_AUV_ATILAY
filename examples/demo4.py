@@ -145,7 +145,6 @@ def update_frame(frame):
         
         genis_veri = (data_int / tasiyici_dalga + 1) / 2
         filtered_data = bandpass_filter(genis_veri, lowcut, highcut, RATE, order=6)
-        print(np.mean(filtered_data))
         genis_veri = np.where(filtered_data <= 0, 0, 1)
 
         # Veriyi güncelle
@@ -165,7 +164,7 @@ def update_frame(frame):
 
     # Aksi takdirde grafiği güncelleme
     else:
-        line.set_ydata(np.random.rand(CHUNK))  # Grafiğe rastgele veri gönder (boş bırakmak için)
+        line.set_ydata(np.arange(0, CHUNK))  # Grafiğe rastgele veri gönder (boş bırakmak için)
         text.set_text('Frekans: Dışı')
         text2.set_text(f'Sure: {gecen_sure:.4f} ms')
 
