@@ -124,13 +124,14 @@ def update_frame(frame):
     if frekans_peak > lowcut and frekans_peak < highcut:
         # Veriyi işleme ve grafiğe gönderme işlemlerini yap
         # Band-pass filtre uygulama
-        filtered_data = bandpass_filter(data_int, lowcut, highcut, RATE, order=6)
-        m2 = filtered_data
-        genis_veri = (m2 / tasiyici_dalga + 1) / 2
+        
+        
+        genis_veri = (data_int / tasiyici_dalga + 1) / 2
+        filtered_data = bandpass_filter(genis_veri, lowcut, highcut, RATE, order=6)
         #genis_veri = np.where(genis_veri <= 0, -50, 50)
 
         # Veriyi güncelle
-        line.set_ydata(genis_veri)
+        line.set_ydata(filtered_data)
 
         # Frekans değerini güncelle
         text.set_text(f'Frekans: {frekans_peak:.2f} Hz')
