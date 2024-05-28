@@ -113,8 +113,7 @@ def update_frame(frame):
     bitme_zamani = time.time()
     gecen_sure = bitme_zamani - baslama_zamani
 
-    # Band-pass filtre uygulama
-    filtered_data = bandpass_filter(data_int, lowcut, highcut, RATE, order=6)
+
     
     # Frekans spektrumunu hesapla
     frekans = np.fft.rfftfreq(len(data_int), 1/RATE)
@@ -124,8 +123,10 @@ def update_frame(frame):
     # Eğer frekans koşulu sağlanıyorsa:
     if frekans_peak > lowcut and frekans_peak < highcut:
         # Veriyi işleme ve grafiğe gönderme işlemlerini yap
+        # Band-pass filtre uygulama
+        filtered_data = bandpass_filter(data_int, lowcut, highcut, RATE, order=6)
         m2 = filtered_data
-        genis_veri = (m2 / tasiyici_dalga + 1) / 2
+        #genis_veri = (m2 / tasiyici_dalga + 1) / 2
         #genis_veri = np.where(genis_veri <= 0, -50, 50)
 
         # Veriyi güncelle
