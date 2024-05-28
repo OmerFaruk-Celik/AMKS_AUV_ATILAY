@@ -113,8 +113,6 @@ def update_frame(frame):
     bitme_zamani = time.time()
     gecen_sure = bitme_zamani - baslama_zamani
 
-
-    
     # Band-pass filtre uygulama
     filtered_data = bandpass_filter(data_int, lowcut, highcut, RATE, order=6)
     
@@ -122,38 +120,35 @@ def update_frame(frame):
     frekans = np.fft.rfftfreq(len(data_int), 1/RATE)
     spektrum = np.fft.rfft(data_int)
     frekans_peak = frekans[np.argmax(np.abs(spektrum))]
-    if frekans_peak < lowcut or frekans_peak>highcut:
-        continue		
-    m2=filtered_data
-    #print("eleman :",m2[0])
-    #d=np.array(m2)
-    #print("m2 :",np.sum(d<=0))
-    genis_veri=(m2/tasiyici_dalga +1)/2
-    #print("genis_veri :",np.sum(genis_veri<=0))
-    genis_veri=np.where(genis_veri <=0,-50,50)
-    
 
-    
-    # Veriyi güncelle
-    line.set_ydata(genis_veri)
-    #if frekans_peak >lowcut  and frekans_peak<highcut:
-    #    #print(genis_veri[:19])
-    #    aa=al(genis_veri)
-    #    if aa is not None:
-    #        print(aa)
-    
-    # Frekans değerini güncelle
-    text.set_text(f'Frekans: {frekans_peak:.2f} Hz')
-    text2.set_text(f'Sure: {gecen_sure:.4f} ms')
+    # Eğer frekans koşulu sağlanıyorsa:
+    if frekans_peak > lowcut and frekans_peak < highcut:
+        # Veriyi işleme ve grafiğe gönderme işlemlerini yap
+        m2 = filtered_data
+        genis_veri = (m2 / tasiyici_dalga + 1) / 2
+        genis_veri = np.where(genis_veri <= 0, -50, 50)
 
-    # Bitleri çözümle ve mesajı yazdır
-    #demodulated_signal = hilbert(filtered_data).real
-    #mesaj = bitleri_cozumle(demodulated_signal)
-    #if mesaj is not None:
-    #    message_text.set_text(f'Mesaj: {mesaj}')
-    #else:
-    #    message_text.set_text('Mesaj: None')
-    
+        # Veriyi güncelle
+        line.set_ydata(genis_veri)
+
+        # Frekans değerini güncelle
+        text.set_text(f'Frekans: {frekans_peak:.2f} Hz')
+        text2.set_text(f'Sure: {gecen_sure:.4f} ms')
+
+        # Bitleri çözümle ve mesajı yazdır (bu kısım isterseniz burada)
+        #demodulated_signal = hilbert(filtered_data).real
+        #mesaj = bitleri_cozumle(demodulated_signal)
+        #if mesaj is not None:
+        #    message_text.set_text(f'Mesaj: {mesaj}')
+        #else:
+        #    message_text.set_text('Mesaj: None')
+
+    # Aksi takdirde grafiği güncelleme
+    else:
+        line.set_ydata(np.random.rand(CHUNK))  # Grafiğe rastgele veri gönder (boş bırakmak için)
+        text.set_text('Frekans: Dışı')
+        text2.set_text(f'Sure: {gecen_sure:.4f} ms')
+
     return line, text, message_text
 
 # Animasyonu başlat
