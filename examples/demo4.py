@@ -105,7 +105,7 @@ fig, ax = plt.subplots()
 x = np.arange(0, 2 * CHUNK, 2)
 line, = ax.plot(x, np.random.rand(CHUNK))
 
-ax.set_ylim(-5, 5)
+ax.set_ylim(-2000, 2000)
 ax.set_xlim(0, CHUNK)
 plt.xlabel('Zaman')
 plt.ylabel('Genlik')
@@ -144,7 +144,7 @@ def update_frame(frame):
         
         
         genis_veri = (data_int / tasiyici_dalga + 1) / 2
-        filtered_data = bandpass_filter(genis_veri, lowcut, highcut, RATE, order=6)*0.001
+        filtered_data = bandpass_filter(genis_veri, lowcut, highcut, RATE, order=6)
         #genis_veri = np.where(filtered_data <= 0, -1, 1)
 
         # Veriyi güncelle
