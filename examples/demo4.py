@@ -6,7 +6,7 @@ from scipy.signal import hilbert, butter, filtfilt
 import time
 from pyldpc import make_ldpc, encode, decode, get_message
 # Ses kayıt parametreleri
-CHUNK = 64 * 1  # Her seferde alınacak örnek sayısı
+CHUNK = 512 * 1  # Her seferde alınacak örnek sayısı
 FORMAT = pyaudio.paInt16  # Örnek formatı
 CHANNELS = 1  # Kanal sayısı
 RATE = 44100  # Örnekleme hızı
@@ -97,15 +97,15 @@ def filtrele(data, esik):
     return filtered_data
 
 # Frekans aralığı
-lowcut = 9000.0
-highcut = 11000.0
+lowcut = 4600.0
+highcut = 5400.0
 
 # Grafik hazırlıkları
 fig, ax = plt.subplots()
 x = np.arange(0, 2 * CHUNK, 2)
 line, = ax.plot(x, np.random.rand(CHUNK))
 
-ax.set_ylim(-10, 10)
+ax.set_ylim(-2000, 2000)
 ax.set_xlim(0, CHUNK)
 plt.xlabel('Zaman')
 plt.ylabel('Genlik')
@@ -118,7 +118,7 @@ text2 = ax.text(0.4, 0.9, '', transform=ax.transAxes)
 # Mesaj için metin ekleyin
 message_text = ax.text(0.05, 0.85, '', transform=ax.transAxes)
 t = np.arange(0, CHUNK) / RATE
-tasiyici_dalga = np.sin(2 * np.pi * 10000 * t)
+tasiyici_dalga = np.sin(2 * np.pi * 5000 * t)
 tasiyici_dalga=np.where(tasiyici_dalga==0,1e-10,tasiyici_dalga)
 
 def update_frame(frame):
@@ -137,23 +137,20 @@ def update_frame(frame):
     frekans_peak = frekans[np.argmax(np.abs(spektrum))]
 
     # Eğer frekans koşulu sağlanıyorsa:
-    
     if frekans_peak > lowcut and frekans_peak < highcut:
         # Veriyi işleme ve grafiğe gönderme işlemlerini yap
         # Band-pass filtre uygulama
-        #print(frekans_peak)
         
         
         
-        
+        genis_veri = (data_int / tasiyici_dalga + 1) / 2
         
         filtered_data = bandpass_filter(data_int, lowcut, highcut, RATE, order=6)
-        genis_veri = (filtered_data / tasiyici_dalga + 1) / 2
         #print(filtered_data[:3])
-        genis_veri = np.where(filtered_data <= 0, 0, 1)
+        #genis_veri = np.where(filtered_data <= 0, -1, 1)
 
         # Veriyi güncelle
-        line.set_ydata(genis_veri)
+        line.set_ydata(filtered_data )
 
         # Frekans değerini güncelle
         text.set_text(f'Frekans: {frekans_peak:.2f} Hz')
