@@ -126,7 +126,7 @@ def update_frame(frame):
         # Veriyi işleme ve grafiğe gönderme işlemlerini yap
         m2 = filtered_data
         genis_veri = (m2 / tasiyici_dalga + 1) / 2
-        genis_veri = np.where(genis_veri <= 0, -50, 50)
+        #genis_veri = np.where(genis_veri <= 0, -50, 50)
 
         # Veriyi güncelle
         line.set_ydata(genis_veri)
