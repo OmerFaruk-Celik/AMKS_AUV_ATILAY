@@ -50,9 +50,9 @@ AMKS, sualtı keşif, araştırma, kurtarma operasyonları ve denizaltı harital
 
 ## Resimler
 
-![AMKS Sistem Şeması](images/amks_sistem_şeması.png)
-![Sinyal Güçlendirici](images/sinyal_güclendirme.png)
-![Yardım Modülü](images/yardim_modulu.png)
+![AMKS Sistem Şeması](images/IUSBL.jpeg)
+![Sinyal Güçlendirici](images/LBL.jpeg)
+![Yardım Modülü](images/SBL.jpeg)
 
 ## Katkıda Bulunma
 
@@ -62,6 +62,3 @@ Projenin geliştirilmesine katkıda bulunmak isterseniz, lütfen [GitHub repo li
 
 Bu proje [Lisans Türü] lisansı altında yayınlanmıştır. 
 
-## Teşekkür
-
-Bu projeyi destekleyen TÜBİTAK'a ve projede çalışan tüm kişilere teşekkür ederiz. 
