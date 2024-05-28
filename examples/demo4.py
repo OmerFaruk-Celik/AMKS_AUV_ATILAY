@@ -6,7 +6,7 @@ from scipy.signal import hilbert, butter, filtfilt
 import time
 from pyldpc import make_ldpc, encode, decode, get_message
 # Ses kayıt parametreleri
-CHUNK = 1024  # Her seferde alınacak örnek sayısı
+CHUNK = 512 * 2  # Her seferde alınacak örnek sayısı
 FORMAT = pyaudio.paInt16  # Örnek formatı
 CHANNELS = 1  # Kanal sayısı
 RATE = 44100  # Örnekleme hızı
@@ -86,7 +86,7 @@ highcut = 6000.0
 
 # Grafik hazırlıkları
 fig, ax = plt.subplots()
-x = np.arange(0, CHUNK, 2)
+x = np.arange(0, 2 * CHUNK, 2)
 line, = ax.plot(x, np.random.rand(CHUNK))
 
 ax.set_ylim(-2000, 2000)
