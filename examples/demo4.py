@@ -137,6 +137,7 @@ def update_frame(frame):
     frekans_peak = frekans[np.argmax(np.abs(spektrum))]
 
     # Eğer frekans koşulu sağlanıyorsa:
+    print(frekans_peak)
     if frekans_peak > lowcut and frekans_peak < highcut:
         # Veriyi işleme ve grafiğe gönderme işlemlerini yap
         # Band-pass filtre uygulama
