@@ -130,7 +130,7 @@ def update_frame(frame):
         #genis_veri = np.where(genis_veri <= 0, -50, 50)
 
         # Veriyi güncelle
-        line.set_ydata(genis_veri)
+        line.set_ydata(m2)
 
         # Frekans değerini güncelle
         text.set_text(f'Frekans: {frekans_peak:.2f} Hz')
