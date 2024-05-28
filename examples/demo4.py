@@ -122,6 +122,8 @@ def update_frame(frame):
     frekans = np.fft.rfftfreq(len(data_int), 1/RATE)
     spektrum = np.fft.rfft(data_int)
     frekans_peak = frekans[np.argmax(np.abs(spektrum))]
+    if frekans_peak < lowcut or frekans_peak>highcut:
+        continue		
     m2=filtered_data
     #print("eleman :",m2[0])
     #d=np.array(m2)
