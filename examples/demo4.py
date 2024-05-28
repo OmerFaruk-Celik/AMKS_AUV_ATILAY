@@ -105,7 +105,7 @@ fig, ax = plt.subplots()
 x = np.arange(0, 2 * CHUNK, 2)
 line, = ax.plot(x, np.random.rand(CHUNK))
 
-ax.set_ylim(-2000, 2000)
+ax.set_ylim(-1000, 1000)
 ax.set_xlim(0, CHUNK)
 plt.xlabel('Zaman')
 plt.ylabel('Genlik')
