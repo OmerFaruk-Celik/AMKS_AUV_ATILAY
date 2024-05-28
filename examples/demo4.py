@@ -145,7 +145,7 @@ def update_frame(frame):
         
         genis_veri = (data_int / tasiyici_dalga + 1) / 2
         filtered_data = bandpass_filter(genis_veri, lowcut, highcut, RATE, order=6)
-        genis_veri = np.where(filtered_data <= 0, 0, 1)
+        genis_veri = np.where(filtered_data <= 0, -1, 1)
 
         # Veriyi güncelle
         line.set_ydata(genis_veri)
