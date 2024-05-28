@@ -164,7 +164,7 @@ def update_frame(frame):
 
     # Aksi takdirde grafiği güncelleme
     else:
-        line.set_ydata(np.arange(0, CHUNK))  # Grafiğe rastgele veri gönder (boş bırakmak için)
+        line.set_ydata(np.repeat(0, CHUNK)) # Grafiğe rastgele veri gönder (boş bırakmak için)
         text.set_text('Frekans: Dışı')
         text2.set_text(f'Sure: {gecen_sure:.4f} ms')
 
