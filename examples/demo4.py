@@ -79,6 +79,22 @@ def al(data):
 		return x
 			
 	return None
+	
+	
+def filtrele(data, esik):
+    """Ses sinyalini şiddetine göre filtreler.
+
+    Args:
+        data: Ses verisi (NumPy dizisi).
+        esik: Filtreleme için kullanılacak eşik değeri.
+
+    Returns:
+        Filtrelenmiş ses verisi (NumPy dizisi).
+    """
+
+    # Eşik değerinden düşük olan örnekleri sıfırlar
+    filtered_data = np.where(np.abs(data) > esik, data, 0)
+    return filtered_data
 
 # Frekans aralığı
 lowcut = 4800.0
@@ -124,6 +140,7 @@ def update_frame(frame):
     if frekans_peak > lowcut and frekans_peak < highcut:
         # Veriyi işleme ve grafiğe gönderme işlemlerini yap
         # Band-pass filtre uygulama
+        genis_veri=filtrele(data_int,1000)
         
         
         genis_veri = (data_int / tasiyici_dalga + 1) / 2
