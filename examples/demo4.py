@@ -125,7 +125,7 @@ def update_frame(frame):
     # Ses verilerini oku
     baslama_zamani = time.time()
     data = stream.read(CHUNK, exception_on_overflow=False)
-    data_int = np.frombuffer(data, dtype=np.int16)
+    data_int = np.frombuffer(data, dtype=np.int8)
     bitme_zamani = time.time()
     gecen_sure = bitme_zamani - baslama_zamani
 
