@@ -141,6 +141,9 @@ def update_frame(frame):
         # Veriyi işleme ve grafiğe gönderme işlemlerini yap
         # Band-pass filtre uygulama
         
+    else:
+        print(frekans_peak)
+        
         
         
         #genis_veri = (data_int / tasiyici_dalga + 1) / 2
