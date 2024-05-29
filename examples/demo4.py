@@ -213,7 +213,7 @@ def update_frame(frame):
         #print(frekans_peak)		
         line.set_ydata(np.repeat(0, CHUNK)) # Grafiğe rastgele veri gönder (boş bırakmak için)
         text.set_text('Frekans: Dışı')
-        text2.set_text(f'Sure: {gecen_sure:.4f} ms')
+        #text2.set_text(f'Sure: {gecen_sure:.4f} ms')
 
     return line, text, message_text
 
