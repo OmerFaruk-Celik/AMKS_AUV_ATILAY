@@ -185,12 +185,13 @@ def update_frame(frame):
         
         #genis_veri = (data_int / tasiyici_dalga + 1) / 2
         
-        filtered_data = bandpass_filter(data_int, lowcut, highcut, RATE, order=6)
+        #filtered_data = bandpass_filter(data_int, lowcut, highcut, RATE, order=6)
         #print(filtered_data[:3])
         #genis_veri = np.where(filtered_data <= 0, -1, 1)
 
         # Veriyi güncelle
         line.set_ydata(data_int )
+        print(parca_kontrol(s, 16, 44100))
 
         # Frekans değerini güncelle
         text.set_text(f'Frekans: {frekans_peak:.2f} Hz')
@@ -206,7 +207,7 @@ def update_frame(frame):
 
     # Aksi takdirde grafiği güncelleme
     else:
-        print(frekans_peak)		
+        #print(frekans_peak)		
         line.set_ydata(np.repeat(0, CHUNK)) # Grafiğe rastgele veri gönder (boş bırakmak için)
         text.set_text('Frekans: Dışı')
         text2.set_text(f'Sure: {gecen_sure:.4f} ms')
