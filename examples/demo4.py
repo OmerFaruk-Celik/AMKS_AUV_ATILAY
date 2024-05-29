@@ -176,7 +176,7 @@ def update_frame(frame):
         b = [1.0 / n] * n
         a = 1
         yy = lfilter(b, a, data_int)
-        filtered_data=yy
+        filtered_data=data_int
         
         
 
