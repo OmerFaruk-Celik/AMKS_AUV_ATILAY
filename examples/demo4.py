@@ -178,7 +178,8 @@ def update_frame(frame):
         #genis_veri = (data_int / tasiyici_dalga + 1) / 2
         
         filtered_data = bandpass_filter(data_int, lowcut, highcut, RATE, order=6)
-        filtered_data=filtrele(filtered_dat,100)
+        print(filtered_data)
+        filtered_data=filtrele(filtered_data,100)
         #print(filtered_data[:3])
         #genis_veri = np.where(filtered_data <= 0, -1, 1)
 
