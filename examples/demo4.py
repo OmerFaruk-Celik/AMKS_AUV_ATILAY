@@ -154,11 +154,11 @@ def parca_kontrol(s, sutun_sayisi, rate):
 
 def update_frame(frame):
     # Ses verilerini oku
-    baslama_zamani = time.time()
+    #baslama_zamani = time.time()
     data = stream.read(CHUNK, exception_on_overflow=False)
     data_int = np.frombuffer(data, dtype=np.int16)
-    bitme_zamani = time.time()
-    gecen_sure = bitme_zamani - baslama_zamani
+    #bitme_zamani = time.time()
+    #gecen_sure = bitme_zamani - baslama_zamani
 
 
     
@@ -198,7 +198,7 @@ def update_frame(frame):
 
         # Frekans değerini güncelle
         text.set_text(f'Frekans: {frekans_peak:.2f} Hz')
-        text2.set_text(f'Sure: {gecen_sure:.4f} ms')
+        #text2.set_text(f'Sure: {gecen_sure:.4f} ms')
 
         # Bitleri çözümle ve mesajı yazdır (bu kısım isterseniz burada)
         #demodulated_signal = hilbert(filtered_data).real
