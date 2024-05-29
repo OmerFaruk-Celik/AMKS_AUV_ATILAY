@@ -186,7 +186,7 @@ def update_frame(frame):
         
         #genis_veri = (data_int / tasiyici_dalga + 1) / 2
         
-        #filtered_data = bandpass_filter(yy, lowcut, highcut, RATE, order=5)
+        filtered_data = bandpass_filter(yy, lowcut, highcut, RATE, order=5)
         #filtered_data = nr.reduce_noise(y=data_int, sr=RATE) 
         #filtered_data=filtrele(filtered_data,20)
         #print(filtered_data[:3])
