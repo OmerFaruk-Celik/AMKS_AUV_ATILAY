@@ -172,11 +172,11 @@ def update_frame(frame):
     if frekans_peak > lowcut and frekans_peak < highcut:
         # Veriyi işleme ve grafiğe gönderme işlemlerini yap
         # Band-pass filtre uygulama
-        n = 4  # the larger n is, the smoother curve will be
+        n = 2 # the larger n is, the smoother curve will be
         b = [1.0 / n] * n
         a = 1
         yy = lfilter(b, a, data_int)
-        filtered_data=data_int
+        filtered_data=yy
         
         
 
