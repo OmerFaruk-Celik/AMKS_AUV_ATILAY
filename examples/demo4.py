@@ -172,7 +172,7 @@ def update_frame(frame):
     if frekans_peak > lowcut and frekans_peak < highcut:
         # Veriyi işleme ve grafiğe gönderme işlemlerini yap
         # Band-pass filtre uygulama
-        n = 16  # the larger n is, the smoother curve will be
+        n = 8  # the larger n is, the smoother curve will be
         b = [1.0 / n] * n
         a = 1
         yy = lfilter(b, a, data_int)
@@ -185,7 +185,7 @@ def update_frame(frame):
         
         #genis_veri = (data_int / tasiyici_dalga + 1) / 2
         
-        filtered_data = bandpass_filter(yy, lowcut, highcut, RATE, order=5)
+        #filtered_data = bandpass_filter(yy, lowcut, highcut, RATE, order=5)
         #filtered_data = nr.reduce_noise(y=data_int, sr=RATE) 
         #filtered_data=filtrele(filtered_data,20)
         #print(filtered_data[:3])
