@@ -191,7 +191,7 @@ def update_frame(frame):
 
         # Veriyi güncelle
         line.set_ydata(data_int )
-        print(parca_kontrol(s, 16, 44100))
+        print(parca_kontrol(data_int, 16, 44100))
 
         # Frekans değerini güncelle
         text.set_text(f'Frekans: {frekans_peak:.2f} Hz')
