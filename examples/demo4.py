@@ -188,13 +188,13 @@ def update_frame(frame):
         
         #genis_veri = (data_int / tasiyici_dalga + 1) / 2
         
-        filtered_data = bandpass_filter(data_int, lowcut, highcut, RATE, order=6)
+        #filtered_data = bandpass_filter(data_int, lowcut, highcut, RATE, order=6)
         #print(filtered_data[:3])
         #genis_veri = np.where(filtered_data <= 0, -1, 1)
 
         # Veriyi güncelle
-        line.set_ydata(filtered_data )
-        print(parca_kontrol(filtered_data , 16, 44100))
+        line.set_ydata(data_int )
+        print(parca_kontrol(data_int , 16, 44100))
 
         # Frekans değerini güncelle
         text.set_text(f'Frekans: {frekans_peak:.2f} Hz')
