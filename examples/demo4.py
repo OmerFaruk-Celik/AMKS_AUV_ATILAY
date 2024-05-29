@@ -156,7 +156,7 @@ def parca_kontrol(s, sutun_sayisi, rate):
   ortalama_frekans=ortalama_frekans/16
   frekanslar=np.array(frekanslar)
   print(frekanslar)
-  bits=np.where(frekanslar>9430,1,0)
+  bits=np.where(frekanslar>9430,1,frekanslar)
   bits=np.where(frekanslar<9452,1,0)
 
   return bits
