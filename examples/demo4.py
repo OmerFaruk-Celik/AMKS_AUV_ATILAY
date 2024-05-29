@@ -84,8 +84,8 @@ def filtrele(data, esik):
     return filtered_data
 
 # Frekans aralığı
-lowcut = 8000.0
-highcut = 11000.0
+lowcut = 15000.0
+highcut = 19000.0
 
 # Grafik hazırlıkları
 fig, ax = plt.subplots()
@@ -179,8 +179,8 @@ def update_frame(frame):
         
         #genis_veri = (data_int / tasiyici_dalga + 1) / 2
         
-        filtered_data = bandpass_filter(data_int, lowcut, highcut, RATE, order=6)
-        filtered_data = nr.reduce_noise(y=filtered_data, sr=RATE) 
+        #filtered_data = bandpass_filter(data_int, lowcut, highcut, RATE, order=6)
+        filtered_data = nr.reduce_noise(y=data_int, sr=RATE) 
         #filtered_data=filtrele(filtered_data,20)
         #print(filtered_data[:3])
         #genis_veri = np.where(filtered_data <= 0, -1, 1)
