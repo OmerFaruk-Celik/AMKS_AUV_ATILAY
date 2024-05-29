@@ -141,8 +141,7 @@ def update_frame(frame):
         # Veriyi işleme ve grafiğe gönderme işlemlerini yap
         # Band-pass filtre uygulama
         
-    else:
-        print(frekans_peak)
+
         
         
         
@@ -169,6 +168,7 @@ def update_frame(frame):
 
     # Aksi takdirde grafiği güncelleme
     else:
+        print(frekans_peak)		
         line.set_ydata(np.repeat(0, CHUNK)) # Grafiğe rastgele veri gönder (boş bırakmak için)
         text.set_text('Frekans: Dışı')
         text2.set_text(f'Sure: {gecen_sure:.4f} ms')
