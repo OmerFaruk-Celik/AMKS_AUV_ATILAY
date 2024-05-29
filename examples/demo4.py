@@ -7,7 +7,7 @@ import time
 from pyldpc import make_ldpc, encode, decode, get_message
 import noisereduce as nr  # noisereduce kütüphanesini ekle
 # Ses kayıt parametreleri
-CHUNK = 1024* 1  # Her seferde alınacak örnek sayısı
+CHUNK = 512* 1  # Her seferde alınacak örnek sayısı
 FORMAT = pyaudio.paInt16  # Örnek formatı
 CHANNELS = 1  # Kanal sayısı
 RATE = 44100  # Örnekleme hızı
@@ -156,7 +156,7 @@ def update_frame(frame):
     # Ses verilerini oku
     baslama_zamani = time.time()
     data = stream.read(CHUNK, exception_on_overflow=False)
-    data_int = np.frombuffer(data, dtype=np.int32)
+    data_int = np.frombuffer(data, dtype=np.int16)
     bitme_zamani = time.time()
     gecen_sure = bitme_zamani - baslama_zamani
 
