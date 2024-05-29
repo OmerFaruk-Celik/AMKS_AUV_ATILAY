@@ -5,6 +5,7 @@ import matplotlib.animation as animation
 from scipy.signal import hilbert, butter, filtfilt
 import time
 from pyldpc import make_ldpc, encode, decode, get_message
+import noisereduce as nr  # noisereduce kütüphanesini ekle
 # Ses kayıt parametreleri
 CHUNK = 512 * 1  # Her seferde alınacak örnek sayısı
 FORMAT = pyaudio.paInt16  # Örnek formatı
@@ -179,7 +180,8 @@ def update_frame(frame):
         #genis_veri = (data_int / tasiyici_dalga + 1) / 2
         
         filtered_data = bandpass_filter(data_int, lowcut, highcut, RATE, order=6)
-        filtered_data=filtrele(filtered_data,20)
+        filtered_data = nr.reduce_noise(y=filtered_data, sr=RATE) 
+        #filtered_data=filtrele(filtered_data,20)
         #print(filtered_data[:3])
         #genis_veri = np.where(filtered_data <= 0, -1, 1)
 
