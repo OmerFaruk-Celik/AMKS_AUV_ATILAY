@@ -97,8 +97,8 @@ def filtrele(data, esik):
     return filtered_data
 
 # Frekans aralığı
-lowcut = 3000.0
-highcut = 8000.0
+lowcut = 4900.0
+highcut = 10000.0
 
 # Grafik hazırlıkları
 fig, ax = plt.subplots()
