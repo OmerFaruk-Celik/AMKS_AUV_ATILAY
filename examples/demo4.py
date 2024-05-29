@@ -97,8 +97,8 @@ def filtrele(data, esik):
     return filtered_data
 
 # Frekans aralığı
-lowcut = 4600.0
-highcut = 8500.0
+lowcut = 4200.0
+highcut = 10500.0
 
 # Grafik hazırlıkları
 fig, ax = plt.subplots()
@@ -154,8 +154,9 @@ def parca_kontrol(s, sutun_sayisi, rate):
     ortalama_frekans += frekans_peak
     frekanslar.append(frekans_peak)
   ortalama_frekans=ortalama_frekans/16
-  bits=np.where(frekanslar[:]>48,1,0)
-  bits=np.where(frekanslar[:]<64,1,0)
+  frekanslar=np.array(frekanslar)
+  bits=np.where(frekanslar>48,1,0)
+  bits=np.where(frekanslar<64,1,0)
 
   return bits
 
