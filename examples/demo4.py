@@ -154,8 +154,8 @@ def parca_kontrol(s, sutun_sayisi, rate):
     ortalama_frekans += frekans_peak
     frekanslar.append(frekans_peak)
   ortalama_frekans=ortalama_frekans/16
-  bits=np.where(frekanslar>48,1,0)
-  bits=np.where(frekanslar<64,1,0)
+  bits=np.where(frekanslar[:]>48,1,0)
+  bits=np.where(frekanslar[:]<64,1,0)
 
   return bits
 
