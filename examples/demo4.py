@@ -166,6 +166,7 @@ def update_frame(frame):
     spektrum = np.fft.rfft(data_int)
     frekans_peak = frekans[np.argmax(np.abs(spektrum))]
 
+
     # Eğer frekans koşulu sağlanıyorsa:
     if frekans_peak > lowcut and frekans_peak < highcut:
         # Veriyi işleme ve grafiğe gönderme işlemlerini yap
