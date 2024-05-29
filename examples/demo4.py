@@ -37,21 +37,7 @@ def bandpass_filter(data, lowcut, highcut, fs, order=5):
     return y
 
 # Bitleri çözmek için fonksiyon
-def bitleri_cozumle(data):
-    mesaj_baslangici = [1, 1, 1]
-    mesaj_bitisi = [0, 1, 0]
 
-    # Eşik değeri kullanarak bitleri belirleme
-    threshold = 0
-    bitler = (data > threshold).astype(int)
-
-    # Mesajın başlangıç ve bitiş bitlerini bulma
-    for i in range(len(bitler) - 16):
-        if (bitler[i:i+3].tolist() == mesaj_baslangici and 
-            bitler[i+13:i+16].tolist() == mesaj_bitisi):
-            return bitler[i:i+16].tolist()
-    return None
-    
     
 def al(data):
 	b_biti=[1,1,1]
@@ -98,7 +84,7 @@ def filtrele(data, esik):
 
 # Frekans aralığı
 lowcut = 15800.0
-highcut = 18000.0
+highcut = 19000.0
 
 # Grafik hazırlıkları
 fig, ax = plt.subplots()
