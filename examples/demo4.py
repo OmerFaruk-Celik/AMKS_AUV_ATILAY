@@ -2,7 +2,7 @@ import pyaudio
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
-from scipy.signal import hilbert, butter, filtfilt
+from scipy.signal import hilbert, butter, filtfilt, lfilter
 import time
 from pyldpc import make_ldpc, encode, decode, get_message
 import noisereduce as nr  # noisereduce kütüphanesini ekle
