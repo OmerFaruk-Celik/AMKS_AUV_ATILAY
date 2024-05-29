@@ -173,7 +173,7 @@ def update_frame(frame):
     if frekans_peak > lowcut and frekans_peak < highcut:
         # Veriyi işleme ve grafiğe gönderme işlemlerini yap
         # Band-pass filtre uygulama
-        n = 2 # the larger n is, the smoother curve will be
+        n = 15 # the larger n is, the smoother curve will be
         b = [1.0 / n] * n
         a = 1
         yy = lfilter(b, a, data_int)
@@ -194,7 +194,7 @@ def update_frame(frame):
 
         # Veriyi güncelle
         line.set_ydata(filtered_data )
-        print(parca_kontrol(filtered_data , 16, 44100))
+        print(parca_kontrol(filtered_data , 32, 44100))
 
         # Frekans değerini güncelle
         text.set_text(f'Frekans: {frekans_peak:.2f} Hz')
