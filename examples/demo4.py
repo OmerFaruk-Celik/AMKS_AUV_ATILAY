@@ -97,8 +97,8 @@ def filtrele(data, esik):
     return filtered_data
 
 # Frekans aralığı
-lowcut = 9000.0
-highcut = 15000.0
+lowcut = 4000.0
+highcut = 6000.0
 
 # Grafik hazırlıkları
 fig, ax = plt.subplots()
@@ -117,9 +117,47 @@ text2 = ax.text(0.4, 0.9, '', transform=ax.transAxes)
 
 # Mesaj için metin ekleyin
 message_text = ax.text(0.05, 0.85, '', transform=ax.transAxes)
-t = np.arange(0, CHUNK) / RATE
-tasiyici_dalga = np.sin(2 * np.pi * 5000 * t)
-tasiyici_dalga=np.where(tasiyici_dalga==0,1e-10,tasiyici_dalga)
+
+
+
+
+def parca_kontrol(s, sutun_sayisi, rate):
+  """
+  Verilen 's' verisini 'sutun_sayisi' kadar parçaya bölerek, her bir parçanın içindeki frekansı hesaplar.
+  Eğer parçanın frekansı ortalama frekanstan büyükse 1, değilse 0 değerini döndüren bir dizi oluşturur.
+
+  Args:
+    s: Kontrol edilecek verilerin numpy dizisi.
+    sutun_sayisi: Verinin bölüneceği parça sayısı.
+    rate: Örnekleme oranı (Hz).
+
+  Returns:
+    Her bir parçanın frekans kontrol sonucunu (1: büyük, 0: küçük) gösteren bir numpy dizisi.
+  """
+
+  frekanslar=[]
+  sutun_genisligi = len(s) / sutun_sayisi
+  ortalama_frekans = 0
+
+  for i in range(sutun_sayisi):
+    baslangic_indeksi = int(i * sutun_genisligi)
+    bitis_indeksi = int((i + 1) * sutun_genisligi)
+
+    parca = s[baslangic_indeksi:bitis_indeksi]
+
+    # Parçanın frekans spektrumunu hesaplama
+    frekans = np.fft.rfftfreq(len(parca), 1/rate)
+    spektrum = np.fft.rfft(parca)
+    frekans_peak = frekans[np.argmax(np.abs(spektrum))]
+
+    # Ortalama frekansı hesaplama
+    ortalama_frekans += frekans_peak
+    frekanslar.append(frekans_peak)
+  ortalama_frekans=ortalama_frekans/16
+  bits=np.where(frekanslar>ortalama_frekans,1,0)
+
+  return bits
+
 
 def update_frame(frame):
     # Ses verilerini oku
