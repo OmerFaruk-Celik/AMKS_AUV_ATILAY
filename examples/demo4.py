@@ -166,6 +166,7 @@ def update_frame(frame):
     frekans = np.fft.rfftfreq(len(data_int), 1/RATE)
     spektrum = np.fft.rfft(data_int)
     frekans_peak = frekans[np.argmax(np.abs(spektrum))]
+    print(frekans_peak)
 
 
     # Eğer frekans koşulu sağlanıyorsa:
