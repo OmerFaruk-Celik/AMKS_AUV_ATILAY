@@ -140,7 +140,7 @@ def parca_kontrol(s, sutun_sayisi, rate):
     # Ortalama frekansı hesaplama
     ortalama_frekans += frekans_peak
     frekanslar.append(frekans_peak)
-  ortalama_frekans=ortalama_frekans/16
+  ortalama_frekans=ortalama_frekans/sutun_sayisi
   frekanslar=np.array(frekanslar)
   print(frekanslar)
   kosul1=frekanslar>17910
@@ -193,7 +193,7 @@ def update_frame(frame):
 
         # Veriyi güncelle
         line.set_ydata(filtered_data )
-        print(parca_kontrol(filtered_data , 16, 44100))
+        print(parca_kontrol(filtered_data , 32, 44100))
 
         # Frekans değerini güncelle
         text.set_text(f'Frekans: {frekans_peak:.2f} Hz')
