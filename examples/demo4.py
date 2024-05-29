@@ -84,8 +84,8 @@ def filtrele(data, esik):
     return filtered_data
 
 # Frekans aralığı
-lowcut = 20000.0
-highcut = 22000.0
+lowcut = 15000.0
+highcut = 20000.0
 
 # Grafik hazırlıkları
 fig, ax = plt.subplots()
@@ -194,7 +194,7 @@ def update_frame(frame):
 
         # Veriyi güncelle
         line.set_ydata(filtered_data )
-        print(parca_kontrol(filtered_data , 32, 44100))
+        print(parca_kontrol(filtered_data , 16, 44100))
 
         # Frekans değerini güncelle
         text.set_text(f'Frekans: {frekans_peak:.2f} Hz')
@@ -218,7 +218,7 @@ def update_frame(frame):
     return line, text, message_text
 
 # Animasyonu başlat
-ani = animation.FuncAnimation(fig, update_frame, interval=1, blit=True)
+ani = animation.FuncAnimation(fig, update_frame, interval=2, blit=True)
 
 # Grafik gösterimi
 plt.show()
