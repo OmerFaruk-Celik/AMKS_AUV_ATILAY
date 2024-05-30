@@ -43,9 +43,9 @@ def bandpass_filter(data, lowcut, highcut, fs, order=5):
     
 def al(data):
 	b_biti=[1,1,1]
-	n = 64
-	d_v = 31
-	d_c = 32
+	n = 32
+	d_v = 5
+	d_c = 8
 	snr = 1000
 	H, G = make_ldpc(n, d_v, d_c, systematic=True, sparse=True)
 	
