@@ -46,7 +46,7 @@ def al(data):
 	n = 64
 	d_v = 31
 	d_c = 32
-	snr = 20
+	snr = 1000
 	H, G = make_ldpc(n, d_v, d_c, systematic=True, sparse=True)
 	
 	
@@ -95,7 +95,7 @@ text2 = ax.text(0.4, 0.9, '', transform=ax.transAxes)
 message_text = ax.text(0.05, 0.85, '', transform=ax.transAxes)
 
 # Veri bitleri
-bit_array = np.zeros(32, dtype=int)  # Başlangıçta tüm bitleri sıfır olarak ayarla
+bit_array = np.zeros(64, dtype=int)  # Başlangıçta tüm bitleri sıfır olarak ayarla
 
 def parca_kontrol(s, sutun_sayisi, rate):
   """
