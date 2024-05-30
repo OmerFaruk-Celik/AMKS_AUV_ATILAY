@@ -138,7 +138,7 @@ def parca_kontrol(s, sutun_sayisi, rate):
   kosul2=frekanslar<19300
   sonuc=kosul1 & kosul2
   
-  bits=np.where(sonuc,1,0)
+  bits=np.where(sonuc,-1,1)
   
   # Bitleri güncelle (32 bitlik diziyi döndürmek yerine)
   bit_array[:sutun_sayisi] = bits 
@@ -159,7 +159,7 @@ def update_frame(frame):
     frekans = np.fft.rfftfreq(len(data_int), 1/RATE)
     spektrum = np.fft.rfft(data_int)
     frekans_peak = frekans[np.argmax(np.abs(spektrum))]
-    print(frekans_peak)
+    #print(frekans_peak)
 
 
     # Eğer frekans koşulu sağlanıyorsa:
@@ -188,7 +188,8 @@ def update_frame(frame):
         # Veriyi güncelle
         line.set_ydata(filtered_data )
         
-        parca_kontrol(filtered_data , 32, 44100)
+        parca_kontrol(filtered_data , 64, 44100)
+        print(al(bit_array))
         
         #print(bit_array) # Bit dizisini yazdır
 
