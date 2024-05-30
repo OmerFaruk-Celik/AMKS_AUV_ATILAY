@@ -6,8 +6,9 @@ from scipy.signal import hilbert, butter, filtfilt, lfilter
 import time
 from pyldpc import make_ldpc, encode, decode, get_message
 import noisereduce as nr  # noisereduce kütüphanesini ekle
+
 # Ses kayıt parametreleri
-CHUNK = 512* 1  # Her seferde alınacak örnek sayısı
+CHUNK = 512 * 1  # Her seferde alınacak örnek sayısı
 FORMAT = pyaudio.paInt16  # Örnek formatı
 CHANNELS = 1  # Kanal sayısı
 RATE = 44100  # Örnekleme hızı
@@ -105,8 +106,8 @@ text2 = ax.text(0.4, 0.9, '', transform=ax.transAxes)
 # Mesaj için metin ekleyin
 message_text = ax.text(0.05, 0.85, '', transform=ax.transAxes)
 
-
-
+# Veri bitleri
+bit_array = np.zeros(32, dtype=int)  # Başlangıçta tüm bitleri sıfır olarak ayarla
 
 def parca_kontrol(s, sutun_sayisi, rate):
   """
@@ -121,6 +122,8 @@ def parca_kontrol(s, sutun_sayisi, rate):
   Returns:
     Her bir parçanın frekans kontrol sonucunu (1: büyük, 0: küçük) gösteren bir numpy dizisi.
   """
+
+  global bit_array  # Global bit_array değişkenine erişmek için
 
   frekanslar=[]
   sutun_genisligi = len(s) / sutun_sayisi
@@ -142,15 +145,17 @@ def parca_kontrol(s, sutun_sayisi, rate):
     frekanslar.append(frekans_peak)
   ortalama_frekans=ortalama_frekans/sutun_sayisi
   frekanslar=np.array(frekanslar)
-  print(frekanslar)
+  #print(frekanslar)
   kosul1=frekanslar>19283
   kosul2=frekanslar<19300
   sonuc=kosul1 & kosul2
   
   bits=np.where(sonuc,1,0)
-
-  return bits
-
+  
+  # Bitleri güncelle (32 bitlik diziyi döndürmek yerine)
+  bit_array[:sutun_sayisi] = bits 
+  
+  return None
 
 def update_frame(frame):
     # Ses verilerini oku
@@ -194,7 +199,10 @@ def update_frame(frame):
 
         # Veriyi güncelle
         line.set_ydata(filtered_data )
-        print(parca_kontrol(filtered_data , 32, 44100))
+        
+        parca_kontrol(filtered_data , 32, 44100)
+        
+        print(bit_array) # Bit dizisini yazdır
 
         # Frekans değerini güncelle
         text.set_text(f'Frekans: {frekans_peak:.2f} Hz')
