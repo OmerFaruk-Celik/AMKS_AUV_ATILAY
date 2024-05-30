@@ -134,8 +134,8 @@ def parca_kontrol(s, sutun_sayisi, rate):
   ortalama_frekans=ortalama_frekans/sutun_sayisi
   frekanslar=np.array(frekanslar)
   print(frekanslar)
-  kosul1=frekanslar>20670
-  kosul2=frekanslar<20672
+  kosul1=frekanslar>2750
+  kosul2=frekanslar<2760
   sonuc=kosul1 & kosul2
   
   bits=np.where(sonuc,-1,1)
