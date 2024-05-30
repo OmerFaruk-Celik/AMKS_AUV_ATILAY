@@ -43,24 +43,14 @@ def bandpass_filter(data, lowcut, highcut, fs, order=5):
     
 def al(data):
 	b_biti=[1,1,1]
-	n = 32
-	d_v = 4
-	d_c = 8
+	n = 64
+	d_v = 31
+	d_c = 32
 	snr = 20
 	H, G = make_ldpc(n, d_v, d_c, systematic=True, sparse=True)
-	gruplar = [data[i:i+64] for i in range(0, len(data), 64)]
-	ana_ort=np.abs(np.mean(data))
-	ortalamalar =[]
 	
-	for grup in gruplar:
-		ortalama=np.mean(grup)
-		if ortalama <=0:
-			ortalamalar.append(-1)
-		else:
-			ortalamalar.append(1)
-	ortalamalar=np.array(ortalamalar)	
-	#print(ortalamalar[0])	
-	d = decode(H, ortalamalar, snr)
+	
+	d = decode(H, data, snr)
 	x=get_message(G, d)
 	
 	if np.array_equal(b_biti, x[:3]):
