@@ -502,3 +502,17 @@ Gözlem Analizi:
     Vektör SN pSi: i.inci sonar çerçevesinde {Si} sonarın konumu.
 
 Bu formüller, makalede açıklanan AINS sisteminin temel matematiksel temellerini oluşturmaktadır.
+
+
+
+
+
+
+
+Özetle:
+Özellik	FM	PM
+Modüle Edilen Özellik	Frekans	Faz
+Gürültüye Dayanıklılık	Daha Yüksek	Daha Düşük
+Verimlilik	Daha Düşük	Daha Yüksek
+Bant Genişliği	Daha Geniş	Daha Dar
+Güç Tüketimi	Daha Yüksek	Daha Düşük
