@@ -145,7 +145,7 @@ def parca_kontrol(s, sutun_sayisi, rate):
     frekanslar.append(frekans_peak)
   ortalama_frekans=ortalama_frekans/sutun_sayisi
   frekanslar=np.array(frekanslar)
-  #print(frekanslar)
+  print(frekanslar)
   kosul1=frekanslar>19283
   kosul2=frekanslar<19300
   sonuc=kosul1 & kosul2
@@ -171,7 +171,7 @@ def update_frame(frame):
     frekans = np.fft.rfftfreq(len(data_int), 1/RATE)
     spektrum = np.fft.rfft(data_int)
     frekans_peak = frekans[np.argmax(np.abs(spektrum))]
-    #print(frekans_peak)
+    print(frekans_peak)
 
 
     # Eğer frekans koşulu sağlanıyorsa:
@@ -202,7 +202,7 @@ def update_frame(frame):
         
         parca_kontrol(filtered_data , 32, 44100)
         
-        print(bit_array) # Bit dizisini yazdır
+        #print(bit_array) # Bit dizisini yazdır
 
         # Frekans değerini güncelle
         text.set_text(f'Frekans: {frekans_peak:.2f} Hz')
