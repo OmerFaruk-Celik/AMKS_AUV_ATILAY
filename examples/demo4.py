@@ -188,7 +188,7 @@ def update_frame(frame):
         # Veriyi güncelle
         line.set_ydata(filtered_data )
         
-        parca_kontrol(filtered_data , 64, 44100)
+        parca_kontrol(filtered_data , 32, 44100)
         print(al(bit_array))
         
         #print(bit_array) # Bit dizisini yazdır
