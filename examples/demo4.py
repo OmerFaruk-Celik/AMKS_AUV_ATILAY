@@ -95,7 +95,7 @@ text2 = ax.text(0.4, 0.9, '', transform=ax.transAxes)
 message_text = ax.text(0.05, 0.85, '', transform=ax.transAxes)
 
 # Veri bitleri
-bit_array = np.zeros(16, dtype=int)  # Başlangıçta tüm bitleri sıfır olarak ayarla
+bit_array = np.zeros(32, dtype=int)  # Başlangıçta tüm bitleri sıfır olarak ayarla
 
 def parca_kontrol(s, sutun_sayisi, rate):
   """
@@ -188,7 +188,7 @@ def update_frame(frame):
         # Veriyi güncelle
         line.set_ydata(filtered_data )
         
-        parca_kontrol(filtered_data , 16, 44100)
+        parca_kontrol(filtered_data , 32, 44100)
         print(al(bit_array))
         
         #print(bit_array) # Bit dizisini yazdır
