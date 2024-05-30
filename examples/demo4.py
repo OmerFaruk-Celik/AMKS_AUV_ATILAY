@@ -53,10 +53,8 @@ def al(data):
 	d = decode(H, data, snr)
 	x=get_message(G, d)
 	
-	if np.array_equal(b_biti, x[:3]):
-		return x
 			
-	return None
+	return x
 	
 
 def filtrele(data, esik):
