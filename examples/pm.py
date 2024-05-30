@@ -4,11 +4,9 @@ import matplotlib.pyplot as plt
 import matplotlib.animation as animation
 from scipy.signal import hilbert, butter, filtfilt, lfilter
 import time
-from pyldpc import make_ldpc, encode, decode, get_message
-import noisereduce as nr  # noisereduce kütüphanesini ekle
 
 # Ses kayıt parametreleri
-CHUNK = 1024 * 1  # Her seferde alınacak örnek sayısı
+CHUNK = 1024  # Her seferde alınacak örnek sayısı
 FORMAT = pyaudio.paInt16  # Örnek formatı
 CHANNELS = 1  # Kanal sayısı
 RATE = 44100  # Örnekleme hızı
@@ -40,58 +38,51 @@ plt.xlabel('Zaman')
 plt.ylabel('Genlik')
 plt.title('Osiloskop')
 
-# Frekans değeri için metin ekleyin
-text = ax.text(0.05, 0.9, '', transform=ax.transAxes)
-text2 = ax.text(0.4, 0.9, '', transform=ax.transAxes)
-
-# Mesaj için metin ekleyin
-message_text = ax.text(0.05, 0.85, '', transform=ax.transAxes)
-
 # Veri bitleri
-bit_array = np.zeros(16, dtype=int)  # Başlangıçta tüm bitleri sıfır olarak ayarla
+bit_array = np.zeros(32, dtype=int)  # Başlangıçta tüm bitleri sıfır olarak ayarla
 
 def parca_kontrol(s, sutun_sayisi, rate):
-  """
-  Verilen 's' verisini 'sutun_sayisi' kadar parçaya bölerek, her bir parçanın içindeki fazı hesaplar.
-  Eğer parçanın fazı belirli bir aralıkta ise 1, değilse 0 değerini döndüren bir dizi oluşturur.
+    """
+    Verilen 's' verisini 'sutun_sayisi' kadar parçaya bölerek, her bir parçanın içindeki fazı hesaplar.
+    Eğer parçanın fazı belirli bir aralıkta ise 1, değilse 0 değerini döndüren bir dizi oluşturur.
 
-  Args:
-    s: Kontrol edilecek verilerin numpy dizisi.
-    sutun_sayisi: Verinin bölüneceği parça sayısı.
-    rate: Örnekleme oranı (Hz).
+    Args:
+      s: Kontrol edilecek verilerin numpy dizisi.
+      sutun_sayisi: Verinin bölüneceği parça sayısı.
+      rate: Örnekleme oranı (Hz).
 
-  Returns:
-    Her bir parçanın faz kontrol sonucunu (1: aralıkta, 0: dışında) gösteren bir numpy dizisi.
-  """
+    Returns:
+      Her bir parçanın faz kontrol sonucunu (1: aralıkta, 0: dışında) gösteren bir numpy dizisi.
+    """
 
-  global bit_array  # Global bit_array değişkenine erişmek için
+    global bit_array  # Global bit_array değişkenine erişmek için
 
-  fazlar=[]
-  sutun_genisligi = len(s) / sutun_sayisi
+    fazlar = []
+    sutun_genisligi = len(s) / sutun_sayisi
 
-  for i in range(sutun_sayisi):
-    baslangic_indeksi = int(i * sutun_genisligi)
-    bitis_indeksi = int((i + 1) * sutun_genisligi)
+    for i in range(sutun_sayisi):
+        baslangic_indeksi = int(i * sutun_genisligi)
+        bitis_indeksi = int((i + 1) * sutun_genisligi)
 
-    parca = s[baslangic_indeksi:bitis_indeksi]
+        parca = s[baslangic_indeksi:bitis_indeksi]
 
-    # Parçanın fazını hesaplama
-    faz = np.unwrap(np.angle(hilbert(parca)))
-    faz_ortalama = np.mean(faz)
-    fazlar.append(faz_ortalama)
+        # Parçanın fazını hesaplama
+        faz = np.unwrap(np.angle(hilbert(parca)))
+        faz_ortalama = np.mean(faz)
+        fazlar.append(faz_ortalama)
 
-  fazlar = np.array(fazlar)
+    fazlar = np.array(fazlar)
 
-  # Faz kontrolü (Belirli bir aralıkta mı?)
-  # Bu aralık PM iletim sinyalindeki faz değişikliklerine göre ayarlanmalı
-  kosul = (fazlar > 0.5) & (fazlar < 1.5)  
-  
-  bits = np.where(kosul, 1, 0)
-  
-  # Bitleri güncelle (32 bitlik diziyi döndürmek yerine)
-  bit_array[:sutun_sayisi] = bits 
-  
-  return None
+    # Faz kontrolü (Belirli bir aralıkta mı?)
+    # Bu aralık PM iletim sinyalindeki faz değişikliklerine göre ayarlanmalı
+    kosul = (fazlar > 0.5) & (fazlar < 1.5)
+
+    bits = np.where(kosul, 1, 0)
+
+    # Bitleri güncelle (32 bitlik diziyi döndürmek yerine)
+    bit_array[:sutun_sayisi] = bits
+
+    return None
 
 def update_frame(frame):
     # Ses verilerini oku
@@ -111,7 +102,16 @@ def update_frame(frame):
     # Bit dizisini yazdır
     print(bit_array)
 
-    return line, text, message_text
+    # Veri bitlerini grafiğe çizdir
+    plt.figure(2)  # İkinci bir grafik oluştur (eğer yoksa)
+    plt.clf()  # Grafiği temizle
+    plt.plot(bit_array)
+    plt.xlabel('Bit İndeksi')
+    plt.ylabel('Bit Değeri')
+    plt.title('Demodüle Edilmiş Veri')
+    plt.ylim(-0.2, 1.2)  # Bit değerleri için y eksenini ayarlayın
+
+    return line, 
 
 # Animasyonu başlat
 ani = animation.FuncAnimation(fig, update_frame, interval=2, blit=True)
