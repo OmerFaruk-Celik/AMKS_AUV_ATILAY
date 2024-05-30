@@ -170,14 +170,14 @@ def update_frame(frame):
         b = [1.0 / n] * n
         a = 1
         yy = lfilter(b, a, data_int)
-        filtered_data=data_int
+        filtered_data=yy
         
         
 
         
         
         
-        #genis_veri = (data_int / tasiyici_dalga + 1) / 2
+        genis_veri = (data_int / tasiyici_dalga + 1) / 2
         
         #filtered_data = bandpass_filter(yy, lowcut, highcut, RATE, order=5)
         #filtered_data = nr.reduce_noise(y=data_int, sr=RATE) 
