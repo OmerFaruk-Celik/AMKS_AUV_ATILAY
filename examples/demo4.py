@@ -8,7 +8,7 @@ from pyldpc import make_ldpc, encode, decode, get_message
 import noisereduce as nr  # noisereduce kütüphanesini ekle
 
 # Ses kayıt parametreleri
-CHUNK = 1024 * 1  # Her seferde alınacak örnek sayısı
+CHUNK = 512 * 1  # Her seferde alınacak örnek sayısı
 FORMAT = pyaudio.paInt16  # Örnek formatı
 CHANNELS = 1  # Kanal sayısı
 RATE = 44100  # Örnekleme hızı
@@ -95,7 +95,7 @@ text2 = ax.text(0.4, 0.9, '', transform=ax.transAxes)
 message_text = ax.text(0.05, 0.85, '', transform=ax.transAxes)
 
 # Veri bitleri
-bit_array = np.zeros(32, dtype=int)  # Başlangıçta tüm bitleri sıfır olarak ayarla
+bit_array = np.zeros(16, dtype=int)  # Başlangıçta tüm bitleri sıfır olarak ayarla
 
 def parca_kontrol(s, sutun_sayisi, rate):
   """
