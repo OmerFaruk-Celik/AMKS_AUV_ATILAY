@@ -7,6 +7,7 @@ FORMAT = pyaudio.paInt16
 CHANNELS = 1
 RATE = 44100
 CHUNK = 1024
+DEVICE_INDEX = 0  # Mikrofon olarak kullanılacak cihazın ID'si
 
 # PyAudio nesnesini başlat
 p = pyaudio.PyAudio()
@@ -16,6 +17,7 @@ stream = p.open(format=FORMAT,
                 channels=CHANNELS,
                 rate=RATE,
                 input=True,
+                input_device_index=DEVICE_INDEX,
                 frames_per_buffer=CHUNK)
 
 def update_frame(frame):
@@ -31,8 +33,10 @@ def update_frame(frame):
     plt.ylabel('Genlik')
     plt.show()
 
+# Örnek bir çerçeve güncellemesi çalıştır
+update_frame(0)
+
 # Akışı kapat
 stream.stop_stream()
 stream.close()
 p.terminate()
-
