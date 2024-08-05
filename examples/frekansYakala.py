@@ -5,7 +5,7 @@ import matplotlib.animation as animation
 from scipy.signal import butter, filtfilt
 
 # Ses kayıt parametreleri
-CHUNK = 1024  # Her seferde alınacak örnek sayısı
+CHUNK = 512  # Her seferde alınacak örnek sayısı
 FORMAT = pyaudio.paInt16  # Örnek formatı
 CHANNELS = 1  # Kanal sayısı
 RATE = 44100  # Örnekleme hızı
