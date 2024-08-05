@@ -77,7 +77,8 @@ def update_frame(frame):
         single_wave = filtered_data[:wave_length]
         
         # X eksenini güncelle
-        line.set_xdata(np.arange(wave_length*2))
+        print(np.arange(wave_length))
+        line.set_xdata(np.arange(wave_length))
         
         # Veriyi güncelle
         line.set_ydata(single_wave)
