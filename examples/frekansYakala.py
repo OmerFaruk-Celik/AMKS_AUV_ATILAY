@@ -93,7 +93,7 @@ def update_frame(frame):
     return line, text
 
 # Animasyonu başlat
-ani = animation.FuncAnimation(fig, update_frame, interval=10, blit=True)
+ani = animation.FuncAnimation(fig, update_frame, interval=15, blit=True)
 
 # Grafik gösterimi
 plt.show()
