@@ -32,7 +32,7 @@ for i in range(5):
     lines.append(line)
     ax[i].set_ylim(-32768, 32767)
 
-ani = animation.FuncAnimation(fig, update_frame, interval=50, blit=True)
+ani = animation.FuncAnimation(fig, update_frame, interval=10, blit=True)
 
 plt.show()
 
