@@ -77,7 +77,7 @@ def update_frame(frame):
         single_wave = filtered_data[:wave_length]
         
         # X eksenini güncelle
-        line.set_xdata(np.arange(wave_length))
+        line.set_xdata(np.arange(wave_length*2))
         
         # Veriyi güncelle
         line.set_ydata(single_wave)
@@ -91,7 +91,7 @@ def update_frame(frame):
     return line, text
 
 # Animasyonu başlat
-ani = animation.FuncAnimation(fig, update_frame, interval=50, blit=True)
+ani = animation.FuncAnimation(fig, update_frame, interval=10, blit=True)
 
 # Grafik gösterimi
 plt.show()
