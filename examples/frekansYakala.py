@@ -81,7 +81,7 @@ def update_frame(frame):
         # Frekans değerini güncelle
         text.set_text(f'Frekans: {frekans_peak:.2f} Hz')
     else:
-        line.set_ydata(np.zeros(CHUNK))  # Grafiğe sıfır veri gönder
+        line.set_ydata(np.zeros(wave_length))  # Grafiğe sıfır veri gönder
         text.set_text('Frekans: Dışı')
 
     return line, text
