@@ -73,8 +73,8 @@ def filtrele(data, esik):
     return filtered_data
 
 # Frekans aralığı
-lowcut = 1000.0
-highcut = 22000.0
+lowcut = 6000.0
+highcut = 10000.0
 
 # Grafik hazırlıkları
 fig, ax = plt.subplots()
@@ -188,8 +188,8 @@ def update_frame(frame):
         # Veriyi güncelle
         line.set_ydata(filtered_data )
         
-        parca_kontrol(filtered_data , 16, 44100)
-        print(bit_array)
+        #parca_kontrol(filtered_data , 16, 44100)
+        #print(bit_array)
         
         #print(bit_array) # Bit dizisini yazdır
 
