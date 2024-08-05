@@ -51,7 +51,11 @@ plt.title('Osiloskop')
 # Frekans değeri için metin ekleyin
 text = ax.text(0.05, 0.9, '', transform=ax.transAxes)
 
+wave_length = CHUNK  # wave_length'i başlangıçta CHUNK olarak belirleyin
+
 def update_frame(frame):
+    global wave_length  # wave_length değişkenini global olarak tanımlayın
+    
     # Ses verilerini oku
     data = stream.read(CHUNK, exception_on_overflow=False)
     data_int = np.frombuffer(data, dtype=np.int16)
