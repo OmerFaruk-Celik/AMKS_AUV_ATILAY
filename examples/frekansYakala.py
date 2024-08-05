@@ -43,7 +43,7 @@ highcut = 15000.0
 fig, ax = plt.subplots()
 line, = ax.plot(np.random.rand(CHUNK))
 
-ax.set_ylim(-1000, 1000)
+ax.set_ylim(-3000, 3000)
 plt.xlabel('Zaman')
 plt.ylabel('Genlik')
 plt.title('Osiloskop')
@@ -76,17 +76,17 @@ def update_frame(frame):
         # Bir dalga boyu kadar veriyi al
         single_wave = filtered_data[:wave_length]
         
-        # Veriyi güncelle
-        line.set_ydata(single_wave)
-        
         # X eksenini güncelle
         line.set_xdata(np.arange(wave_length))
+        
+        # Veriyi güncelle
+        line.set_ydata(single_wave)
         
         # Frekans değerini güncelle
         text.set_text(f'Frekans: {frekans_peak:.2f} Hz')
     else:
         line.set_ydata(np.zeros(wave_length))  # Grafiğe sıfır veri gönder
-        text.set_text('Frekans: Dışı')
+        text.set_text('Frekans aralığı dışında')
 
     return line, text
 
