@@ -36,8 +36,8 @@ def bandpass_filter(data, lowcut, highcut, fs, order=5):
     return y
 
 # Frekans aralığı
-lowcut = 15000.0
-highcut = 18000.0
+lowcut = 13000.0
+highcut = 15000.0
 
 # Grafik hazırlıkları
 fig, ax = plt.subplots()
