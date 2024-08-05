@@ -72,13 +72,14 @@ def update_frame(frame):
         
         # Dalga boyunu hesapla
         wave_length = int(RATE / frekans_peak)
+        wave_length=100
         
         # Bir dalga boyu kadar veriyi al
         single_wave = filtered_data[:wave_length]
         
         # X eksenini güncelle
         
-        line.set_xdata(np.arange(wave_length))
+        line.set_xdata(np.arange(wave_length)*3)
         
         # Veriyi güncelle
         line.set_ydata(single_wave)
