@@ -30,26 +30,14 @@ def butter_bandpass(lowcut, highcut, fs, order=5):
     b, a = butter(order, [low, high], btype='band')
     return b, a
 
-def butter_lowpass(cutoff, fs, order=5):
-    nyq = 0.5 * fs
-    normal_cutoff = cutoff / nyq
-    b, a = butter(order, normal_cutoff, btype='low', analog=False)
-    return b, a
-
 def bandpass_filter(data, lowcut, highcut, fs, order=5):
     b, a = butter_bandpass(lowcut, highcut, fs, order=order)
-    y = filtfilt(b, a, data)
-    return y
-
-def lowpass_filter(data, cutoff, fs, order=5):
-    b, a = butter_lowpass(cutoff, fs, order=order)
     y = filtfilt(b, a, data)
     return y
 
 # Frekans aralığı
 lowcut = 15000.0
 highcut = 18000.0
-lowpass_cutoff = 18000.0  # Lowpass filtresi için kesme frekansı
 
 # Grafik hazırlıkları
 fig, ax = plt.subplots()
@@ -82,21 +70,19 @@ def update_frame(frame):
         # Band-pass filtre uygulama
         filtered_data = bandpass_filter(data_int, lowcut, highcut, RATE, order=5)
         
-        # Lowpass filtre uygulama (gürültü filtreleme)
-        filtered_data = lowpass_filter(filtered_data, lowpass_cutoff, RATE, order=5)
-        
         # Dalga boyunu hesapla
         wave_length = int(RATE / frekans_peak)
-        wave_length = 50
+        wave_length=50
         
         # Bir dalga boyu kadar veriyi al
         single_wave = filtered_data[:wave_length]
         
         # X eksenini güncelle
-        line.set_xdata(np.arange(wave_length) * 10)
+        
+        line.set_xdata(np.arange(wave_length)*10)
         
         # Veriyi güncelle
-        line.set_ydata(single_wave / 10)
+        line.set_ydata(single_wave/10)
         
         # Frekans değerini güncelle
         text.set_text(f'Frekans: {frekans_peak:.2f} Hz')
