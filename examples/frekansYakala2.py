@@ -8,7 +8,7 @@ from scipy.signal import butter, lfilter
 FORMAT = pyaudio.paInt16
 CHANNELS = 1
 RATE = 44100
-CHUNK = 1024 * 10
+CHUNK = 1024 * 100
 
 # Initialize audio stream
 p = pyaudio.PyAudio()
