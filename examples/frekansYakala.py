@@ -43,31 +43,29 @@ def update_frame(i):
     # Update time domain plot
     line.set_ydata(filtered_data)
 
-    # Compute FFT and update frequency domain plot
+    # Compute FFT and find the dominant frequency
     fft_data = np.fft.fft(filtered_data)
     fft_freq = np.fft.fftfreq(len(filtered_data), 1/RATE)
-    line_fft.set_ydata(np.abs(fft_data)[:CHUNK // 2])
-    
-    return line, line_fft
+    dominant_freq = np.abs(fft_freq[np.argmax(np.abs(fft_data))])
+
+    # Update frequency text
+    freq_text.set_text(f'Dominant Frequency: {dominant_freq:.2f} Hz')
+
+    return line, freq_text
 
 # Set up figure and animation
-fig, (ax_time, ax_freq) = plt.subplots(2, 1, figsize=(10, 10))
+fig, ax = plt.subplots(figsize=(10, 5))
 
 # Time domain plot
-line, = ax_time.plot(np.arange(CHUNK), np.zeros(CHUNK))
-ax_time.set_ylim(-32768, 32767)
-ax_time.set_xlim(0, CHUNK)
-ax_time.set_title("Time Domain")
-ax_time.set_xlabel("Samples")
-ax_time.set_ylabel("Amplitude")
+line, = ax.plot(np.arange(CHUNK), np.zeros(CHUNK))
+ax.set_ylim(-32768, 32767)
+ax.set_xlim(0, CHUNK)
+ax.set_title("Time Domain")
+ax.set_xlabel("Samples")
+ax.set_ylabel("Amplitude")
 
-# Frequency domain plot
-line_fft, = ax_freq.plot(np.linspace(0, RATE / 2, CHUNK // 2), np.zeros(CHUNK // 2))
-ax_freq.set_ylim(0, 1000)
-ax_freq.set_xlim(0, RATE / 2)
-ax_freq.set_title("Frequency Domain")
-ax_freq.set_xlabel("Frequency (Hz)")
-ax_freq.set_ylabel("Amplitude")
+# Frequency text
+freq_text = ax.text(0.02, 0.95, '', transform=ax.transAxes, fontsize=14, verticalalignment='top')
 
 ani = animation.FuncAnimation(fig, update_frame, interval=50, blit=True)
 
