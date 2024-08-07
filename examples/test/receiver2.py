@@ -28,21 +28,28 @@ ax.set_ylabel('Amplitüd')
 ax.set_title('15kHz - 18kHz Frekans Aralığı')
 
 def update(frame):
-    data = stream.read(CHUNK)
-    data_int = struct.unpack(str(2 * CHUNK) + 'B', data)
-    data_np = np.array(data_int, dtype='b')[::2] + 128
+    try:
+        data = stream.read(CHUNK)
+        data_int = struct.unpack(str(2 * CHUNK) + 'h', data)
+        data_np = np.array(data_int, dtype='int16')
+
+        fft_data = np.fft.fft(data_np)
+        freqs = np.fft.fftfreq(len(fft_data)) * RATE
+        
+        idx = np.where((freqs >= 15000) & (freqs <= 18000))
+        filtered_freqs = freqs[idx]
+        filtered_fft = np.abs(fft_data[idx])
+        
+        # Boyutları eşitlemek için interpolasyon kullan
+        if len(filtered_fft) > 0:
+            line.set_ydata(np.interp(x, filtered_freqs, filtered_fft))
+        
+    except IOError as e:
+        print(f"IOError: {e}")
     
-    fft_data = np.fft.fft(data_np)
-    freqs = np.fft.fftfreq(len(fft_data)) * RATE
-    
-    idx = np.where((freqs >= 15000) & (freqs <= 18000))
-    filtered_freqs = freqs[idx]
-    filtered_fft = np.abs(fft_data[idx])
-    
-    line.set_ydata(filtered_fft)
     return line,
 
-ani = FuncAnimation(fig, update, blit=True, interval=50)
+ani = FuncAnimation(fig, update, interval=50)
 
 plt.show()
 
