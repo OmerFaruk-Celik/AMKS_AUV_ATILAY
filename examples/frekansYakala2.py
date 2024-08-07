@@ -66,7 +66,7 @@ fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(10, 10))
 # Time domain plot
 line, = ax1.plot(np.arange(CHUNK), np.zeros(CHUNK))
 ax1.set_ylim(-32768, 32767)
-ax1.set_xlim(0, CHUNK/100)
+ax1.set_xlim(80, CHUNK/100)
 ax1.set_title("Time Domain")
 ax1.set_xlabel("Samples")
 ax1.set_ylabel("Amplitude")
