@@ -33,7 +33,7 @@ def bandpass_filter(data, lowcut, highcut, fs, order=5):
 
 # Filter parameters
 lowcut = 16600.0
-highcut = 16630.0
+highcut = 16660.0
 
 # Function to update frame
 def update_frame(i):
