@@ -37,7 +37,7 @@ highcut = 18300.0
 
 # Function to update frame
 def update_frame(i):
-    data = np.frombuffer(stream.read(CHUNK), dtype=np.int16)
+    data = np.frombuffer(stream.read(CHUNK, exception_on_overflow=False), dtype=np.int16)
     filtered_data = bandpass_filter(data, lowcut, highcut, RATE)
 
     # Update time domain plot
@@ -66,7 +66,7 @@ fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(10, 10))
 # Time domain plot
 line, = ax1.plot(np.arange(CHUNK), np.zeros(CHUNK))
 ax1.set_ylim(-32768, 32767)
-ax1.set_xlim(80, CHUNK/120)
+ax1.set_xlim(0, CHUNK)
 ax1.set_title("Time Domain")
 ax1.set_xlabel("Samples")
 ax1.set_ylabel("Amplitude")
