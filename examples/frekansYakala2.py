@@ -8,7 +8,7 @@ from scipy.signal import butter, lfilter
 FORMAT = pyaudio.paInt16
 CHANNELS = 1
 RATE = 44100
-CHUNK = 1024 * 100
+CHUNK = 1024 * 20
 
 # Initialize audio stream
 p = pyaudio.PyAudio()
@@ -21,7 +21,7 @@ stream = p.open(format=FORMAT,
 # Bandpass filter design
 def butter_bandpass(lowcut, highcut, fs, order=5):
     nyquist = 0.5 * fs
-    low = lowcut / nyquist
+    low = lowcutw / nyquist
     high = highcut / nyquist
     b, a = butter(order, [low, high], btype='band')
     return b, a
@@ -66,7 +66,7 @@ fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(10, 10))
 # Time domain plot
 line, = ax1.plot(np.arange(CHUNK), np.zeros(CHUNK))
 ax1.set_ylim(-32768, 32767)
-ax1.set_xlim(80, CHUNK/100)
+ax1.set_xlim(80, CHUNK/200)
 ax1.set_title("Time Domain")
 ax1.set_xlabel("Samples")
 ax1.set_ylabel("Amplitude")
