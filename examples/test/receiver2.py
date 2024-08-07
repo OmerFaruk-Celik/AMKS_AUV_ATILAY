@@ -29,7 +29,10 @@ ax.set_title('15kHz - 18kHz Frekans Aralığı')
 
 def update(frame):
     try:
-        data = stream.read(CHUNK)
+        data = stream.read(CHUNK, exception_on_overflow=False)
+        if len(data) < CHUNK * 2:
+            return line,
+
         data_int = struct.unpack(str(2 * CHUNK) + 'h', data)
         data_np = np.array(data_int, dtype='int16')
 
@@ -49,7 +52,7 @@ def update(frame):
     
     return line,
 
-ani = FuncAnimation(fig, update, interval=50)
+ani = FuncAnimation(fig, update, interval=50, cache_frame_data=False)
 
 plt.show()
 
