@@ -33,7 +33,7 @@ def update(frame):
         if len(data) < CHUNK * 2:
             return line,
 
-        data_int = struct.unpack(str(2 * CHUNK) + 'h', data)
+        data_int = struct.unpack(str(len(data) // 2) + 'h', data)
         data_np = np.array(data_int, dtype='int16')
 
         fft_data = np.fft.fft(data_np)
