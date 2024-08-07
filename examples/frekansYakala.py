@@ -39,24 +39,13 @@ highcut = 18000.0
 def update_frame(i):
     data = np.frombuffer(stream.read(CHUNK), dtype=np.int16)
     filtered_data = bandpass_filter(data, lowcut, highcut, RATE)
-    for j, (line, fd) in enumerate(zip(lines, np.array_split(filtered_data, 5))):
-        if j == 0:
-            line.set_ydata(fd * 100)  # First subplot is zoomed in by a factor of 100
-        else:
-            line.set_ydata(fd)
-    return lines
+    line.set_ydata(filtered_data * 100)  # Zoomed in by a factor of 100
+    return line,
 
 # Set up figure and animation
-fig, ax = plt.subplots(5, 1, figsize=(10, 10))
-lines = []
-
-for i in range(5):
-    line, = ax[i].plot(np.arange(CHUNK//5), np.zeros(CHUNK//5))
-    lines.append(line)
-    ax[i].set_ylim(-32768, 32767)
-    ax[i].set_xlim(0, CHUNK // 5)
-    if i == 0:
-        ax[i].set_ylim(-32768 * 100, 32767 * 100)  # Adjust y-limits for the first subplot
+fig, ax = plt.subplots(figsize=(10, 5))
+line, = ax.plot(np.arange(CHUNK), np.zeros(CHUNK))
+ax.set_ylim(-32768 * 100, 32767 * 100)
 
 ani = animation.FuncAnimation(fig, update_frame, interval=10, blit=True)
 
