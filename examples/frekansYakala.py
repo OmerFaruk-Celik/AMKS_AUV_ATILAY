@@ -39,17 +39,39 @@ highcut = 17000.0
 def update_frame(i):
     data = np.frombuffer(stream.read(CHUNK), dtype=np.int16)
     filtered_data = bandpass_filter(data, lowcut, highcut, RATE)
+
+    # Update time domain plot
+    line.set_ydata(filtered_data)
+
+    # Compute FFT and update frequency domain plot
+    fft_data = np.fft.fft(filtered_data)
+    fft_freq = np.fft.fftfreq(len(filtered_data), 1/RATE)
+    line_fft.set_ydata(np.abs(fft_data)[:CHUNK // 2])
     
-    line.set_ydata(filtered_data) 
-    return line,
+    return line, line_fft
 
 # Set up figure and animation
-fig, ax = plt.subplots(figsize=(10, 5))
-line, = ax.plot(np.arange(CHUNK), np.zeros(CHUNK))
-ax.set_ylim(-32768 , 32767)
+fig, (ax_time, ax_freq) = plt.subplots(2, 1, figsize=(10, 10))
 
-ani = animation.FuncAnimation(fig, update_frame, interval=10, blit=True)
+# Time domain plot
+line, = ax_time.plot(np.arange(CHUNK), np.zeros(CHUNK))
+ax_time.set_ylim(-32768, 32767)
+ax_time.set_xlim(0, CHUNK)
+ax_time.set_title("Time Domain")
+ax_time.set_xlabel("Samples")
+ax_time.set_ylabel("Amplitude")
 
+# Frequency domain plot
+line_fft, = ax_freq.plot(np.linspace(0, RATE / 2, CHUNK // 2), np.zeros(CHUNK // 2))
+ax_freq.set_ylim(0, 1000)
+ax_freq.set_xlim(0, RATE / 2)
+ax_freq.set_title("Frequency Domain")
+ax_freq.set_xlabel("Frequency (Hz)")
+ax_freq.set_ylabel("Amplitude")
+
+ani = animation.FuncAnimation(fig, update_frame, interval=50, blit=True)
+
+plt.tight_layout()
 plt.show()
 
 # Close audio stream
