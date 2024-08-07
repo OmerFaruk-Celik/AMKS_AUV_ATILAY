@@ -32,8 +32,8 @@ def bandpass_filter(data, lowcut, highcut, fs, order=5):
     return y
 
 # Filter parameters
-lowcut = 18000.0
-highcut = 18200.0
+lowcut = 17900.0
+highcut = 18300.0
 
 # Function to update frame
 def update_frame(i):
@@ -66,7 +66,7 @@ fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(10, 10))
 # Time domain plot
 line, = ax1.plot(np.arange(CHUNK), np.zeros(CHUNK))
 ax1.set_ylim(-32768, 32767)
-ax1.set_xlim(0, CHUNK/10)
+ax1.set_xlim(0, CHUNK/20)
 ax1.set_title("Time Domain")
 ax1.set_xlabel("Samples")
 ax1.set_ylabel("Amplitude")
