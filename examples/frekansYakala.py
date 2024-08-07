@@ -38,8 +38,8 @@ highcut = 18000.0
 # Function to update frame
 def update_frame(i):
     data = np.frombuffer(stream.read(CHUNK), dtype=np.int16)
-    filtered_data = bandpass_filter(data, lowcut, highcut, RATE)
-    print(filtered_data)
+    filtered_data = bandpass_filter(data, lowcut, highcut, RATE)[:1000]
+    
     line.set_ydata(filtered_data)  # Zoomed in by a factor of 100
     return line,
 
