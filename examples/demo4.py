@@ -190,7 +190,8 @@ def update_frame(frame):
 
         # Veriyi güncelle
         zaman=np.linspace(0,gecen_sure,CHUNK)
-        ax.set_xlim(zaman)
+        ax.set_xlim(zaman[0], zaman[-1])
+
         line.set_ydata(filtered_data)
         
         #parca_kontrol(filtered_data , 16, 44100)
