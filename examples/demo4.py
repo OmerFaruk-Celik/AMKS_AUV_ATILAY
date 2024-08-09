@@ -170,7 +170,7 @@ def update_frame(frame):
         b = [1.0 / n] * n
         a = 1
         yy = lfilter(b, a, data_int)
-        filtered_data=yy
+        filtered_data=data_int
         
         
 
@@ -195,7 +195,8 @@ def update_frame(frame):
 
         # Frekans değerini güncelle
         text.set_text(f'Frekans: {frekans_peak:.2f} Hz')
-        text2.set_text(f'Sure: {gecen_sure:.4f} ms')
+        #text2.set_text(f'Sure: {gecen_sure:.4f} ms')
+        print(gecen_sure)
 
         # Bitleri çözümle ve mesajı yazdır (bu kısım isterseniz burada)
         #demodulated_signal = hilbert(filtered_data).real
