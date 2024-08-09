@@ -171,6 +171,7 @@ def update_frame(frame):
         a = 1
         yy = lfilter(b, a, data_int)
         filtered_data=data_int
+        integrated_signal = np.cumsum(data_int) * (CHUNK) 
         
         
 
