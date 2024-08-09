@@ -8,7 +8,7 @@ from pyldpc import make_ldpc, encode, decode, get_message
 import noisereduce as nr  # noisereduce kütüphanesini ekle
 
 # Ses kayıt parametreleri
-CHUNK = 512 * 1  # Her seferde alınacak örnek sayısı
+CHUNK = 512 * 10  # Her seferde alınacak örnek sayısı
 FORMAT = pyaudio.paInt16  # Örnek formatı
 CHANNELS = 1  # Kanal sayısı
 RATE = 44100  # Örnekleme hızı
@@ -81,7 +81,7 @@ fig, ax = plt.subplots()
 x = np.arange(0, 2 * CHUNK, 2)
 line, = ax.plot(x, np.random.rand(CHUNK))
 
-ax.set_ylim(-1000, 1000)
+ax.set_ylim(-32000, 32000)
 ax.set_xlim(0, CHUNK)
 plt.xlabel('Zaman')
 plt.ylabel('Genlik')
@@ -170,7 +170,7 @@ def update_frame(frame):
         b = [1.0 / n] * n
         a = 1
         yy = lfilter(b, a, data_int)
-        filtered_data=data_int
+        filtered_data=yy
         
         
 
