@@ -81,8 +81,8 @@ fig, ax = plt.subplots()
 x = np.arange(0, 2 * CHUNK, 2)
 line, = ax.plot(x, np.random.rand(CHUNK))
 
-ax.set_ylim(-1, 1)
-ax.set_xlim(0, CHUNK)
+ax.set_ylim(-32000, 32000)
+
 plt.xlabel('Zaman')
 plt.ylabel('Genlik')
 plt.title('Osiloskop')
@@ -189,6 +189,8 @@ def update_frame(frame):
         #genis_veri = np.where(filtered_data <= 0, -1, 1)
 
         # Veriyi güncelle
+        zaman=np.linspace(0,gecen_sure,CHUNK)
+        ax.set_xlim(zaman)
         line.set_ydata(filtered_data)
         
         #parca_kontrol(filtered_data , 16, 44100)
