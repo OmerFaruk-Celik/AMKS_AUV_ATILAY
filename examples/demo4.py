@@ -82,7 +82,7 @@ x = np.arange(0, 2 * CHUNK, 2)
 line, = ax.plot(x, np.random.rand(CHUNK))
 
 ax.set_ylim(-32000, 32000)
-
+ax.set_xlim(0, CHUNK)
 plt.xlabel('Zaman')
 plt.ylabel('Genlik')
 plt.title('Osiloskop')
@@ -171,7 +171,7 @@ def update_frame(frame):
         a = 1
         yy = lfilter(b, a, data_int)
         filtered_data=data_int
-        integrated_signal = np.cumsum(data_int) * (CHUNK)
+        #integrated_signal = np.cumsum(data_int) * (CHUNK)
         #integrated_signal = integrated_signal - np.mean(integrated_signal)  # Ortalamayı sıfır yapmak
         #integrated_signal = integrated_signal / np.max(np.abs(integrated_signal))   
         
@@ -189,8 +189,6 @@ def update_frame(frame):
         #genis_veri = np.where(filtered_data <= 0, -1, 1)
 
         # Veriyi güncelle
-        zaman=np.linspace(0,gecen_sure,CHUNK)
-        ax.set_xlim(zaman[0], zaman[-1])
 
         line.set_ydata(filtered_data)
         
