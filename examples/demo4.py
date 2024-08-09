@@ -172,8 +172,8 @@ def update_frame(frame):
         yy = lfilter(b, a, data_int)
         filtered_data=data_int
         integrated_signal = np.cumsum(data_int) * (CHUNK)
-        integrated_signal = integrated_signal - np.mean(integrated_signal)  # Ortalamayı sıfır yapmak
-        integrated_signal = integrated_signal / np.max(np.abs(integrated_signal))   
+        #integrated_signal = integrated_signal - np.mean(integrated_signal)  # Ortalamayı sıfır yapmak
+        #integrated_signal = integrated_signal / np.max(np.abs(integrated_signal))   
         
         
 
@@ -189,7 +189,7 @@ def update_frame(frame):
         #genis_veri = np.where(filtered_data <= 0, -1, 1)
 
         # Veriyi güncelle
-        line.set_ydata(integrated_signal )
+        line.set_ydata(filtered_data)
         
         #parca_kontrol(filtered_data , 16, 44100)
         #print(bit_array)
