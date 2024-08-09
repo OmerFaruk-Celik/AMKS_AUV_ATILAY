@@ -82,7 +82,7 @@ x = np.arange(0, 2 * CHUNK, 2)
 line, = ax.plot(x, np.random.rand(CHUNK))
 
 ax.set_ylim(-32000, 32000)
-ax.set_xlim(0, CHUNK/400)
+ax.set_xlim(0, CHUNK/200)
 plt.xlabel('Zaman')
 plt.ylabel('Genlik')
 plt.title('Osiloskop')
@@ -147,11 +147,11 @@ def parca_kontrol(s, sutun_sayisi, rate):
 
 def update_frame(frame):
     # Ses verilerini oku
-    #baslama_zamani = time.time()
+    baslama_zamani = time.time()
     data = stream.read(CHUNK, exception_on_overflow=False)
     data_int = np.frombuffer(data, dtype=np.int16)
-    #bitme_zamani = time.time()
-    #gecen_sure = bitme_zamani - baslama_zamani
+    bitme_zamani = time.time()
+    gecen_sure = bitme_zamani - baslama_zamani
 
 
     
@@ -195,7 +195,7 @@ def update_frame(frame):
 
         # Frekans değerini güncelle
         text.set_text(f'Frekans: {frekans_peak:.2f} Hz')
-        #text2.set_text(f'Sure: {gecen_sure:.4f} ms')
+        text2.set_text(f'Sure: {gecen_sure:.4f} ms')
 
         # Bitleri çözümle ve mesajı yazdır (bu kısım isterseniz burada)
         #demodulated_signal = hilbert(filtered_data).real
@@ -215,7 +215,7 @@ def update_frame(frame):
     return line, text, message_text
 
 # Animasyonu başlat
-ani = animation.FuncAnimation(fig, update_frame, interval=2, blit=True)
+ani = animation.FuncAnimation(fig, update_frame, interval=5, blit=True)
 
 # Grafik gösterimi
 plt.show()
