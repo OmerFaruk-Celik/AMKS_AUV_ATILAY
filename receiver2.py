@@ -57,7 +57,7 @@ def binary_queue_to_decimal(q):
 
 def xor_or(signal2, signal1):
     if signal2 and signal1:
-        #print(1)
+        print(1)
         h=9
     if signal2 ^ signal1:
 		
