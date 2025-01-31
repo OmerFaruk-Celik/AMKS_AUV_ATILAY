@@ -1,6 +1,5 @@
 import numpy as np
 import sounddevice as sd
-import matplotlib.pyplot as plt
 from scipy.fftpack import fft
 from scipy.signal import butter, lfilter
 import queue
@@ -38,17 +37,13 @@ def audio_callback(indata, frames, time, status):
         print(status)
     q.put(indata.copy())
 
-
-def xor_or(signal2,signal1):
-	if signal1^signal2:
-		
-		if q2.full():
-			a=q.get()
-			print("Çıkarılan",a)
-		print("Eklenen",signal2)
-		q2.put(signal1)
-		
-		
+def xor_or(signal2, signal1):
+    if signal1 ^ signal2:
+        if q2.full():
+            a = q2.get()
+            print("Çıkarılan", a)
+        print("Eklenen", signal1)
+        q2.put(signal1)
 
 def process_audio():
     """Bu fonksiyon kuyruktaki ses verilerini alır ve band geçiren filtre uygular."""
@@ -62,17 +57,17 @@ def process_audio():
             # 15 kHz band geçiren filtre
             filtered_15kHz = bandpass_filter(indata[:, 0], 14500, 15500, sampling_rate)
             signal_15kHz = detect_signal(filtered_15kHz)
-            xor_or(signal_19kHz,signal_15kHz)
             
-            
-            # Sonuçları yazdır
-            #print(f"19 kHz Signal: {'1' if signal_19kHz else '0'}, 15 kHz Signal: {'1' if signal_15kHz else '0'}")
-            #print(list(q2.queue))
+            xor_or(signal_19kHz, signal_15kHz)
+
 def listen_microphone():
     """Bu fonksiyon mikrofon girişini dinler ve frekans spektrumunu gösterir."""
     with sd.InputStream(callback=audio_callback, channels=1, samplerate=sampling_rate):
         print("Mikrofon dinleniyor... 'Ctrl+C' ile çıkış yapabilirsiniz.")
-        process_audio()
+        process_thread = threading.Thread(target=process_audio)
+        process_thread.daemon = True
+        process_thread.start()
+        process_thread.join()
 
 if __name__ == "__main__":
     listen_microphone()
