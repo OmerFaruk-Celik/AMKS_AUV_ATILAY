@@ -22,9 +22,25 @@ ax.set_zlabel('Z Eksen')
 ax.set_title('Tüm Ekranı Kaplayan 3D Grafik Örneği')
 
 # Eksen sınırlarını genişletme
-ax.set_xlim([-20, 20])
-ax.set_ylim([-20, 20])
-ax.set_zlim([-2, 2])
+ax.set_xlim([-10, 10])
+ax.set_ylim([-10, 10])
+ax.set_zlim([-1, 1])
+
+# 3D eksende bir nokta ekleme
+point_x, point_y, point_z = 0, 0, 0  # Noktanın koordinatları
+ax.scatter(point_x, point_y, point_z, color='red', s=100)  # Nokta ekleme (s: boyut)
+
+# Küre verilerini oluşturma
+phi = np.linspace(0, 2 * np.pi, 100)
+theta = np.linspace(0, np.pi, 100)
+phi, theta = np.meshgrid(phi, theta)
+r = 1  # Kürenin yarıçapı
+sphere_x = r * np.sin(theta) * np.cos(phi)
+sphere_y = r * np.sin(theta) * np.sin(phi)
+sphere_z = r * np.cos(theta)
+
+# 3D eksende bir küre ekleme
+ax.plot_surface(sphere_x + 3, sphere_y + 3, sphere_z, color='blue', alpha=0.6)  # Küre ekleme (alpha: saydamlık)
 
 # Grafik gösterimi
 plt.show()
