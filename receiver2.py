@@ -59,6 +59,8 @@ def xor_or(signal2, signal1):
     if signal2 and signal1:
         print(1)
         h=9
+    else:
+        print(0)
     if signal2 ^ signal1:
 		
         if q2.full():
