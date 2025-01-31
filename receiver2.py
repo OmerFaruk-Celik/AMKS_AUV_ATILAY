@@ -61,7 +61,7 @@ def xor_or(signal2, signal1):
             decimal_numbers = binary_queue_to_decimal(q2)
             print(decimal_numbers)
             q2.get()  # Kuyruktan bir veri çıkar
-        q2.put(signal2)  # Kuyruğa yeni veri ekle
+        q2.put(int(signal2))  # Kuyruğa yeni veri ekle
 
 def process_audio():
     """Bu fonksiyon kuyruktaki ses verilerini alır ve band geçiren filtre uygular."""
