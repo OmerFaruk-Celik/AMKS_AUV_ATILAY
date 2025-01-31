@@ -43,7 +43,7 @@ def update(num):
     
     ax.set_xlim([0, SCREEN_WIDTH])
     ax.set_ylim([0, SCREEN_HEIGHT])
-    ax.set_zlim([0, LINE_LENGTH])
+    ax.set_zlim([0, LINE_LENGTH*10])
     
     ax.plot([LINE_START[0], LINE_END[0]], [LINE_START[1], LINE_END[1]], [LINE_START[2], LINE_END[2]], color='red', linewidth=5)
     ax.plot([LINE_START[0], LINE_END2[0]], [LINE_START[1], LINE_END2[1]], [LINE_START[2], LINE_END2[2]], color='red', linewidth=5)
