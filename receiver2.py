@@ -56,12 +56,15 @@ def binary_queue_to_decimal(q):
     return decimal_list         
 
 def xor_or(signal2, signal1):
+    """
     if signal2 and signal1:
         print(1)
-        h=9
+        h=1
     else:
         print(0)
-    if signal2 ^ signal1:
+        h=0
+    """
+    if signal2 and signal1:
 		
         if q2.full():
             #decimal_numbers = binary_queue_to_decimal(q2)
@@ -84,7 +87,7 @@ def process_audio():
             signal_15kHz = detect_signal(filtered_15kHz)
             #print(f"19 kHz Signal: {'1' if signal_19kHz else '0'}, 15 kHz Signal: {'1' if signal_15kHz else '0'}")
             xor_or(signal_19kHz, signal_15kHz)
-            #print(list(q2.queue))
+            print(list(q2.queue))
 
 def listen_microphone():
     """Bu fonksiyon mikrofon girişini dinler ve frekans spektrumunu gösterir."""
