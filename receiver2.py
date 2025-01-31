@@ -40,7 +40,7 @@ def audio_callback(indata, frames, time, status):
 
 
 def xor_or(signal1,signal2):
-	if signal1^singal2:
+	if signal1^signal2:
 		
 		if q2.full():
 			q.get()
