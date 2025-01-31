@@ -27,7 +27,7 @@ def calculate_coordinates(r0, r1, r2, r3, line_length):
     z = round((line_length / 2) + (r0**2 - r3**2) / (2 * line_length))
     return np.array([x, y, z]) + np.array([SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2, 0])
 
-# Denizaltı gövdesi oluşturma fonksiyonu
+# Denizaltı gövdesi oluşturma fonksiyonu (silindir)
 def create_submarine_body(center, length, radius):
     phi = np.linspace(0, 2 * np.pi, 100)
     z = np.linspace(-length / 2, length / 2, 100)
@@ -66,12 +66,14 @@ def update(num):
     ax.plot([LINE_START[0], LINE_END2[0]], [LINE_START[1], LINE_END2[1]], [LINE_START[2], LINE_END2[2]], color='red', linewidth=5)
     ax.plot([LINE_START[0], LINE_END3[0]], [LINE_START[1], LINE_END3[1]], [LINE_START[2], LINE_END3[2]], color='red', linewidth=5)
 
-    # Denizaltı gövdesini çiz
-    body_x, body_y, body_z = create_submarine_body(p_point, 200, 50)
+    # Denizaltı gövdesini çiz (X ekseni boyunca paralel)
+    body_center = p_point + np.array([0, 0, -100])
+    body_x, body_y, body_z = create_submarine_body(body_center, 200, 50)
     ax.plot_surface(body_x, body_y, body_z, color='blue', alpha=0.6)
 
-    # Denizaltı başını çiz
-    head_x, head_y, head_z = create_submarine_head(p_point + np.array([100, 0, 0]), 50)
+    # Denizaltı başını çiz (Yukarı bakacak şekilde)
+    head_center = p_point + np.array([0, 0, 100])
+    head_x, head_y, head_z = create_submarine_head(head_center, 50)
     ax.plot_surface(head_x, head_y, head_z, color='blue', alpha=0.6)
 
     # Metinleri ekle
