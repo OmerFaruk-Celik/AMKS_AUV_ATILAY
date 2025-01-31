@@ -44,8 +44,8 @@ def xor_or(signal1,signal2):
 		
 		if q2.full():
 			a=q.get()
-			#print(a)
-		print(signal2)
+			print("Çıkarılan",a)
+		print("Eklenen",signal2)
 		q2.put(signal1)
 		
 		
