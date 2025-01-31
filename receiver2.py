@@ -12,7 +12,7 @@ duration = 1.0  # Ses kayıt süresi (saniye)
 
 # Ses verilerini tutmak için bir kuyruk oluşturun
 q = queue.Queue()
-q2 = queue.Queue()
+q2 = queue.Queue(maxsize=16)
 
 def butter_bandpass(lowcut, highcut, fs, order=5):
     """Band geçiren filtre koeffsiyentlerini hesaplar."""
@@ -37,6 +37,13 @@ def audio_callback(indata, frames, time, status):
     if status:
         print(status)
     q.put(indata.copy())
+
+
+def xor_or(signal1,signal2):
+	if signal1^singal2:
+		signal1
+		
+		
 
 def process_audio():
     """Bu fonksiyon kuyruktaki ses verilerini alır ve band geçiren filtre uygular."""
