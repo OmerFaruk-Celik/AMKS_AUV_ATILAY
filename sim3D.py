@@ -73,9 +73,9 @@ def update(num):
     p_point = np.array([P_X, P_Y, P_Z])
 
 # Ana döngü parametreleri
-x_velocity = 0.5  # P noktasının hareket hızı
+x_velocity = 0.6  # P noktasının hareket hızı
 y_velocity = 0.8  # P noktasının hareket hızı
-z_velocity = 0.3  # P noktasının hareket hızı
+z_velocity = 0.7  # P noktasının hareket hızı
 
 fig = plt.figure(figsize=(16, 9))
 ax = fig.add_subplot(111, projection='3d')
