@@ -12,6 +12,7 @@ duration = 1.0  # Ses kayıt süresi (saniye)
 
 # Ses verilerini tutmak için bir kuyruk oluşturun
 q = queue.Queue()
+q2 = queue.Queue()
 
 def butter_bandpass(lowcut, highcut, fs, order=5):
     """Band geçiren filtre koeffsiyentlerini hesaplar."""
