@@ -6,7 +6,7 @@ import queue
 import threading
 
 # Sabitler
-sampling_rate = 44100  # Örnekleme frekansı (Hz)
+sampling_rate = 100000  # Örnekleme frekansı (Hz)
 duration = 1.0  # Ses kayıt süresi (saniye)
 
 # Ses verilerini tutmak için bir kuyruk oluşturun
