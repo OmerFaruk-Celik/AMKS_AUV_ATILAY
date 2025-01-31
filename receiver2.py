@@ -64,7 +64,7 @@ def xor_or(signal2, signal1):
         print(0)
         h=0
     """
-    if signal2 and signal1:
+    if signal2^signal1:
 		
         if q2.full():
             #decimal_numbers = binary_queue_to_decimal(q2)
