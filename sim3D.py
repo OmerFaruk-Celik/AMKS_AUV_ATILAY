@@ -9,7 +9,7 @@ x, y = np.meshgrid(x, y)
 z = np.sin(np.sqrt(x**2 + y**2))
 
 # Büyük boyutlu 3D grafik oluşturma
-fig = plt.figure(figsize=(16, 9))  # Figür boyutlarını ayarlama (inch cinsinden)
+fig = plt.figure(figsize=(8, 4))  # Figür boyutlarını ayarlama (inch cinsinden)
 ax = fig.add_subplot(111, projection='3d')
 
 # 3D yüzey çizimi
