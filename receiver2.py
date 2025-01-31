@@ -43,7 +43,8 @@ def xor_or(signal1,signal2):
 	if signal1^signal2:
 		
 		if q2.full():
-			print(q.get())
+			#print(q.get())
+		print(signal2)
 		q2.put(signal1)
 		
 		
