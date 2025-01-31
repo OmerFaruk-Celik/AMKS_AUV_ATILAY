@@ -43,7 +43,7 @@ def xor_or(signal1,signal2):
 	if signal1^signal2:
 		
 		if q2.full():
-			q.get()
+			print(q.get())
 		q2.put(signal1)
 		
 		
@@ -64,7 +64,7 @@ def process_audio():
             
             
             # Sonuçları yazdır
-            print(f"19 kHz Signal: {'1' if signal_19kHz else '0'}, 15 kHz Signal: {'1' if signal_15kHz else '0'}")
+            #print(f"19 kHz Signal: {'1' if signal_19kHz else '0'}, 15 kHz Signal: {'1' if signal_15kHz else '0'}")
             #print(list(q2.queue))
 def listen_microphone():
     """Bu fonksiyon mikrofon girişini dinler ve frekans spektrumunu gösterir."""
