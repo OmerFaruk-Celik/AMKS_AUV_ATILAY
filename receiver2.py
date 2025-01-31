@@ -65,7 +65,7 @@ def process_audio():
             
             # Sonuçları yazdır
             print(f"19 kHz Signal: {'1' if signal_19kHz else '0'}, 15 kHz Signal: {'1' if signal_15kHz else '0'}")
-            print(list(q2.queue))
+            #print(list(q2.queue))
 def listen_microphone():
     """Bu fonksiyon mikrofon girişini dinler ve frekans spektrumunu gösterir."""
     with sd.InputStream(callback=audio_callback, channels=1, samplerate=sampling_rate):
