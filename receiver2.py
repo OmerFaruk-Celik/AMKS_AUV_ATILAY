@@ -6,8 +6,8 @@ import queue
 import threading
 
 # Sabitler
-sampling_rate = 50000  # Örnekleme frekansı (Hz)
-block_duration = 0.003  # Blok süresi (saniye)
+sampling_rate = 5000  # Örnekleme frekansı (Hz)
+block_duration = 0.0001  # Blok süresi (saniye)
 blocksize = int(sampling_rate * block_duration)  # Blok boyutu (örnek sayısı)
 
 # Ses verilerini tutmak için bir kuyruk oluşturun
