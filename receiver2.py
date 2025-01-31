@@ -7,7 +7,7 @@ import threading
 
 # Sabitler
 sampling_rate = 50000  # Örnekleme frekansı (Hz)
-duration = 1.0  # Ses kayıt süresi (saniye)
+duration = 0.006  # Ses kayıt süresi (saniye)
 
 # Ses verilerini tutmak için bir kuyruk oluşturun
 q = queue.Queue()
