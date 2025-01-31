@@ -7,7 +7,8 @@ import threading
 
 # Sabitler
 sampling_rate = 50000  # Örnekleme frekansı (Hz)
-duration = 0.006  # Ses kayıt süresi (saniye)
+block_duration = 0.006  # Blok süresi (saniye)
+blocksize = int(sampling_rate * block_duration)  # Blok boyutu (örnek sayısı)
 
 # Ses verilerini tutmak için bir kuyruk oluşturun
 q = queue.Queue()
@@ -37,7 +38,6 @@ def audio_callback(indata, frames, time, status):
         print(status)
     q.put(indata.copy())
 
-  
 def binary_queue_to_decimal(q):
     """Bu fonksiyon, q2 kuyruğundaki 16 bitlik binary dizileri alır ve onluk tabana çevirir."""
     decimal_list = []
@@ -56,19 +56,8 @@ def binary_queue_to_decimal(q):
     return decimal_list         
 
 def xor_or(signal2, signal1):
-    """
-    if signal2 and signal1:
-        print(1)
-        h=1
-    else:
-        print(0)
-        h=0
-    """
-    if signal2^signal1:
-		
+    if signal2 ^ signal1:
         if q2.full():
-            #decimal_numbers = binary_queue_to_decimal(q2)
-            #print(decimal_numbers)
             q2.get()  # Kuyruktan bir veri çıkar
         q2.put(int(signal2))  # Kuyruğa yeni veri ekle
 
@@ -76,7 +65,6 @@ def process_audio():
     """Bu fonksiyon kuyruktaki ses verilerini alır ve band geçiren filtre uygular."""
     while True:
         if not q.empty():
-            #print(len(list(q.queue)))
             indata = q.get()
             # 19 kHz band geçiren filtre
             filtered_19kHz = bandpass_filter(indata[:, 0], 18000, 19500, sampling_rate)
@@ -91,17 +79,12 @@ def process_audio():
 
 def listen_microphone():
     """Bu fonksiyon mikrofon girişini dinler ve frekans spektrumunu gösterir."""
-    with sd.InputStream(callback=audio_callback, channels=1, samplerate=sampling_rate):
+    with sd.InputStream(callback=audio_callback, channels=1, samplerate=sampling_rate, blocksize=blocksize):
         print("Mikrofon dinleniyor... 'Ctrl+C' ile çıkış yapabilirsiniz.")
         process_thread = threading.Thread(target=process_audio)
         process_thread.daemon = True
         process_thread.start()
         process_thread.join()
 
-
-
 if __name__ == "__main__":
     listen_microphone()
-    
-
-
