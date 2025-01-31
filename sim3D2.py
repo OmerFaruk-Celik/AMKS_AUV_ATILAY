@@ -80,11 +80,11 @@ def update(num):
     ax.plot_surface(sphere_x, sphere_y, sphere_z, color='blue', alpha=0.6)
 
     # Küpü çiz
-    cube_x, cube_y, cube_z1, cube_z2 = create_cube(p_point, 100)
-    ax.plot_surface(cube_x, cube_y, cube_z1, color='green', alpha=0.6)
-    ax.plot_surface(cube_x, cube_y, cube_z2, color='green', alpha=0.6)
-    ax.plot_surface(cube_x, cube_y, np.transpose(cube_z1), color='green', alpha=0.6)
-    ax.plot_surface(cube_x, cube_y, np.transpose(cube_z2), color='green', alpha=0.6)
+    #cube_x, cube_y, cube_z1, cube_z2 = create_cube(p_point, 100)
+    #ax.plot_surface(cube_x, cube_y, cube_z1, color='green', alpha=0.6)
+    #ax.plot_surface(cube_x, cube_y, cube_z2, color='green', alpha=0.6)
+    #ax.plot_surface(cube_x, cube_y, np.transpose(cube_z1), color='green', alpha=0.6)
+    #ax.plot_surface(cube_x, cube_y, np.transpose(cube_z2), color='green', alpha=0.6)
 
     # Piramidi çiz
     pyramid_x, pyramid_y, pyramid_z = create_pyramid(p_point, 100)
