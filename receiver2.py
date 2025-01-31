@@ -6,7 +6,7 @@ import queue
 import threading
 
 # Sabitler
-sampling_rate = 50000  # Örnekleme frekansı (Hz)
+sampling_rate = 100000  # Örnekleme frekansı (Hz)
 duration = 1.0  # Ses kayıt süresi (saniye)
 
 # Ses verilerini tutmak için bir kuyruk oluşturun
@@ -71,7 +71,7 @@ def process_audio():
     """Bu fonksiyon kuyruktaki ses verilerini alır ve band geçiren filtre uygular."""
     while True:
         if not q.empty():
-            print(list(q.queue))
+            print(len(list(q.queue)))
             indata = q.get()
             # 19 kHz band geçiren filtre
             filtered_19kHz = bandpass_filter(indata[:, 0], 18000, 19500, sampling_rate)
