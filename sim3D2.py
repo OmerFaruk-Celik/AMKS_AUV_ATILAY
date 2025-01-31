@@ -81,7 +81,7 @@ def update(num):
 
     # Küpü çiz
     #cube_x, cube_y, cube_z1, cube_z2 = create_cube(p_point, 100)
-    #ax.plot_surface(cube_x, cube_y, cube_z1, color='green', alpha=0.6)
+    #ax.plot_surface(cube_x, cube_y, cube_z1, color='green', alpha=0.6)hb       
     #ax.plot_surface(cube_x, cube_y, cube_z2, color='green', alpha=0.6)
     #ax.plot_surface(cube_x, cube_y, np.transpose(cube_z1), color='green', alpha=0.6)
     #ax.plot_surface(cube_x, cube_y, np.transpose(cube_z2), color='green', alpha=0.6)
