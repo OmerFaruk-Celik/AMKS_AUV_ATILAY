@@ -38,13 +38,10 @@ def audio_callback(indata, frames, time, status):
     q.put(indata.copy())
 
 def xor_or(signal2, signal1):
-    #print(signal1 ^ signal2)
     if signal1 ^ signal2:
         if q2.full():
-            a = q2.get()
-            #print("Çıkarılan", a)
-        #print("Eklenen", signal1)
-        q2.put(signal2)
+            q2.get()  # Kuyruktan bir veri çıkar
+        q2.put(signal2)  # Kuyruğa yeni veri ekle
 
 def process_audio():
     """Bu fonksiyon kuyruktaki ses verilerini alır ve band geçiren filtre uygular."""
@@ -60,7 +57,6 @@ def process_audio():
             signal_15kHz = detect_signal(filtered_15kHz)
             
             xor_or(signal_19kHz, signal_15kHz)
-            #print(f"19 kHz Signal: {'1' if signal_19kHz else '0'}, 15 kHz Signal: {'1' if signal_15kHz else '0'}")
             print(list(q2.queue))
 
 def listen_microphone():
@@ -72,5 +68,27 @@ def listen_microphone():
         process_thread.start()
         process_thread.join()
 
+def binary_queue_to_decimal(q):
+    """Bu fonksiyon, q2 kuyruğundaki 16 bitlik binary dizileri alır ve onluk tabana çevirir."""
+    decimal_list = []
+    binary_str = ""
+    
+    while not q.empty():
+        binary_str += str(q.get())
+    
+    if len(binary_str) >= 16:
+        for i in range(0, len(binary_str), 16):
+            binary_segment = binary_str[i:i+16]
+            if len(binary_segment) == 16:
+                decimal_number = int(binary_segment, 2)
+                decimal_list.append(decimal_number)
+    
+    return decimal_list
+
 if __name__ == "__main__":
     listen_microphone()
+    
+    while True:
+        if q2.full():
+            decimal_numbers = binary_queue_to_decimal(q2)
+            print("Kuyruktaki onluk sayılar:", decimal_numbers)
