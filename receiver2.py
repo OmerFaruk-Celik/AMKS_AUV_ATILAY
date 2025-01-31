@@ -67,13 +67,13 @@ def process_audio():
         if not q.empty():
             indata = q.get()
             # 19 kHz band geçiren filtre
-            filtered_19kHz = bandpass_filter(indata[:, 0], 18000, 19500, sampling_rate)
+            filtered_19kHz = bandpass_filter(indata[:, 0], 13000, 15500, sampling_rate)
             signal_19kHz = detect_signal(filtered_19kHz)
             
             # 15 kHz band geçiren filtre
-            filtered_15kHz = bandpass_filter(indata[:, 0], 14500, 15500, sampling_rate)
+            filtered_15kHz = bandpass_filter(indata[:, 0], 9500, 10500, sampling_rate)
             signal_15kHz = detect_signal(filtered_15kHz)
-            #print(f"19 kHz Signal: {'1' if signal_19kHz else '0'}, 15 kHz Signal: {'1' if signal_15kHz else '0'}")
+            #print(f"15 kHz Signal: {'1' if signal_19kHz else '0'}, 10 kHz Signal: {'1' if signal_15kHz else '0'}")
             xor_or(signal_19kHz, signal_15kHz)
             print(list(q2.queue))
 
