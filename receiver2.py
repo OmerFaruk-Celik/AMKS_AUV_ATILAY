@@ -27,7 +27,7 @@ def bandpass_filter(data, lowcut, highcut, fs, order=5):
     y = lfilter(b, a, data)
     return y
 
-def detect_signal(data, threshold=0.1):
+def detect_signal(data, threshold=0.01):
     """Belirlenen eşiği geçen sinyalleri algılar."""
     return np.any(np.abs(data) > threshold)
 
@@ -47,7 +47,7 @@ def process_audio():
             signal_19kHz = detect_signal(filtered_19kHz)
             
             # 15 kHz band geçiren filtre
-            filtered_15kHz = bandpass_filter(indata[:, 0], 14500, 15500, sampling_rate)
+            filtered_15kHz = bandpass_filter(indata[:, 0], 13500, 16500, sampling_rate)
             signal_15kHz = detect_signal(filtered_15kHz)
             
             # Sonuçları yazdır
