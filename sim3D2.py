@@ -27,22 +27,31 @@ def calculate_coordinates(r0, r1, r2, r3, line_length):
     z = round((line_length / 2) + (r0**2 - r3**2) / (2 * line_length))
     return np.array([x, y, z]) + np.array([SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2, 0])
 
-# Denizaltı gövdesi oluşturma fonksiyonu (silindir)
-def create_submarine_body(center, length, radius):
-    phi = np.linspace(0, 2 * np.pi, 100)
-    z = np.linspace(-length / 2, length / 2, 100)
-    phi, z = np.meshgrid(phi, z)
-    x = radius * np.cos(phi) + center[0]
-    y = radius * np.sin(phi) + center[1]
-    z = z + center[2]
-    return x, y, z
-
-# Denizaltı başı (küre) oluşturma fonksiyonu
-def create_submarine_head(center, radius):
+# Küre oluşturma fonksiyonu
+def create_sphere(center, radius):
     phi, theta = np.mgrid[0.0:2.0*np.pi:100j, 0.0:np.pi:50j]
     x = radius * np.sin(theta) * np.cos(phi) + center[0]
     y = radius * np.sin(theta) * np.sin(phi) + center[1]
     z = radius * np.cos(theta) + center[2]
+    return x, y, z
+
+# Küp oluşturma fonksiyonu
+def create_cube(center, size):
+    r = [-size/2, size/2]
+    x, y = np.meshgrid(r, r)
+    z1 = np.ones_like(x) * r[0]
+    z2 = np.ones_like(x) * r[1]
+    x += center[0]
+    y += center[1]
+    z1 += center[2]
+    z2 += center[2]
+    return x, y, z1, z2
+
+# Piramit oluşturma fonksiyonu
+def create_pyramid(center, size):
+    x = np.array([0, size, size, 0, 0.5 * size]) + center[0] - 0.5 * size
+    y = np.array([0, 0, size, size, 0.5 * size]) + center[1] - 0.5 * size
+    z = np.array([0, 0, 0, 0, size]) + center[2]
     return x, y, z
 
 # Animasyon fonksiyonu
@@ -66,15 +75,20 @@ def update(num):
     ax.plot([LINE_START[0], LINE_END2[0]], [LINE_START[1], LINE_END2[1]], [LINE_START[2], LINE_END2[2]], color='red', linewidth=5)
     ax.plot([LINE_START[0], LINE_END3[0]], [LINE_START[1], LINE_END3[1]], [LINE_START[2], LINE_END3[2]], color='red', linewidth=5)
 
-    # Denizaltı gövdesini çiz (X ekseni boyunca paralel)
-    body_center = p_point + np.array([0, 0, -100])
-    body_x, body_y, body_z = create_submarine_body(body_center, 200, 50)
-    ax.plot_surface(body_x, body_y, body_z, color='blue', alpha=0.6)
+    # Küreyi çiz
+    sphere_x, sphere_y, sphere_z = create_sphere(p_point, 50)
+    ax.plot_surface(sphere_x, sphere_y, sphere_z, color='blue', alpha=0.6)
 
-    # Denizaltı başını çiz (Yukarı bakacak şekilde)
-    head_center = p_point + np.array([0, 0, 100])
-    head_x, head_y, head_z = create_submarine_head(head_center, 50)
-    ax.plot_surface(head_x, head_y, head_z, color='blue', alpha=0.6)
+    # Küpü çiz
+    cube_x, cube_y, cube_z1, cube_z2 = create_cube(p_point, 100)
+    ax.plot_surface(cube_x, cube_y, cube_z1, color='green', alpha=0.6)
+    ax.plot_surface(cube_x, cube_y, cube_z2, color='green', alpha=0.6)
+    ax.plot_surface(cube_x, cube_y, np.transpose(cube_z1), color='green', alpha=0.6)
+    ax.plot_surface(cube_x, cube_y, np.transpose(cube_z2), color='green', alpha=0.6)
+
+    # Piramidi çiz
+    pyramid_x, pyramid_y, pyramid_z = create_pyramid(p_point, 100)
+    ax.plot_trisurf(pyramid_x, pyramid_y, pyramid_z, color='red', alpha=0.6)
 
     # Metinleri ekle
     ax.text(p_point[0], p_point[1], p_point[2], f"X: {round(P_X)}, Y: {round(P_Y)}, Z: {round(P_Z)}", color='black')
