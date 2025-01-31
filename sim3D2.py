@@ -114,9 +114,9 @@ def update(num):
     p_point = np.array([P_X, P_Y, P_Z])
 
 # Ana döngü parametreleri
-x_velocity = 0.8  # P noktasının hareket hızı
-y_velocity = 1.9  # P noktasının hareket hızı
-z_velocity = 0.9  # P noktasının hareket hızı
+x_velocity = 1.8  # P noktasının hareket hızı
+y_velocity = 2.9  # P noktasının hareket hızı
+z_velocity = 1.9  # P noktasının hareket hızı
 
 # 3D grafik ve animasyon oluşturma
 fig = plt.figure(figsize=(16, 9))
