@@ -8,7 +8,7 @@ from matplotlib.animation import FuncAnimation
 SCREEN_WIDTH, SCREEN_HEIGHT = 1600, 960
 
 # Çizgi ve nokta ayarları
-LINE_LENGTH = 300
+LINE_LENGTH = 100
 LINE_START = np.array([SCREEN_WIDTH//2, SCREEN_HEIGHT // 2, 0])
 LINE_END = np.array([LINE_START[0] + LINE_LENGTH, LINE_START[1], 0])
 LINE_END2 = np.array([SCREEN_WIDTH//2, LINE_START[1] + LINE_LENGTH, 0])
