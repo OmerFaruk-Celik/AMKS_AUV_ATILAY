@@ -12,7 +12,7 @@ blocksize = int(sampling_rate * block_duration)  # Blok boyutu (örnek sayısı)
 
 # Ses verilerini tutmak için bir kuyruk oluşturun
 q = queue.Queue()
-q2 = queue.Queue(maxsize=16)
+q2 = queue.Queue(maxsize=32)
 
 def butter_bandpass(lowcut, highcut, fs, order=5):
     """Band geçiren filtre koeffsiyentlerini hesaplar."""
