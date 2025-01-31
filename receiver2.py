@@ -57,7 +57,7 @@ def binary_queue_to_decimal(q):
 
 def xor_or(signal2, signal1):
     if signal2 and signal1:
-        print(1)
+        #print(1)
     if signal2 ^ signal1:
 		
         if q2.full():
@@ -70,6 +70,7 @@ def process_audio():
     """Bu fonksiyon kuyruktaki ses verilerini alır ve band geçiren filtre uygular."""
     while True:
         if not q.empty():
+			print(q)
             indata = q.get()
             # 19 kHz band geçiren filtre
             filtered_19kHz = bandpass_filter(indata[:, 0], 18000, 19500, sampling_rate)
