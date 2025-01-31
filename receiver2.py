@@ -56,7 +56,7 @@ def binary_queue_to_decimal(q):
     return decimal_list         
 
 def xor_or(signal2, signal1):
-    if signal2 and signal1:
+    if signal2^signal1:
         if q2.full():
             q2.get()  # Kuyruktan bir veri çıkar
         q2.put(int(signal2))  # Kuyruğa yeni veri ekle
