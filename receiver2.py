@@ -60,7 +60,8 @@ def process_audio():
             signal_15kHz = detect_signal(filtered_15kHz)
             
             xor_or(signal_19kHz, signal_15kHz)
-            print(list(q2.queue))
+            print(f"19 kHz Signal: {'1' if signal_19kHz else '0'}, 15 kHz Signal: {'1' if signal_15kHz else '0'}")
+            #print(list(q2.queue))
 
 def listen_microphone():
     """Bu fonksiyon mikrofon girişini dinler ve frekans spektrumunu gösterir."""
