@@ -87,8 +87,8 @@ def update(num):
     #ax.plot_surface(cube_x, cube_y, np.transpose(cube_z2), color='green', alpha=0.6)
 
     # Piramidi çiz
-    pyramid_x, pyramid_y, pyramid_z = create_pyramid(p_point, 100)
-    ax.plot_trisurf(pyramid_x, pyramid_y, pyramid_z, color='red', alpha=0.6)
+    #pyramid_x, pyramid_y, pyramid_z = create_pyramid(p_point, 100)
+    #ax.plot_trisurf(pyramid_x, pyramid_y, pyramid_z, color='red', alpha=0.6)
 
     # Metinleri ekle
     ax.text(p_point[0], p_point[1], p_point[2], f"X: {round(P_X)}, Y: {round(P_Y)}, Z: {round(P_Z)}", color='black')
