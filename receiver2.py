@@ -6,8 +6,8 @@ import queue
 import threading
 
 # Sabitler
-sampling_rate = 5000  # Örnekleme frekansı (Hz)
-block_duration = 0.0001  # Blok süresi (saniye)
+sampling_rate = 50000  # Örnekleme frekansı (Hz)
+block_duration = 0.0002  # Blok süresi (saniye)
 blocksize = int(sampling_rate * block_duration)  # Blok boyutu (örnek sayısı)
 
 # Ses verilerini tutmak için bir kuyruk oluşturun
@@ -73,9 +73,9 @@ def process_audio():
             # 15 kHz band geçiren filtre
             filtered_15kHz = bandpass_filter(indata[:, 0], 9500, 10500, sampling_rate)
             signal_15kHz = detect_signal(filtered_15kHz)
-            #print(f"15 kHz Signal: {'1' if signal_19kHz else '0'}, 10 kHz Signal: {'1' if signal_15kHz else '0'}")
+            print(f"15 kHz Signal: {'1' if signal_19kHz else '0'}, 10 kHz Signal: {'1' if signal_15kHz else '0'}")
             xor_or(signal_19kHz, signal_15kHz)
-            print(list(q2.queue))
+            #print(list(q2.queue))
 
 def listen_microphone():
     """Bu fonksiyon mikrofon girişini dinler ve frekans spektrumunu gösterir."""
