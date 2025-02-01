@@ -58,11 +58,7 @@ def process_audio():
             dominant_freq = find_dominant_frequency(indata[:, 0], sampling_rate)
             #print(f"Dominant Frequency: {dominant_freq} Hz")
             
-            # is10Khz ve is15Khz fonksiyonlarını çağır
-            if is10Khz(dominant_freq):
-                print("The dominant frequency is in the 10 kHz band.")
-            if is15Khz(dominant_freq):
-                print("The dominant frequency is in the 15 kHz band.")
+            xor_or(is15Khz(dominant_freq), is10Khz(dominant_freq))
 
 def update_plot_and_fft():
     """Bu fonksiyon grafiği günceller ve Fourier dönüşümü ile frekans analizini yapar."""
