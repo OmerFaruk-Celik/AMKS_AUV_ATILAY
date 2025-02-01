@@ -69,8 +69,8 @@ def process_audio():
     x = np.arange(0, blocksize)
     y1 = np.zeros(blocksize)
     y2 = np.zeros(blocksize)
-    line1, = ax[0].plot(x, y1, label='19 kHz Band')
-    line2, = ax[1].plot(x, y2, label='15 kHz Band')
+    line1, = ax[0].plot(x, y1, label='15 kHz Band')
+    line2, = ax[1].plot(x, y2, label='10 kHz Band')
     ax[0].set_ylim([-1, 1])
     ax[1].set_ylim([-1, 1])
     ax[0].legend()
@@ -80,18 +80,18 @@ def process_audio():
         if not q.empty():
             indata = q.get()
             # 19 kHz band geçiren filtre
-            filtered_19kHz = bandpass_filter(indata[:, 0], 14500, 15500, sampling_rate)
-            signal_19kHz = detect_signal(filtered_19kHz)
+            filtered_15kHz = bandpass_filter(indata[:, 0], 14500, 15500, sampling_rate)
+            signal_15kHz = detect_signal(filtered_15kHz)
             
             # 15 kHz band geçiren filtre
-            filtered_15kHz = bandpass_filter(indata[:, 0], 9500, 10500, sampling_rate)
-            signal_15kHz = detect_signal(filtered_15kHz)
-            print(f"15 kHz Signal: {'1' if signal_19kHz else '0'}, 10 kHz Signal: {'1' if signal_15kHz else '0'}")
-            xor_or(signal_19kHz, signal_15kHz)
+            filtered_10kHz = bandpass_filter(indata[:, 0], 9500, 10500, sampling_rate)
+            signal_10kHz = detect_signal(filtered_10kHz)
+            print(f"15 kHz Signal: {'1' if signal_15kHz else '0'}, 10 kHz Signal: {'1' if signal_10kHz else '0'}")
+            xor_or(signal_15kHz, signal_10kHz)
             
             # Anlık verileri güncelleme ve grafikte gösterme
-            y1 = filtered_19kHz
-            y2 = filtered_15kHz
+            y1 = filtered_15kHz
+            y2 = filtered_10kHz
             line1.set_ydata(y1)
             line2.set_ydata(y2)
             fig.canvas.draw()
