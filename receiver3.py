@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 
 # Sabitler
 sampling_rate = 50000  # Örnekleme frekansı (Hz)
-block_duration = 0.005  # Blok süresi (saniye) - 5 ms
+block_duration = 0.001  # Blok süresi (saniye) - 5 ms
 blocksize = int(sampling_rate * block_duration)  # Blok boyutu (örnek sayısı)
 scale_factor = 10  # Genlik ölçekleme faktörü
 
@@ -117,11 +117,11 @@ def listen_microphone():
         process_thread = threading.Thread(target=process_audio)
         process_thread.daemon = True
         process_thread.start()
-        
+        """
         plot_thread = threading.Thread(target=update_plot, args=(fig, ax, line1, line2))
         plot_thread.daemon = True
         plot_thread.start()
-        
+        """
         process_thread.join()
         plot_thread.join()
 
