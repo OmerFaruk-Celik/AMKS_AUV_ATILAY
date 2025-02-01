@@ -38,7 +38,7 @@ def audio_callback(indata, frames, time, status):
     if status:
         print(status)
     try:
-        print(f"Received {len(indata)} samples")  # Veri örneklerini yazdır
+       # print(f"Received {len(indata)} samples")  # Veri örneklerini yazdır
         q.put(indata.copy() * scale_factor, block=False)  # Genlik ölçekleme ekle
     except queue.Full:
         pass  # Kuyruk doluysa veriyi atla
