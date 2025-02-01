@@ -37,10 +37,11 @@ def audio_callback(indata, frames, time, status):
     if status:
         print(status)
     try:
+        print(f"Received {len(indata)} samples")  # Veri örneklerini yazdır
         q.put(indata.copy() * scale_factor, block=False)  # Genlik ölçekleme ekle
     except queue.Full:
         pass  # Kuyruk doluysa veriyi atla
-
+        
 def binary_queue_to_decimal(q):
     """Bu fonksiyon, q2 kuyruğundaki 16 bitlik binary dizileri alır ve onluk tabana çevirir."""
     decimal_list = []
