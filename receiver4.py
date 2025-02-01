@@ -59,6 +59,7 @@ def process_audio():
             #print(f"Dominant Frequency: {dominant_freq} Hz")
             
             xor_or(is15Khz(dominant_freq), is10Khz(dominant_freq))
+            print(list(q2.queue)) ##Bu yorum satırlarını silme lazım olacak şekilde tekrardan kullanmak için şimdilik yorum satırına alıyorum
 
 def update_plot_and_fft():
     """Bu fonksiyon grafiği günceller ve Fourier dönüşümü ile frekans analizini yapar."""
