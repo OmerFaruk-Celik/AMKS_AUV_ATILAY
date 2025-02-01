@@ -6,13 +6,14 @@ import matplotlib.pyplot as plt
 
 # Sabitler
 sampling_rate = 40000  # Örnekleme frekansı (Hz)
-block_duration = 0.00025  # Blok süresi (saniye) - 0.25 ms
-blocksize = int(sampling_rate * block_duration)  # Blok boyutu (örnek sayısı) = 10
+block_duration = 0.000275  # Blok süresi (saniye) - 0.275 ms
+blocksize = int(sampling_rate * block_duration)  # Blok boyutu (örnek sayısı) = 11
 scale_factor = 10  # Genlik ölçekleme faktörü
 
 # Ses verilerini tutmak için bir kuyruk oluşturun
 q = queue.Queue(maxsize=blocksize)  # Maksimum boyutu belirleyin
 q2 = queue.Queue(16)  # Maksimum boyutu belirleyin
+
 def find_dominant_frequency(data, fs):
     """Verilen verinin baskın frekansını bulur."""
     fft_data = np.fft.fft(data)
@@ -21,14 +22,14 @@ def find_dominant_frequency(data, fs):
     dominant_freq = freqs[np.argmax(fft_magnitude)]
     return dominant_freq
 
-def is10Khz(dominant_freq):
-    """Baskın frekansın 10 kHz bandında olup olmadığını kontrol eder."""
+def is18Khz(dominant_freq):
+    """Baskın frekansın 18 kHz bandında olup olmadığını kontrol eder."""
     if 17500 <= dominant_freq <= 18500:
         return 1
     return 0
 
-def is15Khz(dominant_freq):
-    """Baskın frekansın 15 kHz bandında olup olmadığını kontrol eder."""
+def is20Khz(dominant_freq):
+    """Baskın frekansın 20 kHz bandında olup olmadığını kontrol eder."""
     if 19500 <= dominant_freq <= 20500:
         return 1
     return 0
@@ -56,11 +57,11 @@ def process_audio():
         if not q.empty():
             indata = q.get()
             dominant_freq = find_dominant_frequency(indata[:, 0], sampling_rate)
-            #print(f"Dominant Frequency: {dominant_freq} Hz")
-            is20=is15Khz(dominant_freq)
-            is18=is10Khz(dominant_freq)
-            print(is20)
-            xor_or(is15,is10)
+            print(f"Dominant Frequency: {dominant_freq} Hz")
+            is20 = is20Khz(dominant_freq)
+            is18 = is18Khz(dominant_freq)
+            print(f"is20Khz: {is20}, is18Khz: {is18}")
+            xor_or(is20, is18)
             #print(list(q2.queue)) ##Bu yorum satırlarını silme! lazım olacak şekilde tekrardan kullanmak için şimdilik yorum satırına alıyorum
 
 def update_plot_and_fft():
