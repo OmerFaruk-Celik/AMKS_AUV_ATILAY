@@ -94,6 +94,7 @@ def update_plot_and_fft():
     ax1.set_xlim([0, blocksize])
     
     freqs = np.fft.fftfreq(blocksize, 1/sampling_rate)
+    print(freqs)
     line2, = ax2.plot(freqs, np.zeros(blocksize))
     ax2.set_xlim([0, sampling_rate / 2])
     ax2.set_ylim([0, 1])
