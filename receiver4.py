@@ -22,15 +22,15 @@ def find_dominant_frequency(data, fs):
     dominant_freq = freqs[np.argmax(fft_magnitude)]
     return dominant_freq
 
-def is18Khz(dominant_freq):
+def is16Khz(dominant_freq):
     """Baskın frekansın 18 kHz bandında olup olmadığını kontrol eder."""
-    if 17500 <= dominant_freq <= 18500:
+    if 15500 <= dominant_freq <= 16500:
         return 1
     return 0
 
-def is20Khz(dominant_freq):
+def is18Khz(dominant_freq):
     """Baskın frekansın 20 kHz bandında olup olmadığını kontrol eder."""
-    if 19500 <= dominant_freq <= 20500:
+    if 17500 <= dominant_freq <= 18500:
         return 1
     return 0
 
@@ -58,10 +58,10 @@ def process_audio():
             indata = q.get()
             dominant_freq = find_dominant_frequency(indata[:, 0], sampling_rate)
             print(f"Dominant Frequency: {dominant_freq} Hz")
-            is20 = is20Khz(dominant_freq)
             is18 = is18Khz(dominant_freq)
-            print(f"is20Khz: {is20}, is18Khz: {is18}")
-            xor_or(is20, is18)
+            is16 = is16Khz(dominant_freq)
+            print(f"is20Khz: {is18}, is18Khz: {is16}")
+            xor_or(is18, is16)
             #print(list(q2.queue)) ##Bu yorum satırlarını silme! lazım olacak şekilde tekrardan kullanmak için şimdilik yorum satırına alıyorum
 
 def update_plot_and_fft():
