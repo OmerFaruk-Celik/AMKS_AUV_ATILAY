@@ -33,6 +33,14 @@ def is15Khz(dominant_freq):
         return 1
     return 0
 
+def xor_or(signal2, signal1):
+    if signal2 ^ signal1:
+        if q2.full():
+            q2.get()  # Kuyruktan bir veri çıkar
+        q2.put(int(signal2))  # Kuyruğa yeni veri ekle
+    elif signal2 and signal1:
+        print(1)
+
 def audio_callback(indata, frames, time, status):
     """Bu fonksiyon mikrofon girişini alır ve verileri kuyrukta saklar."""
     if status:
