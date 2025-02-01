@@ -56,10 +56,10 @@ def process_audio():
         if not q.empty():
             indata = q.get()
             dominant_freq = find_dominant_frequency(indata[:, 0], sampling_rate)
-            print(f"Dominant Frequency: {dominant_freq} Hz")
+            #print(f"Dominant Frequency: {dominant_freq} Hz")
             is15=is15Khz(dominant_freq)
             is10=is10Khz(dominant_freq)
-            #print(is15)
+            print(is15)
             xor_or(is15,is10)
             #print(list(q2.queue)) ##Bu yorum satırlarını silme lazım olacak şekilde tekrardan kullanmak için şimdilik yorum satırına alıyorum
 
