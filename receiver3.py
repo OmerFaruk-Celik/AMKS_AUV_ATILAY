@@ -28,7 +28,7 @@ def bandpass_filter(data, lowcut, highcut, fs, order=5):
     y = lfilter(b, a, data)
     return y
 
-def detect_signal(data, threshold=0.001):
+def detect_signal(data, threshold=0.005):
     """Belirlenen eşiği geçen sinyalleri algılar."""
     return np.any(np.abs(data) > threshold)
 
