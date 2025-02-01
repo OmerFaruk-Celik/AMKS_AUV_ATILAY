@@ -21,6 +21,18 @@ def find_dominant_frequency(data, fs):
     dominant_freq = freqs[np.argmax(fft_magnitude)]
     return dominant_freq
 
+def is10Khz(dominant_freq):
+    """Baskın frekansın 10 kHz bandında olup olmadığını kontrol eder."""
+    if 9500 <= dominant_freq <= 10500:
+        return 1
+    return 0
+
+def is15Khz(dominant_freq):
+    """Baskın frekansın 15 kHz bandında olup olmadığını kontrol eder."""
+    if 14500 <= dominant_freq <= 15500:
+        return 1
+    return 0
+
 def audio_callback(indata, frames, time, status):
     """Bu fonksiyon mikrofon girişini alır ve verileri kuyrukta saklar."""
     if status:
@@ -37,6 +49,12 @@ def process_audio():
             indata = q.get()
             dominant_freq = find_dominant_frequency(indata[:, 0], sampling_rate)
             print(f"Dominant Frequency: {dominant_freq} Hz")
+            
+            # is10Khz ve is15Khz fonksiyonlarını çağır
+            if is10Khz(dominant_freq):
+                print("The dominant frequency is in the 10 kHz band.")
+            if is15Khz(dominant_freq):
+                print("The dominant frequency is in the 15 kHz band.")
 
 def update_plot_and_fft():
     """Bu fonksiyon grafiği günceller ve Fourier dönüşümü ile frekans analizini yapar."""
