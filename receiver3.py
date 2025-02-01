@@ -3,6 +3,7 @@ import sounddevice as sd
 from scipy.signal import butter, lfilter
 import queue
 import threading
+import matplotlib.pyplot as plt
 
 # Sabitler
 sampling_rate = 40000  # Örnekleme frekansı (Hz)
@@ -83,13 +84,36 @@ def process_audio():
             xor_or(signal_15kHz, signal_10kHz)
             #print(list(q2.queue)) ##Bu yorum satırlarını silme lazım olacak şekilde tekrardan kullanmak için şimdilik yorum satırına alıyorum
 
+def update_plot():
+    """Bu fonksiyon grafiği günceller."""
+    plt.ion()  # Interaktif modu etkinleştir
+    fig, ax = plt.subplots()  # Tek grafik oluştur
+    x = np.arange(0, blocksize)
+    y = np.zeros(blocksize)
+    line, = ax.plot(x, y)
+    ax.set_ylim([-1, 1])
+    ax.set_xlim([0, blocksize])
+
+    while True:
+        if not q.empty():
+            indata = q.get()
+            line.set_ydata(indata[:, 0])
+            fig.canvas.draw()
+            fig.canvas.flush_events()
+
 def listen_microphone():
     with sd.InputStream(callback=audio_callback, channels=1, samplerate=sampling_rate, blocksize=blocksize):
         print("Mikrofon dinleniyor... 'Ctrl+C' ile çıkış yapabilirsiniz.")
         process_thread = threading.Thread(target=process_audio)
         process_thread.daemon = True
         process_thread.start()
+        
+        plot_thread = threading.Thread(target=update_plot)
+        plot_thread.daemon = True
+        plot_thread.start()
+        
         process_thread.join()
+        plot_thread.join()
 
 if __name__ == "__main__":
     listen_microphone()
