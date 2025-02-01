@@ -89,15 +89,16 @@ def update_plot(fig, ax, line1, line2):
             filtered_15kHz = bandpass_filter(indata[:, 0], 14500, 15500, sampling_rate)
             # 10 kHz band geçiren filtre
             filtered_10kHz = bandpass_filter(indata[:, 0], 9500, 10500, sampling_rate)
-            
+            """
             # Anlık verileri güncelleme ve grafikte gösterme
             line1.set_ydata(filtered_15kHz)
             line2.set_ydata(filtered_10kHz)
             fig.canvas.draw()
             fig.canvas.flush_events()
+            """
 
 def listen_microphone():
-    """Bu fonksiyon mikrofon girişini dinler ve frekans spektrumunu gösterir."""
+    """
     plt.ion()  # Interaktif modu etkinleştir
     fig, ax = plt.subplots(2, 1)  # İki alt grafik oluştur
     x = np.linspace(0, block_duration, blocksize)
@@ -111,6 +112,7 @@ def listen_microphone():
     ax[1].set_xlim([0, block_duration])  # Zaman ekseni ölçeklendirme
     ax[0].legend()
     ax[1].legend()
+    """
 
     with sd.InputStream(callback=audio_callback, channels=1, samplerate=sampling_rate, blocksize=blocksize):
         print("Mikrofon dinleniyor... 'Ctrl+C' ile çıkış yapabilirsiniz.")
