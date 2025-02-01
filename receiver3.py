@@ -12,7 +12,7 @@ blocksize = int(sampling_rate * block_duration)  # Blok boyutu (örnek sayısı)
 scale_factor = 10  # Genlik ölçekleme faktörü
 
 # Ses verilerini tutmak için bir kuyruk oluşturun
-q = queue.Queue()
+q = queue.Queue(maxsize=10)  # Maksimum boyutu belirleyin
 q2 = queue.Queue(maxsize=16)
 
 def butter_bandpass(lowcut, highcut, fs, order=5):
@@ -37,7 +37,10 @@ def audio_callback(indata, frames, time, status):
     """Bu fonksiyon mikrofon girişini alır ve verileri kuyrukta saklar."""
     if status:
         print(status)
-    q.put(indata.copy() * scale_factor)  # Genlik ölçekleme ekle
+    try:
+        q.put(indata.copy() * scale_factor, block=False)  # Genlik ölçekleme ekle
+    except queue.Full:
+        pass  # Kuyruk doluysa veriyi atla
 
 def binary_queue_to_decimal(q):
     """Bu fonksiyon, q2 kuyruğundaki 16 bitlik binary dizileri alır ve onluk tabana çevirir."""
