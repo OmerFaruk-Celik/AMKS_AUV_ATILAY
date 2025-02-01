@@ -73,6 +73,8 @@ def process_audio():
     line2, = ax[1].plot(x, y2, label='10 kHz Band')
     ax[0].set_ylim([-1, 1])  # Genlik ölçeklendirme
     ax[1].set_ylim([-1, 1])  # Genlik ölçeklendirme
+    ax[0].set_xlim([0,0.005])  # Genlik ölçeklendirme
+    ax[1].set_xlim([0,0.005])  # Genlik ölçeklendirme
     ax[0].legend()
     ax[1].legend()
 
