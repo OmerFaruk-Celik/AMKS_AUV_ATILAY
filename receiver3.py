@@ -1,6 +1,5 @@
 import numpy as np
 import sounddevice as sd
-from scipy.fftpack import fft
 from scipy.signal import butter, lfilter
 import queue
 import threading
@@ -8,8 +7,9 @@ import matplotlib.pyplot as plt
 
 # Sabitler
 sampling_rate = 50000  # Örnekleme frekansı (Hz)
-block_duration = 0.01  # Blok süresi (saniye) - 5 ms
+block_duration = 0.01  # Blok süresi (saniye) - 10 ms
 blocksize = int(sampling_rate * block_duration)  # Blok boyutu (örnek sayısı)
+scale_factor = 10  # Genlik ölçekleme faktörü
 
 # Ses verilerini tutmak için bir kuyruk oluşturun
 q = queue.Queue()
@@ -37,7 +37,7 @@ def audio_callback(indata, frames, time, status):
     """Bu fonksiyon mikrofon girişini alır ve verileri kuyrukta saklar."""
     if status:
         print(status)
-    q.put(indata.copy())
+    q.put(indata.copy() * scale_factor)  # Genlik ölçekleme ekle
 
 def binary_queue_to_decimal(q):
     """Bu fonksiyon, q2 kuyruğundaki 16 bitlik binary dizileri alır ve onluk tabana çevirir."""
@@ -66,13 +66,13 @@ def process_audio():
     """Bu fonksiyon kuyruktaki ses verilerini alır ve band geçiren filtre uygular."""
     plt.ion()  # Interaktif modu etkinleştir
     fig, ax = plt.subplots(2, 1)  # İki alt grafik oluştur
-    x = np.arange(0, blocksize)
+    x = np.linspace(0, block_duration, blocksize)
     y1 = np.zeros(blocksize)
     y2 = np.zeros(blocksize)
     line1, = ax[0].plot(x, y1, label='15 kHz Band')
     line2, = ax[1].plot(x, y2, label='10 kHz Band')
-    ax[0].set_ylim([-1, 1])
-    ax[1].set_ylim([-1, 1])
+    ax[0].set_ylim([-10, 10])  # Genlik ölçeklendirme
+    ax[1].set_ylim([-10, 10])  # Genlik ölçeklendirme
     ax[0].legend()
     ax[1].legend()
 
