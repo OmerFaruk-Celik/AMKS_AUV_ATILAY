@@ -12,7 +12,7 @@ blocksize = int(sampling_rate * block_duration)  # Blok boyutu (örnek sayısı)
 scale_factor = 10  # Genlik ölçekleme faktörü
 
 # Ses verilerini tutmak için bir kuyruk oluşturun
-q = queue.Queue(maxsize=16)  # Maksimum boyutu belirleyin
+q = queue.Queue(maxsize=40)  # Maksimum boyutu belirleyin
 q2 = queue.Queue(maxsize=16)
 
 def butter_bandpass(lowcut, highcut, fs, order=5):
