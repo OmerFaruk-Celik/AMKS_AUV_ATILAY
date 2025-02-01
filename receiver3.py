@@ -81,7 +81,7 @@ def process_audio():
             signal_10kHz = detect_signal(filtered_10kHz)
             #print(f"15 kHz Signal: {'1' if signal_15kHz else '0'}, 10 kHz Signal: {'1' if signal_10kHz else '0'}")
             xor_or(signal_15kHz, signal_10kHz)
-            print(list(q2.queue)) ##Bu yorum satırlarını silme lazım olacak şekilde tekrardan kullanmak için şimdilik yorum satırına alıyorum
+            #print(list(q2.queue)) ##Bu yorum satırlarını silme lazım olacak şekilde tekrardan kullanmak için şimdilik yorum satırına alıyorum
 
 def listen_microphone():
     with sd.InputStream(callback=audio_callback, channels=1, samplerate=sampling_rate, blocksize=blocksize):
