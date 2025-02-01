@@ -6,8 +6,8 @@ import threading
 import matplotlib.pyplot as plt
 
 # Sabitler
-sampling_rate = 30000  # Örnekleme frekansı (Hz)
-block_duration = 0.0009  # Blok süresi (saniye) - 5 ms
+sampling_rate = 35000  # Örnekleme frekansı (Hz)
+block_duration = 0.001  # Blok süresi (saniye) - 5 ms
 blocksize = int(sampling_rate * block_duration)  # Blok boyutu (örnek sayısı)
 scale_factor = 10  # Genlik ölçekleme faktörü
 
@@ -123,9 +123,10 @@ def listen_microphone():
         plot_thread = threading.Thread(target=update_plot, args=(fig, ax, line1, line2))
         plot_thread.daemon = True
         plot_thread.start()
+        plot_thread.join()
         """
         process_thread.join()
-        plot_thread.join()
+        
 
 if __name__ == "__main__":
     listen_microphone()
