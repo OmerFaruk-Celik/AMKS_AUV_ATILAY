@@ -12,7 +12,7 @@ scale_factor = 10  # Genlik ölçekleme faktörü
 
 # Ses verilerini tutmak için bir kuyruk oluşturun
 q = queue.Queue(maxsize=blocksize)  # Maksimum boyutu belirleyin
-
+q2 = queue.Queue(16)  # Maksimum boyutu belirleyin
 def find_dominant_frequency(data, fs):
     """Verilen verinin baskın frekansını bulur."""
     fft_data = np.fft.fft(data)
