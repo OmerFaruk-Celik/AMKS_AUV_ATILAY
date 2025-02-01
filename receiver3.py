@@ -80,7 +80,7 @@ def process_audio():
         if not q.empty():
             indata = q.get()
             # 19 kHz band geçiren filtre
-            filtered_19kHz = bandpass_filter(indata[:, 0], 13000, 15500, sampling_rate)
+            filtered_19kHz = bandpass_filter(indata[:, 0], 14500, 15500, sampling_rate)
             signal_19kHz = detect_signal(filtered_19kHz)
             
             # 15 kHz band geçiren filtre
