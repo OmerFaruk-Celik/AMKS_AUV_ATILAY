@@ -33,6 +33,14 @@ def detect_signal(data, threshold=0.01):
     """Belirlenen eşiği geçen sinyalleri algılar."""
     return np.any(np.abs(data) > threshold)
 
+def find_dominant_frequency(data, fs):
+    """Verilen verinin baskın frekansını bulur."""
+    fft_data = np.fft.fft(data)
+    fft_magnitude = np.abs(fft_data) / len(data)
+    freqs = np.fft.fftfreq(len(data), 1/fs)
+    dominant_freq = freqs[np.argmax(fft_magnitude)]
+    return dominant_freq
+
 def audio_callback(indata, frames, time, status):
     """Bu fonksiyon mikrofon girişini alır ve verileri kuyrukta saklar."""
     if status:
@@ -72,14 +80,19 @@ def process_audio():
     while True:
         if not q.empty():
             indata = q.get()
+
             # 15 kHz band geçiren filtre
             filtered_15kHz = bandpass_filter(indata[:, 0], 14500, 15500, sampling_rate)
             signal_15kHz = detect_signal(filtered_15kHz)
+            dominant_freq_15kHz = find_dominant_frequency(filtered_15kHz, sampling_rate)
+            print(f"15 kHz Band Dominant Frequency: {dominant_freq_15kHz} Hz")
             
             # 10 kHz band geçiren filtre
             filtered_10kHz = bandpass_filter(indata[:, 0], 9500, 10500, sampling_rate)
             signal_10kHz = detect_signal(filtered_10kHz)
-            #print(f"15 kHz Signal: {'1' if signal_15kHz else '0'}, 10 kHz Signal: {'1' if signal_10kHz else '0'}")
+            dominant_freq_10kHz = find_dominant_frequency(filtered_10kHz, sampling_rate)
+            print(f"10 kHz Band Dominant Frequency: {dominant_freq_10kHz} Hz")
+            
             xor_or(signal_15kHz, signal_10kHz)
             #print(list(q2.queue)) ##Bu yorum satırlarını silme lazım olacak şekilde tekrardan kullanmak için şimdilik yorum satırına alıyorum
 
@@ -94,7 +107,6 @@ def update_plot_and_fft():
     ax1.set_xlim([0, blocksize])
     
     freqs = np.fft.fftfreq(blocksize, 1/sampling_rate)
-    print(freqs)
     line2, = ax2.plot(freqs, np.zeros(blocksize))
     ax2.set_xlim([0, sampling_rate / 2])
     ax2.set_ylim([0, 1])
