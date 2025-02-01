@@ -29,7 +29,7 @@ def is10Khz(dominant_freq):
 
 def is15Khz(dominant_freq):
     """Baskın frekansın 15 kHz bandında olup olmadığını kontrol eder."""
-    if 13800 <= dominant_freq <= 16100:
+    if 14000 <= dominant_freq <= 15500:
         return 1
     return 0
 
