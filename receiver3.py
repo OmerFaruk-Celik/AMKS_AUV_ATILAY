@@ -64,6 +64,8 @@ def xor_or(signal2, signal1):
         if q2.full():
             q2.get()  # Kuyruktan bir veri çıkar
         q2.put(int(signal2))  # Kuyruğa yeni veri ekle
+    elif signal2 and signal1:
+        print(1)
 
 def process_audio():
     """Bu fonksiyon kuyruktaki ses verilerini alır ve band geçiren filtre uygular."""
@@ -79,7 +81,7 @@ def process_audio():
             signal_10kHz = detect_signal(filtered_10kHz)
             #print(f"15 kHz Signal: {'1' if signal_15kHz else '0'}, 10 kHz Signal: {'1' if signal_10kHz else '0'}")
             xor_or(signal_15kHz, signal_10kHz)
-            print(list(q2.queue))
+            ##printlist(q2.queue)) ##Bu yorum satırlarını silme lazım lacak şekilde tekrardan kullanmak için şimdilik yotum satırına alıyorum
 
 def update_plot(fig, ax, line1, line2):
     """Bu fonksiyon grafiği günceller."""
