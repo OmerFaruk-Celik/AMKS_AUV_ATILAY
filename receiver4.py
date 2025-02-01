@@ -29,7 +29,7 @@ def is10Khz(dominant_freq):
 
 def is15Khz(dominant_freq):
     """Baskın frekansın 15 kHz bandında olup olmadığını kontrol eder."""
-    if 14000 <= dominant_freq <= 16000:
+    if 13800 <= dominant_freq <= 16100:
         return 1
     return 0
 
@@ -59,9 +59,9 @@ def process_audio():
             #print(f"Dominant Frequency: {dominant_freq} Hz")
             is15=is15Khz(dominant_freq)
             is10=is10Khz(dominant_freq)
-            print(is15)
+            #print(is15)
             xor_or(is15,is10)
-            #print(list(q2.queue)) ##Bu yorum satırlarını silme lazım olacak şekilde tekrardan kullanmak için şimdilik yorum satırına alıyorum
+            print(list(q2.queue)) ##Bu yorum satırlarını silme lazım olacak şekilde tekrardan kullanmak için şimdilik yorum satırına alıyorum
 
 def update_plot_and_fft():
     """Bu fonksiyon grafiği günceller ve Fourier dönüşümü ile frekans analizini yapar."""
