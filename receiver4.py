@@ -57,8 +57,9 @@ def process_audio():
             indata = q.get()
             dominant_freq = find_dominant_frequency(indata[:, 0], sampling_rate)
             #print(f"Dominant Frequency: {dominant_freq} Hz")
-            
-            xor_or(is15Khz(dominant_freq), is10Khz(dominant_freq))
+            is15=is15Khz(dominant_freq)
+            is10=is10Khz(dominant_freq)
+            xor_or(is15,is10)
             print(list(q2.queue)) ##Bu yorum satırlarını silme lazım olacak şekilde tekrardan kullanmak için şimdilik yorum satırına alıyorum
 
 def update_plot_and_fft():
