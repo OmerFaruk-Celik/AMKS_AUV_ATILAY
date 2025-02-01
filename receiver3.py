@@ -81,7 +81,7 @@ def process_audio():
             signal_10kHz = detect_signal(filtered_10kHz)
             #print(f"15 kHz Signal: {'1' if signal_15kHz else '0'}, 10 kHz Signal: {'1' if signal_10kHz else '0'}")
             xor_or(signal_15kHz, signal_10kHz)
-            ##printlist(q2.queue)) ##Bu yorum satırlarını silme lazım lacak şekilde tekrardan kullanmak için şimdilik yotum satırına alıyorum
+            print(list(q2.queue)) ##Bu yorum satırlarını silme lazım lacak şekilde tekrardan kullanmak için şimdilik yotum satırına alıyorum
 
 def update_plot(fig, ax, line1, line2):
     """Bu fonksiyon grafiği günceller."""
