@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 
 # Sabitler
 sampling_rate = 40000  # Örnekleme frekansı (Hz)
-block_duration = 0.00025  # Blok süresi (saniye) - 0.25 ms
+block_duration = 0.0005  # Blok süresi (saniye) - 0.25 ms
 blocksize = int(sampling_rate * block_duration)  # Blok boyutu (örnek sayısı) = 10
 scale_factor = 10  # Genlik ölçekleme faktörü
 
