@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 
 # Sabitler
 sampling_rate = 50000  # Örnekleme frekansı (Hz)
-block_duration = 0.02  # Blok süresi (saniye) - 10 ms
+block_duration = 0.005  # Blok süresi (saniye) - 5 ms
 blocksize = int(sampling_rate * block_duration)  # Blok boyutu (örnek sayısı)
 scale_factor = 10  # Genlik ölçekleme faktörü
 
@@ -29,7 +29,7 @@ def bandpass_filter(data, lowcut, highcut, fs, order=5):
     y = lfilter(b, a, data)
     return y
 
-def detect_signal(data, threshold=0.01):
+def detect_signal(data, threshold=0.005):
     """Belirlenen eşiği geçen sinyalleri algılar."""
     return np.any(np.abs(data) > threshold)
 
@@ -64,20 +64,6 @@ def xor_or(signal2, signal1):
 
 def process_audio():
     """Bu fonksiyon kuyruktaki ses verilerini alır ve band geçiren filtre uygular."""
-    plt.ion()  # Interaktif modu etkinleştir
-    fig, ax = plt.subplots(2, 1)  # İki alt grafik oluştur
-    x = np.linspace(0, block_duration, blocksize)
-    y1 = np.zeros(blocksize)
-    y2 = np.zeros(blocksize)
-    line1, = ax[0].plot(x, y1, label='15 kHz Band')
-    line2, = ax[1].plot(x, y2, label='10 kHz Band')
-    ax[0].set_ylim([-1, 1])  # Genlik ölçeklendirme
-    ax[1].set_ylim([-1, 1])  # Genlik ölçeklendirme
-    ax[0].set_xlim([0,0.005])  # Genlik ölçeklendirme
-    ax[1].set_xlim([0,0.005])  # Genlik ölçeklendirme
-    ax[0].legend()
-    ax[1].legend()
-
     while True:
         if not q.empty():
             indata = q.get()
@@ -90,23 +76,51 @@ def process_audio():
             signal_10kHz = detect_signal(filtered_10kHz)
             print(f"15 kHz Signal: {'1' if signal_15kHz else '0'}, 10 kHz Signal: {'1' if signal_10kHz else '0'}")
             xor_or(signal_15kHz, signal_10kHz)
+
+def update_plot(fig, ax, line1, line2):
+    """Bu fonksiyon grafiği günceller."""
+    while True:
+        if not q.empty():
+            indata = q.queue[-1]  # Son alınan veriyi kullan
+            # 15 kHz band geçiren filtre
+            filtered_15kHz = bandpass_filter(indata[:, 0], 14500, 15500, sampling_rate)
+            # 10 kHz band geçiren filtre
+            filtered_10kHz = bandpass_filter(indata[:, 0], 9500, 10500, sampling_rate)
             
             # Anlık verileri güncelleme ve grafikte gösterme
-            y1 = filtered_15kHz
-            y2 = filtered_10kHz
-            line1.set_ydata(y1)
-            line2.set_ydata(y2)
+            line1.set_ydata(filtered_15kHz)
+            line2.set_ydata(filtered_10kHz)
             fig.canvas.draw()
             fig.canvas.flush_events()
 
 def listen_microphone():
     """Bu fonksiyon mikrofon girişini dinler ve frekans spektrumunu gösterir."""
+    plt.ion()  # Interaktif modu etkinleştir
+    fig, ax = plt.subplots(2, 1)  # İki alt grafik oluştur
+    x = np.linspace(0, block_duration, blocksize)
+    y1 = np.zeros(blocksize)
+    y2 = np.zeros(blocksize)
+    line1, = ax[0].plot(x, y1, label='15 kHz Band')
+    line2, = ax[1].plot(x, y2, label='10 kHz Band')
+    ax[0].set_ylim([-1, 1])  # Genlik ölçeklendirme
+    ax[1].set_ylim([-1, 1])  # Genlik ölçeklendirme
+    ax[0].set_xlim([0, block_duration])  # Zaman ekseni ölçeklendirme
+    ax[1].set_xlim([0, block_duration])  # Zaman ekseni ölçeklendirme
+    ax[0].legend()
+    ax[1].legend()
+
     with sd.InputStream(callback=audio_callback, channels=1, samplerate=sampling_rate, blocksize=blocksize):
         print("Mikrofon dinleniyor... 'Ctrl+C' ile çıkış yapabilirsiniz.")
         process_thread = threading.Thread(target=process_audio)
         process_thread.daemon = True
         process_thread.start()
+        
+        plot_thread = threading.Thread(target=update_plot, args=(fig, ax, line1, line2))
+        plot_thread.daemon = True
+        plot_thread.start()
+        
         process_thread.join()
+        plot_thread.join()
 
 if __name__ == "__main__":
     listen_microphone()
