@@ -6,8 +6,8 @@ import matplotlib.pyplot as plt
 
 # Sabitler
 sampling_rate = 40000  # Örnekleme frekansı (Hz)
-block_duration = 0.000275  # Blok süresi (saniye) - 0.275 ms
-blocksize = int(sampling_rate * block_duration)  # Blok boyutu (örnek sayısı) = 11
+block_duration = 0.0005  # Blok süresi (saniye) - 0.5 ms
+blocksize = int(sampling_rate * block_duration)  # Blok boyutu (örnek sayısı) = 20
 scale_factor = 10  # Genlik ölçekleme faktörü
 
 # Ses verilerini tutmak için bir kuyruk oluşturun
