@@ -59,6 +59,7 @@ def process_audio():
             #print(f"Dominant Frequency: {dominant_freq} Hz")
             is15=is15Khz(dominant_freq)
             is10=is10Khz(dominant_freq)
+            print(is15)
             xor_or(is15,is10)
             print(list(q2.queue)) ##Bu yorum satırlarını silme lazım olacak şekilde tekrardan kullanmak için şimdilik yorum satırına alıyorum
 
