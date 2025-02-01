@@ -69,7 +69,7 @@ def process_audio():
     """Bu fonksiyon kuyruktaki ses verilerini alır ve band geçiren filtre uygular."""
     while True:
         if not q.empty():
-            indata = q.get()
+            indata = q.get[-1]
             # 15 kHz band geçiren filtre
             filtered_15kHz = bandpass_filter(indata[:, 0], 14500, 15500, sampling_rate)
             signal_15kHz = detect_signal(filtered_15kHz)
