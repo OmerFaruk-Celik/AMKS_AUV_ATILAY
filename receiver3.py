@@ -59,7 +59,7 @@ def update_plot():
     ax2.axis('off')
 
     while True:
-        if not q.empty():
+        if not q.full():
             indata = q.get()
             #print("sonra ",len(indata))
             
