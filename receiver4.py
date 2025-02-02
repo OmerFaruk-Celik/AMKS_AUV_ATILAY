@@ -39,7 +39,7 @@ def find_dominant_frequency(data, fs):
 
 def is16Khz(dominant_freq):
     """Baskın frekansın 16 kHz bandında olup olmadığını kontrol eder."""
-    if 15000 <= dominant_freq <= 15800:
+    if 15000 <= dominant_freq <= 17000:
         print(1)
         return 1
     return 0
