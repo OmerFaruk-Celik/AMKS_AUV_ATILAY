@@ -55,7 +55,7 @@ def update_plot():
     x = np.arange(0, 2000)  # 2000 nokta
     y = np.zeros(2000)
     line1, = ax1.plot(x, y)
-    ax1.set_ylim([-1, 1])
+    ax1.set_ylim([-0.2, 0.2])
     ax1.set_xlim([0, 2000])
     ax1.set_title("Time Domain Signal")
 
@@ -106,11 +106,11 @@ def update_plot():
                     calculate_frequency(grup15, sampling_rate),
                     calculate_frequency(grup16, sampling_rate)
                 ]
-                freqs_array = check_frequencies(freqs, 6000, tolerance)
+                freqs_array = check_frequencies(freqs, 2000, tolerance)
 
 
 
-                if (all(freqs_array[:2]) and freqs_array[15]) or True :
+                if (all(freqs_array[:2]) and freqs_array[15]):
                     freq_text1.set_text(f'Grup1 Frekansı: {freqs[0]:.2f} Hz')
                     freq_text2.set_text(f'Grup2 Frekansı: {freqs[1]:.2f} Hz')
                     # Frekansları kontrol et
