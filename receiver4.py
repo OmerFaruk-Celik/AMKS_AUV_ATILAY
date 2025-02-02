@@ -56,9 +56,11 @@ def audio_callback(indata, frames, time, status):
         q.put(indata.copy() * scale_factor, block=False)  # Genlik ölçekleme ekle
     except queue.Full:
         pass  # Kuyruk doluysa veriyi atla
-
+fark1=0
+fark2=0
 def process_audio():
     """Bu fonksiyon kuyruktaki ses verilerini alır ve baskın frekans analizini yapar."""
+    global sayac15,sayac18
     while True:
         if not q.empty():
             indata = q.get()
@@ -67,7 +69,13 @@ def process_audio():
             is18 = is18Khz(dominant_freq)
             is16 = is16Khz(dominant_freq)
             #print(f"is18Khz: {is18}, is16Khz: {is16}")
-            print(f"is18Khz: {sayac18}, is16Khz: {sayac15}")
+            if (sayac18-fark1!=0) or (sayac15-fark2!=0):
+                
+                if sayac18-fark1!=0:
+                    fark1=sayac18
+                if sayac15-fark2!=0:
+                    fark2=sayac15
+                print(f"is18Khz: {sayac18}, is16Khz: {sayac15}")
             #xor_or(is18, is16)
             #print(list(q2.queue)) ##Bu yorum satırlarını silme! lazım olacak şekilde tekrardan kullanmak için şimdilik yorum satırına alıyorum
 
