@@ -62,8 +62,9 @@ def update_plot():
 
     while True:
         if not q.empty():
+            print("önce ",len(indata))
             indata = q.get()
-            print(len(indata))
+            print("sonra ",len(indata))
             
             if len(indata) >= 4000:
                 display_data = indata[:2000, 0]  # İlk 2000 noktayı al
