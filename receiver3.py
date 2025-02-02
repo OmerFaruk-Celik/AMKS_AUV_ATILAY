@@ -59,7 +59,7 @@ def update_plot():
                 # Grup frekanslarını hesapla
                 freq1 = calculate_frequency(grup1, sampling_rate)
                 freq2 = calculate_frequency(grup2, sampling_rate)
-                freq16 = calculate_frequency(grup16, sampling_rate)
+                #freq16 = calculate_frequency(grup16, sampling_rate)
 
                 # Frekansları kontrol et
                 if (abs(freq1 - 2000) <= tolerance and 
@@ -75,7 +75,7 @@ def update_plot():
                 else:
                     freq_text1.set_text('Grup1 frekansı 2kHz civarında değil.')
                     freq_text2.set_text('Grup2 frekansı 2kHz civarında değil.')
-                    freq_text3.set_text('Grup16 frekansı 2kHz civarında değil.')
+                    #freq_text3.set_text('Grup16 frekansı 2kHz civarında değil.')
 
 def listen_microphone():
     with sd.InputStream(callback=audio_callback, channels=1, samplerate=sampling_rate, blocksize=blocksize):
