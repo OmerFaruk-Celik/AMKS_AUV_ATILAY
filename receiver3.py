@@ -62,7 +62,6 @@ def update_plot():
 
     while True:
         if not q.empty():
-            print("önce ",len(indata))
             indata = q.get()
             print("sonra ",len(indata))
             
