@@ -108,8 +108,8 @@ def update_plot():
                     freq_text2.set_text(f'Grup2 Frekansı: {freqs[1]:.2f} Hz')
                     line1.set_ydata(display_data)
                 else:
-                    freq_text1.set_text('Grup1 frekansı 6kHz civarında değil.')
-                    freq_text2.set_text('Grup2 frekansı 6kHz civarında değil.')
+                    freq_text1.set_text('Grup1 frekansı 2kHz civarında değil.')
+                    freq_text2.set_text('Grup2 frekansı 2kHz civarında değil.')
 
                 fig.canvas.draw()
                 fig.canvas.flush_events()
