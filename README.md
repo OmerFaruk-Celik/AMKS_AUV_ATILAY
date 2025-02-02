@@ -15,6 +15,15 @@ Pictures klasöründeki resim dosyalarına buradan ulaşabilirsiniz:
 ![Resim 1](./Pictures/1.png)
 ![Resim 2](./Pictures/2.png)
 ![Resim 3](./Pictures/3.png)
+![Resim 4](./Pictures/4.png)
+![Resim 5](./Pictures/5.png)
+![Resim 6](./Pictures/6.png)
+![Resim 7](./Pictures/7.png)
+![Resim 8](./Pictures/8.png)
+![Resim 9](./Pictures/9.png)
+![Resim 10](./Pictures/10.png)
+![Resim 11](./Pictures/11.png)
+
 
 > Not: Resim dosyalarının isimlerini ve uzantılarını dosya adlarıyla eşleştirin.
 
