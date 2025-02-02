@@ -67,7 +67,7 @@ def process_audio():
             is18 = is18Khz(dominant_freq)
             is16 = is16Khz(dominant_freq)
             print(f"is18Khz: {is18}, is16Khz: {is16}")
-            xor_or(is18, is16)
+            #xor_or(is18, is16)
             #print(list(q2.queue)) ##Bu yorum satırlarını silme! lazım olacak şekilde tekrardan kullanmak için şimdilik yorum satırına alıyorum
 
 def update_plot_and_fft():
