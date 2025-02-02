@@ -31,7 +31,7 @@ Pictures klasöründeki resim dosyalarına buradan ulaşabilirsiniz:
 
 Jupyter Notebook dosyasını buradan görüntüleyebilirsiniz:
 
-- [.~FM.ipynb](./FM.ipynb)
+![.~FM.ipynb](./FM.ipynb)
 
 > Not: Jupyter Notebook dosyasının ismini ve yolunu doğru yazdığınızdan emin olun.
 
