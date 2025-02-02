@@ -62,7 +62,8 @@ def update_plot():
     while True:
         if not q.full():
             indata = q.get()
-            print("sonra ",len(indata))
+            #print("sonra ",len(indata))
+            time.sleep(0.1)
             
             if len(indata) >= 2000:
                 display_data = indata[:2000, 0]  # İlk 2000 noktayı al
