@@ -43,7 +43,7 @@ def check_frequencies(freqs, target_freq, tolerance):
     """Bu fonksiyon verilen frekansların hedef frekansa yakın olup olmadığını kontrol eder."""
     result = abs(target_freqs-freqs) <= tolerance
     return result
-freqs=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+
 def update_plot():
     """Bu fonksiyon grafiği günceller."""
     global freqs
@@ -64,10 +64,12 @@ def update_plot():
                 # Grup frekanslarını hesapla
                 for i in range(16):
                     if not q.empty():
-                        freqs[i]=calculate_frequency(q.get(), sampling_rate)
+                        freqs=calculate_frequency(q.get(), sampling_rate)
+                        if i==0 or i==1:
+                            hesaplanan_frekans= check_frequencies(freqs, 2000, tolerance)
                 
 
-                freqs_array = check_frequencies(freqs, 2000, tolerance)
+                
 
                 if (freqs_array[0]) and freqs_array[1]:
                     freq_text1.set_text(f'Grup1 Frekansı: {freqs[0]:.2f} Hz')
