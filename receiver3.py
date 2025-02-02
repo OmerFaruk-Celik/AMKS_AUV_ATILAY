@@ -44,7 +44,7 @@ def update_plot():
         if not q.empty():
             indata = q.get()
             if len(indata) >= 2000:
-				display_data = indata[:2000, 0]  # İlk 200 noktayı al
+                display_data = indata[:2000, 0]  # İlk 200 noktayı al
                 grup1 = indata[:125, 0]  # İlk 125 noktayı al
                 grup2 = indata[125:250, 0]  # İlk 125 noktayı al
                 grup3 = indata[250:375, 0]  # İlk 125 noktayı al
@@ -68,7 +68,7 @@ def update_plot():
             line1.set_ydata(display_data)
             
             # Fourier dönüşümü ve frekans analizi
-            fft_data = np.fft.fft(display_data)
+            fft_data = np.fft.fft(grup1)
             #print(len(fft_data ))
             fft_magnitude = np.abs(fft_data) / 2000 * amplitude_factor  # Genlikleri 4 katına çıkar
             line2.set_ydata(fft_magnitude[:1000])  # İlk 1000 frekans bileşenini göster
