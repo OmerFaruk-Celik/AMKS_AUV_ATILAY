@@ -62,7 +62,7 @@ def update_plot():
                 freq = calculate_frequency(display_data, sampling_rate)
                 freq1 = calculate_frequency(grup1, sampling_rate)
                 freq2 = calculate_frequency(grup2, sampling_rate)
-                freq3 = calculate_frequency(grup3, sampling_rate)
+
                 print(freq1," ",freq2," ",freq3)
                 #print(freq)
                 #freq16 = calculate_frequency(grup16, sampling_rate)
@@ -73,6 +73,18 @@ def update_plot():
                     freq_text1.set_text(f'Grup1 Frekansı: {freq1:.2f} Hz')
                     freq_text2.set_text(f'Grup2 Frekansı: {freq2:.2f} Hz')
                     #freq_text3.set_text(f'Grup16 Frekansı: {freq16:.2f} Hz')
+                    freq3 = calculate_frequency(grup3, sampling_rate)
+                    freq4 = calculate_frequency(grup3, sampling_rate)
+                    freq5 = calculate_frequency(grup3, sampling_rate)
+                    freq6 = calculate_frequency(grup3, sampling_rate)
+                    freq7 = calculate_frequency(grup3, sampling_rate)
+                    freq8 = calculate_frequency(grup3, sampling_rate)
+                    freq9 = calculate_frequency(grup3, sampling_rate)
+                    freq10 = calculate_frequency(grup3, sampling_rate)
+                    freq11 = calculate_frequency(grup3, sampling_rate)
+                    freq12 = calculate_frequency(grup3, sampling_rate)
+                    freq13 = calculate_frequency(grup3, sampling_rate)
+                    freq14= calculate_frequency(grup3, sampling_rate)
                     
                     # Zaman domeni sinyali güncelle
                     line1.set_ydata(display_data)
