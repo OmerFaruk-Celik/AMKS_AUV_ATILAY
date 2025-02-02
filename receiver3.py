@@ -3,7 +3,7 @@ import sounddevice as sd
 import queue
 import threading
 import matplotlib.pyplot as plt
-
+import time
 # Sabitler
 sampling_rate = 20000  # Örnekleme frekansı (Hz)
 block_duration = 0.1  # Blok süresi (saniye)
@@ -13,9 +13,14 @@ tolerance = 100  # Frekans toleransı (Hz)
 
 # Ses verilerini tutmak için bir kuyruk oluşturun
 q = queue.Queue()  # Maksimum boyutu belirleyin
-
+basla=time.time()
 def audio_callback(indata, frames, time, status):
     """Bu fonksiyon mikrofon girişini alır ve verileri kuyrukta saklar."""
+    global basla
+    son=time.time()
+    fark=son-basla
+    print(fark)
+    basla=time.time()
     print("tetiklendi")
     if status:
         print(status)
