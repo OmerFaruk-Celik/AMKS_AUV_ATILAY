@@ -7,7 +7,7 @@ import time
 import ctypes
 # Sabitler
 sampling_rate = 20000  # Örnekleme frekansı (Hz)
-block_duration = 0.1  # Blok süresi (saniye)
+block_duration = 0.01  # Blok süresi (saniye)
 blocksize = int(sampling_rate * block_duration)  # Blok boyutu (örnek sayısı)
 scale_factor = 10  # Genlik ölçekleme faktörü
 tolerance = 100  # Frekans toleransı (Hz)
@@ -28,9 +28,6 @@ def audio_callback(indata, frames, time, status):
     print(fark)
     basla=son
     #output_time = time.outputBufferDacTime
-
-
-    print(f"Current Time: {current_time}")
 
     
     try:
