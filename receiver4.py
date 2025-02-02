@@ -31,6 +31,7 @@ def is16Khz(dominant_freq):
 def is18Khz(dominant_freq):
     """Baskın frekansın 20 kHz bandında olup olmadığını kontrol eder."""
     if 17500 <= dominant_freq <= 18500:
+        print(1)
         return 1
     return 0
 
@@ -60,7 +61,7 @@ def process_audio():
             #print(f"Dominant Frequency: {dominant_freq} Hz")
             is18 = is18Khz(dominant_freq)
             is16 = is16Khz(dominant_freq)
-            print(f"is18Khz: {is18}, is16Khz: {is16}")
+            #print(f"is18Khz: {is18}, is16Khz: {is16}")
             xor_or(is18, is16)
             #print(list(q2.queue)) ##Bu yorum satırlarını silme! lazım olacak şekilde tekrardan kullanmak için şimdilik yorum satırına alıyorum
 
