@@ -5,8 +5,8 @@ import threading
 import matplotlib.pyplot as plt
 
 # Sabitler
-sampling_rate = 40000  # Örnekleme frekansı (Hz)
-block_duration = 0.0008  # Blok süresi (saniye) - 1 ms
+sampling_rate = 20000  # Örnekleme frekansı (Hz)
+block_duration = 0.1  # Blok süresi (saniye) - 1 ms
 blocksize = int(sampling_rate * block_duration)  # Blok boyutu (örnek sayısı) = 20
 scale_factor = 10  # Genlik ölçekleme faktörü
 
@@ -67,7 +67,7 @@ def process_audio():
         if not q.empty():
             indata = q.get()
             dominant_freq = find_dominant_frequency(indata[:, 0], sampling_rate)
-            #print(f"Dominant Frequency: {dominant_freq} Hz")
+            print(f"Dominant Frequency: {dominant_freq} Hz")
             is18 = is18Khz(dominant_freq)
             is16 = is16Khz(dominant_freq)
             #print(f"is18Khz: {is18}, is16Khz: {is16}")
