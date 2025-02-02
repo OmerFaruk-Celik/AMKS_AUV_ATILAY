@@ -9,6 +9,7 @@ sampling_rate = 20000  # Örnekleme frekansı (Hz)
 block_duration = 0.1  # Blok süresi (saniye)
 blocksize = int(sampling_rate * block_duration)  # Blok boyutu (örnek sayısı)
 scale_factor = 10  # Genlik ölçekleme faktörü
+tolerance = 100  # Frekans toleransı (Hz)
 
 # Ses verilerini tutmak için bir kuyruk oluşturun
 q = queue.Queue(maxsize=blocksize)  # Maksimum boyutu belirleyin
@@ -57,15 +58,18 @@ def update_plot():
                 freq1 = calculate_frequency(grup1, sampling_rate)
                 freq2 = calculate_frequency(grup2, sampling_rate)
 
-                freq_text1.set_text(f'Grup1 Frekansı: {freq1:.2f} Hz')
-                freq_text2.set_text(f'Grup2 Frekansı: {freq2:.2f} Hz')
-            else:
-                display_data = np.pad(indata[:, 0], (0, 2000 - len(indata)), 'constant')  # Yetersizse sıfırla doldur
-                
-            # Zaman domeni sinyali güncelle
-            line1.set_ydata(display_data)
-            fig.canvas.draw()
-            fig.canvas.flush_events()
+                # Frekansları kontrol et
+                if abs(freq1 - 1000) <= tolerance and abs(freq2 - 1000) <= tolerance:
+                    freq_text1.set_text(f'Grup1 Frekansı: {freq1:.2f} Hz')
+                    freq_text2.set_text(f'Grup2 Frekansı: {freq2:.2f} Hz')
+                    
+                    # Zaman domeni sinyali güncelle
+                    line1.set_ydata(display_data)
+                    fig.canvas.draw()
+                    fig.canvas.flush_events()
+                else:
+                    freq_text1.set_text('Grup1 frekansı 1kHz civarında değil.')
+                    freq_text2.set_text('Grup2 frekansı 1kHz civarında değil.')
 
 def listen_microphone():
     with sd.InputStream(callback=audio_callback, channels=1, samplerate=sampling_rate, blocksize=blocksize):
