@@ -35,11 +35,11 @@ def update_plot():
     """Bu fonksiyon grafiği günceller."""
     plt.ion()  # Interaktif modu etkinleştir
     fig, (ax1, ax2) = plt.subplots(2, 1)  # İki alt grafik oluştur
-    x = np.arange(0, 2000)  # 2000 nokta
-    y = np.zeros(2000)
+    x = np.arange(0, 4000)  # 4000 nokta
+    y = np.zeros(4000)
     line1, = ax1.plot(x, y)
     ax1.set_ylim([-1, 1])
-    ax1.set_xlim([0, 2000])
+    ax1.set_xlim([0, 4000])
     ax1.set_title("Time Domain Signal")
 
     freq_text1 = ax2.text(0.5, 0.5, '', transform=ax2.transAxes, ha='center')
@@ -50,13 +50,13 @@ def update_plot():
     while True:
         if not q.empty():
             indata = q.get()
-            if len(indata) >= 2000:
-                display_data = indata[:2000, 0]  # İlk 2000 noktayı al
-                grup1 = indata[:125, 0]  # İlk 125 noktayı al
-                grup2 = indata[125:250, 0]  # İkinci 125 noktayı al
-                grup3 = indata[250:375, 0]  # İkinci 125 noktayı al
-                grup4 = indata[375:500, 0]  # İkinci 125 noktayı al
-                grup5 = indata[500:625, 0]  # Son 125 noktayı al
+            if len(indata) >= 4000:
+                display_data = indata[:4000, 0]  # İlk 2000 noktayı al
+                grup1 = indata[:250, 0]  # İlk 125 noktayı al
+                grup2 = indata[250:500, 0]  # İkinci 125 noktayı al
+                grup3 = indata[500:750, 0]  # İkinci 125 noktayı al
+                grup4 = indata[750:1000, 0]  # İkinci 125 noktayı al
+                grup5 = indata[1000:,1250]  # Son 125 noktayı al
                 
                 # Grup frekanslarını hesapla
                 freq = calculate_frequency(display_data, sampling_rate)
