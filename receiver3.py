@@ -17,14 +17,18 @@ q = queue.Queue()  # Maksimum boyutu belirleyin
 #basla=time.time()
 def audio_callback(indata, frames, time, status):
     """Bu fonksiyon mikrofon girişini alır ve verileri kuyrukta saklar."""
-    #global basla
-    #son=time.time()
-    #fark=son-basla
-    #deger=ctypes.c_int.from_address(time)
-    print(f"currentTime: {time_info.currentTime}")    #basla=time.time()
-    #print("tetiklendi")
     if status:
         print(status)
+    
+    # Zaman bilgilerini okuyun
+    input_time = time.inputBufferAdcTime
+    current_time = time.currentTime
+    output_time = time.outputBufferDacTime
+
+    print(f"Input Buffer ADC Time: {input_time}")
+    print(f"Current Time: {current_time}")
+    print(f"Output Buffer DAC Time: {output_time}")
+    
     try:
         q.put(indata.copy() * scale_factor, block=False)  # Genlik ölçekleme ekle
         if q.qsize() > 2000:
