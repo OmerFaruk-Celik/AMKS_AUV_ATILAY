@@ -44,7 +44,23 @@ def update_plot():
         if not q.empty():
             indata = q.get()
             if len(indata) >= 2000:
-                display_data = indata[:125, 0]  # İlk 125 noktayı al
+				display_data = indata[:2000, 0]  # İlk 200 noktayı al
+                grup1 = indata[:125, 0]  # İlk 125 noktayı al
+                grup2 = indata[125:250, 0]  # İlk 125 noktayı al
+                grup3 = indata[250:375, 0]  # İlk 125 noktayı al
+                grup4 = indata[375:500, 0]  # İlk 125 noktayı al
+                grup5 = indata[500:625, 0]  # İlk 125 noktayı al
+                grup6 = indata[625:750, 0]  # İlk 125 noktayı al
+                grup7 = indata[750:875, 0]  # İlk 125 noktayı al
+                grup8 = indata[875:1000, 0]  # İlk 125 noktayı al
+                grup9 = indata[1000:1125, 0]  # İlk 125 noktayı al
+                grup10 = indata[1125:1250, 0]  # İlk 125 noktayı al
+                grup11 = indata[1250:1375, 0]  # İlk 125 noktayı al
+                grup12= indata[1375:1500, 0]  # İlk 125 noktayı al
+                grup13 = indata[1500:1625, 0]  # İlk 125 noktayı al
+                grup14 = indata[1625:1750, 0]  # İlk 125 noktayı al
+                grup15= indata[1750:1875, 0]  # İlk 125 noktayı al
+                grup16 = indata[1875:2000, 0]  # İlk 125 noktayı al
             else:
                 display_data = np.pad(indata[:, 0], (0, 2000 - len(indata)), 'constant')  # Yetersizse sıfırla doldur
                 
