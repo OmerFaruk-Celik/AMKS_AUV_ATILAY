@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 
 # Sabitler
 sampling_rate = 40000  # Örnekleme frekansı (Hz)
-block_duration = 0.0005  # Blok süresi (saniye) - 1 ms
+block_duration = 0.001  # Blok süresi (saniye) - 1 ms
 blocksize = int(sampling_rate * block_duration)  # Blok boyutu (örnek sayısı) = 20
 scale_factor = 10  # Genlik ölçekleme faktörü
 
@@ -25,7 +25,7 @@ sayac15=0
 def is16Khz(dominant_freq):
     """Baskın frekansın 18 kHz bandında olup olmadığını kontrol eder."""
     global sayac15
-    if 15000 <= dominant_freq <= 15800:
+    if 14500 <= dominant_freq <= 15500:
         sayac15+=1
         #print(sayac)
         return sayac15
