@@ -12,9 +12,11 @@ block_duration = 0.01  # Blok süresi (saniye)
 blocksize = int(sampling_rate * block_duration)  # Blok boyutu (örnek sayısı)
 scale_factor = 10  # Genlik ölçekleme faktörü
 tolerance = 100  # Frekans toleransı (Hz)
-
+say=0
 # Ses verilerini tutmak için bir kuyruk oluşturun
 q = queue.Queue(16)  # Maksimum boyutu belirleyin
+q2 = queue.Queue(16)  # Maksimum boyutu belirleyin
+
 basla = time.time()
 
 def audio_callback(indata, frames, time, status):
@@ -61,7 +63,7 @@ def update_plot():
 
     while True:
                 # Grup frekanslarını hesapla
-                for i in range(16):
+                while say<16:
                     if not q.empty():
                         freqs=calculate_frequency(q.get(), sampling_rate)
                         hesaplanan_frekans= check_frequencies(freqs, 2000, tolerance)
