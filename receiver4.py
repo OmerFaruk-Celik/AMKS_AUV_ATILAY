@@ -16,7 +16,7 @@ q = queue.Queue(maxsize=blocksize)  # Maksimum boyutu belirleyin
 q2 = queue.Queue(16)  # Maksimum boyutu belirleyin
 
 def butter_lowpass(cutoff, fs, order=5):
-    nyq = 0.5 * fs  # Nyquist frekansı
+    nyq = 0.8 * fs  # Nyquist frekansı
     normal_cutoff = cutoff / nyq
     b, a = butter(order, normal_cutoff, btype='low', analog=False)
     return b, a
