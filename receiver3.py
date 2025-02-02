@@ -54,12 +54,15 @@ def update_plot():
                 display_data = indata[:2000, 0]  # İlk 2000 noktayı al
                 grup1 = indata[:125, 0]  # İlk 125 noktayı al
                 grup2 = indata[125:250, 0]  # İkinci 125 noktayı al
-                #grup16 = indata[1875:2000, 0]  # Son 125 noktayı al
+                grup3 = indata[250:375, 0]  # İkinci 125 noktayı al
+                grup4 = indata[375:500, 0]  # İkinci 125 noktayı al
+                grup5 = indata[500:625, 0]  # Son 125 noktayı al
                 
                 # Grup frekanslarını hesapla
                 freq1 = calculate_frequency(grup1, sampling_rate)
                 freq2 = calculate_frequency(grup2, sampling_rate)
-                print(freq1)
+                freq3 = calculate_frequency(grup3, sampling_rate)
+                print(freq1,freq2)
                 #freq16 = calculate_frequency(grup16, sampling_rate)
 
                 # Frekansları kontrol et
