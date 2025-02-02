@@ -3,7 +3,6 @@ import sounddevice as sd
 import queue
 import threading
 import matplotlib.pyplot as plt
-from scipy.signal import butter, lfilter
 
 # Sabitler
 sampling_rate = 40000  # Örnekleme frekansı (Hz)
@@ -15,20 +14,6 @@ scale_factor = 10  # Genlik ölçekleme faktörü
 q = queue.Queue(maxsize=blocksize)  # Maksimum boyutu belirleyin
 q2 = queue.Queue(16)  # Maksimum boyutu belirleyin
 
-# Band geçiş filtresi için butterworth filtresi oluşturma
-def butter_bandpass(lowcut, highcut, fs, order=5):
-    nyq = 0.5 * fs
-    low = lowcut / nyq
-    high = highcut / nyq
-    b, a = butter(order, [low, high], btype='band')
-    return b, a
-
-# Band geçiş filtresi uygulama
-def bandpass_filter(data, lowcut, highcut, fs, order=5):
-    b, a = butter_bandpass(lowcut, highcut, fs, order=order)
-    y = lfilter(b, a, data)
-    return y
-
 def find_dominant_frequency(data, fs):
     """Verilen verinin baskın frekansını bulur."""
     fft_data = np.fft.fft(data)
@@ -38,14 +23,14 @@ def find_dominant_frequency(data, fs):
     return dominant_freq
 
 def is16Khz(dominant_freq):
-    """Baskın frekansın 16 kHz bandında olup olmadığını kontrol eder."""
-    if 15000 <= dominant_freq <= 17000:
+    """Baskın frekansın 18 kHz bandında olup olmadığını kontrol eder."""
+    if 15000 <= dominant_freq <= 15800:
         print(1)
         return 1
     return 0
 
 def is18Khz(dominant_freq):
-    """Baskın frekansın 18 kHz bandında olup olmadığını kontrol eder."""
+    """Baskın frekansın 20 kHz bandında olup olmadığını kontrol eder."""
     if 17500 <= dominant_freq <= 18500:
         print(1)
         return 1
@@ -73,13 +58,13 @@ def process_audio():
     while True:
         if not q.empty():
             indata = q.get()
-            # Gürültü azaltma için band geçiş filtresi uygula
-            filtered_data = bandpass_filter(indata[:, 0], lowcut=15000, highcut=18500, fs=sampling_rate)
-            dominant_freq = find_dominant_frequency(filtered_data, sampling_rate)
+            dominant_freq = find_dominant_frequency(indata[:, 0], sampling_rate)
             print(f"Dominant Frequency: {dominant_freq} Hz")
             is18 = is18Khz(dominant_freq)
             is16 = is16Khz(dominant_freq)
+            #print(f"is18Khz: {is18}, is16Khz: {is16}")
             xor_or(is18, is16)
+            #print(list(q2.queue)) ##Bu yorum satırlarını silme! lazım olacak şekilde tekrardan kullanmak için şimdilik yorum satırına alıyorum
 
 def update_plot_and_fft():
     """Bu fonksiyon grafiği günceller ve Fourier dönüşümü ile frekans analizini yapar."""
