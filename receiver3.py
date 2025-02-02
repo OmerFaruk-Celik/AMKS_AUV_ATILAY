@@ -30,15 +30,11 @@ def audio_callback(indata, frames, time, status):
     #output_time = time.outputBufferDacTime
 
     
-    try:
-        q.put(indata.copy() * scale_factor, block=False)  # Genlik ölçekleme ekle
-        #print(len(indata))
-        if q.qsize() > 2000:
-            while q.qsize() > 2000:
-                q.get()  # Kuyruktan fazladan verileri çıkar
-    except queue.Full:
-        pass  # Kuyruk doluysa veriyi atla
-
+    if q.full():
+        q.get()  # Kuyruktan fazladan verileri çıkar		
+    q.put(indata.copy() * scale_factor, block=False)  # Genlik ölçekleme ekle
+    #print(len(indata))
+                
 def calculate_frequency(data, sampling_rate):
     """Bu fonksiyon verilen veri için frekansı hesaplar."""
     fft_data = np.fft.fft(data)
