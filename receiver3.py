@@ -54,7 +54,7 @@ def update_plot():
                 display_data = indata[:2000, 0]  # İlk 2000 noktayı al
                 grup1 = indata[:125, 0]  # İlk 125 noktayı al
                 grup2 = indata[125:250, 0]  # İkinci 125 noktayı al
-                grup16 = indata[1875:2000, 0]  # Son 125 noktayı al
+                #grup16 = indata[1875:2000, 0]  # Son 125 noktayı al
                 
                 # Grup frekanslarını hesapla
                 freq1 = calculate_frequency(grup1, sampling_rate)
@@ -63,11 +63,10 @@ def update_plot():
 
                 # Frekansları kontrol et
                 if (abs(freq1 - 2000) <= tolerance and 
-                    abs(freq2 - 2000) <= tolerance and 
-                    abs(freq16 - 2000) <= tolerance):
+                    abs(freq2 - 2000) <= tolerance):
                     freq_text1.set_text(f'Grup1 Frekansı: {freq1:.2f} Hz')
                     freq_text2.set_text(f'Grup2 Frekansı: {freq2:.2f} Hz')
-                    freq_text3.set_text(f'Grup16 Frekansı: {freq16:.2f} Hz')
+                    #freq_text3.set_text(f'Grup16 Frekansı: {freq16:.2f} Hz')
                     
                     # Zaman domeni sinyali güncelle
                     line1.set_ydata(display_data)
