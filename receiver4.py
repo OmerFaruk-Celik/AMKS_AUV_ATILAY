@@ -21,11 +21,12 @@ def find_dominant_frequency(data, fs):
     freqs = np.fft.fftfreq(len(data), 1/fs)
     dominant_freq = freqs[np.argmax(fft_magnitude)]
     return dominant_freq
-
+sayac=0
 def is16Khz(dominant_freq):
     """Baskın frekansın 18 kHz bandında olup olmadığını kontrol eder."""
     if 15000 <= dominant_freq <= 15800:
-        print(1)
+        sayac+=1
+        print(sayac)
         return 1
     return 0
 
