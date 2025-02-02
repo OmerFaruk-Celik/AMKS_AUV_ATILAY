@@ -63,13 +63,15 @@ def update_plot():
 
     while True:
                 # Grup frekanslarını hesapla
-                while say<16:
+                while say<16 and not q.empty():
+                    say+=1
                     if not q.empty():
                         freqs=calculate_frequency(q.get(), sampling_rate)
                         hesaplanan_frekans= check_frequencies(freqs, 2000, tolerance)
                         if i==0 or i==1:                          
                             if not hesaplanan_frekans:
-                                q.get()
+                                say=0
+                    
                 
 
                 
