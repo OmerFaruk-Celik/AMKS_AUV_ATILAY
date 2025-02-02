@@ -43,9 +43,10 @@ def check_frequencies(freqs, target_freq, tolerance):
     """Bu fonksiyon verilen frekansların hedef frekansa yakın olup olmadığını kontrol eder."""
     result = [1 if abs(f - target_freq) <= tolerance else 0 for f in freqs]
     return result
-
+freqs=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
 def update_plot():
     """Bu fonksiyon grafiği günceller."""
+    global freqs
     plt.ion()  # Interaktif modu etkinleştir
     fig, (ax1, ax2) = plt.subplots(2, 1)  # İki alt grafik oluştur
     x = np.arange(0, 2000)  # 2000 nokta
@@ -60,49 +61,12 @@ def update_plot():
     ax2.axis('off')
 
     while True:
-        if not q.full():
-            indata = q.get()
-            #print("sonra ",len(indata))
-            #time.sleep(0.1)
-            
-            if len(indata) >= 2000:
-                #display_data = indata[:2000, 0]  # İlk 2000 noktayı al
-                grup1 = q.get()  # İlk 125 noktayı al
-                grup2 = q.get()  # İkinci 125 noktayı al
-                grup3 = q.get()  # Üçüncü 125 noktayı al
-                grup4 = q.get()  # Dördüncü 125 noktayı al
-                grup5 = q.get()  # Beşinci 125 noktayı al
-                grup6 = q.get()  # Altıncı 125 noktayı al
-                grup7 = q.get()  # Yedinci 125 noktayı al
-                grup8 = q.get()  # Sekizinci 125 noktayı al
-                grup9 = q.get()  # Dokuzuncu 125 noktayı al
-                grup10 = q.get()  # Onuncu 125 noktayı al
-                grup11 = q.get()  # On birinci 125 noktayı al
-                grup12 = q.get()  # On ikinci 125 noktayı al
-                grup13 = q.get()  # On üçüncü 125 noktayı al
-                grup14 = q.get()  # On dördüncü 125 noktayı al
-                grup15 = q.get()  # On beşinci 125 noktayı al
-                grup16 = q.get()  # On altıncı 125 noktayı al
-
                 # Grup frekanslarını hesapla
-                freqs = [
-                    calculate_frequency(grup1, sampling_rate),
-                    calculate_frequency(grup2, sampling_rate),
-                    calculate_frequency(grup3, sampling_rate),
-                    calculate_frequency(grup4, sampling_rate),
-                    calculate_frequency(grup5, sampling_rate),
-                    calculate_frequency(grup6, sampling_rate),
-                    calculate_frequency(grup7, sampling_rate),
-                    calculate_frequency(grup8, sampling_rate),
-                    calculate_frequency(grup9, sampling_rate),
-                    calculate_frequency(grup10, sampling_rate),
-                    calculate_frequency(grup11, sampling_rate),
-                    calculate_frequency(grup12, sampling_rate),
-                    calculate_frequency(grup13, sampling_rate),
-                    calculate_frequency(grup14, sampling_rate),
-                    calculate_frequency(grup15, sampling_rate),
-                    calculate_frequency(grup16, sampling_rate)
-                ]
+                for i in range(16):
+                
+                calculate_frequency(q.get(), sampling_rate)
+                
+
                 freqs_array = check_frequencies(freqs, 2000, tolerance)
 
                 if (freqs_array[0]) and freqs_array[1]:
