@@ -4,6 +4,7 @@ import queue
 import threading
 import matplotlib.pyplot as plt
 import time
+import ctypes
 # Sabitler
 sampling_rate = 20000  # Örnekleme frekansı (Hz)
 block_duration = 0.1  # Blok süresi (saniye)
