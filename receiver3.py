@@ -49,8 +49,8 @@ def update_plot():
     global say
     plt.ion()  # Interaktif modu etkinleştir
     fig, (ax1, ax2) = plt.subplots(2, 1)  # İki alt grafik oluştur
-    x = np.arange(0, 1000)  # 2000 nokta
-    y = np.zeros(1000)
+    x = np.arange(0, 2000)  # 2000 nokta
+    y = np.zeros(2000)
     line1, = ax1.plot(x, y)
     ax1.set_ylim([-0.2, 0.2])
     ax1.set_xlim([0, 1000])
