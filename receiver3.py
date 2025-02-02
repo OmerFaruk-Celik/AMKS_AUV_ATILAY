@@ -96,7 +96,7 @@ def update_plot():
                 ]
 
 
-                freqs_array = check_frequencies(freqs, 2000, tolerance)
+                freqs_array = check_frequencies(freqs, 6000, tolerance)
 
 
                 if all(freqs_array[:2]) and freqs_array[15]:
