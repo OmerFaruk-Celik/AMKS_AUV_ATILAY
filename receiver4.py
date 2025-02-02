@@ -24,6 +24,7 @@ def find_dominant_frequency(data, fs):
 sayac=0
 def is16Khz(dominant_freq):
     """Baskın frekansın 18 kHz bandında olup olmadığını kontrol eder."""
+    global sayac
     if 15000 <= dominant_freq <= 15800:
         sayac+=1
         print(sayac)
