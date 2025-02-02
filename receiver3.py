@@ -49,7 +49,12 @@ def process_audio():
             # 15 kHz band geçiren filtre
             filtered_15kHz = bandpass_filter(indata[:, 0], 14500, 15500, sampling_rate)
             signal_15kHz = detect_signal(filtered_15kHz)
-            print(f"15 kHz Signal: {'1' if signal_15kHz else '0'}")
+            
+            # 18 kHz band geçiren filtre
+            filtered_18kHz = bandpass_filter(indata[:, 0], 17500, 18500, sampling_rate)
+            signal_18kHz = detect_signal(filtered_18kHz)
+            
+            print(f"15 kHz Signal: {'1' if signal_15kHz else '0'}, 18 kHz Signal: {'1' if signal_18kHz else '0'}")
 
 def update_plot():
     """Bu fonksiyon grafiği günceller."""
