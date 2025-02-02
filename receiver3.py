@@ -14,7 +14,7 @@ scale_factor = 10  # Genlik ölçekleme faktörü
 tolerance = 100  # Frekans toleransı (Hz)
 
 # Ses verilerini tutmak için bir kuyruk oluşturun
-q = queue.Queue(2000)  # Maksimum boyutu belirleyin
+q = queue.Queue(16)  # Maksimum boyutu belirleyin
 basla = time.time()
 
 def audio_callback(indata, frames, time, status):
