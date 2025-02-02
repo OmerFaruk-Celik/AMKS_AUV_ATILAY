@@ -12,6 +12,7 @@ blocksize = int(sampling_rate * block_duration)  # Blok boyutu (örnek sayısı)
 scale_factor = 10  # Genlik ölçekleme faktörü
 group_size = 125  # Her grup için nokta sayısı
 num_groups = 2000 // group_size  # Toplam grup sayısı
+amplitude_factor = 4  # Fourier dönüşümündeki genlikleri artırmak için faktör
 
 # Ses verilerini tutmak için bir kuyruk oluşturun
 q = queue.Queue(maxsize=blocksize)  # Maksimum boyutu belirleyin
@@ -32,7 +33,7 @@ def fourier_transform_groups(data):
     
     for group in groups:
         fft_data = np.fft.fft(group)
-        fft_magnitude = np.abs(fft_data) / group_size
+        fft_magnitude = np.abs(fft_data) / group_size * amplitude_factor
         freqs = np.fft.fftfreq(group_size, 1 / sampling_rate)
         freq_groups.append((freqs[:group_size // 2], fft_magnitude[:group_size // 2]))
     
@@ -41,13 +42,13 @@ def fourier_transform_groups(data):
 def update_plot_and_table():
     """Bu fonksiyon grafiği günceller ve frekans bileşenlerini tablolaştırır."""
     plt.ion()  # Interaktif modu etkinleştir
-    fig, ax = plt.subplots()  # Tek grafik oluştur
+    fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(10, 8))  # İki alt grafik oluştur
     x = np.arange(0, 2000)  # 2000 nokta
     y = np.zeros(2000)
-    line, = ax.plot(x, y)
-    ax.set_ylim([-1, 1])
-    ax.set_xlim([0, 2000])
-    ax.set_title("Time Domain Signal")
+    line1, = ax1.plot(x, y)
+    ax1.set_ylim([-1, 1])
+    ax1.set_xlim([0, 2000])
+    ax1.set_title("Time Domain Signal")
     
     while True:
         if not q.empty():
@@ -58,7 +59,7 @@ def update_plot_and_table():
                 display_data = np.pad(indata[:, 0], (0, 2000 - len(indata)), 'constant')  # Yetersizse sıfırla doldur
                 
             # Zaman domeni sinyali güncelle
-            line.set_ydata(display_data)
+            line1.set_ydata(display_data)
             fig.canvas.draw()
             fig.canvas.flush_events()
             
@@ -72,7 +73,18 @@ def update_plot_and_table():
                     table_data.append({"Group": i + 1, "Frequency (Hz)": f, "Magnitude": m})
 
             df = pd.DataFrame(table_data)
-            print(df)
+            print(df)  # Tablolaştırılmış veriyi yazdır
+
+            # Her grubun frekans bileşenlerini grafikte göster
+            ax2.clear()
+            for i, (freqs, magnitudes) in enumerate(freq_groups):
+                ax2.plot(freqs, magnitudes, label=f"Group {i + 1}")
+            ax2.set_xlim([0, sampling_rate / 2])
+            ax2.set_ylim([0, max(df["Magnitude"])])
+            ax2.set_title("Frequency Domain Signal")
+            ax2.legend()
+            fig.canvas.draw()
+            fig.canvas.flush_events()
 
 def listen_microphone():
     with sd.InputStream(callback=audio_callback, channels=1, samplerate=sampling_rate, blocksize=blocksize):
