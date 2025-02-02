@@ -5,7 +5,7 @@ import threading
 import matplotlib.pyplot as plt
 
 # Sabitler
-sampling_rate = 10000  # Örnekleme frekansı (Hz)
+sampling_rate = 20000  # Örnekleme frekansı (Hz)
 block_duration = 0.1  # Blok süresi (saniye)
 blocksize = int(sampling_rate * block_duration)  # Blok boyutu (örnek sayısı)
 scale_factor = 10  # Genlik ölçekleme faktörü
@@ -96,7 +96,7 @@ def update_plot():
                 ]
 
 
-                freqs_array = check_frequencies(freqs, 6000, tolerance)
+                freqs_array = check_frequencies(freqs, 2000, tolerance)
 
 
                 if all(freqs_array[:2]) and freqs_array[15]:
