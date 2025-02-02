@@ -55,6 +55,7 @@ def update_plot():
     ax1.set_ylim([-0.2, 0.2])
     ax1.set_xlim([0, 2000])
     ax1.set_title("Time Domain Signal")
+    ax1.set_xticks(np.arange(0, 2001, 125))  # X ekseninde 0'dan 2000'e kadar 125'in katlarında tıklamalar ekle
 
     freq_text1 = ax2.text(0.5, 0.5, '', transform=ax2.transAxes, ha='center')
     freq_text2 = ax2.text(0.5, 0.4, '', transform=ax2.transAxes, ha='center')
