@@ -6,47 +6,12 @@ import matplotlib.pyplot as plt
 
 # Sabitler
 sampling_rate = 20000  # Örnekleme frekansı (Hz)
-block_duration = 0.2  # Blok süresi (saniye) - 1 ms
-blocksize = int(sampling_rate * block_duration)  # Blok boyutu (örnek sayısı) = 20
+block_duration = 0.1  # Blok süresi (saniye)
+blocksize = int(sampling_rate * block_duration)  # Blok boyutu (örnek sayısı)
 scale_factor = 10  # Genlik ölçekleme faktörü
 
 # Ses verilerini tutmak için bir kuyruk oluşturun
-q = queue.Queue(maxsize=blocksize)  # Maksimum boyutu belirleyin
-q2 = queue.Queue(16)  # Maksimum boyutu belirleyin
-
-def find_dominant_frequency(data, fs):
-    """Verilen verinin baskın frekansını bulur."""
-    fft_data = np.fft.fft(data)
-    fft_magnitude = np.abs(fft_data) / len(data)
-    freqs = np.fft.fftfreq(len(data), 1/fs)
-    dominant_freq = freqs[np.argmax(fft_magnitude)]
-    return dominant_freq
-sayac15=0
-def is16Khz(dominant_freq):
-    """Baskın frekansın 18 kHz bandında olup olmadığını kontrol eder."""
-    global sayac15
-    if 14500 <= dominant_freq <= 15500:
-        sayac15+=1
-        #print(sayac)
-        return sayac15
-    return 0
-sayac18=0
-def is18Khz(dominant_freq):
-    """Baskın frekansın 20 kHz bandında olup olmadığını kontrol eder."""
-    global sayac18
-    if 17500 <= dominant_freq <= 18500:
-        sayac18+=1
-        #print(sayac)
-        return sayac18
-    return 0
-
-def xor_or(signal2, signal1):
-    if signal2 ^ signal1:
-        if q2.full():
-            q2.get()  # Kuyruktan bir veri çıkar
-        q2.put(int(signal2))  # Kuyruğa yeni veri ekle
-    elif signal2 and signal1:
-        print(1)
+q = queue.Queue()  # Maksimum boyutu belirleyin
 
 def audio_callback(indata, frames, time, status):
     """Bu fonksiyon mikrofon girişini alır ve verileri kuyrukta saklar."""
@@ -54,80 +19,44 @@ def audio_callback(indata, frames, time, status):
         print(status)
     try:
         q.put(indata.copy() * scale_factor, block=False)  # Genlik ölçekleme ekle
+        if q.qsize() > 2000:
+            while q.qsize() > 2000:
+                q.get()  # Kuyruktan fazladan verileri çıkar
     except queue.Full:
         pass  # Kuyruk doluysa veriyi atla
-fark1=0
-fark2=0
-islem18=False
-islem15=False
-def process_audio():
-    """Bu fonksiyon kuyruktaki ses verilerini alır ve baskın frekans analizini yapar."""
-    global sayac15,sayac18,fark1,fark2,islem15,islem18
-    while True:
-        if not q.empty():
-            indata = q.get()
-            dominant_freq = find_dominant_frequency(indata[:, 0], sampling_rate)
-            print(f"Dominant Frequency: {dominant_freq} Hz")
-            is18 = is18Khz(dominant_freq)
-            is16 = is16Khz(dominant_freq)
-            #print(f"is18Khz: {is18}, is16Khz: {is16}")
-            if ((sayac18-fark1)!=0) or ((sayac15-fark2)!=0):
-                
-                if sayac18-fark1!=0:
-                    fark1=sayac18
-                    islem18=True
-                    islem15=False
-                if sayac15-fark2!=0:
-                    fark2=sayac15
-                    islem15=True
-                    islem18=False
-                    
-                    
-                if islem18 and not islem15:
-                    print(f"is18Khz: {sayac18}, is16Khz: {sayac15}")
-            #xor_or(is18, is16)
-            #print(list(q2.queue)) ##Bu yorum satırlarını silme! lazım olacak şekilde tekrardan kullanmak için şimdilik yorum satırına alıyorum
 
-def update_plot_and_fft():
-    """Bu fonksiyon grafiği günceller ve Fourier dönüşümü ile frekans analizini yapar."""
+def update_plot():
+    """Bu fonksiyon grafiği günceller."""
     plt.ion()  # Interaktif modu etkinleştir
-    fig, (ax1, ax2) = plt.subplots(2, 1)  # İki alt grafik oluştur
-    x = np.arange(0, blocksize)
-    y = np.zeros(blocksize)
+    fig, ax1 = plt.subplots()  # Tek alt grafik oluştur
+    x = np.arange(0, 2000)  # 2000 nokta
+    y = np.zeros(2000)
     line1, = ax1.plot(x, y)
     ax1.set_ylim([-1, 1])
-    ax1.set_xlim([0, blocksize])
+    ax1.set_xlim([0, 2000])
+    ax1.set_title("Time Domain Signal")
     
-    freqs = np.fft.fftfreq(blocksize, 1/sampling_rate)
-    line2, = ax2.plot(freqs, np.zeros(blocksize))
-    ax2.set_xlim([0, sampling_rate / 2])
-    ax2.set_ylim([0, 1])
-
     while True:
         if not q.empty():
             indata = q.get()
-            line1.set_ydata(indata[:, 0])
-            
-            # Fourier dönüşümü ve frekans analizini yap
-            fft_data = np.fft.fft(indata[:, 0])
-            fft_magnitude = np.abs(fft_data) / blocksize
-            line2.set_ydata(fft_magnitude)
-            
+            if len(indata) >= 2000:
+                display_data = indata[:2000, 0]  # İlk 2000 noktayı al
+            else:
+                display_data = np.pad(indata[:, 0], (0, 2000 - len(indata)), 'constant')  # Yetersizse sıfırla doldur
+                
+            # Zaman domeni sinyali güncelle
+            line1.set_ydata(display_data)
             fig.canvas.draw()
             fig.canvas.flush_events()
 
 def listen_microphone():
     with sd.InputStream(callback=audio_callback, channels=1, samplerate=sampling_rate, blocksize=blocksize):
         print("Mikrofon dinleniyor... 'Ctrl+C' ile çıkış yapabilirsiniz.")
-        process_thread = threading.Thread(target=process_audio)
-        process_thread.daemon = True
-        process_thread.start()
         
-        plot_thread = threading.Thread(target=update_plot_and_fft)
+        plot_thread = threading.Thread(target=update_plot)
         plot_thread.daemon = True
         plot_thread.start()
         
-        process_thread.join()
         plot_thread.join()
 
 if __name__ == "__main__":
