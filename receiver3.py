@@ -5,6 +5,7 @@ import threading
 import matplotlib.pyplot as plt
 import time
 import ctypes
+
 # Sabitler
 sampling_rate = 20000  # Örnekleme frekansı (Hz)
 block_duration = 0.1  # Blok süresi (saniye)
@@ -14,7 +15,8 @@ tolerance = 100  # Frekans toleransı (Hz)
 
 # Ses verilerini tutmak için bir kuyruk oluşturun
 q = queue.Queue(2000)  # Maksimum boyutu belirleyin
-basla=time.time()
+basla = time.time()
+
 def audio_callback(indata, frames, time, status):
     """Bu fonksiyon mikrofon girişini alır ve verileri kuyrukta saklar."""
     global basla
@@ -22,19 +24,14 @@ def audio_callback(indata, frames, time, status):
         print(status)
     
     # Zaman bilgilerini okuyun
-    #input_time = time.inputBufferAdcTime
-    son= time.currentTime
-    fark=son-basla
-    #print(fark)
-    basla=time.currentTime
-    #output_time = time.outputBufferDacTime
+    son = time.currentTime
+    fark = son - basla
+    basla = time.currentTime
 
-    
     if q.full():
-        q.get()  # Kuyruktan fazladan verileri çıkar		
+        q.get()  # Kuyruktan fazladan verileri çıkar
     q.put(indata.copy() * scale_factor, block=False)  # Genlik ölçekleme ekle
-    #print(len(indata))
-                
+
 def calculate_frequency(data, sampling_rate):
     """Bu fonksiyon verilen veri için frekansı hesaplar."""
     fft_data = np.fft.fft(data)
@@ -62,8 +59,6 @@ def update_plot():
     freq_text1 = ax2.text(0.5, 0.5, '', transform=ax2.transAxes, ha='center')
     freq_text2 = ax2.text(0.5, 0.4, '', transform=ax2.transAxes, ha='center')
     ax2.axis('off')
-
-    freqs_array = np.zeros(16)  # 16 elemanlık dizi
 
     while True:
         if not q.empty():
@@ -108,22 +103,19 @@ def update_plot():
                 ]
                 freqs_array = check_frequencies(freqs, 2000, tolerance)
 
-
-
-                if (all(freqs_array[:2]) and freqs_array[15]):
+                if all(freqs_array[:2]) and freqs_array[15]:
                     freq_text1.set_text(f'Grup1 Frekansı: {freqs[0]:.2f} Hz')
                     freq_text2.set_text(f'Grup2 Frekansı: {freqs[1]:.2f} Hz')
-                    # Frekansları kontrol et
-                    
-                    # Frekans kontrol sonuçlarını yazdır
-                    #print(freqs_array)
-                    # Zaman domeni sinyali güncelle
                     line1.set_ydata(display_data)
-                    fig.canvas.draw()
-                    fig.canvas.flush_events()
                 else:
                     freq_text1.set_text('Grup1 frekansı 6kHz civarında değil.')
                     freq_text2.set_text('Grup2 frekansı 6kHz civarında değil.')
+
+                fig.canvas.draw()
+                fig.canvas.flush_events()
+            else:
+                freq_text1.set_text('Yeterli veri yok.')
+                freq_text2.set_text('Yeterli veri yok.')
 
 def listen_microphone():
     with sd.InputStream(callback=audio_callback, channels=1, samplerate=sampling_rate, blocksize=blocksize):
@@ -137,3 +129,4 @@ def listen_microphone():
 
 if __name__ == "__main__":
     listen_microphone()
+    plt.show(block=True)  # Ana iş parçacığında grafiği göster
