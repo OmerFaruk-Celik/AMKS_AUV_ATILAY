@@ -21,23 +21,23 @@ def find_dominant_frequency(data, fs):
     freqs = np.fft.fftfreq(len(data), 1/fs)
     dominant_freq = freqs[np.argmax(fft_magnitude)]
     return dominant_freq
-sayac=0
+sayac15=0
 def is16Khz(dominant_freq):
     """Baskın frekansın 18 kHz bandında olup olmadığını kontrol eder."""
-    global sayac
+    global sayac15
     if 15000 <= dominant_freq <= 15800:
-        #sayac+=1
+        sayac15+=1
         #print(sayac)
-        return 1
+        return sayac15
     return 0
-
+sayac18
 def is18Khz(dominant_freq):
     """Baskın frekansın 20 kHz bandında olup olmadığını kontrol eder."""
-    global sayac
+    global sayac18
     if 17500 <= dominant_freq <= 18500:
-        sayac+=1
-        print(sayac)
-        return 1
+        sayac18+=1
+        #print(sayac)
+        return sayac18
     return 0
 
 def xor_or(signal2, signal1):
@@ -66,7 +66,7 @@ def process_audio():
             #print(f"Dominant Frequency: {dominant_freq} Hz")
             is18 = is18Khz(dominant_freq)
             is16 = is16Khz(dominant_freq)
-            #print(f"is18Khz: {is18}, is16Khz: {is16}")
+            print(f"is18Khz: {is18}, is16Khz: {is16}")
             xor_or(is18, is16)
             #print(list(q2.queue)) ##Bu yorum satırlarını silme! lazım olacak şekilde tekrardan kullanmak için şimdilik yorum satırına alıyorum
 
