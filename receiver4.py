@@ -3,6 +3,7 @@ import sounddevice as sd
 import queue
 import threading
 import matplotlib.pyplot as plt
+from scipy.signal import butter, lfilter
 
 # Sabitler
 sampling_rate = 40000  # Örnekleme frekansı (Hz)
@@ -13,6 +14,17 @@ scale_factor = 10  # Genlik ölçekleme faktörü
 # Ses verilerini tutmak için bir kuyruk oluşturun
 q = queue.Queue(maxsize=blocksize)  # Maksimum boyutu belirleyin
 q2 = queue.Queue(16)  # Maksimum boyutu belirleyin
+
+def butter_lowpass(cutoff, fs, order=5):
+    nyq = 0.5 * fs
+    normal_cutoff = cutoff / nyq
+    b, a = butter(order, normal_cutoff, btype='low', analog=False)
+    return b, a
+
+def lowpass_filter(data, cutoff, fs, order=5):
+    b, a = butter_lowpass(cutoff, fs, order=order)
+    y = lfilter(b, a, data)
+    return y
 
 def find_dominant_frequency(data, fs):
     """Verilen verinin baskın frekansını bulur."""
@@ -58,11 +70,12 @@ def process_audio():
     while True:
         if not q.empty():
             indata = q.get()
-            dominant_freq = find_dominant_frequency(indata[:, 0], sampling_rate)
+            # Gürültü azaltma için düşük geçiş filtresi uygula
+            filtered_data = lowpass_filter(indata[:, 0], cutoff=20000, fs=sampling_rate)
+            dominant_freq = find_dominant_frequency(filtered_data, sampling_rate)
             print(f"Dominant Frequency: {dominant_freq} Hz")
             is18 = is18Khz(dominant_freq)
             is16 = is16Khz(dominant_freq)
-            #print(f"is18Khz: {is18}, is16Khz: {is16}")
             xor_or(is18, is16)
             #print(list(q2.queue)) ##Bu yorum satırlarını silme! lazım olacak şekilde tekrardan kullanmak için şimdilik yorum satırına alıyorum
 
