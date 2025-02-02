@@ -7,7 +7,7 @@ import time
 import ctypes
 
 # Sabitler
-sampling_rate = 40000  # Örnekleme frekansı (Hz)
+sampling_rate = 20000  # Örnekleme frekansı (Hz)
 block_duration = 0.1  # Blok süresi (saniye)
 blocksize = int(sampling_rate * block_duration)  # Blok boyutu (örnek sayısı)
 scale_factor = 10  # Genlik ölçekleme faktörü
@@ -63,7 +63,7 @@ def update_plot():
     while True:
         if not q.empty():
             indata = q.get()
-            print(indata[:1])
+            print(indata[:1,0])
             if len(indata) >= 2000:
                 display_data = indata[:2000, 0]  # İlk 2000 noktayı al
                 grup1 = indata[:125, 0]  # İlk 125 noktayı al
