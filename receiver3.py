@@ -97,7 +97,7 @@ def update_plot():
                     calculate_frequency(grup15, sampling_rate),
                     calculate_frequency(grup16, sampling_rate)
                 ]
-                freqs_array = check_frequencies(freqs, 6000, tolerance)
+                freqs_array = check_frequencies(freqs, 2000, tolerance)
 
 
 
