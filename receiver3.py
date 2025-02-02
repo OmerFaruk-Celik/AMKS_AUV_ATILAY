@@ -46,6 +46,7 @@ def check_frequencies(freqs, target_freq, tolerance):
 
 def update_plot():
     """Bu fonksiyon grafiği günceller."""
+    global say
     plt.ion()  # Interaktif modu etkinleştir
     fig, (ax1, ax2) = plt.subplots(2, 1)  # İki alt grafik oluştur
     x = np.arange(0, 2000)  # 2000 nokta
