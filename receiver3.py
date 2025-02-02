@@ -57,7 +57,17 @@ def update_plot():
                 grup3 = indata[250:375, 0]  # İkinci 125 noktayı al
                 grup4 = indata[375:500, 0]  # İkinci 125 noktayı al
                 grup5 = indata[500:625, 0]  # Son 125 noktayı al
-                
+                grup6 = indata[:125, 0]  # İlk 125 noktayı al
+                grup7 = indata[125:250, 0]  # İkinci 125 noktayı al
+                grup8 = indata[250:375, 0]  # İkinci 125 noktayı al
+                grup9 = indata[375:500, 0]  # İkinci 125 noktayı al
+                grup10 = indata[500:625, 0]  # Son 125 noktayı al
+                grup1 = indata[:125, 0]  # İlk 125 noktayı al
+                grup12 = indata[125:250, 0]  # İkinci 125 noktayı al
+                grup13= indata[250:375, 0]  # İkinci 125 noktayı al
+                grup14= indata[375:500, 0]  # İkinci 125 noktayı al
+                grup15= indata[500:625, 0]  # Son 125 noktayı al  
+                grup16= indata[500:625, 0]  # Son 125 noktayı al             
                 # Grup frekanslarını hesapla
                 freq = calculate_frequency(display_data, sampling_rate)
                 freq1 = calculate_frequency(grup1, sampling_rate)
@@ -74,17 +84,17 @@ def update_plot():
                     freq_text2.set_text(f'Grup2 Frekansı: {freq2:.2f} Hz')
                     #freq_text3.set_text(f'Grup16 Frekansı: {freq16:.2f} Hz')
                     freq3 = calculate_frequency(grup3, sampling_rate)
-                    freq4 = calculate_frequency(grup3, sampling_rate)
-                    freq5 = calculate_frequency(grup3, sampling_rate)
-                    freq6 = calculate_frequency(grup3, sampling_rate)
-                    freq7 = calculate_frequency(grup3, sampling_rate)
-                    freq8 = calculate_frequency(grup3, sampling_rate)
-                    freq9 = calculate_frequency(grup3, sampling_rate)
-                    freq10 = calculate_frequency(grup3, sampling_rate)
-                    freq11 = calculate_frequency(grup3, sampling_rate)
-                    freq12 = calculate_frequency(grup3, sampling_rate)
-                    freq13 = calculate_frequency(grup3, sampling_rate)
-                    freq14= calculate_frequency(grup3, sampling_rate)
+                    freq4 = calculate_frequency(grup4, sampling_rate)
+                    freq5 = calculate_frequency(grup5, sampling_rate)
+                    freq6 = calculate_frequency(grup6, sampling_rate)
+                    freq7 = calculate_frequency(grup7, sampling_rate)
+                    freq8 = calculate_frequency(grup8, sampling_rate)
+                    freq9 = calculate_frequency(grup9, sampling_rate)
+                    freq10 = calculate_frequency(grup10, sampling_rate)
+                    freq11 = calculate_frequency(grup11, sampling_rate)
+                    freq12 = calculate_frequency(grup12, sampling_rate)
+                    freq13 = calculate_frequency(grup13, sampling_rate)
+                    freq14= calculate_frequency(grup14, sampling_rate)
                     
                     # Zaman domeni sinyali güncelle
                     line1.set_ydata(display_data)
