@@ -44,7 +44,7 @@ def update_plot():
         if not q.empty():
             indata = q.get()
             if len(indata) >= 2000:
-                display_data = indata[:2000, 0]  # İlk 2000 noktayı al
+                display_data = indata[:125, 0]  # İlk 125 noktayı al
             else:
                 display_data = np.pad(indata[:, 0], (0, 2000 - len(indata)), 'constant')  # Yetersizse sıfırla doldur
                 
