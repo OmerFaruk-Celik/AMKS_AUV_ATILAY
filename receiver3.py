@@ -28,9 +28,9 @@ def audio_callback(indata, frames, time, status):
     fark = son - basla
     basla = time.currentTime
 
-    if q.full():
-        q.get()  # Kuyruktan fazladan verileri çıkar
-    q.put(indata.copy() * scale_factor, block=False)  # Genlik ölçekleme ekle
+    if q.empty():
+        
+        q.put(indata.copy() * scale_factor, block=False)  # Genlik ölçekleme ekle
 
 def calculate_frequency(data, sampling_rate):
     """Bu fonksiyon verilen veri için frekansı hesaplar."""
@@ -63,6 +63,7 @@ def update_plot():
     while True:
         if not q.empty():
             indata = q.get()
+            print(len(indata))
             if len(indata) >= 2000:
                 display_data = indata[:2000, 0]  # İlk 2000 noktayı al
                 grup1 = indata[:125, 0]  # İlk 125 noktayı al
@@ -107,7 +108,7 @@ def update_plot():
                     freq_text1.set_text(f'Grup1 Frekansı: {freqs[0]:.2f} Hz')
                     freq_text2.set_text(f'Grup2 Frekansı: {freqs[1]:.2f} Hz')
                     line1.set_ydata(display_data)
-                    print(freqs_array)
+                    #print(freqs_array)
                 else:
                     freq_text1.set_text('Grup1 frekansı 2kHz civarında değil.')
                     freq_text2.set_text('Grup2 frekansı 2kHz civarında değil.')
