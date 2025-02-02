@@ -64,8 +64,8 @@ def update_plot():
                 for i in range(16):
                     if not q.empty():
                         freqs=calculate_frequency(q.get(), sampling_rate)
-                        if i==0 or i==1:
-                            hesaplanan_frekans= check_frequencies(freqs, 2000, tolerance)
+                        hesaplanan_frekans= check_frequencies(freqs, 2000, tolerance)
+                        if i==0 or i==1:                          
                             if not hesaplanan_frekans:
                                 q.get()
                 
