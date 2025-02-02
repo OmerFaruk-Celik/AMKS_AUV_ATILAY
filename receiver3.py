@@ -16,12 +16,12 @@ q = queue.Queue()  # Maksimum boyutu belirleyin
 basla=time.time()
 def audio_callback(indata, frames, time, status):
     """Bu fonksiyon mikrofon girişini alır ve verileri kuyrukta saklar."""
-    global basla
-    son=time.time()
-    fark=son-basla
-    print(fark)
-    basla=time.time()
-    print("tetiklendi")
+    #global basla
+    #son=time.time()
+    #fark=son-basla
+    print(time)
+    #basla=time.time()
+    #print("tetiklendi")
     if status:
         print(status)
     try:
