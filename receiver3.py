@@ -8,7 +8,7 @@ import ctypes
 
 # Sabitler
 sampling_rate = 20000  # Örnekleme frekansı (Hz)
-block_duration = 0.1  # Blok süresi (saniye)
+block_duration = 0.05  # Blok süresi (saniye)
 blocksize = int(sampling_rate * block_duration)  # Blok boyutu (örnek sayısı)
 scale_factor = 10  # Genlik ölçekleme faktörü
 tolerance = 100  # Frekans toleransı (Hz)
@@ -106,7 +106,7 @@ def update_plot():
                 if (freqs_array[1]) and freqs_array[2]:
                     freq_text1.set_text(f'Grup1 Frekansı: {freqs[0]:.2f} Hz')
                     freq_text2.set_text(f'Grup2 Frekansı: {freqs[1]:.2f} Hz')
-                    line1.set_ydata(grup1)
+                    line1.set_ydata(display_data)
                 else:
                     freq_text1.set_text('Grup1 frekansı 2kHz civarında değil.')
                     freq_text2.set_text('Grup2 frekansı 2kHz civarında değil.')
