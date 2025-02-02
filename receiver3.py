@@ -6,8 +6,8 @@ import threading
 import matplotlib.pyplot as plt
 
 # Sabitler
-sampling_rate = 40000  # Örnekleme frekansı (Hz)
-block_duration = 0.0005  # Blok süresi (saniye) - 0.25 ms
+sampling_rate = 20000  # Örnekleme frekansı (Hz)
+block_duration = 0.1  # Blok süresi (saniye) - 0.25 ms
 blocksize = int(sampling_rate * block_duration)  # Blok boyutu (örnek sayısı) = 10
 scale_factor = 10  # Genlik ölçekleme faktörü
 
@@ -78,8 +78,8 @@ def process_audio():
             signal_15kHz = detect_signal(filtered_15kHz)
             
             # 10 kHz band geçiren filtre
-            filtered_10kHz = bandpass_filter(indata[:, 0], 9500, 10500, sampling_rate)
-            signal_10kHz = detect_signal(filtered_10kHz)
+            #filtered_10kHz = bandpass_filter(indata[:, 0], 9500, 10500, sampling_rate)
+            #signal_10kHz = detect_signal(filtered_10kHz)
             #print(f"15 kHz Signal: {'1' if signal_15kHz else '0'}, 10 kHz Signal: {'1' if signal_10kHz else '0'}")
             xor_or(signal_15kHz, signal_10kHz)
             #print(list(q2.queue)) ##Bu yorum satırlarını silme lazım olacak şekilde tekrardan kullanmak için şimdilik yorum satırına alıyorum
