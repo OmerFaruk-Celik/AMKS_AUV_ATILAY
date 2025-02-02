@@ -15,7 +15,6 @@ tolerance = 100  # Frekans toleransı (Hz)
 say=0
 # Ses verilerini tutmak için bir kuyruk oluşturun
 q = queue.Queue(16)  # Maksimum boyutu belirleyin
-q2 = queue.Queue(16)  # Maksimum boyutu belirleyin
 
 basla = time.time()
 
@@ -68,19 +67,19 @@ def update_plot():
                     if not q.empty():
                         freqs=calculate_frequency(q.get(), sampling_rate)
                         hesaplanan_frekans= check_frequencies(freqs, 2000, tolerance)
-                        if i==1 or i==2:                          
+                        if say==1:                          
                             if not hesaplanan_frekans:
                                 say=0
-                    
+                        elif say==2:                          
+                            if not hesaplanan_frekans:
+                                say=0
+                        else:                            
+                            break                    
+                
+               if q.full():
+                   
                 
 
-                
-
-                if (freqs_array[0]) and freqs_array[1]:
-                    freq_text1.set_text(f'Grup1 Frekansı: {freqs[0]:.2f} Hz')
-                    freq_text2.set_text(f'Grup2 Frekansı: {freqs[1]:.2f} Hz')
-                    line1.set_ydata(display_data)
-                    #print(freqs_array)
                 else:
                     freq_text1.set_text('Grup1 frekansı 2kHz civarında değil.')
                     freq_text2.set_text('Grup2 frekansı 2kHz civarında değil.')
