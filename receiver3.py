@@ -66,23 +66,23 @@ def update_plot():
             time.sleep(0.1)
             
             if len(indata) >= 2000:
-                display_data = indata[:2000, 0]  # İlk 2000 noktayı al
-                grup1 = indata[:125, 0]  # İlk 125 noktayı al
-                grup2 = indata[125:250, 0]  # İkinci 125 noktayı al
-                grup3 = indata[250:375, 0]  # Üçüncü 125 noktayı al
-                grup4 = indata[375:500, 0]  # Dördüncü 125 noktayı al
-                grup5 = indata[500:625, 0]  # Beşinci 125 noktayı al
-                grup6 = indata[625:750, 0]  # Altıncı 125 noktayı al
-                grup7 = indata[750:875, 0]  # Yedinci 125 noktayı al
-                grup8 = indata[875:1000, 0]  # Sekizinci 125 noktayı al
-                grup9 = indata[1000:1125, 0]  # Dokuzuncu 125 noktayı al
-                grup10 = indata[1125:1250, 0]  # Onuncu 125 noktayı al
-                grup11 = indata[1250:1375, 0]  # On birinci 125 noktayı al
-                grup12 = indata[1375:1500, 0]  # On ikinci 125 noktayı al
-                grup13 = indata[1500:1625, 0]  # On üçüncü 125 noktayı al
-                grup14 = indata[1625:1750, 0]  # On dördüncü 125 noktayı al
-                grup15 = indata[1750:1875, 0]  # On beşinci 125 noktayı al
-                grup16 = indata[1875:2000, 0]  # On altıncı 125 noktayı al
+                #display_data = indata[:2000, 0]  # İlk 2000 noktayı al
+                grup1 = q.get()  # İlk 125 noktayı al
+                grup2 = q.get()  # İkinci 125 noktayı al
+                grup3 = q.get()  # Üçüncü 125 noktayı al
+                grup4 = q.get()  # Dördüncü 125 noktayı al
+                grup5 = q.get()  # Beşinci 125 noktayı al
+                grup6 = q.get()  # Altıncı 125 noktayı al
+                grup7 = q.get()  # Yedinci 125 noktayı al
+                grup8 = q.get()  # Sekizinci 125 noktayı al
+                grup9 = q.get()  # Dokuzuncu 125 noktayı al
+                grup10 = q.get()  # Onuncu 125 noktayı al
+                grup11 = q.get()  # On birinci 125 noktayı al
+                grup12 = q.get()  # On ikinci 125 noktayı al
+                grup13 = q.get()  # On üçüncü 125 noktayı al
+                grup14 = q.get()  # On dördüncü 125 noktayı al
+                grup15 = q.get()  # On beşinci 125 noktayı al
+                grup16 = q.get()  # On altıncı 125 noktayı al
 
                 # Grup frekanslarını hesapla
                 freqs = [
