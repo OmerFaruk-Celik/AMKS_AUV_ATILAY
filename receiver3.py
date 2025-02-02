@@ -27,6 +27,7 @@ def audio_callback(indata, frames, time, status):
     son = time.currentTime
     fark = son - basla
     basla = time.currentTime
+    print(len(indata))
 
     if q.empty():
         
