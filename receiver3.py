@@ -7,14 +7,14 @@ import time
 import ctypes
 
 # Sabitler
-sampling_rate = 20000  # Örnekleme frekansı (Hz)
-block_duration = 0.1  # Blok süresi (saniye)
+sampling_rate = 12500  # Örnekleme frekansı (Hz)
+block_duration = 0.01  # Blok süresi (saniye)
 blocksize = int(sampling_rate * block_duration)  # Blok boyutu (örnek sayısı)
 scale_factor = 10  # Genlik ölçekleme faktörü
 tolerance = 100  # Frekans toleransı (Hz)
 
 # Ses verilerini tutmak için bir kuyruk oluşturun
-q = queue.Queue(4000)  # Maksimum boyutu belirleyin
+q = queue.Queue(2000)  # Maksimum boyutu belirleyin
 basla = time.time()
 
 def audio_callback(indata, frames, time, status):
@@ -64,9 +64,9 @@ def update_plot():
     while True:
         if not q.empty():
             indata = q.get()
-            print("sonra ",len(indata))
+            #print("sonra ",len(indata))
             
-            if len(indata) >= 4000:
+            if len(indata) >= 2000:
                 display_data = indata[:2000, 0]  # İlk 2000 noktayı al
                 grup1 = indata[:125, 0]  # İlk 125 noktayı al
                 grup2 = indata[125:250, 0]  # İkinci 125 noktayı al
