@@ -5,7 +5,7 @@ import threading
 import matplotlib.pyplot as plt
 
 # Sabitler
-sampling_rate = 40000  # Örnekleme frekansı (Hz)
+sampling_rate = 20000  # Örnekleme frekansı (Hz)
 block_duration = 0.1  # Blok süresi (saniye)
 blocksize = int(sampling_rate * block_duration)  # Blok boyutu (örnek sayısı)
 scale_factor = 10  # Genlik ölçekleme faktörü
@@ -35,11 +35,11 @@ def update_plot():
     """Bu fonksiyon grafiği günceller."""
     plt.ion()  # Interaktif modu etkinleştir
     fig, (ax1, ax2) = plt.subplots(2, 1)  # İki alt grafik oluştur
-    x = np.arange(0, 4000)  # 4000 nokta
-    y = np.zeros(4000)
+    x = np.arange(0, 2000)  # 2000 nokta
+    y = np.zeros(2000)
     line1, = ax1.plot(x, y)
     ax1.set_ylim([-1, 1])
-    ax1.set_xlim([0, 4000])
+    ax1.set_xlim([0, 2000])
     ax1.set_title("Time Domain Signal")
 
     freq_text1 = ax2.text(0.5, 0.5, '', transform=ax2.transAxes, ha='center')
@@ -50,26 +50,26 @@ def update_plot():
     while True:
         if not q.empty():
             indata = q.get()
-            if len(indata) >= 4000:
-                display_data = indata[:4000, 0]  # İlk 2000 noktayı al
-                grup1 = indata[:250, 0]  # İlk 125 noktayı al
-                grup2 = indata[250:500, 0]  # İkinci 125 noktayı al
-                grup3 = indata[500:750, 0]  # İkinci 125 noktayı al
-                grup4 = indata[750:1000, 0]  # İkinci 125 noktayı al
-                grup5 = indata[1000:,1250]  # Son 125 noktayı al
+            if len(indata) >= 2000:
+                display_data = indata[:2000, 0]  # İlk 2000 noktayı al
+                grup1 = indata[:125, 0]  # İlk 125 noktayı al
+                grup2 = indata[125:250, 0]  # İkinci 125 noktayı al
+                grup3 = indata[250:375, 0]  # İkinci 125 noktayı al
+                grup4 = indata[375:500, 0]  # İkinci 125 noktayı al
+                grup5 = indata[500:625, 0]  # Son 125 noktayı al
                 
                 # Grup frekanslarını hesapla
                 freq = calculate_frequency(display_data, sampling_rate)
                 freq1 = calculate_frequency(grup1, sampling_rate)
                 freq2 = calculate_frequency(grup2, sampling_rate)
                 freq3 = calculate_frequency(grup3, sampling_rate)
-                #print(freq1," ",freq2," ",freq3)
-                print(freq)
+                print(freq1," ",freq2," ",freq3)
+                #print(freq)
                 #freq16 = calculate_frequency(grup16, sampling_rate)
 
                 # Frekansları kontrol et
-                if (abs(freq1 - 2000) <= tolerance and 
-                    abs(freq2 - 2000) <= tolerance):
+                if (abs(freq1 - 6000) <= tolerance and 
+                    abs(freq2 - 6000) <= tolerance):
                     freq_text1.set_text(f'Grup1 Frekansı: {freq1:.2f} Hz')
                     freq_text2.set_text(f'Grup2 Frekansı: {freq2:.2f} Hz')
                     #freq_text3.set_text(f'Grup16 Frekansı: {freq16:.2f} Hz')
