@@ -27,7 +27,8 @@ def audio_callback(indata, frames, time, status):
     son = time.currentTime
     fark = son - basla
     basla = time.currentTime
-    q.put(indata.copy() * scale_factor, block=False)  # Genlik ölçekleme ekle
+    if(not q.full()):
+        q.put(indata.copy() * scale_factor, block=False)  # Genlik ölçekleme ekle
     print(len(list(q.queue)))
 
 def calculate_frequency(data, sampling_rate):
