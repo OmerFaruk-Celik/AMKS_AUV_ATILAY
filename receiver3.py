@@ -46,7 +46,6 @@ def check_frequencies(freqs, target_freq, tolerance):
 
 def update_plot():
     """Bu fonksiyon grafiği günceller."""
-    global freqs
     plt.ion()  # Interaktif modu etkinleştir
     fig, (ax1, ax2) = plt.subplots(2, 1)  # İki alt grafik oluştur
     x = np.arange(0, 2000)  # 2000 nokta
@@ -67,6 +66,8 @@ def update_plot():
                         freqs=calculate_frequency(q.get(), sampling_rate)
                         if i==0 or i==1:
                             hesaplanan_frekans= check_frequencies(freqs, 2000, tolerance)
+                            if hesaplanan_frekans:
+                                
                 
 
                 
