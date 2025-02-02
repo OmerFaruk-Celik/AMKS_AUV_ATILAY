@@ -63,7 +63,7 @@ def update_plot():
     while True:
         if not q.empty():
             indata = q.get()
-            print(len(indata))
+            #print(len(indata))
             if len(indata) >= 2000:
                 display_data = indata[:2000, 0]  # İlk 2000 noktayı al
                 grup1 = indata[:125, 0]  # İlk 125 noktayı al
