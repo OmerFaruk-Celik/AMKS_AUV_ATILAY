@@ -26,7 +26,7 @@ def audio_callback(indata, frames, time, status):
 def update_plot():
     """Bu fonksiyon grafiği günceller."""
     plt.ion()  # Interaktif modu etkinleştir
-    fig, (ax1, ax2) = plt.subplots(1, 1)  # İki alt grafik oluştur
+    fig, (ax1, ax2) = plt.subplots(2, 1)  # İki alt grafik oluştur
     x = np.arange(0, 2000)  # 2000 nokta
     y = np.zeros(2000)
     line1, = ax1.plot(x, y)
