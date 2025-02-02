@@ -59,6 +59,7 @@ def update_plot():
                 # Grup frekanslarını hesapla
                 freq1 = calculate_frequency(grup1, sampling_rate)
                 freq2 = calculate_frequency(grup2, sampling_rate)
+                print(freq1)
                 #freq16 = calculate_frequency(grup16, sampling_rate)
 
                 # Frekansları kontrol et
