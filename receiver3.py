@@ -9,7 +9,6 @@ sampling_rate = 20000  # Örnekleme frekansı (Hz)
 block_duration = 0.1  # Blok süresi (saniye)
 blocksize = int(sampling_rate * block_duration)  # Blok boyutu (örnek sayısı)
 scale_factor = 10  # Genlik ölçekleme faktörü
-amplitude_factor = 4  # Fourier dönüşümündeki genlikleri artırmak için faktör
 
 # Ses verilerini tutmak için bir kuyruk oluşturun
 q = queue.Queue(maxsize=blocksize)  # Maksimum boyutu belirleyin
@@ -26,7 +25,7 @@ def audio_callback(indata, frames, time, status):
 def update_plot():
     """Bu fonksiyon grafiği günceller."""
     plt.ion()  # Interaktif modu etkinleştir
-    fig, (ax1, ax2) = plt.subplots(2, 1)  # İki alt grafik oluştur
+    fig, ax1 = plt.subplots()
     x = np.arange(0, 2000)  # 2000 nokta
     y = np.zeros(2000)
     line1, = ax1.plot(x, y)
@@ -34,36 +33,13 @@ def update_plot():
     ax1.set_xlim([0, 2000])
     ax1.set_title("Time Domain Signal")
     
-
-
     while True:
         if not q.empty():
             indata = q.get()
-            if len(indata) >= 2000:
-                display_data = indata[:2000, 0]  # İlk 200 noktayı al
-                grup1 = indata[:125, 0]  # İlk 125 noktayı al
-                grup2 = indata[125:250, 0]  # İlk 125 noktayı al
-                grup3 = indata[250:375, 0]  # İlk 125 noktayı al
-                grup4 = indata[375:500, 0]  # İlk 125 noktayı al
-                grup5 = indata[500:625, 0]  # İlk 125 noktayı al
-                grup6 = indata[625:750, 0]  # İlk 125 noktayı al
-                grup7 = indata[750:875, 0]  # İlk 125 noktayı al
-                grup8 = indata[875:1000, 0]  # İlk 125 noktayı al
-                grup9 = indata[1000:1125, 0]  # İlk 125 noktayı al
-                grup10 = indata[1125:1250, 0]  # İlk 125 noktayı al
-                grup11 = indata[1250:1375, 0]  # İlk 125 noktayı al
-                grup12= indata[1375:1500, 0]  # İlk 125 noktayı al
-                grup13 = indata[1500:1625, 0]  # İlk 125 noktayı al
-                grup14 = indata[1625:1750, 0]  # İlk 125 noktayı al
-                grup15= indata[1750:1875, 0]  # İlk 125 noktayı al
-                grup16 = indata[1875:2000, 0]  # İlk 125 noktayı al
-            else:
-                display_data = np.pad(indata[:, 0], (0, 2000 - len(indata)), 'constant')  # Yetersizse sıfırla doldur
+            display_data = indata[:2000, 0] if len(indata) >= 2000 else np.pad(indata[:, 0], (0, 2000 - len(indata)), 'constant')
                 
             # Zaman domeni sinyali güncelle
             line1.set_ydata(display_data)
-            
-
             fig.canvas.draw()
             fig.canvas.flush_events()
 
