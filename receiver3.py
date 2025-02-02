@@ -16,6 +16,7 @@ q = queue.Queue()  # Maksimum boyutu belirleyin
 
 def audio_callback(indata, frames, time, status):
     """Bu fonksiyon mikrofon girişini alır ve verileri kuyrukta saklar."""
+    print("tetiklendi")
     if status:
         print(status)
     try:
@@ -107,7 +108,7 @@ def update_plot():
                     # Frekansları kontrol et
                     
                     # Frekans kontrol sonuçlarını yazdır
-                    print(freqs_array)
+                    #print(freqs_array)
                     # Zaman domeni sinyali güncelle
                     line1.set_ydata(display_data)
                     fig.canvas.draw()
