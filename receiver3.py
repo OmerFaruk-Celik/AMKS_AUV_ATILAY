@@ -14,7 +14,7 @@ scale_factor = 10  # Genlik ölçekleme faktörü
 tolerance = 100  # Frekans toleransı (Hz)
 
 # Ses verilerini tutmak için bir kuyruk oluşturun
-q = queue.Queue(2000)  # Maksimum boyutu belirleyin
+q = queue.Queue(4000)  # Maksimum boyutu belirleyin
 basla = time.time()
 
 def audio_callback(indata, frames, time, status):
@@ -63,8 +63,9 @@ def update_plot():
     while True:
         if not q.empty():
             indata = q.get()
+            print(len(indata))
             
-            if len(indata) >= 2000:
+            if len(indata) >= 4000:
                 display_data = indata[:2000, 0]  # İlk 2000 noktayı al
                 grup1 = indata[:125, 0]  # İlk 125 noktayı al
                 grup2 = indata[125:250, 0]  # İkinci 125 noktayı al
