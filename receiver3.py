@@ -12,7 +12,7 @@ scale_factor = 10  # Genlik ölçekleme faktörü
 tolerance = 200  # Frekans toleransı (Hz)
 
 # Ses verilerini tutmak için bir kuyruk oluşturun
-q = queue.Queue(maxsize=blocksize)  # Maksimum boyutu belirleyin
+q = queue.Queue()  # Maksimum boyutu belirleyin
 
 def audio_callback(indata, frames, time, status):
     """Bu fonksiyon mikrofon girişini alır ve verileri kuyrukta saklar."""
@@ -20,6 +20,9 @@ def audio_callback(indata, frames, time, status):
         print(status)
     try:
         q.put(indata.copy() * scale_factor, block=False)  # Genlik ölçekleme ekle
+        if q.qsize() > 2000:
+            while q.qsize() > 2000:
+                q.get()  # Kuyruktan fazladan verileri çıkar
     except queue.Full:
         pass  # Kuyruk doluysa veriyi atla
 
@@ -95,9 +98,7 @@ def update_plot():
                     calculate_frequency(grup16, sampling_rate)
                 ]
 
-
                 freqs_array = check_frequencies(freqs, 6000, tolerance)
-
 
                 if all(freqs_array[:2]) and freqs_array[15]:
                     freq_text1.set_text(f'Grup1 Frekansı: {freqs[0]:.2f} Hz')
