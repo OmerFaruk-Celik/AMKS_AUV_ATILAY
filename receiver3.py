@@ -10,7 +10,7 @@ block_duration = 0.1  # Blok süresi (saniye)
 blocksize = int(sampling_rate * block_duration)  # Blok boyutu (örnek sayısı)
 scale_factor = 10  # Genlik ölçekleme faktörü
 amplitude_factor = 4  # Fourier dönüşümündeki genlikleri artırmak için faktör
-group_size = 125
+
 # Ses verilerini tutmak için bir kuyruk oluşturun
 q = queue.Queue(maxsize=blocksize)  # Maksimum boyutu belirleyin
 
@@ -22,18 +22,7 @@ def audio_callback(indata, frames, time, status):
         q.put(indata.copy() * scale_factor, block=False)  # Genlik ölçekleme ekle
     except queue.Full:
         pass  # Kuyruk doluysa veriyi atla
-def fourier_transform_groups(data):
-    """Verilen veriyi 125 noktalık gruplara ayırır ve Fourier dönüşümü uygular."""
-    groups = [data[i:i + group_size] for i in range(0, len(data), group_size)]
-    freq_groups = []
-    
-    for group in groups:
-        fft_data = np.fft.fft(group)
-        fft_magnitude = np.abs(fft_data) / group_size * amplitude_factor
-        freqs = np.fft.fftfreq(group_size, 1 / sampling_rate)
-        freq_groups.append((freqs[:group_size // 2], fft_magnitude[:group_size // 2]))
-    
-    return freq_groups
+
 def update_plot():
     """Bu fonksiyon grafiği günceller."""
     plt.ion()  # Interaktif modu etkinleştir
@@ -79,8 +68,6 @@ def update_plot():
             line1.set_ydata(display_data)
             
             # Fourier dönüşümü ve frekans analizi
-            print(fourier_transform_groups(display_data))
-            
             fft_data = np.fft.fft(display_data)
             #print(len(fft_data ))
             fft_magnitude = np.abs(fft_data) / 2000 * amplitude_factor  # Genlikleri 4 katına çıkar
