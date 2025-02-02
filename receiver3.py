@@ -8,7 +8,7 @@ import ctypes
 
 # Sabitler
 sampling_rate = 20000  # Örnekleme frekansı (Hz)
-block_duration = 0.05  # Blok süresi (saniye)
+block_duration = 0.1  # Blok süresi (saniye)
 blocksize = int(sampling_rate * block_duration)  # Blok boyutu (örnek sayısı)
 scale_factor = 10  # Genlik ölçekleme faktörü
 tolerance = 100  # Frekans toleransı (Hz)
