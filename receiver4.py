@@ -60,9 +60,9 @@ def process_audio():
             #print(f"Dominant Frequency: {dominant_freq} Hz")
             is18 = is18Khz(dominant_freq)
             is16 = is16Khz(dominant_freq)
-            #print(f"is18Khz: {is18}, is16Khz: {is16}")
+            print(f"is18Khz: {is18}, is16Khz: {is16}")
             xor_or(is18, is16)
-            print(list(q2.queue)) ##Bu yorum satırlarını silme! lazım olacak şekilde tekrardan kullanmak için şimdilik yorum satırına alıyorum
+            #print(list(q2.queue)) ##Bu yorum satırlarını silme! lazım olacak şekilde tekrardan kullanmak için şimdilik yorum satırına alıyorum
 
 def update_plot_and_fft():
     """Bu fonksiyon grafiği günceller ve Fourier dönüşümü ile frekans analizini yapar."""
