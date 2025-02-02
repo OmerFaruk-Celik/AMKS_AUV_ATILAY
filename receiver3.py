@@ -53,7 +53,7 @@ def update_plot():
             
             # Fourier dönüşümü ve frekans analizi
             fft_data = np.fft.fft(display_data)
-            print(len(fft_data ))
+            #print(len(fft_data ))
             fft_magnitude = np.abs(fft_data) / 2000 * amplitude_factor  # Genlikleri 4 katına çıkar
             line2.set_ydata(fft_magnitude[:1000])  # İlk 1000 frekans bileşenini göster
             
