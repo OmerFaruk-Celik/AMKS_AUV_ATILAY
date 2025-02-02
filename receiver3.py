@@ -41,7 +41,7 @@ def calculate_frequency(data, sampling_rate):
 
 def check_frequencies(freqs, target_freq, tolerance):
     """Bu fonksiyon verilen frekansların hedef frekansa yakın olup olmadığını kontrol eder."""
-    result = [1 if abs(f - target_freq) <= tolerance else 0 for f in freqs]
+    result = abs(target_freqs-freqs) <= tolerance
     return result
 freqs=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
 def update_plot():
@@ -63,8 +63,8 @@ def update_plot():
     while True:
                 # Grup frekanslarını hesapla
                 for i in range(16):
-                
-                calculate_frequency(q.get(), sampling_rate)
+                    if not q.empty():
+                        freqs[i]=calculate_frequency(q.get(), sampling_rate)
                 
 
                 freqs_array = check_frequencies(freqs, 2000, tolerance)
