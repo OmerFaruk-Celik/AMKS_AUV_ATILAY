@@ -97,9 +97,9 @@ def update_plot():
                     calculate_frequency(grup15, sampling_rate),
                     calculate_frequency(grup16, sampling_rate)
                 ]
-
                 freqs_array = check_frequencies(freqs, 6000, tolerance)
-                print(freqs_array)
+
+
 
                 if all(freqs_array[:2]) and freqs_array[15] :
                     freq_text1.set_text(f'Grup1 Frekansı: {freqs[0]:.2f} Hz')
