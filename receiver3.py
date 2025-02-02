@@ -29,7 +29,7 @@ def calculate_frequency(data, sampling_rate):
     freqs = np.fft.fftfreq(len(data), 1 / sampling_rate)
     idx = np.argmax(np.abs(fft_data))
     freq = freqs[idx]
-    print(len(freqs))
+    #print(len(freqs))
     return abs(freq)
 
 def update_plot():
@@ -98,7 +98,8 @@ def update_plot():
                     freq12 = calculate_frequency(grup12, sampling_rate)
                     freq13 = calculate_frequency(grup13, sampling_rate)
                     freq14= calculate_frequency(grup14, sampling_rate)
-                    
+                    freq15 = calculate_frequency(grup15, sampling_rate)
+                    freq16= calculate_frequency(grup16, sampling_rate)                    
                     # Zaman domeni sinyali güncelle
                     line1.set_ydata(display_data)
                     fig.canvas.draw()
