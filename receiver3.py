@@ -24,7 +24,7 @@ def audio_callback(indata, frames, time, status):
         pass  # Kuyruk doluysa veriyi atla
 def fourier_transform_groups(data):
     """Verilen veriyi 125 noktalık gruplara ayırır ve Fourier dönüşümü uygular."""
-    groups = [data[i:i + group_size] for i in range(0, len(data), group_size)]
+    groups = [data[i:i + group_size] for i in range(0, len(data), 125)]
     freq_groups = []
     
     for group in groups:
