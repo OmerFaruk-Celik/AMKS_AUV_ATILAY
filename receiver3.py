@@ -97,14 +97,15 @@ def update_plot():
 
 
 
-                # Frekans kontrol sonuçlarını yazdır
-                print(freqs_array)
+
 
                 if all(freqs_array[:2]) and freqs_array[15]:
                     freq_text1.set_text(f'Grup1 Frekansı: {freqs[0]:.2f} Hz')
                     freq_text2.set_text(f'Grup2 Frekansı: {freqs[1]:.2f} Hz')
                     # Frekansları kontrol et
                     freqs_array = check_frequencies(freqs, 6000, tolerance)
+                    # Frekans kontrol sonuçlarını yazdır
+                    print(freqs_array)
                     # Zaman domeni sinyali güncelle
                     line1.set_ydata(display_data)
                     fig.canvas.draw()
