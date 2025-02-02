@@ -16,7 +16,7 @@ q = queue.Queue(maxsize=blocksize)  # Maksimum boyutu belirleyin
 q2 = queue.Queue(16)  # Maksimum boyutu belirleyin
 
 def butter_lowpass(cutoff, fs, order=5):
-    nyq = 0.5 * fs
+    nyq = 0.5 * fs  # Nyquist frekansı
     normal_cutoff = cutoff / nyq
     b, a = butter(order, normal_cutoff, btype='low', analog=False)
     return b, a
@@ -71,7 +71,7 @@ def process_audio():
         if not q.empty():
             indata = q.get()
             # Gürültü azaltma için düşük geçiş filtresi uygula
-            filtered_data = lowpass_filter(indata[:, 0], cutoff=20000, fs=sampling_rate)
+            filtered_data = lowpass_filter(indata[:, 0], cutoff=15000, fs=sampling_rate)
             dominant_freq = find_dominant_frequency(filtered_data, sampling_rate)
             print(f"Dominant Frequency: {dominant_freq} Hz")
             is18 = is18Khz(dominant_freq)
