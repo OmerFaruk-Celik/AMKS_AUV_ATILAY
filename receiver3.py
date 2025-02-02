@@ -25,13 +25,14 @@ def audio_callback(indata, frames, time, status):
     #input_time = time.inputBufferAdcTime
     son= time.currentTime
     fark=son-basla
-    print(fark)
+    #print(fark)
     basla=time.currentTime
     #output_time = time.outputBufferDacTime
 
     
     try:
         q.put(indata.copy() * scale_factor, block=False)  # Genlik ölçekleme ekle
+        print(indata)
         if q.qsize() > 2000:
             while q.qsize() > 2000:
                 q.get()  # Kuyruktan fazladan verileri çıkar
