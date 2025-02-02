@@ -58,9 +58,11 @@ def audio_callback(indata, frames, time, status):
         pass  # Kuyruk doluysa veriyi atla
 fark1=0
 fark2=0
+islem18=False
+islem15=False
 def process_audio():
     """Bu fonksiyon kuyruktaki ses verilerini alır ve baskın frekans analizini yapar."""
-    global sayac15,sayac18,fark1,fark2
+    global sayac15,sayac18,fark1,fark2,islem15,islem18
     while True:
         if not q.empty():
             indata = q.get()
@@ -73,9 +75,16 @@ def process_audio():
                 
                 if sayac18-fark1!=0:
                     fark1=sayac18
+                    islem18=True
+                    islem15=False
                 if sayac15-fark2!=0:
                     fark2=sayac15
-                print(f"is18Khz: {sayac18}, is16Khz: {sayac15}")
+                    islem15=True
+                    islem18=False
+                    
+                    
+                if islem18 and not islem15:
+                    print(f"is18Khz: {sayac18}, is16Khz: {sayac15}")
             #xor_or(is18, is16)
             #print(list(q2.queue)) ##Bu yorum satırlarını silme! lazım olacak şekilde tekrardan kullanmak için şimdilik yorum satırına alıyorum
 
