@@ -110,7 +110,7 @@ def update_plot():
 
 
 
-                if all(freqs_array[:2]) and freqs_array[15] :
+                if (all(freqs_array[:2]) and freqs_array[15]) or True :
                     freq_text1.set_text(f'Grup1 Frekansı: {freqs[0]:.2f} Hz')
                     freq_text2.set_text(f'Grup2 Frekansı: {freqs[1]:.2f} Hz')
                     # Frekansları kontrol et
