@@ -22,21 +22,45 @@ def audio_callback(indata, frames, time, status):
     except queue.Full:
         pass  # Kuyruk doluysa veriyi atla
 
+def calculate_frequency(data, sampling_rate):
+    """Bu fonksiyon verilen veri için frekansı hesaplar."""
+    fft_data = np.fft.fft(data)
+    freqs = np.fft.fftfreq(len(data), 1 / sampling_rate)
+    idx = np.argmax(np.abs(fft_data))
+    freq = freqs[idx]
+    return abs(freq)
+
 def update_plot():
     """Bu fonksiyon grafiği günceller."""
     plt.ion()  # Interaktif modu etkinleştir
-    fig, ax1 = plt.subplots()
+    fig, (ax1, ax2) = plt.subplots(2, 1)  # İki alt grafik oluştur
     x = np.arange(0, 2000)  # 2000 nokta
     y = np.zeros(2000)
     line1, = ax1.plot(x, y)
     ax1.set_ylim([-1, 1])
     ax1.set_xlim([0, 2000])
     ax1.set_title("Time Domain Signal")
+
+    freq_text1 = ax2.text(0.5, 0.5, '', transform=ax2.transAxes, ha='center')
+    freq_text2 = ax2.text(0.5, 0.4, '', transform=ax2.transAxes, ha='center')
+    ax2.axis('off')
     
     while True:
         if not q.empty():
             indata = q.get()
-            display_data = indata[:2000, 0] if len(indata) >= 2000 else np.pad(indata[:, 0], (0, 2000 - len(indata)), 'constant')
+            if len(indata) >= 2000:
+                display_data = indata[:2000, 0]  # İlk 2000 noktayı al
+                grup1 = indata[:125, 0]  # İlk 125 noktayı al
+                grup2 = indata[125:250, 0]  # İkinci 125 noktayı al
+                
+                # Grup frekanslarını hesapla
+                freq1 = calculate_frequency(grup1, sampling_rate)
+                freq2 = calculate_frequency(grup2, sampling_rate)
+
+                freq_text1.set_text(f'Grup1 Frekansı: {freq1:.2f} Hz')
+                freq_text2.set_text(f'Grup2 Frekansı: {freq2:.2f} Hz')
+            else:
+                display_data = np.pad(indata[:, 0], (0, 2000 - len(indata)), 'constant')  # Yetersizse sıfırla doldur
                 
             # Zaman domeni sinyali güncelle
             line1.set_ydata(display_data)
