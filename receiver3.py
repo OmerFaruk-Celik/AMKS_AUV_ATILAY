@@ -29,6 +29,7 @@ def calculate_frequency(data, sampling_rate):
     freqs = np.fft.fftfreq(len(data), 1 / sampling_rate)
     idx = np.argmax(np.abs(fft_data))
     freq = freqs[idx]
+    print(len(freqs))
     return abs(freq)
 
 def update_plot():
@@ -57,17 +58,19 @@ def update_plot():
                 grup3 = indata[250:375, 0]  # İkinci 125 noktayı al
                 grup4 = indata[375:500, 0]  # İkinci 125 noktayı al
                 grup5 = indata[500:625, 0]  # Son 125 noktayı al
-                grup6 = indata[:625,750]  # İlk 125 noktayı al
+                grup6 = indata[625:750,0]  # İlk 125 noktayı al
                 grup7 = indata[750:875, 0]  # İkinci 125 noktayı al
+                grup15= indata[875:1000, 0] 
                 grup8 = indata[1000:1125, 0]  # İkinci 125 noktayı al
                 grup9 = indata[1125:1250, 0]  # İkinci 125 noktayı al
-                grup10 = indata[500:625, 0]  # Son 125 noktayı al
-                grup1 = indata[:125, 0]  # İlk 125 noktayı al
-                grup12 = indata[125:250, 0]  # İkinci 125 noktayı al
-                grup13= indata[250:375, 0]  # İkinci 125 noktayı al
-                grup14= indata[375:500, 0]  # İkinci 125 noktayı al
-                grup15= indata[500:625, 0]  # Son 125 noktayı al  
-                grup16= indata[500:625, 0]  # Son 125 noktayı al             
+                grup10 = indata[1250:1375, 0]  # Son 125 noktayı al
+                grup16= indata[1375:1500, 0]  # Son 125 noktayı al 
+                grup11 = indata[1500:1625, 0]  # İlk 125 noktayı al
+                grup12 = indata[1625:1750, 0]  # İkinci 125 noktayı al
+                grup13= indata[1750:1875, 0]  # İkinci 125 noktayı al
+                grup14= indata[1875:2000, 0]  # İkinci 125 noktayı al
+
+                            
                 # Grup frekanslarını hesapla
                 freq = calculate_frequency(display_data, sampling_rate)
                 freq1 = calculate_frequency(grup1, sampling_rate)
