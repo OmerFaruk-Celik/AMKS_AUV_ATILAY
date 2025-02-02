@@ -78,12 +78,10 @@ def update_plot_and_table():
             # Her grubun frekans bileşenlerini grafikte göster
             ax2.clear()
             for i, (freqs, magnitudes) in enumerate(freq_groups):
-                ax2.plot([i + 1] * len(freqs), freqs, 'o', label=f"Group {i + 1}" if i == 0 else "")
-            ax2.set_xlim([0, num_groups + 1])
-            ax2.set_ylim([0, sampling_rate / 2])
-            ax2.set_title("Frequency Components per Group")
-            ax2.set_xlabel("Group")
-            ax2.set_ylabel("Frequency (Hz)")
+                ax2.plot(freqs, magnitudes, label=f"Group {i + 1}")
+            ax2.set_xlim([0, sampling_rate / 2])
+            ax2.set_ylim([0, max(df["Magnitude"])])
+            ax2.set_title("Frequency Domain Signal")
             ax2.legend()
             fig.canvas.draw()
             fig.canvas.flush_events()
