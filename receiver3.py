@@ -20,7 +20,8 @@ def audio_callback(indata, frames, time, status):
     #global basla
     #son=time.time()
     #fark=son-basla
-    print(list(time))
+    #deger=ctypes.c_int.from_address(time)
+    print(time)
     #basla=time.time()
     #print("tetiklendi")
     if status:
