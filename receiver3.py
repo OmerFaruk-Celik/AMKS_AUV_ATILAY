@@ -12,7 +12,7 @@ block_duration = 0.01  # Blok süresi (saniye)
 blocksize = int(sampling_rate * block_duration)  # Blok boyutu (örnek sayısı)
 scale_factor = 10  # Genlik ölçekleme faktörü
 tolerance = 100  # Frekans toleransı (Hz)
-say=0
+say = 0
 # Ses verilerini tutmak için bir kuyruk oluşturun
 q = queue.Queue(16)  # Maksimum boyutu belirleyin
 
@@ -28,9 +28,8 @@ def audio_callback(indata, frames, time, status):
     son = time.currentTime
     fark = son - basla
     basla = time.currentTime
-    if(not q.full()):
+    if not q.full():
         q.put(indata.copy() * scale_factor, block=False)  # Genlik ölçekleme ekle
-    #print(len(list(q.queue)))
 
 def calculate_frequency(data, sampling_rate):
     """Bu fonksiyon verilen veri için frekansı hesaplar."""
@@ -42,7 +41,7 @@ def calculate_frequency(data, sampling_rate):
 
 def check_frequencies(freqs, target_freq, tolerance):
     """Bu fonksiyon verilen frekansların hedef frekansa yakın olup olmadığını kontrol eder."""
-    result = abs(target_freqs-freqs) <= tolerance
+    result = abs(target_freq - freqs) <= tolerance
     return result
 
 def update_plot():
@@ -61,34 +60,37 @@ def update_plot():
     ax2.axis('off')
 
     while True:
-                # Grup frekanslarını hesapla
-                while say<=16 and not q.empty():
-                    say+=1
-                    if not q.empty():
-                        freqs=calculate_frequency(q.get(), sampling_rate)
-                        hesaplanan_frekans= check_frequencies(freqs, 2000, tolerance)
-                        if say==1:                          
-                            if not hesaplanan_frekans:
-                                say=0
-                        elif say==2:                          
-                            if not hesaplanan_frekans:
-                                say=0
-                        else:                            
-                            break                    
-                
-               if q.full():
-                   
-                
-
+        # Grup frekanslarını hesapla
+        while say <= 16 and not q.empty():
+            say += 1
+            if not q.empty():
+                freqs = calculate_frequency(q.get(), sampling_rate)
+                hesaplanan_frekans = check_frequencies(freqs, 2000, tolerance)
+                if say == 1:
+                    if not hesaplanan_frekans:
+                        say = 0
+                elif say == 2:
+                    if not hesaplanan_frekans:
+                        say = 0
                 else:
-                    freq_text1.set_text('Grup1 frekansı 2kHz civarında değil.')
-                    freq_text2.set_text('Grup2 frekansı 2kHz civarında değil.')
-
+                    break
+        
+        if q.full():
+            combined_data = []
+            while not q.empty():
+                combined_data.extend(q.get())
+            combined_data = np.array(combined_data)
+            if len(combined_data) >= 2000:
+                display_data = combined_data[:2000]
+                line1.set_ydata(display_data)
                 fig.canvas.draw()
                 fig.canvas.flush_events()
             else:
                 freq_text1.set_text('Yeterli veri yok.')
                 freq_text2.set_text('Yeterli veri yok.')
+        else:
+            freq_text1.set_text('Grup1 frekansı 2kHz civarında değil.')
+            freq_text2.set_text('Grup2 frekansı 2kHz civarında değil.')
 
 def listen_microphone():
     with sd.InputStream(callback=audio_callback, channels=1, samplerate=sampling_rate, blocksize=blocksize):
