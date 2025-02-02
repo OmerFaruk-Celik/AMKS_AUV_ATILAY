@@ -98,7 +98,7 @@ def update_plot():
                     calculate_frequency(grup16, sampling_rate)
                 ]
 
-                freqs_array = check_frequencies(freqs, 2000, tolerance)
+                freqs_array = check_frequencies(freqs, 6000, tolerance)
                 print(freqs_array)
 
                 if all(freqs_array[:2]) and freqs_array[15] :
