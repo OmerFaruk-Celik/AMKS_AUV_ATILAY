@@ -26,7 +26,7 @@ def audio_callback(indata, frames, time, status):
 def update_plot():
     """Bu fonksiyon grafiği günceller."""
     plt.ion()  # Interaktif modu etkinleştir
-    fig, (ax1, ax2) = plt.subplots(2, 1)  # İki alt grafik oluştur
+    fig, (ax1, ax2) = plt.subplots(1, 1)  # İki alt grafik oluştur
     x = np.arange(0, 2000)  # 2000 nokta
     y = np.zeros(2000)
     line1, = ax1.plot(x, y)
@@ -34,11 +34,7 @@ def update_plot():
     ax1.set_xlim([0, 2000])
     ax1.set_title("Time Domain Signal")
     
-    freqs = np.fft.fftfreq(2000, 1/sampling_rate)
-    line2, = ax2.plot(freqs[:1000], np.zeros(1000))  # İlk 1000 frekans bileşenini göster
-    ax2.set_xlim([0, sampling_rate / 2])
-    ax2.set_ylim([0, 1])
-    ax2.set_title("Frequency Domain Signal")
+
 
     while True:
         if not q.empty():
@@ -67,12 +63,7 @@ def update_plot():
             # Zaman domeni sinyali güncelle
             line1.set_ydata(display_data)
             
-            # Fourier dönüşümü ve frekans analizi
-            fft_data = np.fft.fft(display_data)
-            #print(len(fft_data ))
-            fft_magnitude = np.abs(fft_data) / 2000 * amplitude_factor  # Genlikleri 4 katına çıkar
-            line2.set_ydata(fft_magnitude[:1000])  # İlk 1000 frekans bileşenini göster
-            
+
             fig.canvas.draw()
             fig.canvas.flush_events()
 
