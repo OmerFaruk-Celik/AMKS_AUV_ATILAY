@@ -9,6 +9,7 @@ sampling_rate = 20000  # Örnekleme frekansı (Hz)
 block_duration = 0.1  # Blok süresi (saniye)
 blocksize = int(sampling_rate * block_duration)  # Blok boyutu (örnek sayısı)
 scale_factor = 10  # Genlik ölçekleme faktörü
+amplitude_factor = 4  # Fourier dönüşümündeki genlikleri artırmak için faktör
 
 # Ses verilerini tutmak için bir kuyruk oluşturun
 q = queue.Queue(maxsize=blocksize)  # Maksimum boyutu belirleyin
@@ -52,7 +53,7 @@ def update_plot():
             
             # Fourier dönüşümü ve frekans analizi
             fft_data = np.fft.fft(display_data)
-            fft_magnitude = np.abs(fft_data) / 2000
+            fft_magnitude = np.abs(fft_data) / 2000 * amplitude_factor  # Genlikleri 4 katına çıkar
             line2.set_ydata(fft_magnitude[:1000])  # İlk 1000 frekans bileşenini göster
             
             fig.canvas.draw()
