@@ -9,10 +9,10 @@ sampling_rate = 20000  # Örnekleme frekansı (Hz)
 block_duration = 0.1  # Blok süresi (saniye)
 blocksize = int(sampling_rate * block_duration)  # Blok boyutu (örnek sayısı)
 scale_factor = 10  # Genlik ölçekleme faktörü
-tolerance = 200  # Frekans toleransı (Hz)
+tolerance = 100  # Frekans toleransı (Hz)
 
 # Ses verilerini tutmak için bir kuyruk oluşturun
-q = queue.Queue(2001)  # Maksimum boyutu belirleyin
+q = queue.Queue()  # Maksimum boyutu belirleyin
 
 def audio_callback(indata, frames, time, status):
     """Bu fonksiyon mikrofon girişini alır ve verileri kuyrukta saklar."""
