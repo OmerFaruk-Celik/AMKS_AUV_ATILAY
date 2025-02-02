@@ -60,7 +60,7 @@ fark1=0
 fark2=0
 def process_audio():
     """Bu fonksiyon kuyruktaki ses verilerini alır ve baskın frekans analizini yapar."""
-    global sayac15,sayac18
+    global sayac15,sayac18,fark1,fark2
     while True:
         if not q.empty():
             indata = q.get()
@@ -69,7 +69,7 @@ def process_audio():
             is18 = is18Khz(dominant_freq)
             is16 = is16Khz(dominant_freq)
             #print(f"is18Khz: {is18}, is16Khz: {is16}")
-            if (sayac18-fark1!=0) or (sayac15-fark2!=0):
+            if ((sayac18-fark1)!=0) or ((sayac15-fark2)!=0):
                 
                 if sayac18-fark1!=0:
                     fark1=sayac18
