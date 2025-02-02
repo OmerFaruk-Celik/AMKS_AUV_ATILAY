@@ -103,10 +103,10 @@ def update_plot():
                 ]
                 freqs_array = check_frequencies(freqs, 2000, tolerance)
 
-                if all(freqs_array[:2]) and freqs_array[15]:
+                if (freqs_array[1]) and freqs_array[2]:
                     freq_text1.set_text(f'Grup1 Frekansı: {freqs[0]:.2f} Hz')
                     freq_text2.set_text(f'Grup2 Frekansı: {freqs[1]:.2f} Hz')
-                    line1.set_ydata(display_data)
+                    line1.set_ydata(grup1)
                 else:
                     freq_text1.set_text('Grup1 frekansı 2kHz civarında değil.')
                     freq_text2.set_text('Grup2 frekansı 2kHz civarında değil.')
