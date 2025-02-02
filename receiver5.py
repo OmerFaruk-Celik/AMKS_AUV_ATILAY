@@ -1,6 +1,7 @@
 import pyaudio
 import numpy as np
 import matplotlib.pyplot as plt
+from matplotlib.animation import FuncAnimation
 
 # Ayarlar
 SAMPLE_RATE = 44100  # Örnekleme hızı (Hz)
@@ -18,38 +19,32 @@ stream = audio.open(format=FORMAT,
                     input=True,
                     frames_per_buffer=NUM_SAMPLES)
 
-print("Mikrofon verisi alınıyor...")
+fig, ax = plt.subplots()
+x = np.arange(0, NUM_SAMPLES)
+line, = ax.plot(x, np.random.rand(NUM_SAMPLES))
 
-try:
-    while True:
-        # Mikrofon verisini al
-        data = stream.read(NUM_SAMPLES)
-        
-        # Veriyi numpy dizisine dönüştür
-        samples = np.frombuffer(data, dtype=np.int16)
-        
-        # Fourier dönüşümünü uygula
-        fft_result = np.fft.fft(samples)
-        frequencies = np.fft.fftfreq(len(fft_result), 1/SAMPLE_RATE)
-        
-        # Baskın frekansı bul
-        magnitude = np.abs(fft_result)
-        dominant_frequency = frequencies[np.argmax(magnitude)]
-        
-        print(f"Baskın frekans: {dominant_frequency} Hz")
-        
-        # Örnekleri grafiğe ver
-        plt.figure(figsize=(10, 6))
-        plt.plot(samples)
-        plt.title("Mikrofon Verisi")
-        plt.xlabel("Örnek Numrası")
-        plt.ylabel("Genlik")
-        plt.grid()
-        plt.show()
-        
-except KeyboardInterrupt:
-    print("Durduruldu")
-finally:
-    stream.stop_stream()
-    stream.close()
-    audio.terminate()
+def update(frame):
+    data = stream.read(NUM_SAMPLES)
+    samples = np.frombuffer(data, dtype=np.int16)
+    
+    # Fourier dönüşümünü uygula
+    fft_result = np.fft.fft(samples)
+    frequencies = np.fft.fftfreq(len(fft_result), 1 / SAMPLE_RATE)
+    
+    # Baskın frekansı bul
+    magnitude = np.abs(fft_result)
+    dominant_frequency = frequencies[np.argmax(magnitude)]
+    
+    print(f"Baskın frekans: {dominant_frequency} Hz")
+    
+    # Grafiği güncelle
+    line.set_ydata(samples)
+    return line,
+
+ani = FuncAnimation(fig, update, blit=True)
+plt.show()
+
+# Temizleme işlemi
+stream.stop_stream()
+stream.close()
+audio.terminate()
