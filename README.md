@@ -12,9 +12,9 @@ Bu proje, aşağıdaki dosyaları içermektedir:
 
 Pictures klasöründeki resim dosyalarına buradan ulaşabilirsiniz:
 
-![Resim 1](./Pictures/resim1.jpg)
-![Resim 2](./Pictures/resim2.jpg)
-![Resim 3](./Pictures/resim3.jpg)
+![Resim 1](./Pictures/1.png)
+![Resim 2](./Pictures/2.png)
+![Resim 3](./Pictures/3.png)
 
 > Not: Resim dosyalarının isimlerini ve uzantılarını dosya adlarıyla eşleştirin.
 
