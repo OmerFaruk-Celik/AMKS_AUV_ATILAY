@@ -33,7 +33,7 @@ def audio_callback(indata, frames, time, status):
     if q.full():
         q.get()  # Kuyruktan fazladan verileri çıkar		
     q.put(indata.copy() * scale_factor, block=False)  # Genlik ölçekleme ekle
-    print(indata[:10])
+    #print(len(indata))
                 
 def calculate_frequency(data, sampling_rate):
     """Bu fonksiyon verilen veri için frekansı hesaplar."""
