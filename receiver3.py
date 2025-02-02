@@ -7,7 +7,7 @@ import time
 import ctypes
 # Sabitler
 sampling_rate = 20000  # Örnekleme frekansı (Hz)
-block_duration = 0.05  # Blok süresi (saniye)
+block_duration = 0.1  # Blok süresi (saniye)
 blocksize = int(sampling_rate * block_duration)  # Blok boyutu (örnek sayısı)
 scale_factor = 10  # Genlik ölçekleme faktörü
 tolerance = 100  # Frekans toleransı (Hz)
@@ -25,14 +25,14 @@ def audio_callback(indata, frames, time, status):
     #input_time = time.inputBufferAdcTime
     son= time.currentTime
     fark=son-basla
-    #print(fark)
+    print(fark)
     basla=time.currentTime
     #output_time = time.outputBufferDacTime
 
     
     try:
         q.put(indata.copy() * scale_factor, block=False)  # Genlik ölçekleme ekle
-        print(indata)
+        print(len(indata))
         if q.qsize() > 2000:
             while q.qsize() > 2000:
                 q.get()  # Kuyruktan fazladan verileri çıkar
