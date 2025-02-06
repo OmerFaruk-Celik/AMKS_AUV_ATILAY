@@ -9,7 +9,7 @@ SAMPLE_RATE = 192000  # Örnekleme frekansı
 DURATION = 0.01  # 10 ms pencere
 FREQ_MIN = 17000  # Minimum frekans sınırı
 FREQ_MAX = 20000  # Maksimum frekans sınırı
-TOLERANCE = 50  # Frekans toleransı
+TOLERANCE = 100  # Frekans toleransı
 
 # Özel bit frekansları
 START_BIT = 20000
@@ -78,7 +78,7 @@ with sd.InputStream(callback=audio_callback, channels=1, samplerate=SAMPLE_RATE,
             dominant_index = np.argmax(fft_magnitudes)
             dominant_freq = filtered_freqs[dominant_index]
             #print(global_time)  # 🛠 Test için global_time yazdır
-            #print(dominant_freq)
+            print(dominant_freq)
 
             # **Start biti (16000 Hz) algılandı mı?**
             if frequency_in_range(dominant_freq, START_BIT):
