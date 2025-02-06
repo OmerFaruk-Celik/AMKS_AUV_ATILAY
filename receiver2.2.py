@@ -59,7 +59,7 @@ with sd.InputStream(callback=audio_callback, channels=1, samplerate=SAMPLE_RATE,
 
             # **Start biti (16000 Hz) algılandı mı?**
             if frequency_in_range(dominant_freq, START_BIT):
-                print("\n[START] Başlangıç biti algılandı, veri alımı başlıyor!")
+                #print("\n[START] Başlangıç biti algılandı, veri alımı başlıyor!")
                 bit_array = []  # 16 bitlik diziyi sıfırla
                 is_receiving = True
                 waiting_for_separator = True  # İlk olarak ayraç frekansı bekle
@@ -68,24 +68,25 @@ with sd.InputStream(callback=audio_callback, channels=1, samplerate=SAMPLE_RATE,
             elif is_receiving:
                 # **Ayraç biti (15100 Hz) algılandı mı?**
                 if waiting_for_separator and frequency_in_range(dominant_freq, SEPARATOR_BIT):
-                    print("[INFO] Ayraç algılandı, sonraki bit okunacak...")
+                    #print("[INFO] Ayraç algılandı, sonraki bit okunacak...")
                     waiting_for_separator = False  # Artık veri bekliyoruz
                 
                 # **Ayraç algılandıktan sonra bit okunuyor**
                 elif not waiting_for_separator:
                     if frequency_in_range(dominant_freq, BIT_0):
                         bit_array.append(0)
-                        print("[BIT] 0 eklendi.")
+                        #print("[BIT] 0 eklendi.")
                         waiting_for_separator = True  # Yeniden ayraç bekle
                     elif frequency_in_range(dominant_freq, BIT_1):
                         bit_array.append(1)
-                        print("[BIT] 1 eklendi.")
+                        #print("[BIT] 1 eklendi.")
                         waiting_for_separator = True  # Yeniden ayraç bekle
 
                 # **16 bit tamamlandıysa**
                 if len(bit_array) == 16:
                     decimal_value = int("".join(map(str, bit_array)), 2)  # Binary to decimal çevirme
-                    print(f"[COMPLETED] 16-bit veri alındı: {bit_array} (Decimal: {decimal_value})")
+                    #print(f"[COMPLETED] 16-bit veri alındı: {bit_array} (Decimal: {decimal_value})")
+                    print("Decimal",decimal_value)
                     is_receiving = False  # Veri alımını durdur
 
         except queue.Empty:
