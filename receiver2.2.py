@@ -105,7 +105,7 @@ with sd.InputStream(callback=audio_callback, channels=1, samplerate=SAMPLE_RATE,
                         waiting_for_separator = True  # Yeniden ayraç bekle
 
                 # **16 bit tamamlandıysa**
-                if len(bit_array) == 16:
+                if len(bit_array) == 24:
                     decimal_value = int("".join(map(str, bit_array)), 2)  # Binary to decimal çevirme
                     
                     # Zaman farkını hesapla
