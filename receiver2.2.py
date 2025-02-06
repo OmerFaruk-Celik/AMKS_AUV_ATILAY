@@ -2,7 +2,7 @@ import numpy as np
 import sounddevice as sd
 import queue
 import time
-
+import threading
 # Ayarlar
 SAMPLE_RATE = 192000  # Örnekleme frekansı
 DURATION = 0.01  # 10 ms pencere
@@ -24,6 +24,25 @@ bit_array = []
 is_receiving = False  # Veri alımı başladı mı?
 waiting_for_separator = False  # Yeni bit eklemek için ayraç bekleniyor
 start_time = None  # Başlangıç zamanı
+
+
+
+
+# Global zaman değişkeni
+global_time = 0
+
+def update_timer():
+    global global_time
+    global_time += 1  # Zamanı arttır
+    if global_time >= 65000:
+        global_time = 0  # 65000 olduğunda sıfırla
+    
+    # 100 µs sonra tekrar çağır
+    threading.Timer(0.0001, update_timer).start()
+
+# Timer'ı başlat
+update_timer()
+
 
 def frequency_in_range(frequency, target):
     """Belirli bir frekansın hedef frekans aralığında olup olmadığını kontrol eder."""
