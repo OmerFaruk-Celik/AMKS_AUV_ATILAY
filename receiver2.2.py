@@ -84,7 +84,8 @@ with sd.InputStream(callback=audio_callback, channels=1, samplerate=SAMPLE_RATE,
 
                 # **16 bit tamamlandıysa**
                 if len(bit_array) == 16:
-                    print(f"[COMPLETED] 16-bit veri alındı: {bit_array}")
+                    decimal_value = int("".join(map(str, bit_array)), 2)  # Binary to decimal çevirme
+                    print(f"[COMPLETED] 16-bit veri alındı: {bit_array} (Decimal: {decimal_value})")
                     is_receiving = False  # Veri alımını durdur
 
         except queue.Empty:
