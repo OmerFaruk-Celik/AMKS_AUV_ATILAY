@@ -3,6 +3,7 @@ import sounddevice as sd
 import queue
 import time
 import threading
+
 # Ayarlar
 SAMPLE_RATE = 192000  # Örnekleme frekansı
 DURATION = 0.01  # 10 ms pencere
@@ -25,20 +26,20 @@ is_receiving = False  # Veri alımı başladı mı?
 waiting_for_separator = False  # Yeni bit eklemek için ayraç bekleniyor
 start_time = None  # Başlangıç zamanı
 
-
-
-
 # Global zaman değişkeni
 global_time = 0
 
 def baslat():
+    global global_time  # Global değişkeni belirt
     while True:
-        global_time+=1
+        global_time += 1  # Değişkeni artır
+        if global_time >= 65000:  # 65000 olduğunda sıfırla
+            global_time = 0
+        time.sleep(0.0001)  # 100 µs bekle
 
 # Yeni bir thread başlat
-thread = threading.Thread(target=baslat)
+thread = threading.Thread(target=baslat, daemon=True)  # `daemon=True` kapanınca thread ölür
 thread.start()
-
 
 def frequency_in_range(frequency, target):
     """Belirli bir frekansın hedef frekans aralığında olup olmadığını kontrol eder."""
@@ -55,7 +56,6 @@ with sd.InputStream(callback=audio_callback, channels=1, samplerate=SAMPLE_RATE,
     print("Gerçek zamanlı veri alımı başlıyor...")
 
     while True:
-        
         try:
             # Kuyruktan ses verisini al
             audio_data = audio_queue.get_nowait()
@@ -72,13 +72,11 @@ with sd.InputStream(callback=audio_callback, channels=1, samplerate=SAMPLE_RATE,
             # Dominant frekansı belirle
             dominant_index = np.argmax(fft_magnitudes)
             dominant_freq = filtered_freqs[dominant_index]
-            #print(dominant_freq)
-            print(global_time)
+            print(global_time)  # 🛠 Test için global_time yazdır
 
             # **Start biti (16000 Hz) algılandı mı?**
             if frequency_in_range(dominant_freq, START_BIT):
                 start_time = time.time() * 1000  # Milisaniye cinsinden zamanı kaydet
-                #print("\n[START] Başlangıç biti algılandı, veri alımı başlıyor!")
                 bit_array = []  # 16 bitlik diziyi sıfırla
                 is_receiving = True
                 waiting_for_separator = True  # İlk olarak ayraç frekansı bekle
@@ -87,18 +85,15 @@ with sd.InputStream(callback=audio_callback, channels=1, samplerate=SAMPLE_RATE,
             elif is_receiving:
                 # **Ayraç biti (15100 Hz) algılandı mı?**
                 if waiting_for_separator and frequency_in_range(dominant_freq, SEPARATOR_BIT):
-                    #print("[INFO] Ayraç algılandı, sonraki bit okunacak...")
                     waiting_for_separator = False  # Artık veri bekliyoruz
                 
                 # **Ayraç algılandıktan sonra bit okunuyor**
                 elif not waiting_for_separator:
                     if frequency_in_range(dominant_freq, BIT_0):
                         bit_array.append(0)
-                        #print("[BIT] 0 eklendi.")
                         waiting_for_separator = True  # Yeniden ayraç bekle
                     elif frequency_in_range(dominant_freq, BIT_1):
                         bit_array.append(1)
-                        #print("[BIT] 1 eklendi.")
                         waiting_for_separator = True  # Yeniden ayraç bekle
 
                 # **16 bit tamamlandıysa**
@@ -110,7 +105,7 @@ with sd.InputStream(callback=audio_callback, channels=1, samplerate=SAMPLE_RATE,
                     delay = abs(start_time/(1000*10) - decimal_value*100)  # ms cinsinden fark
                     
                     # Sonuçları yazdır
-                    #print(f"Decimal: {decimal_value}, Gecikme: {delay:.2f} ms")
+                    print(f"Decimal: {decimal_value}, Gecikme: {delay:.2f} ms")
                     
                     is_receiving = False  # Veri alımını durdur
 
