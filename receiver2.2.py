@@ -86,6 +86,7 @@ with sd.InputStream(callback=audio_callback, channels=1, samplerate=SAMPLE_RATE,
                 bit_array = []  # 16 bitlik diziyi sıfırla
                 is_receiving = True
                 waiting_for_separator = True  # İlk olarak ayraç frekansı bekle
+                t=global_time
 
             # **Veri alımı başladıysa**
             elif is_receiving:
@@ -111,7 +112,8 @@ with sd.InputStream(callback=audio_callback, channels=1, samplerate=SAMPLE_RATE,
                     if not ilk: 
                         ilk=True
                         global_time=decimal_value
-                    delay = abs(global_time- decimal_value)*100/(1000*1000)
+                        t=decimal_value
+                    delay = abs(t- decimal_value)*100/(1000*1000)
                     
                     # Sonuçları yazdır
                     print(f"Decimal: {decimal_value}, Gecikme: {delay:.2f} ms")
