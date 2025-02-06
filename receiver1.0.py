@@ -83,9 +83,9 @@ def listen_and_decode(duration_per_bit=0.5, num_bits=10, sampling_rate=44100):
         idx = np.argmax(np.abs(fft_data))
         freq = freqs[idx]
         dominant_freq = abs(freq)
-        if dominant_freq<11800 or dominant_freq > 16500:
+        if dominant_freq<2800 or dominant_freq > 16500:
             continue
-        #print(dominant_freq )
+        print(dominant_freq )
         if(abs(dominant_freq-StartBiti)<tolarance):
             bit_array=[]
             start_detected=True
