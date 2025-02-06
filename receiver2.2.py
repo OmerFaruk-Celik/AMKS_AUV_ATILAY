@@ -1,91 +1,91 @@
 import numpy as np
 import sounddevice as sd
-import matplotlib.pyplot as plt
 import queue
 import time
 
 # Ayarlar
-SAMPLE_RATE = 192000  # Örnekleme frekansı (Yüksek olmalı)
-DURATION = 0.01  # 50 ms'lik pencere
-FREQ_MIN = 4000  # 4 kHz
-FREQ_MAX = 40000  # 40 kHz
-TIME_WINDOW = 5  # Dominant frekansın son 5 saniyesini göster
+SAMPLE_RATE = 192000  # Örnekleme frekansı
+DURATION = 0.01  # 10 ms pencere
+FREQ_MIN = 14000  # Minimum frekans sınırı
+FREQ_MAX = 17000  # Maksimum frekans sınırı
+TOLERANCE = 100  # Frekans toleransı
 
-# Ses verisini saklamak için kuyruk oluştur
+# Özel bit frekansları
+START_BIT = 16000
+SEPARATOR_BIT = 15100
+BIT_0 = 15400
+BIT_1 = 15700
+
+# Ses verisi kuyruğu
 audio_queue = queue.Queue()
-dominant_freqs = []  # Zaman içinde dominant frekansı tutacak liste
-timestamps = []  # Zaman damgaları
+
+# 16 bitlik diziyi saklamak için
+bit_array = []
+is_receiving = False  # Veri alımı başladı mı?
+waiting_for_separator = False  # Yeni bit eklemek için ayraç bekleniyor
+
+def frequency_in_range(frequency, target):
+    """Belirli bir frekansın hedef frekans aralığında olup olmadığını kontrol eder."""
+    return abs(frequency - target) <= TOLERANCE
 
 def audio_callback(indata, frames, time, status):
-    """ Mikrofon verisini kuyruk içine atar """
+    """Mikrofondan alınan veriyi kuyruğa ekler."""
     if status:
         print(status)
-    audio_queue.put(indata[:, 0])  # Mono hale getir ve kuyruğa ekle
+    audio_queue.put(indata[:, 0])  # Mono hale getir
 
-# Matplotlib başlat
-fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(8, 8))  # İki grafik için
-plt.ion()
-
-# Mikrofonu dinlemeye başla
-start_time = time.time()
+# Mikrofonu başlat
 with sd.InputStream(callback=audio_callback, channels=1, samplerate=SAMPLE_RATE, blocksize=int(SAMPLE_RATE * DURATION)):
-    print("Gerçek zamanlı analiz başlıyor...")
+    print("Gerçek zamanlı veri alımı başlıyor...")
 
     while True:
         try:
-            # Kuyruktan veri al
+            # Kuyruktan ses verisini al
             audio_data = audio_queue.get_nowait()
             
-            # FFT uygula
+            # FFT işlemi
             fft_data = np.fft.rfft(audio_data)
             freqs = np.fft.rfftfreq(len(audio_data), d=1/SAMPLE_RATE)
-
-            # 4 kHz - 40 kHz arasını filtrele
+            
+            # 14 kHz - 17 kHz arasını filtrele
             mask = (freqs >= FREQ_MIN) & (freqs <= FREQ_MAX)
             fft_magnitudes = np.abs(fft_data)[mask]
             filtered_freqs = freqs[mask]
 
-            # Dominant frekansı bul
+            # Dominant frekansı belirle
             dominant_index = np.argmax(fft_magnitudes)
             dominant_freq = filtered_freqs[dominant_index]
-            dominant_amp = fft_magnitudes[dominant_index]
 
-            # Zamanı kaydet
-            current_time = time.time() - start_time
-            dominant_freqs.append(dominant_freq)
-            timestamps.append(current_time)
+            # **Start biti (16000 Hz) algılandı mı?**
+            if frequency_in_range(dominant_freq, START_BIT):
+                print("\n[START] Başlangıç biti algılandı, veri alımı başlıyor!")
+                bit_array = []  # 16 bitlik diziyi sıfırla
+                is_receiving = True
+                waiting_for_separator = True  # İlk olarak ayraç frekansı bekle
 
-            # Eski verileri temizle (5 saniyeden uzun olanları sil)
-            while timestamps and timestamps[0] < current_time - TIME_WINDOW:
-                timestamps.pop(0)
-                dominant_freqs.pop(0)
-            """
-            # Spektrum Grafiği (ax1)
-            ax1.clear()
-            ax1.plot(filtered_freqs, fft_magnitudes, color='blue', label="Spektrum")
-            ax1.scatter(dominant_freq, dominant_amp, color='red', s=50, label=f"Dominant: {dominant_freq:.1f} Hz")
-            ax1.set_xlabel("Frekans (Hz)")
-            ax1.set_ylabel("Genlik")
-            ax1.set_title("Gerçek Zamanlı Frekans Spektrumu (4 kHz - 40 kHz)")
-            ax1.set_xlim(FREQ_MIN, FREQ_MAX)
-            ax1.set_ylim(0, np.max(fft_magnitudes) * 1.1)
-            ax1.legend()
+            # **Veri alımı başladıysa**
+            elif is_receiving:
+                # **Ayraç biti (15100 Hz) algılandı mı?**
+                if waiting_for_separator and frequency_in_range(dominant_freq, SEPARATOR_BIT):
+                    print("[INFO] Ayraç algılandı, sonraki bit okunacak...")
+                    waiting_for_separator = False  # Artık veri bekliyoruz
+                
+                # **Ayraç algılandıktan sonra bit okunuyor**
+                elif not waiting_for_separator:
+                    if frequency_in_range(dominant_freq, BIT_0):
+                        bit_array.append(0)
+                        print("[BIT] 0 eklendi.")
+                        waiting_for_separator = True  # Yeniden ayraç bekle
+                    elif frequency_in_range(dominant_freq, BIT_1):
+                        bit_array.append(1)
+                        print("[BIT] 1 eklendi.")
+                        waiting_for_separator = True  # Yeniden ayraç bekle
 
-            # Dominant Frekansın Zamana Göre Grafiği (ax2)
-            ax2.clear()
-            ax2.plot(timestamps, dominant_freqs, color='green', marker='o', linestyle='-', label="Dominant Frekans")
-            ax2.set_xlabel("Zaman (s)")
-            ax2.set_ylabel("Dominant Frekans (Hz)")
-            ax2.set_title("Dominant Frekansın Zamana Göre Değişimi")
-            ax2.set_xlim(max(0, current_time - TIME_WINDOW), current_time)
-            ax2.set_ylim(FREQ_MIN, FREQ_MAX)
-            ax2.legend()
-
-            plt.pause(0.01)
-            """
-
-            # Terminale yazdır
-            print(f"Dominant Frekans: {dominant_freq:.1f} Hz")
+                # **16 bit tamamlandıysa**
+                if len(bit_array) == 16:
+                    print(f"[COMPLETED] 16-bit veri alındı: {bit_array}")
+                    is_receiving = False  # Veri alımını durdur
 
         except queue.Empty:
             pass  # Veri gelmesini bekle
+
