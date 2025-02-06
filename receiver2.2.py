@@ -55,7 +55,7 @@ with sd.InputStream(callback=audio_callback, channels=1, samplerate=SAMPLE_RATE,
             # Dominant frekansı belirle
             dominant_index = np.argmax(fft_magnitudes)
             dominant_freq = filtered_freqs[dominant_index]
-            print(dominant_freq)
+            #print(dominant_freq)
 
             # **Start biti (16000 Hz) algılandı mı?**
             if frequency_in_range(dominant_freq, START_BIT):
