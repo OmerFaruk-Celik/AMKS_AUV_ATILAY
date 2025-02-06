@@ -59,7 +59,7 @@ with sd.InputStream(callback=audio_callback, channels=1, samplerate=SAMPLE_RATE,
             while timestamps and timestamps[0] < current_time - TIME_WINDOW:
                 timestamps.pop(0)
                 dominant_freqs.pop(0)
-
+            """
             # Spektrum Grafiği (ax1)
             ax1.clear()
             ax1.plot(filtered_freqs, fft_magnitudes, color='blue', label="Spektrum")
@@ -82,6 +82,7 @@ with sd.InputStream(callback=audio_callback, channels=1, samplerate=SAMPLE_RATE,
             ax2.legend()
 
             plt.pause(0.01)
+            """
 
             # Terminale yazdır
             print(f"Dominant Frekans: {dominant_freq:.1f} Hz")
