@@ -27,19 +27,24 @@ waiting_for_separator = False  # Yeni bit eklemek için ayraç bekleniyor
 start_time = None  # Başlangıç zamanı
 
 # Global zaman değişkeni
-global_time = 0
+global_time = 0  # Global zaman değişkeni
 
 def baslat():
-    global global_time  # Global değişkeni belirt
+    global global_time
+    hedef_zaman = time.perf_counter_ns()  # Başlangıç zamanı (nano-saniye cinsinden)
+    
     while True:
-        global_time += 1  # Değişkeni artır
-        if global_time >= 16777216:  # 65000 olduğunda sıfırla
-            global_time = 0
-        
+        simdiki_zaman = time.perf_counter_ns()
+        if simdiki_zaman - hedef_zaman >= 100_000:  # 100 µs (mikro-saniye)
+            global_time += 1
+            if global_time >= 65000:
+                global_time = 0
+            hedef_zaman = simdiki_zaman  # Yeni hedef zamanı güncelle
 
 # Yeni bir thread başlat
-thread = threading.Thread(target=baslat, daemon=True)  # `daemon=True` kapanınca thread ölür
+thread = threading.Thread(target=baslat, daemon=True)
 thread.start()
+
 
 def frequency_in_range(frequency, target):
     """Belirli bir frekansın hedef frekans aralığında olup olmadığını kontrol eder."""
