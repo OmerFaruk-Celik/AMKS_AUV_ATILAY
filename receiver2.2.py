@@ -14,8 +14,8 @@ TOLERANCE = 50  # Frekans toleransı
 # Özel bit frekansları
 START_BIT = 20000
 SEPARATOR_BIT = 17800
-BIT_0 = 15400
-BIT_1 = 15700
+BIT_0 = 18600
+BIT_1 = 19500
 ilk=False
 # Ses verisi kuyruğu
 audio_queue = queue.Queue()
@@ -119,8 +119,8 @@ with sd.InputStream(callback=audio_callback, channels=1, samplerate=SAMPLE_RATE,
                     delay = abs(t- decimal_value)*100/(1000)
                     
                     # Sonuçları yazdır
-                    #print(f"Decimal: {decimal_value}, Gecikme: {delay:.2f} ms")
-                    print(int(1/(delay*400/10000000)*100))
+                    print(f"Decimal: {decimal_value}, Gecikme: {delay:.2f} ms")
+                    #print(int(1/(delay*400/10000000)*100))
                     
                     is_receiving = False  # Veri alımını durdur
 
