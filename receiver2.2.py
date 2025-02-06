@@ -7,8 +7,8 @@ import threading
 # Ayarlar
 SAMPLE_RATE = 192000  # Örnekleme frekansı
 DURATION = 0.01  # 10 ms pencere
-FREQ_MIN = 14000  # Minimum frekans sınırı
-FREQ_MAX = 32000  # Maksimum frekans sınırı
+FREQ_MIN = 16000  # Minimum frekans sınırı
+FREQ_MAX = 20000  # Maksimum frekans sınırı
 TOLERANCE = 100  # Frekans toleransı
 
 # Özel bit frekansları
