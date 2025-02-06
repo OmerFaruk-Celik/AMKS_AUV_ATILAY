@@ -118,7 +118,8 @@ with sd.InputStream(callback=audio_callback, channels=1, samplerate=SAMPLE_RATE,
                     delay = abs(t- decimal_value)*100/(1000)
                     
                     # Sonuçları yazdır
-                    print(f"Decimal: {decimal_value}, Gecikme: {delay:.2f} ms")
+                    #print(f"Decimal: {decimal_value}, Gecikme: {delay:.2f} ms")
+                    print(delay*400/1000000)
                     
                     is_receiving = False  # Veri alımını durdur
 
