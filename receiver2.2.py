@@ -37,7 +37,7 @@ def baslat():
         simdiki_zaman = time.perf_counter_ns()
         if simdiki_zaman - hedef_zaman >= 100_000:  # 100 µs (mikro-saniye)
             global_time += 1
-            if global_time >= 65000:
+            if global_time >=16777216:
                 global_time = 0
             hedef_zaman = simdiki_zaman  # Yeni hedef zamanı güncelle
 
