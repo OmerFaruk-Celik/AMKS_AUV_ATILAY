@@ -33,9 +33,9 @@ def baslat():
     global global_time  # Global değişkeni belirt
     while True:
         global_time += 1  # Değişkeni artır
-        if global_time >= 65000:  # 65000 olduğunda sıfırla
+        if global_time >= 16777216:  # 65000 olduğunda sıfırla
             global_time = 0
-        time.sleep(0.0001)  # 100 µs bekle
+        
 
 # Yeni bir thread başlat
 thread = threading.Thread(target=baslat, daemon=True)  # `daemon=True` kapanınca thread ölür
