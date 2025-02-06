@@ -23,6 +23,7 @@ audio_queue = queue.Queue()
 bit_array = []
 is_receiving = False  # Veri alımı başladı mı?
 waiting_for_separator = False  # Yeni bit eklemek için ayraç bekleniyor
+start_time = None  # Başlangıç zamanı
 
 def frequency_in_range(frequency, target):
     """Belirli bir frekansın hedef frekans aralığında olup olmadığını kontrol eder."""
@@ -59,6 +60,7 @@ with sd.InputStream(callback=audio_callback, channels=1, samplerate=SAMPLE_RATE,
 
             # **Start biti (16000 Hz) algılandı mı?**
             if frequency_in_range(dominant_freq, START_BIT):
+                start_time = time.time() * 1000  # Milisaniye cinsinden zamanı kaydet
                 #print("\n[START] Başlangıç biti algılandı, veri alımı başlıyor!")
                 bit_array = []  # 16 bitlik diziyi sıfırla
                 is_receiving = True
@@ -85,10 +87,15 @@ with sd.InputStream(callback=audio_callback, channels=1, samplerate=SAMPLE_RATE,
                 # **16 bit tamamlandıysa**
                 if len(bit_array) == 16:
                     decimal_value = int("".join(map(str, bit_array)), 2)  # Binary to decimal çevirme
-                    #print(f"[COMPLETED] 16-bit veri alındı: {bit_array} (Decimal: {decimal_value})")
-                    print("Decimal",decimal_value)
+                    
+                    # Zaman farkını hesapla
+                    end_time = time.time() * 1000  # Şu anki zamanı al
+                    delay = end_time - start_time - (decimal_value * 0.1)  # ms cinsinden fark
+                    
+                    # Sonuçları yazdır
+                    print(f"Decimal: {decimal_value}, Gecikme: {delay:.2f} ms")
+                    
                     is_receiving = False  # Veri alımını durdur
 
         except queue.Empty:
             pass  # Veri gelmesini bekle
-
