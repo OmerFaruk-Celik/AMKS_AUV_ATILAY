@@ -16,7 +16,7 @@ START_BIT = 16000
 SEPARATOR_BIT = 15100
 BIT_0 = 15400
 BIT_1 = 15700
-
+ilk=False
 # Ses verisi kuyruğu
 audio_queue = queue.Queue()
 
@@ -81,6 +81,7 @@ with sd.InputStream(callback=audio_callback, channels=1, samplerate=SAMPLE_RATE,
 
             # **Start biti (16000 Hz) algılandı mı?**
             if frequency_in_range(dominant_freq, START_BIT):
+				
                 start_time = time.time() * 1000  # Milisaniye cinsinden zamanı kaydet
                 bit_array = []  # 16 bitlik diziyi sıfırla
                 is_receiving = True
@@ -107,7 +108,10 @@ with sd.InputStream(callback=audio_callback, channels=1, samplerate=SAMPLE_RATE,
                     
                     # Zaman farkını hesapla
                     end_time = time.time() * 1000  # Şu anki zamanı al
-                    delay = abs(global_time- decimal_value*100)  # ms cinsinden fark
+                    if not ilk: 
+                        ilk=True
+                        global_time=decimal_value
+                    delay = abs(global_time- decimal_value)  # ms cinsinden fark
                     
                     # Sonuçları yazdır
                     print(f"Decimal: {decimal_value}, Gecikme: {delay:.2f} ms")
