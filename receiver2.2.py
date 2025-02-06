@@ -31,17 +31,10 @@ start_time = None  # Başlangıç zamanı
 # Global zaman değişkeni
 global_time = 0
 
-def update_timer():
-    global global_time
-    global_time += 1  # Zamanı arttır
-    if global_time >= 65000:
-        global_time = 0  # 65000 olduğunda sıfırla
-    
-    # 100 µs sonra tekrar çağır
-    threading.Timer(0.0001, update_timer).start()
-
-# Timer'ı başlat
-update_timer()
+while True:
+    global_time+=1
+    if global_time>=65000:
+        global_time=0
 
 
 def frequency_in_range(frequency, target):
@@ -76,7 +69,7 @@ with sd.InputStream(callback=audio_callback, channels=1, samplerate=SAMPLE_RATE,
             dominant_index = np.argmax(fft_magnitudes)
             dominant_freq = filtered_freqs[dominant_index]
             #print(dominant_freq)
-            #print(global_time)
+            print(global_time)
 
             # **Start biti (16000 Hz) algılandı mı?**
             if frequency_in_range(dominant_freq, START_BIT):
@@ -113,7 +106,7 @@ with sd.InputStream(callback=audio_callback, channels=1, samplerate=SAMPLE_RATE,
                     delay = abs(start_time/(1000*10) - decimal_value*100)  # ms cinsinden fark
                     
                     # Sonuçları yazdır
-                    print(f"Decimal: {decimal_value}, Gecikme: {delay:.2f} ms")
+                    #print(f"Decimal: {decimal_value}, Gecikme: {delay:.2f} ms")
                     
                     is_receiving = False  # Veri alımını durdur
 
