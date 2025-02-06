@@ -6,7 +6,7 @@ import time
 
 # Ayarlar
 SAMPLE_RATE = 192000  # Örnekleme frekansı (Yüksek olmalı)
-DURATION = 0.05  # 50 ms'lik pencere
+DURATION = 0.01  # 50 ms'lik pencere
 FREQ_MIN = 4000  # 4 kHz
 FREQ_MAX = 40000  # 40 kHz
 TIME_WINDOW = 5  # Dominant frekansın son 5 saniyesini göster
