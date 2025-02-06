@@ -112,7 +112,7 @@ with sd.InputStream(callback=audio_callback, channels=1, samplerate=SAMPLE_RATE,
                     delay = abs(global_time - (decimal_value))  # ms cinsinden fark
                     
                     # Sonuçları yazdır
-                    print(f"Decimal: {decimal_value}, Gecikme: {delay:.2f} ms")
+                    print(f"Decimal: {decimal_value}, Gecikme: {global_time:.2f} ms")
                     
                     is_receiving = False  # Veri alımını durdur
 
