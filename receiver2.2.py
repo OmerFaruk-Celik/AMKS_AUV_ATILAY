@@ -31,7 +31,13 @@ start_time = None  # Başlangıç zamanı
 # Global zaman değişkeni
 global_time = 0
 
+def baslat():
+    while True:
+        global_time+=1
 
+# Yeni bir thread başlat
+thread = threading.Thread(target=baslat)
+thread.start()
 
 
 def frequency_in_range(frequency, target):
@@ -49,7 +55,7 @@ with sd.InputStream(callback=audio_callback, channels=1, samplerate=SAMPLE_RATE,
     print("Gerçek zamanlı veri alımı başlıyor...")
 
     while True:
-        global_time+=1
+        
         try:
             # Kuyruktan ses verisini al
             audio_data = audio_queue.get_nowait()
