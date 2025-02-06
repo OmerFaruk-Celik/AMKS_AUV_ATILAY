@@ -77,7 +77,7 @@ with sd.InputStream(callback=audio_callback, channels=1, samplerate=SAMPLE_RATE,
             # Dominant frekansı belirle
             dominant_index = np.argmax(fft_magnitudes)
             dominant_freq = filtered_freqs[dominant_index]
-            print(global_time)  # 🛠 Test için global_time yazdır
+            #print(global_time)  # 🛠 Test için global_time yazdır
 
             # **Start biti (16000 Hz) algılandı mı?**
             if frequency_in_range(dominant_freq, START_BIT):
@@ -107,7 +107,7 @@ with sd.InputStream(callback=audio_callback, channels=1, samplerate=SAMPLE_RATE,
                     
                     # Zaman farkını hesapla
                     end_time = time.time() * 1000  # Şu anki zamanı al
-                    delay = abs(start_time/(1000*10) - decimal_value*100)  # ms cinsinden fark
+                    delay = abs(global_time- decimal_value*100)  # ms cinsinden fark
                     
                     # Sonuçları yazdır
                     print(f"Decimal: {decimal_value}, Gecikme: {delay:.2f} ms")
