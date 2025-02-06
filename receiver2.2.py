@@ -109,6 +109,8 @@ with sd.InputStream(callback=audio_callback, channels=1, samplerate=SAMPLE_RATE,
                     
                     # Zaman farkını hesapla
                     end_time = time.time() * 1000  # Şu anki zamanı al
+                    if decimal_value>t:
+                        t+=1048576
                     if not ilk: 
                         ilk=True
                         global_time=decimal_value
