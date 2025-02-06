@@ -38,7 +38,7 @@ def update_timer():
         global_time = 0  # 65000 olduğunda sıfırla
     
     # 100 µs sonra tekrar çağır
-    threading.Timer(0.00001, update_timer).start()
+    threading.Timer(0.0001, update_timer).start()
 
 # Timer'ı başlat
 update_timer()
