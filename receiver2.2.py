@@ -113,8 +113,8 @@ with sd.InputStream(callback=audio_callback, channels=1, samplerate=SAMPLE_RATE,
                         t+=1048576
                     if not ilk: 
                         ilk=True
-                        global_time=decimal_value
-                        t=decimal_value+((40+100*20)*1000/100)
+                        global_time=decimal_value+((40+100*20)*1000/100)
+                        t=global_time
                     delay = abs(t- decimal_value)*100/(1000)
                     
                     # Sonuçları yazdır
