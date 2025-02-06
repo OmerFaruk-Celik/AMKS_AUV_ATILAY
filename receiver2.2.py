@@ -12,8 +12,8 @@ FREQ_MAX = 20000  # Maksimum frekans sınırı
 TOLERANCE = 50  # Frekans toleransı
 
 # Özel bit frekansları
-START_BIT = 16000
-SEPARATOR_BIT = 15100
+START_BIT = 20000
+SEPARATOR_BIT = 17800
 BIT_0 = 15400
 BIT_1 = 15700
 ilk=False
