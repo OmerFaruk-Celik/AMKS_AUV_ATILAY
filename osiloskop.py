@@ -3,6 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
 from matplotlib.widgets import Slider, AxesWidget
+from PyQt5.QtWidgets import QApplication
 
 class Bar(AxesWidget):
     """
