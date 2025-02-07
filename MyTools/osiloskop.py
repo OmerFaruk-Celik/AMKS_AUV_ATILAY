@@ -2,7 +2,8 @@ import sounddevice as sd
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
-from matplotlib.widgets import Slider
+import scipy.signal as signal
+import scipy.fftpack as fftpack
 
 class Osiloskop:
     def __init__(self, sample_rate=44100, duration=0.1, max_queue_size=10):
@@ -39,15 +40,12 @@ class Osiloskop:
         if duration:
             self.DURATION = duration
         
-        # Stop existing stream if any
         if self.stream:
             self.stream.stop()
             self.stream.close()
         
-        # Clear previous data
         self.audio_queue.clear()
         
-        # Start new input stream
         try:
             self.stream = sd.InputStream(
                 callback=self._audio_callback, 
@@ -59,24 +57,7 @@ class Osiloskop:
         except Exception as e:
             print(f"Stream error: {e}")
     
-    def get_data(self):
-        # Return the most recent audio data or None
-        return self.audio_queue[-1] if self.audio_queue else None
-    
-    def send_data(self, data=None):
-        # If no data provided, use microphone data
-        
-        if data is None:
-           
-            data = self.get_data()
-        
-        if data is not None:
-            # Example: you could implement data sending logic here
-            # For now, just return the data
-            return data
-        return None
-    
-    def visualize(self, interval=50, max_frames=1000):
+    def visualize(self, interval=50, block=False):
         def init():
             self.ax.set_xlim(0, self.DURATION)
             self.ax.set_ylim(-1, 1)
@@ -103,16 +84,42 @@ class Osiloskop:
             init_func=init, 
             blit=True, 
             interval=interval,
-            cache_frame_data=False, 
-            save_count=max_frames
+            cache_frame_data=False
         )
-        plt.show()
-
-# Example usage
-def main():
-    osc = Osiloskop()
-    osc.start_stream()
-    osc.visualize()
-
-if __name__ == "__main__":
-    main()
+        
+        if block:
+            plt.show()
+        else:
+            plt.show(block=False)
+            plt.pause(0.1)
+    
+    def get_data(self):
+        return self.audio_queue[-1] if self.audio_queue else None
+    
+    def apply_bandpass_filter(self, data, lowcut, highcut, order=5):
+        """Apply bandpass filter to audio data"""
+        nyq = 0.5 * self.SAMPLE_RATE
+        low = lowcut / nyq
+        high = highcut / nyq
+        b, a = signal.butter(order, [low, high], btype='band')
+        return signal.lfilter(b, a, data)
+    
+    def reduce_noise(self, data, noise_threshold=0.1):
+        """Simple noise reduction using amplitude thresholding"""
+        return np.where(np.abs(data) > noise_threshold, data, 0)
+    
+    def estimate_dominant_frequency(self, data):
+        """Estimate dominant frequency using FFT"""
+        fft_data = signal.fft(data)
+        freqs = signal.fftfreq(len(data), 1/self.SAMPLE_RATE)
+        
+        positive_freqs = freqs[:len(freqs)//2]
+        positive_amplitudes = np.abs(fft_data[:len(fft_data)//2])
+        
+        dominant_index = np.argmax(positive_amplitudes)
+        return positive_freqs[dominant_index]
+    
+    def spectral_density(self, data):
+        """Compute power spectral density"""
+        f, Pxx = signal.welch(data, self.SAMPLE_RATE)
+        return f, Pxx
