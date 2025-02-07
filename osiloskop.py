@@ -62,7 +62,7 @@ SAMPLE_RATE = 44100  # 44.1 kHz, CD kalitesinde ses
 DURATION = 0.1  # 100 ms
 XLIM = DURATION  # Başlangıç xlim
 YLIM = 1  # Başlangıç ylim
-INTERVAL = 50  # Başlangıç interval değeri (ms)
+INTERVAL = 500  # Başlangıç interval değeri (ms)
 
 # Ses verisi için bir kuyruk
 audio_queue = []
