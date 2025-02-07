@@ -106,6 +106,9 @@ def update_interval(val):
         INTERVAL = new_interval
         start_microphone()
         ani.event_source.interval = INTERVAL
+        start_microphone()
+        ani = FuncAnimation(fig, update, init_func=init, blit=True, interval=INTERVAL)
+        plt.show()
 
 s_duration.on_changed(update_duration)
 s_sample_rate.on_changed(update_sample_rate)
