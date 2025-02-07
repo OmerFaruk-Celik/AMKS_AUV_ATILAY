@@ -5,17 +5,17 @@ import time
 import threading
 
 # Ayarlar
-SAMPLE_RATE = 200000  # Örnekleme frekansı
-DURATION = 0.01  # 10 ms pencere
-FREQ_MIN = 14000  # Minimum frekans sınırı
-FREQ_MAX = 17000  # Maksimum frekans sınırı
-TOLERANCE = 10  # Frekans toleransı
+SAMPLE_RATE = 300000  # Örnekleme frekansı
+DURATION = 0.005  # 10 ms pencere
+FREQ_MIN = 17000  # Minimum frekans sınırı
+FREQ_MAX = 20000  # Maksimum frekans sınırı
+TOLERANCE = 200  # Frekans toleransı
 
 # Özel bit frekansları
-START_BIT = 16000
-SEPARATOR_BIT = 15100
-BIT_0 = 15400
-BIT_1 = 15700
+START_BIT = 20000
+SEPARATOR_BIT = 17800
+BIT_0 = 18600
+BIT_1 = 19500
 ilk=False
 # Ses verisi kuyruğu
 audio_queue = queue.Queue()
@@ -44,6 +44,7 @@ def baslat():
 # Yeni bir thread başlat
 thread = threading.Thread(target=baslat, daemon=True)
 thread.start()
+
 
 def frequency_in_range(frequency, target):
     """Belirli bir frekansın hedef frekans aralığında olup olmadığını kontrol eder."""
