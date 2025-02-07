@@ -81,9 +81,18 @@ def update(frame):
 def update_interval(val):
     global INTERVAL, ani
     INTERVAL = int(val)
+    print(f"New interval: {INTERVAL}")
+    
+    # Mevcut animasyonu durdur ve yeniden başlat
     if hasattr(ani, 'event_source'):
-        ani.event_source.interval = INTERVAL
-
+        ani.event_source.stop()
+        plt.close()  # Mevcut figürü kapat
+        
+        # Yeni animasyon oluştur
+        ani = FuncAnimation(fig, update, init_func=init, 
+                          blit=True, interval=INTERVAL,
+                          cache_frame_data=False, save_count=MAX_FRAMES)
+        plt.draw()  # Grafiği yenile
 def restart_stream():
     global stream, audio_queue
     # Mevcut stream'i temizle
