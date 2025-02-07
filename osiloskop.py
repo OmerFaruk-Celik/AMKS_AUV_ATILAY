@@ -9,6 +9,7 @@ SAMPLE_RATE = 44100  # 44.1 kHz, CD kalitesinde ses
 DURATION = 0.1  # 100 ms
 XLIM = DURATION  # Başlangıç xlim
 YLIM = 1  # Başlangıç ylim
+INTERVAL = 50  # Başlangıç interval değeri (ms)
 
 # Ses verisi için bir kuyruk
 audio_queue = []
@@ -22,7 +23,7 @@ def audio_callback(indata, frames, time, status):
 
 # Grafik oluşturma
 fig, ax = plt.subplots()
-plt.subplots_adjust(left=0.1, bottom=0.25, right=0.85)
+plt.subplots_adjust(left=0.25, bottom=0.25, right=0.85)
 xdata, ydata = [], []
 ln, = plt.plot([], [], 'b-')
 plt.xlabel('Zaman (saniye)')
@@ -36,12 +37,14 @@ ax_duration = plt.axes([0.1, 0.1, 0.65, 0.03], facecolor=axcolor)
 ax_sample_rate = plt.axes([0.1, 0.15, 0.65, 0.03], facecolor=axcolor)
 ax_xlim = plt.axes([0.88, 0.25, 0.03, 0.63], facecolor=axcolor)
 ax_ylim = plt.axes([0.93, 0.25, 0.03, 0.63], facecolor=axcolor)
+ax_interval = plt.axes([0.05, 0.25, 0.03, 0.63], facecolor=axcolor)
 
 # Sliderlar
 s_duration = Slider(ax_duration, 'Duration', 0.0001, 0.1, valinit=DURATION, valstep=0.0001)
 s_sample_rate = Slider(ax_sample_rate, 'Sample Rate', 20000, 200000, valinit=SAMPLE_RATE, valstep=1000)
 s_xlim = Slider(ax_xlim, 'X Lim', 0.001, 0.1, valinit=XLIM, valstep=0.001, orientation='vertical')
 s_ylim = Slider(ax_ylim, 'Y Lim', 0.001, 1, valinit=YLIM, valstep=0.01, orientation='vertical')
+s_interval = Slider(ax_interval, 'Interval', 10, 200, valinit=INTERVAL, valstep=10, orientation='vertical')
 
 def init():
     ax.set_xlim(0, XLIM)
@@ -49,11 +52,12 @@ def init():
     return ln,
 
 def update(frame):
-    global SAMPLE_RATE, DURATION, XLIM, YLIM
+    global SAMPLE_RATE, DURATION, XLIM, YLIM, INTERVAL
     SAMPLE_RATE = int(s_sample_rate.val)
     DURATION = s_duration.val
     XLIM = s_xlim.val
     YLIM = s_ylim.val
+    INTERVAL = int(s_interval.val)
     if not audio_queue:
         return ln,
     ydata = audio_queue.pop(0)
@@ -80,15 +84,21 @@ def update_ylim(val):
     global YLIM
     YLIM = val
 
+def update_interval(val):
+    global INTERVAL
+    INTERVAL = int(val)
+    ani.event_source.interval = INTERVAL
+
 s_duration.on_changed(update_duration)
 s_sample_rate.on_changed(update_sample_rate)
 s_xlim.on_changed(update_xlim)
 s_ylim.on_changed(update_ylim)
+s_interval.on_changed(update_interval)
 
 # Mikrofonu başlat
 try:
     with sd.InputStream(callback=audio_callback, channels=1, samplerate=SAMPLE_RATE):
-        ani = FuncAnimation(fig, update, init_func=init, blit=True, interval=50)
+        ani = FuncAnimation(fig, update, init_func=init, blit=True, interval=INTERVAL)
         plt.show()
 
 except KeyboardInterrupt:
