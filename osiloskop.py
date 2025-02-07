@@ -41,7 +41,11 @@ class Bar(AxesWidget):
     def set_val(self, val):
         val = max(self.valmin, min(self.valmax, val))
         self.val = val
-        self.bar[0].set_height(val) if self.orientation == 'vertical' else self.bar[0].set_width(val)
+        if self.orientation == 'vertical':
+            self.bar[0].set_height(val)
+        else:
+            self.bar[0].set_width(val)
+        self.ax.figure.canvas.draw_idle()  # Çubuğun yeniden çizilmesini sağlar
         if not self.eventson:
             return
         if 'change' in self.callbacks:
