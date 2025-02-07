@@ -117,8 +117,8 @@ def update_interval(val):
         ani = FuncAnimation(fig, update, init_func=init, 
                           blit=True, interval=INTERVAL,
                           cache_frame_data=False, save_count=MAX_FRAMES)
-        #plt.draw()  # Grafiği yenile
-        plt.show()
+        plt.draw()  # Grafiği yenile
+       
         
 
 
