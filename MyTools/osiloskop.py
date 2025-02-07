@@ -214,7 +214,7 @@ def update_sample_rate(val):
     highcut = float(t_highcut.text)
     restart_stream()
     ax2.set_xlim(0, highcut)
-    ax1.set_xlim(0, SAMPLE_RATE*DURATION)
+    #ax1.set_xlim(0, SAMPLE_RATE*DURATION)
     plt.draw()
 
 def update_duration(val):
