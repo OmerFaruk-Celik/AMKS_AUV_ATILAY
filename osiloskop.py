@@ -78,22 +78,7 @@ def update(frame):
         
     return ln,
 
-def update_interval(val):
-    global INTERVAL, ani
-    INTERVAL = int(val)
-    print(f"New interval: {INTERVAL}")
-    
-    # Mevcut animasyonu durdur ve yeniden başlat
-    if hasattr(ani, 'event_source'):
-        ani.event_source.stop()
-        plt.close()  # Mevcut figürü kapat
-        
-        # Yeni animasyon oluştur
-        ani = FuncAnimation(fig, update, init_func=init, 
-                          blit=True, interval=INTERVAL,
-                          cache_frame_data=False, save_count=MAX_FRAMES)
-        plt.draw()  # Grafiği yenile
-def restart_stream():
+
     global stream, audio_queue
     # Mevcut stream'i temizle
     if stream is not None:
@@ -112,7 +97,23 @@ def restart_stream():
         stream.start()
     except Exception as e:
         print(f"Stream error: {e}")
-
+        
+def update_interval(val):
+    global INTERVAL, ani
+    INTERVAL = int(val)
+    print(f"New interval: {INTERVAL}")
+    
+    # Mevcut animasyonu durdur ve yeniden başlat
+    if hasattr(ani, 'event_source'):
+        ani.event_source.stop()
+        plt.close()  # Mevcut figürü kapat
+        
+        # Yeni animasyon oluştur
+        ani = FuncAnimation(fig, update, init_func=init, 
+                          blit=True, interval=INTERVAL,
+                          cache_frame_data=False, save_count=MAX_FRAMES)
+        plt.draw()  # Grafiği yenile
+def restart_stream():
 def update_sample_rate(val):
     global SAMPLE_RATE
     SAMPLE_RATE = int(val)
