@@ -216,6 +216,7 @@ def update(frame):
         freq_noise_threshold = s_freq_noise.val
         
         if show_filtered:
+            line1.set_data([],[])
             # Zaman domain filtresi
             filtered_data = apply_bandpass_filter(ydata, lowcut, highcut, SAMPLE_RATE)
             filtered_data = apply_noise_filter(filtered_data, noise_threshold)
@@ -242,11 +243,11 @@ def update(frame):
         # Normalize et
         yf = yf / np.max(yf) if np.max(yf) > 0 else yf
         
-        # Orijinal FFT'yi göster
-        line2.set_data(xf, yf)
+
         
         # Frekans filtresi
         if show_freq_filtered:
+            line2.set_data([], [])
             filtered_yf = apply_freq_filter(xf, yf, freq_noise_threshold)
             line2_filtered.set_data(xf, filtered_yf)
             
@@ -254,6 +255,9 @@ def update(frame):
             max_idx = np.argmax(filtered_yf)
             dominant_freq = xf[max_idx] if max_idx < len(xf) else 0
         else:
+            # Orijinal FFT'yi göster
+            line2.set_data(xf, yf)
+            
             line2_filtered.set_data([], [])
             # Dominant frekansı orijinal veriden hesapla
             max_idx = np.argmax(yf)
