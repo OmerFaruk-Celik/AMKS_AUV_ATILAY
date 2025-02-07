@@ -126,6 +126,7 @@ def update(frame):
 def update_interval(val):
     global INTERVAL
     INTERVAL = int(val)
+    baslat()
     if 'ani' in globals() and ani:
         ani.event_source.interval = INTERVAL
 
