@@ -211,8 +211,9 @@ def restart_stream():
 def update_sample_rate(val):
     global SAMPLE_RATE,DURATION
     SAMPLE_RATE = int(val)
+    highcut = float(t_highcut.text)
     restart_stream()
-    ax2.set_xlim(0, SAMPLE_RATE*DURATION)
+    #ax2.set_xlim(0, highcut)
     ax1.set_xlim(0, SAMPLE_RATE*DURATION)
     plt.draw()
 
