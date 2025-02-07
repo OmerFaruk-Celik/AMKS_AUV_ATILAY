@@ -89,7 +89,9 @@ def update_interval(val):
     global INTERVAL
     INTERVAL = int(val)
     return INTERVAL
-
+def update_interval():
+    global INTERVAL
+    return INTERVAL
 
 s_duration.on_changed(update_duration)
 s_sample_rate.on_changed(update_sample_rate)
@@ -101,7 +103,7 @@ s_interval.on_changed(update_interval)
 try:
     print(INTERVAL)
     with sd.InputStream(callback=audio_callback, channels=1, samplerate=SAMPLE_RATE):
-        ani = FuncAnimation(fig, update, init_func=init, blit=True, interval=INTERVAL)
+        ani = FuncAnimation(fig, update, init_func=init, blit=True, interval=update_interval())
         plt.show()
 
 except KeyboardInterrupt:
