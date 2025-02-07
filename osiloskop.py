@@ -137,6 +137,8 @@ def baslat():
     global ani
     try:
         print(INTERVAL)
+        if QApplication.instance() is not None:
+            QApplication.instance().quit()
         ani = FuncAnimation(fig, update, init_func=init, blit=True, interval=INTERVAL)
         with sd.InputStream(callback=audio_callback, channels=1, samplerate=SAMPLE_RATE):
             plt.show()
