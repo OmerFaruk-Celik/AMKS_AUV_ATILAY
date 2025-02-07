@@ -93,6 +93,7 @@ def update_sample_rate(val):
     # Yeni sample rate ile stream'i yeniden başlat
     stream = sd.InputStream(callback=audio_callback, channels=1, samplerate=SAMPLE_RATE)
     stream.start()
+
     
     # Animasyonu yenile
     if 'ani' in globals() and ani:
