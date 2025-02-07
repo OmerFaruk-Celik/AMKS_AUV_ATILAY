@@ -148,10 +148,10 @@ def baslat():
 def stop():
     # Mikrofonu ve grafiği durdur
     global ani
-    if ani:
+    if 'ani' in globals() and ani:
         ani.event_source.stop()
         plt.close(fig)
         print("Ses verisi alımı durduruldu ve grafik kapatıldı.")
 
 baslat()
-stop()
+
