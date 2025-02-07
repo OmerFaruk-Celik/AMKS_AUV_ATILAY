@@ -108,11 +108,13 @@ def update_interval(val):
     print(f"New interval: {INTERVAL}")  # Debug için
     
     if 'ani' in globals() and ani:
-        ani.event_source.interval = INTERVAL
+        ani.event_source.stop()
+        ani = FuncAnimation(fig, update, init_func=init, blit=True, interval=INTERVAL)
         print(f"Animation interval: {ani.event_source.interval}")  # Debug için
         plt.draw()
 
 s_interval.on_changed(update_interval)
+
 
 
 def update_sample_rate(val):
