@@ -88,21 +88,25 @@ with sd.InputStream(callback=audio_callback, channels=1, samplerate=SAMPLE_RATE,
                 is_receiving = True
                 waiting_for_separator = True  # İlk olarak ayraç frekansı bekle
                 t=global_time
+                print("[Start] Starttt")
 
             # **Veri alımı başladıysa**
             elif is_receiving:
                 # **Ayraç biti (15100 Hz) algılandı mı?**
                 if waiting_for_separator and frequency_in_range(dominant_freq, SEPARATOR_BIT):
                     waiting_for_separator = False  # Artık veri bekliyoruz
+                    print("[info] Ayrac Algılandı ...")
                 
                 # **Ayraç algılandıktan sonra bit okunuyor**
                 elif not waiting_for_separator:
                     if frequency_in_range(dominant_freq, BIT_0):
                         bit_array.append(0)
                         waiting_for_separator = True  # Yeniden ayraç bekle
+                        print("[info] added 0")
                     elif frequency_in_range(dominant_freq, BIT_1):
                         bit_array.append(1)
                         waiting_for_separator = True  # Yeniden ayraç bekle
+                        print("[info] added 1")
 
                 # **16 bit tamamlandıysa**
                 if len(bit_array) == 20:
