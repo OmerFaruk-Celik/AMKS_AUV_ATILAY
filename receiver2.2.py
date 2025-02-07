@@ -3,13 +3,14 @@ import sounddevice as sd
 import queue
 import time
 import threading
+from kalman_filter import KalmanFilter
 
 # Ayarlar
 SAMPLE_RATE = 300000  # Örnekleme frekansı
-DURATION = 0.005  # 10 ms pencere
+DURATION = 0.005  # 5 ms pencere
 FREQ_MIN = 17000  # Minimum frekans sınırı
 FREQ_MAX = 20000  # Maksimum frekans sınırı
-TOLERANCE = 200  # Frekans toleransı
+TOLERANCE = 100  # Frekans toleransı
 
 # Özel bit frekansları
 START_BIT = 20000
@@ -29,6 +30,9 @@ start_time = None  # Başlangıç zamanı
 # Global zaman değişkeni
 global_time = 0  # Global zaman değişkeni
 
+# Kalman filtresi
+kalman_filter = KalmanFilter(process_variance=1e-5, measurement_variance=0.1**2, estimated_measurement_variance=1.0)
+
 def baslat():
     global global_time
     hedef_zaman = time.perf_counter_ns()  # Başlangıç zamanı (nano-saniye cinsinden)
@@ -44,7 +48,6 @@ def baslat():
 # Yeni bir thread başlat
 thread = threading.Thread(target=baslat, daemon=True)
 thread.start()
-
 
 def frequency_in_range(frequency, target):
     """Belirli bir frekansın hedef frekans aralığında olup olmadığını kontrol eder."""
@@ -69,19 +72,20 @@ with sd.InputStream(callback=audio_callback, channels=1, samplerate=SAMPLE_RATE,
             fft_data = np.fft.rfft(audio_data)
             freqs = np.fft.rfftfreq(len(audio_data), d=1/SAMPLE_RATE)
             
-            # 14 kHz - 17 kHz arasını filtrele
+            # 17 kHz - 20 kHz arasını filtrele
             mask = (freqs >= FREQ_MIN) & (freqs <= FREQ_MAX)
             fft_magnitudes = np.abs(fft_data)[mask]
             filtered_freqs = freqs[mask]
 
-            # Dominant frekansı belirle
+            # Dominant frekansı belirle ve Kalman filtresini uygula
             dominant_index = np.argmax(fft_magnitudes)
             dominant_freq = filtered_freqs[dominant_index]
+            filtered_freq = kalman_filter.update(dominant_freq)
             #print(global_time)  # 🛠 Test için global_time yazdır
             #print(dominant_freq)
 
-            # **Start biti (16000 Hz) algılandı mı?**
-            if frequency_in_range(dominant_freq, START_BIT):
+            # **Start biti (20000 Hz) algılandı mı?**
+            if frequency_in_range(filtered_freq, START_BIT):
 				
                 start_time = time.time() * 1000  # Milisaniye cinsinden zamanı kaydet
                 bit_array = []  # 16 bitlik diziyi sıfırla
@@ -92,23 +96,23 @@ with sd.InputStream(callback=audio_callback, channels=1, samplerate=SAMPLE_RATE,
 
             # **Veri alımı başladıysa**
             elif is_receiving:
-                # **Ayraç biti (15100 Hz) algılandı mı?**
-                if waiting_for_separator and frequency_in_range(dominant_freq, SEPARATOR_BIT):
+                # **Ayraç biti (17800 Hz) algılandı mı?**
+                if waiting_for_separator and frequency_in_range(filtered_freq, SEPARATOR_BIT):
                     waiting_for_separator = False  # Artık veri bekliyoruz
                     print("[info] Ayrac Algılandı ...")
                 
                 # **Ayraç algılandıktan sonra bit okunuyor**
                 elif not waiting_for_separator:
-                    if frequency_in_range(dominant_freq, BIT_0):
+                    if frequency_in_range(filtered_freq, BIT_0):
                         bit_array.append(0)
                         waiting_for_separator = True  # Yeniden ayraç bekle
                         print("[info] added 0")
-                    elif frequency_in_range(dominant_freq, BIT_1):
+                    elif frequency_in_range(filtered_freq, BIT_1):
                         bit_array.append(1)
                         waiting_for_separator = True  # Yeniden ayraç bekle
                         print("[info] added 1")
 
-                # **16 bit tamamlandıysa**
+                # **20 bit tamamlandıysa**
                 if len(bit_array) == 20:
                     decimal_value = int("".join(map(str, bit_array)), 2)  # Binary to decimal çevirme
                     
