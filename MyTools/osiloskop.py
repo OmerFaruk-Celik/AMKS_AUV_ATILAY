@@ -316,7 +316,7 @@ s_sample_rate.on_changed(update_sample_rate)
 s_duration.on_changed(update_duration)
 s_xlim.on_changed(update_xlim)
 s_ylim.on_changed(update_ylim)
-check.on_clicked(toggle_filter)
+check_time.on_clicked(toggle_filter)
 
 def baslat():
     global ani
