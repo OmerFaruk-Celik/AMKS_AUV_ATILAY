@@ -81,7 +81,7 @@ def update(frame):
     return ln,
 
 def restart_stream():
-    global audio_stream, audio_queue
+    global audio_stream
     # Mevcut stream'i temizle
     if audio_stream is not None:
         audio_stream.stop()
@@ -174,7 +174,7 @@ def start_stream():
 
 # GUI işlemlerini ana thread'de başlatan fonksiyon
 def start():
-    start_stream()
+    threading.Thread(target=start_stream).start()
     start_gui()
 
 # Ses verilerini döndüren fonksiyon
