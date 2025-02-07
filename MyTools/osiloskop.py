@@ -65,7 +65,7 @@ class Osiloskop:
     
     def send_data(self, data=None):
         # If no data provided, use microphone data
-        print(data)
+        
         if data is None:
            
             data = self.get_data()
