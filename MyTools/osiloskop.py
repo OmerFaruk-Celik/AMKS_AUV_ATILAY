@@ -174,8 +174,9 @@ def start_stream():
 
 # GUI işlemlerini ana thread'de başlatan fonksiyon
 def start():
-    threading.Thread(target=start_stream).start()
-    start_gui()
+    gui_thread = threading.Thread(target=start_gui)
+    gui_thread.start()
+    start_stream()
 
 # Ses verilerini döndüren fonksiyon
 def get():
