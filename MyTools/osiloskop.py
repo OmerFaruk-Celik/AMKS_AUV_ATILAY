@@ -213,6 +213,7 @@ def update_sample_rate(val):
     SAMPLE_RATE = int(val)
     restart_stream()
     ax2.set_xlim(0, SAMPLE_RATE/2)
+    ax1.set_xlim(0, SAMPLE_RATE/2)
     plt.draw()
 
 def update_duration(val):
