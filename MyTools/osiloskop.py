@@ -128,7 +128,7 @@ s_duration = Slider(ax_duration, 'Duration', 0.0001, 0.1, valinit=DURATION,
                    color='#2196F3')
 s_sample_rate = Slider(ax_sample_rate, 'Sample Rate', 20000, 400000, valinit=SAMPLE_RATE,
                       color='#2196F3')
-s_noise = Slider(ax_noise, 'Noise', 0.001, 0.5, valinit=DEFAULT_NOISE_THRESHOLD,
+s_noise = Slider(ax_noise, 'Noise', 0, 0.01, valinit=DEFAULT_NOISE_THRESHOLD,
                 color='#FF9800')
 
 # Text boxlar
