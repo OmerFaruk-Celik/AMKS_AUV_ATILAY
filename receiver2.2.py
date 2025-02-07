@@ -10,14 +10,14 @@ SAMPLE_RATE = 300000  # Örnekleme frekansı
 DURATION = 0.005  # 5 ms pencere
 FREQ_MIN = 17000  # Minimum frekans sınırı
 FREQ_MAX = 20000  # Maksimum frekans sınırı
-TOLERANCE = 100  # Frekans toleransı
+TOLERANCE = 200  # Frekans toleransı
 
 # Özel bit frekansları
 START_BIT = 20000
 SEPARATOR_BIT = 17800
 BIT_0 = 18600
 BIT_1 = 19500
-ilk=False
+ilk = False
 # Ses verisi kuyruğu
 audio_queue = queue.Queue()
 
@@ -41,7 +41,7 @@ def baslat():
         simdiki_zaman = time.perf_counter_ns()
         if simdiki_zaman - hedef_zaman >= 100_000:  # 100 µs (mikro-saniye)
             global_time += 1
-            if global_time >=1048576:
+            if global_time >= 1048576:
                 global_time = 0
             hedef_zaman = simdiki_zaman  # Yeni hedef zamanı güncelle
 
@@ -86,12 +86,12 @@ with sd.InputStream(callback=audio_callback, channels=1, samplerate=SAMPLE_RATE,
 
             # **Start biti (20000 Hz) algılandı mı?**
             if frequency_in_range(filtered_freq, START_BIT):
-				
+                
                 start_time = time.time() * 1000  # Milisaniye cinsinden zamanı kaydet
                 bit_array = []  # 16 bitlik diziyi sıfırla
                 is_receiving = True
                 waiting_for_separator = True  # İlk olarak ayraç frekansı bekle
-                t=global_time
+                t = global_time
                 print("[Start] Starttt")
 
             # **Veri alımı başladıysa**
@@ -118,13 +118,13 @@ with sd.InputStream(callback=audio_callback, channels=1, samplerate=SAMPLE_RATE,
                     
                     # Zaman farkını hesapla
                     end_time = time.time() * 1000  # Şu anki zamanı al
-                    if decimal_value>t:
-                        t+=1048576
+                    if decimal_value > t:
+                        t += 1048576
                     if not ilk: 
-                        ilk=True
-                        global_time=decimal_value+((40+100*20)*1000/100)
-                        t=global_time
-                    delay = abs(t- decimal_value)*100/(1000)
+                        ilk = True
+                        global_time = decimal_value + ((40 + 100 * 20) * 1000 / 100)
+                        t = global_time
+                    delay = abs(t - decimal_value) * 100 / (1000)
                     
                     # Sonuçları yazdır
                     print(f"Decimal: {decimal_value}, Gecikme: {delay:.2f} ms")
