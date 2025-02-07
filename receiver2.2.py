@@ -45,7 +45,6 @@ def baslat():
 thread = threading.Thread(target=baslat, daemon=True)
 thread.start()
 
-
 def frequency_in_range(frequency, target):
     """Belirli bir frekansın hedef frekans aralığında olup olmadığını kontrol eder."""
     return abs(frequency - target) <= TOLERANCE
