@@ -114,8 +114,19 @@ def update_duration(val):
     global DURATION
     DURATION = val
     print(f"New duration: {DURATION}")
+    
+    # xlim slider'ını güncelle
+    s_xlim.valmax = DURATION  # Maximum değeri güncelle
+    if s_xlim.val > DURATION:  # Eğer mevcut değer yeni maximum'dan büyükse
+        s_xlim.set_val(DURATION)  # xlim değerini yeni duration'a eşitle
+    
+    # Slider'ın görsel sınırlarını güncelle
+    ax_xlim.set_ylim(s_xlim.valmin, DURATION)
+    
+    # Grafik eksenini güncelle
+    ax.set_xlim(0, s_xlim.val)
+    
     restart_stream()
-
 # Slider callback'leri
 s_interval.on_changed(update_interval)
 s_sample_rate.on_changed(update_sample_rate)
