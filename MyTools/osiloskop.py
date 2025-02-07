@@ -209,11 +209,11 @@ def restart_stream():
         print(f"Stream error: {e}")
 
 def update_sample_rate(val):
-    global SAMPLE_RATE
+    global SAMPLE_RATE,DURATION
     SAMPLE_RATE = int(val)
     restart_stream()
-    ax2.set_xlim(0, SAMPLE_RATE/2)
-    ax1.set_xlim(0, SAMPLE_RATE/2)
+    ax2.set_xlim(0, SAMPLE_RATE*DURATION)
+    ax1.set_xlim(0, SAMPLE_RATE*DURATION)
     plt.draw()
 
 def update_duration(val):
