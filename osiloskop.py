@@ -97,7 +97,7 @@ s_interval.on_changed(update_interval)
 
 # Mikrofonu başlat
 try:
-	print(INTERVAL)
+    print(INTERVAL)
     with sd.InputStream(callback=audio_callback, channels=1, samplerate=SAMPLE_RATE):
         ani = FuncAnimation(fig, update, init_func=init, blit=True, interval=INTERVAL)
         plt.show()
