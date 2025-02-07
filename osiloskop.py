@@ -130,14 +130,15 @@ def update_interval(val):
 
 b_interval.on_changed(update_interval)
 
-# Mikrofonu başlat
-try:
-    print(INTERVAL)
-    with sd.InputStream(callback=audio_callback, channels=1, samplerate=SAMPLE_RATE):
-        ani = FuncAnimation(fig, update, init_func=init, blit=True, interval=INTERVAL)
-        plt.show()
+def baslat():
+    # Mikrofonu başlat
+    try:
+        print(INTERVAL)
+        with sd.InputStream(callback=audio_callback, channels=1, samplerate=SAMPLE_RATE):
+            ani = FuncAnimation(fig, update, init_func=init, blit=True, interval=INTERVAL)
+            plt.show()
 
-except KeyboardInterrupt:
-    print("Ses verisi alımı durduruldu.")
-except Exception as e:
-    print(f"Bir hata oluştu: {e}")
+    except KeyboardInterrupt:
+        print("Ses verisi alımı durduruldu.")
+    except Exception as e:
+        print(f"Bir hata oluştu: {e}")
