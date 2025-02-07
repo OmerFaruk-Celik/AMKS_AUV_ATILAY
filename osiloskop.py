@@ -41,19 +41,10 @@ ax_interval = plt.axes([0.05, 0.25, 0.03, 0.63], facecolor=axcolor)
 
 # Sliderlar
 s_duration = Slider(ax_duration, 'Duration', 0.0001, 0.1, valinit=DURATION, valstep=0.0001)
-s_sample_rate = Slider(ax_sample_rate, 'Sample Rate', 20000, 200000, valinit=SAMPLE_RATE, valstep=1000)
+s_sample_rate = Slider(ax_sample_rate, 'Sample Rate', 20000, 400000, valinit=SAMPLE_RATE, valstep=1000)
 s_xlim = Slider(ax_xlim, 'X Lim', 0.001, 0.1, valinit=XLIM, valstep=0.001, orientation='vertical')
 s_ylim = Slider(ax_ylim, 'Y Lim', 0.001, 1, valinit=YLIM, valstep=0.01, orientation='vertical')
 s_interval = Slider(ax_interval, 'Interval', 10, 200, valinit=INTERVAL, valstep=10, orientation='vertical')
-
-# Mikrofonu başlatma fonksiyonu
-stream = None
-def start_microphone():
-    global stream
-    if stream is not None:
-        stream.close()
-    stream = sd.InputStream(callback=audio_callback, channels=1, samplerate=SAMPLE_RATE)
-    stream.start()
 
 def init():
     ax.set_xlim(0, XLIM)
@@ -62,17 +53,11 @@ def init():
 
 def update(frame):
     global SAMPLE_RATE, DURATION, XLIM, YLIM, INTERVAL
-    new_sample_rate = int(s_sample_rate.val)
-    new_duration = s_duration.val
-    new_interval = int(s_interval.val)
-    if SAMPLE_RATE != new_sample_rate or DURATION != new_duration or INTERVAL != new_interval:
-        SAMPLE_RATE = new_sample_rate
-        DURATION = new_duration
-        INTERVAL = new_interval
-        start_microphone()
-        ani.event_source.interval = INTERVAL
+    SAMPLE_RATE = int(s_sample_rate.val)
+    DURATION = s_duration.val
     XLIM = s_xlim.val
     YLIM = s_ylim.val
+    INTERVAL = int(s_interval.val)
     if not audio_queue:
         return ln,
     ydata = audio_queue.pop(0)
@@ -86,12 +71,10 @@ def update(frame):
 def update_duration(val):
     global DURATION
     DURATION = val
-    start_microphone()
 
 def update_sample_rate(val):
     global SAMPLE_RATE
     SAMPLE_RATE = int(val)
-    start_microphone()
 
 def update_xlim(val):
     global XLIM
@@ -104,7 +87,7 @@ def update_ylim(val):
 def update_interval(val):
     global INTERVAL
     INTERVAL = int(val)
-    start_microphone()
+    ani.event_source.interval = INTERVAL
 
 s_duration.on_changed(update_duration)
 s_sample_rate.on_changed(update_sample_rate)
@@ -114,14 +97,12 @@ s_interval.on_changed(update_interval)
 
 # Mikrofonu başlat
 try:
-    start_microphone()
-    ani = FuncAnimation(fig, update, init_func=init, blit=True, interval=INTERVAL)
-    plt.show()
+    print(INTERVAL)
+    with sd.InputStream(callback=audio_callback, channels=1, samplerate=SAMPLE_RATE):
+        ani = FuncAnimation(fig, update, init_func=init, blit=True, interval=INTERVAL)
+        plt.show()
 
 except KeyboardInterrupt:
     print("Ses verisi alımı durduruldu.")
 except Exception as e:
     print(f"Bir hata oluştu: {e}")
-finally:
-    if stream is not None:
-        stream.close()
