@@ -58,7 +58,7 @@ class Bar(AxesWidget):
         self.callbacks['change'].append(callback)
 
 # Başlangıç örnekleme frekansı ve pencere süresi
-SAMPLE_RATE = 44100  # 44.1 kHz, CD kalitesinde ses
+SAMPLE_RATE = 44100# 44.1 kHz, CD kalitesinde ses
 DURATION = 0.1  # 100 ms
 XLIM = DURATION  # Başlangıç xlim
 YLIM = 1  # Başlangıç ylim
@@ -143,7 +143,7 @@ def baslat():
         with sd.InputStream(callback=audio_callback, channels=1, samplerate=SAMPLE_RATE) as listen:
             plt.show()
 
-        listen.stop()
+        
     except KeyboardInterrupt:
         print("Ses verisi alımı durduruldu.")
     except Exception as e:
