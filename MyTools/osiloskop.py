@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
 import scipy.signal as signal
 import numpy.fft as fft
+import threading
 
 class Osiloskop:
     def __init__(self, sample_rate=44100, duration=0.1, max_queue_size=10):
@@ -57,7 +58,7 @@ class Osiloskop:
         except Exception as e:
             print(f"Stream error: {e}")
     
-    def visualize(self, interval=50, block=False):
+    def visualize(self, interval=50):
         def init():
             self.ax.set_xlim(0, self.DURATION)
             self.ax.set_ylim(-1, 1)
@@ -87,11 +88,12 @@ class Osiloskop:
             cache_frame_data=False
         )
         
-        if block:
+        # Run plt.show() in a separate thread
+        def show_plot():
             plt.show()
-        else:
-            plt.show(block=False)
-            plt.pause(0.1)
+        
+        plot_thread = threading.Thread(target=show_plot)
+        plot_thread.start()
     
     def get_data(self):
         return self.audio_queue[-1] if self.audio_queue else None
