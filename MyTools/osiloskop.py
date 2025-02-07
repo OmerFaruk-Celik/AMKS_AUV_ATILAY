@@ -34,12 +34,14 @@ FILTER_ORDER = 4
 DEFAULT_LOWCUT = 5000
 DEFAULT_HIGHCUT = 20000
 DEFAULT_NOISE_THRESHOLD = 0.1
-DEFAULT_SMOOTHING = 51  # Savitzky-Golay filtresi için pencere boyutu
+DEFAULT_SMOOTHING = 51
+DEFAULT_FREQ_NOISE_THRESHOLD = 0.1  # FFT için gürültü eşiği
 
 # Veri kuyruğu
 audio_queue = []
 stream = None
-show_filtered = True  # Filtrelenmiş veriyi gösterme kontrolü
+show_filtered = True  # Zaman domain filtresi kontrolü
+show_freq_filtered = True  # Frekans domain filtresi kontrolü
 
 def audio_callback(indata, frames, time, status):
     if status:
@@ -75,10 +77,15 @@ def apply_noise_filter(data, threshold):
     return filtered_data
 
 def apply_smoothing(data, window_length):
-    # window_length tek sayı olmalı
     if window_length % 2 == 0:
         window_length += 1
     return signal.savgol_filter(data, window_length, 3)
+
+def apply_freq_filter(freqs, amplitudes, threshold):
+    mask = amplitudes > (threshold * np.max(amplitudes))
+    filtered_amps = amplitudes.copy()
+    filtered_amps[~mask] = 0
+    return filtered_amps
 
 # Grafik oluşturma
 fig = plt.figure(figsize=(12, 8))
@@ -93,7 +100,7 @@ ax_controls.set_visible(False)
 ax1 = plt.subplot(gs[0, 1])
 ax2 = plt.subplot(gs[1, 1])
 
-# Grafik ayarları
+# Grafik ayarları - Zaman Domain
 line1, = ax1.plot([], [], '#2196F3', label='Orijinal Sinyal', linewidth=1.5)
 line_filtered, = ax1.plot([], [], '#FF4081', label='Filtrelenmiş Sinyal', alpha=0.7, linewidth=1.5)
 freq_text = ax1.text(0.02, 0.95, '', transform=ax1.transAxes, 
@@ -104,34 +111,39 @@ ax1.set_ylabel('Genlik', fontsize=10)
 ax1.set_title('Zaman Domain Analizi', fontsize=12, pad=10)
 ax1.legend(loc='upper right', framealpha=0.9)
 
-line2, = ax2.plot([], [], '#4CAF50', linewidth=1.5)
+# Grafik ayarları - Frekans Domain
+line2, = ax2.plot([], [], '#4CAF50', label='Orijinal FFT', linewidth=1.5)
+line2_filtered, = ax2.plot([], [], '#FF9800', label='Filtrelenmiş FFT', alpha=0.7, linewidth=1.5)
 ax2.grid(True, alpha=0.3)
 ax2.set_xlabel('Frekans (Hz)', fontsize=10)
 ax2.set_ylabel('Genlik', fontsize=10)
 ax2.set_title('Frekans Domain Analizi', fontsize=12, pad=10)
+ax2.legend(loc='upper right', framealpha=0.9)
 
-# Slider ve textbox stil ayarları
+# Slider ve kontrolcü stil ayarları
 slider_color = '#f8f9fa'
 text_box_style = {'boxstyle': 'round,pad=0.5', 
                  'facecolor': slider_color,
                  'edgecolor': '#dee2e6'}
 
-# Sol taraftaki kontroller için yeni konumlar
+# Zaman domain kontrolleri
 ax_xlim = plt.axes([0.05, 0.7, 0.03, 0.2], facecolor=slider_color)
 ax_ylim = plt.axes([0.12, 0.7, 0.03, 0.2], facecolor=slider_color)
 ax_lowcut = plt.axes([0.05, 0.45, 0.1, 0.03], facecolor=slider_color)
 ax_highcut = plt.axes([0.05, 0.4, 0.1, 0.03], facecolor=slider_color)
 ax_noise = plt.axes([0.05, 0.35, 0.1, 0.03], facecolor=slider_color)
-ax_smooth = plt.axes([0.05, 0.3, 0.1, 0.03], facecolor=slider_color)  # Yeni smoothing slider
-
-# Toggle button için axes
+ax_smooth = plt.axes([0.05, 0.3, 0.1, 0.03], facecolor=slider_color)
 ax_toggle = plt.axes([0.05, 0.25, 0.1, 0.03])
 
-# Alt kısımdaki kontrol sliderları
+# Frekans domain kontrolleri
+ax_freq_noise = plt.axes([0.05, 0.15, 0.1, 0.03], facecolor='#e3f2fd')  # Farklı renk
+ax_freq_toggle = plt.axes([0.05, 0.1, 0.1, 0.03])
+
+# Alt kontrol sliderları
 ax_duration = plt.axes([0.25, 0.05, 0.5, 0.02], facecolor=slider_color)
 ax_sample_rate = plt.axes([0.25, 0.09, 0.5, 0.02], facecolor=slider_color)
 
-# Kontrol elemanları
+# Kontrol elemanları - Zaman Domain
 s_xlim = Slider(ax_xlim, 'X Lim', 0.001, 0.5, valinit=XLIM, orientation='vertical',
                 color='#4CAF50')
 s_ylim = Slider(ax_ylim, 'Y Lim', 0.001, 0.05, valinit=YLIM, orientation='vertical',
@@ -140,13 +152,18 @@ s_duration = Slider(ax_duration, 'Duration', 0.0001, 0.1, valinit=DURATION,
                    color='#2196F3')
 s_sample_rate = Slider(ax_sample_rate, 'Sample Rate', 20000, 400000, valinit=SAMPLE_RATE,
                       color='#2196F3')
-s_noise = Slider(ax_noise, 'Noise', 0, 0.005, valinit=DEFAULT_NOISE_THRESHOLD,
+s_noise = Slider(ax_noise, 'Time Noise', 0, 0.005, valinit=DEFAULT_NOISE_THRESHOLD,
                 color='#FF9800')
 s_smooth = Slider(ax_smooth, 'Smooth', 3, 99, valinit=DEFAULT_SMOOTHING,
-                 color='#9C27B0')  # Yeni smoothing slider
+                 color='#9C27B0')
 
-# Toggle button
-check = CheckButtons(ax_toggle, ['Filtre'], [True])
+# Kontrol elemanları - Frekans Domain
+s_freq_noise = Slider(ax_freq_noise, 'Freq Noise', 0, 0.5, valinit=DEFAULT_FREQ_NOISE_THRESHOLD,
+                     color='#2196F3')
+
+# Toggle butonları
+check_time = CheckButtons(ax_toggle, ['Time Filter'], [True])
+check_freq = CheckButtons(ax_freq_toggle, ['Freq Filter'], [True])
 
 # Text boxlar
 t_lowcut = TextBox(ax_lowcut, 'Low Cut Hz', initial=str(DEFAULT_LOWCUT),
@@ -165,24 +182,29 @@ def init():
     ax1.set_ylim(-s_ylim.val, s_ylim.val)
     ax2.set_xlim(0, SAMPLE_RATE/2)
     ax2.set_ylim(0, 1)
-    return line1, line_filtered, line2
+    return line1, line_filtered, line2, line2_filtered
 
-def toggle_filter(label):
+def toggle_time_filter(label):
     global show_filtered
     show_filtered = not show_filtered
+    plt.draw()
+
+def toggle_freq_filter(label):
+    global show_freq_filtered
+    show_freq_filtered = not show_freq_filtered
     plt.draw()
 
 def update(frame):
     global SAMPLE_RATE, DURATION
     
     if not audio_queue:
-        return line1, line_filtered, line2
+        return line1, line_filtered, line2, line2_filtered
 
     try:
         ydata = audio_queue[-1]
         xdata = np.linspace(0, DURATION, len(ydata))
         
-        # Filtreleme
+        # Zaman domain filtreleme
         lowcut = float(t_lowcut.text)
         highcut = float(t_highcut.text)
         noise_threshold = s_noise.val
@@ -190,46 +212,58 @@ def update(frame):
         if smooth_window % 2 == 0:
             smooth_window += 1
         
-        
+        # Frekans domain filtreleme
+        freq_noise_threshold = s_freq_noise.val
         
         if show_filtered:
-            line1.set_data([], [])
-            # Filtreleme işlemleri
+            # Zaman domain filtresi
             filtered_data = apply_bandpass_filter(ydata, lowcut, highcut, SAMPLE_RATE)
             filtered_data = apply_noise_filter(filtered_data, noise_threshold)
             filtered_data = apply_smoothing(filtered_data, smooth_window)
-            
-            # Dominant frekans
-            dominant_freq = calculate_dominant_frequency(filtered_data, SAMPLE_RATE)
-            freq_text.set_text(f'Dominant Frekans:\n{dominant_freq:.1f} Hz')
-            
-            # FFT
-            yf = np.abs(fft(filtered_data))
-            xf = fftfreq(len(filtered_data), 1/SAMPLE_RATE)
-            
             line_filtered.set_data(xdata, filtered_data)
+            data_for_fft = filtered_data
         else:
-            # Orijinal veriyi göster
-            line1.set_data(xdata, ydata)
             line_filtered.set_data([], [])
-            # FFT orijinal veri için
-            yf = np.abs(fft(ydata))
-            xf = fftfreq(len(ydata), 1/SAMPLE_RATE)
+            data_for_fft = ydata
             
-            dominant_freq = calculate_dominant_frequency(ydata, SAMPLE_RATE)
-            freq_text.set_text(f'Dominant Frekans:\n{dominant_freq:.1f} Hz')
+        # Her zaman orijinal veriyi göster
+        line1.set_data(xdata, ydata)
+            
+        # FFT hesaplama
+        yf = np.abs(fft(data_for_fft))
+        xf = fftfreq(len(data_for_fft), 1/SAMPLE_RATE)
         
+        # Pozitif frekansları al
         positive_freq_mask = xf >= 0
         yf = yf[positive_freq_mask]
         xf = xf[positive_freq_mask]
         
+        # Normalize et
         yf = yf / np.max(yf) if np.max(yf) > 0 else yf
+        
+        # Orijinal FFT'yi göster
         line2.set_data(xf, yf)
+        
+        # Frekans filtresi
+        if show_freq_filtered:
+            filtered_yf = apply_freq_filter(xf, yf, freq_noise_threshold)
+            line2_filtered.set_data(xf, filtered_yf)
+            
+            # Dominant frekansı filtrelenmiş veriden hesapla
+            max_idx = np.argmax(filtered_yf)
+            dominant_freq = xf[max_idx] if max_idx < len(xf) else 0
+        else:
+            line2_filtered.set_data([], [])
+            # Dominant frekansı orijinal veriden hesapla
+            max_idx = np.argmax(yf)
+            dominant_freq = xf[max_idx] if max_idx < len(xf) else 0
+            
+        freq_text.set_text(f'Dominant Frekans:\n{dominant_freq:.1f} Hz')
         
     except Exception as e:
         print(f"Update error: {e}")
     
-    return line1, line_filtered, line2
+    return line1, line_filtered, line2, line2_filtered
 
 def restart_stream():
     global stream, audio_queue
