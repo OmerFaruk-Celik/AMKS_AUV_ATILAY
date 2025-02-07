@@ -88,6 +88,7 @@ def update_ylim(val):
 def update_interval(val):
     global INTERVAL
     INTERVAL = int(val)
+    return INTERVAL
 
 
 s_duration.on_changed(update_duration)
