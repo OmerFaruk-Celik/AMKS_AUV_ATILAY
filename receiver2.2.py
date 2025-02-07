@@ -5,7 +5,7 @@ import time
 import threading
 
 # Ayarlar
-SAMPLE_RATE = 19600  # Örnekleme frekansı
+SAMPLE_RATE = 200000  # Örnekleme frekansı
 DURATION = 0.01  # 10 ms pencere
 FREQ_MIN = 14000  # Minimum frekans sınırı
 FREQ_MAX = 17000  # Maksimum frekans sınırı
