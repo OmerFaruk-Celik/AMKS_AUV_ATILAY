@@ -46,6 +46,15 @@ s_xlim = Slider(ax_xlim, 'X Lim', 0.001, 0.1, valinit=XLIM, valstep=0.001, orien
 s_ylim = Slider(ax_ylim, 'Y Lim', 0.001, 1, valinit=YLIM, valstep=0.01, orientation='vertical')
 s_interval = Slider(ax_interval, 'Interval', 10, 200, valinit=INTERVAL, valstep=10, orientation='vertical')
 
+# Mikrofonu başlatma fonksiyonu
+stream = None
+def start_microphone():
+    global stream
+    if stream is not None:
+        stream.close()
+    stream = sd.InputStream(callback=audio_callback, channels=1, samplerate=SAMPLE_RATE)
+    stream.start()
+
 def init():
     ax.set_xlim(0, XLIM)
     ax.set_ylim(-YLIM, YLIM)
@@ -71,10 +80,12 @@ def update(frame):
 def update_duration(val):
     global DURATION
     DURATION = val
+    start_microphone()
 
 def update_sample_rate(val):
     global SAMPLE_RATE
     SAMPLE_RATE = int(val)
+    start_microphone()
 
 def update_xlim(val):
     global XLIM
@@ -97,12 +108,14 @@ s_interval.on_changed(update_interval)
 
 # Mikrofonu başlat
 try:
-    print(INTERVAL)
-    with sd.InputStream(callback=audio_callback, channels=1, samplerate=SAMPLE_RATE):
-        ani = FuncAnimation(fig, update, init_func=init, blit=True, interval=INTERVAL)
-        plt.show()
+    start_microphone()
+    ani = FuncAnimation(fig, update, init_func=init, blit=True, interval=INTERVAL)
+    plt.show()
 
 except KeyboardInterrupt:
     print("Ses verisi alımı durduruldu.")
 except Exception as e:
     print(f"Bir hata oluştu: {e}")
+finally:
+    if stream is not None:
+        stream.close()
