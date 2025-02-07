@@ -5,6 +5,13 @@ from matplotlib.animation import FuncAnimation
 from matplotlib.widgets import Slider, TextBox
 from scipy import signal
 from scipy.fft import fft, fftfreq
+import matplotlib.style as style
+from matplotlib.gridspec import GridSpec
+
+# Modern stil ayarları
+style.use('seaborn-darkgrid')
+plt.rcParams['font.family'] = 'sans-serif'
+plt.rcParams['font.sans-serif'] = ['Arial']
 
 # Başlangıç parametreleri
 SAMPLE_RATE = 44100
@@ -31,7 +38,6 @@ def audio_callback(indata, frames, time, status):
         audio_queue.pop(0)
     audio_queue.append(indata[:, 0])
 
-# Fourier analizi fonksiyonu
 def calculate_dominant_frequency(data, sample_rate):
     if len(data) == 0:
         return 0
@@ -39,15 +45,12 @@ def calculate_dominant_frequency(data, sample_rate):
     yf = fft(data)
     xf = fftfreq(len(data), 1/sample_rate)
     
-    # Sadece pozitif frekansları al
     yf = yf[:len(data)//2]
     xf = xf[:len(data)//2]
     
-    # En büyük genliğe sahip frekansı bul
     dominant_idx = np.argmax(np.abs(yf))
     return abs(xf[dominant_idx])
 
-# Band geçiren filtre fonksiyonu
 def apply_bandpass_filter(data, lowcut, highcut, sample_rate, order=FILTER_ORDER):
     nyquist = sample_rate / 2
     low = lowcut / nyquist
@@ -55,7 +58,6 @@ def apply_bandpass_filter(data, lowcut, highcut, sample_rate, order=FILTER_ORDER
     b, a = signal.butter(order, [low, high], btype='band')
     return signal.filtfilt(b, a, data)
 
-# Gürültü filtreleme fonksiyonu
 def apply_noise_filter(data, threshold):
     mask = np.abs(data) > threshold
     filtered_data = data.copy()
@@ -63,48 +65,82 @@ def apply_noise_filter(data, threshold):
     return filtered_data
 
 # Grafik oluşturma
-fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(10, 8))
-plt.subplots_adjust(left=0.25, bottom=0.25, right=0.85, hspace=0.3)
+fig = plt.figure(figsize=(12, 8))
+gs = GridSpec(2, 2, width_ratios=[0.2, 1], height_ratios=[1, 1])
+plt.subplots_adjust(left=0.25, bottom=0.12, right=0.95, top=0.95, hspace=0.3)
+
+# Sol kontrol paneli için axes
+ax_controls = plt.subplot(gs[:, 0])
+ax_controls.set_visible(False)
+
+# Ana grafikler
+ax1 = plt.subplot(gs[0, 1])
+ax2 = plt.subplot(gs[1, 1])
 
 # Zaman domain grafiği
-line1, = ax1.plot([], [], 'b-', label='Orijinal Sinyal')
-line_filtered, = ax1.plot([], [], 'r-', label='Filtrelenmiş Sinyal', alpha=0.7)
-freq_text = ax1.text(0.02, 0.95, '', transform=ax1.transAxes)
-ax1.grid(True)
-ax1.set_xlabel('Zaman (saniye)')
-ax1.set_ylabel('Genlik')
-ax1.set_title('Zaman Domain Analizi')
-ax1.legend()
+line1, = ax1.plot([], [], 'b-', label='Orijinal Sinyal', linewidth=1.5)
+line_filtered, = ax1.plot([], [], 'r-', label='Filtrelenmiş Sinyal', alpha=0.7, linewidth=1.5)
+freq_text = ax1.text(0.02, 0.95, '', transform=ax1.transAxes, 
+                    bbox=dict(facecolor='white', alpha=0.8, edgecolor='none'))
+ax1.grid(True, alpha=0.3)
+ax1.set_xlabel('Zaman (saniye)', fontsize=10)
+ax1.set_ylabel('Genlik', fontsize=10)
+ax1.set_title('Zaman Domain Analizi', fontsize=12, pad=10)
+ax1.legend(loc='upper right', framealpha=0.9)
 
 # Frekans domain grafiği
-line2, = ax2.plot([], [], 'g-')
-ax2.grid(True)
-ax2.set_xlabel('Frekans (Hz)')
-ax2.set_ylabel('Genlik')
-ax2.set_title('Frekans Domain Analizi')
+line2, = ax2.plot([], [], 'g-', linewidth=1.5)
+ax2.grid(True, alpha=0.3)
+ax2.set_xlabel('Frekans (Hz)', fontsize=10)
+ax2.set_ylabel('Genlik', fontsize=10)
+ax2.set_title('Frekans Domain Analizi', fontsize=12, pad=10)
 
-# Kontrol paneli
-axcolor = 'lightgoldenrodyellow'
-ax_duration = plt.axes([0.1, 0.1, 0.65, 0.03], facecolor=axcolor)
-ax_sample_rate = plt.axes([0.1, 0.15, 0.65, 0.03], facecolor=axcolor)
+# Slider stil ayarları
+slider_color = '#f0f0f0'
+text_box_style = {'boxstyle': 'round,pad=0.5', 
+                 'facecolor': slider_color,
+                 'edgecolor': '#cccccc'}
 
-# Filtre kontrolleri
-ax_lowcut = plt.axes([0.88, 0.7, 0.1, 0.03], facecolor=axcolor)
-ax_highcut = plt.axes([0.88, 0.6, 0.1, 0.03], facecolor=axcolor)
-ax_noise = plt.axes([0.88, 0.5, 0.1, 0.03], facecolor=axcolor)
+# Sol taraftaki kontrol sliderları
+ax_xlim = plt.axes([0.05, 0.6, 0.03, 0.3], facecolor=slider_color)
+ax_ylim = plt.axes([0.12, 0.6, 0.03, 0.3], facecolor=slider_color)
+
+# Alt kısımdaki kontrol sliderları
+ax_duration = plt.axes([0.25, 0.05, 0.5, 0.02], facecolor=slider_color)
+ax_sample_rate = plt.axes([0.25, 0.09, 0.5, 0.02], facecolor=slider_color)
+
+# Sağ taraftaki filtre kontrolleri
+ax_lowcut = plt.axes([0.82, 0.8, 0.12, 0.03], facecolor=slider_color)
+ax_highcut = plt.axes([0.82, 0.75, 0.12, 0.03], facecolor=slider_color)
+ax_noise = plt.axes([0.82, 0.7, 0.12, 0.03], facecolor=slider_color)
 
 # Sliderlar
-s_duration = Slider(ax_duration, 'Duration', 0.0001, 0.1, valinit=DURATION)
-s_sample_rate = Slider(ax_sample_rate, 'Sample Rate', 20000, 400000, valinit=SAMPLE_RATE)
-s_noise = Slider(ax_noise, 'Noise Threshold', 0, 1, valinit=DEFAULT_NOISE_THRESHOLD)
+s_xlim = Slider(ax_xlim, 'X Lim', 0.001, 0.5, valinit=XLIM, orientation='vertical',
+                track_color='#e0e0e0', handle_style={'facecolor': '#4CAF50'})
+s_ylim = Slider(ax_ylim, 'Y Lim', 0.1, 2.0, valinit=YLIM, orientation='vertical',
+                track_color='#e0e0e0', handle_style={'facecolor': '#4CAF50'})
+s_duration = Slider(ax_duration, 'Duration', 0.0001, 0.1, valinit=DURATION,
+                   track_color='#e0e0e0', handle_style={'facecolor': '#2196F3'})
+s_sample_rate = Slider(ax_sample_rate, 'Sample Rate', 20000, 400000, valinit=SAMPLE_RATE,
+                      track_color='#e0e0e0', handle_style={'facecolor': '#2196F3'})
+s_noise = Slider(ax_noise, 'Noise Threshold', 0, 1, valinit=DEFAULT_NOISE_THRESHOLD,
+                track_color='#e0e0e0', handle_style={'facecolor': '#FF9800'})
 
-# Textbox'lar
-t_lowcut = TextBox(ax_lowcut, 'Low Cut (Hz)', initial=str(DEFAULT_LOWCUT))
-t_highcut = TextBox(ax_highcut, 'High Cut (Hz)', initial=str(DEFAULT_HIGHCUT))
+# Modern stil text boxlar
+t_lowcut = TextBox(ax_lowcut, 'Low Cut (Hz)', initial=str(DEFAULT_LOWCUT),
+                  textalignment="center", label_pad=0.1)
+t_highcut = TextBox(ax_highcut, 'High Cut (Hz)', initial=str(DEFAULT_HIGHCUT),
+                   textalignment="center", label_pad=0.1)
+
+# Text box stilleri
+for tb in [t_lowcut, t_highcut]:
+    tb.label.set_color('#333333')
+    tb.label.set_fontsize(9)
+    tb.text_disp.set_fontsize(9)
 
 def init():
-    ax1.set_xlim(0, XLIM)
-    ax1.set_ylim(-YLIM, YLIM)
+    ax1.set_xlim(0, s_xlim.val)
+    ax1.set_ylim(-s_ylim.val, s_ylim.val)
     ax2.set_xlim(0, SAMPLE_RATE/2)
     ax2.set_ylim(0, 1)
     return line1, line_filtered, line2
@@ -116,7 +152,6 @@ def update(frame):
         return line1, line_filtered, line2
 
     try:
-        # Zaman domain verisi
         ydata = audio_queue[-1]
         xdata = np.linspace(0, DURATION, len(ydata))
         
@@ -125,27 +160,26 @@ def update(frame):
         highcut = float(t_highcut.text)
         noise_threshold = s_noise.val
         
-        # Band geçiren filtre uygula
         filtered_data = apply_bandpass_filter(ydata, lowcut, highcut, SAMPLE_RATE)
-        
-        # Gürültü filtresi uygula
         filtered_data = apply_noise_filter(filtered_data, noise_threshold)
         
-        # Dominant frekansı hesapla
+        # Dominant frekans
         dominant_freq = calculate_dominant_frequency(filtered_data, SAMPLE_RATE)
-        freq_text.set_text(f'Dominant Frekans: {dominant_freq:.1f} Hz')
+        freq_text.set_text(f'Dominant Frekans:\n{dominant_freq:.1f} Hz')
         
-        # FFT hesapla
+        # FFT
         yf = np.abs(fft(filtered_data))
         xf = fftfreq(len(filtered_data), 1/SAMPLE_RATE)
         
-        # Pozitif frekansları al
         positive_freq_mask = xf >= 0
         yf = yf[positive_freq_mask]
         xf = xf[positive_freq_mask]
         
-        # Normalize et
         yf = yf / np.max(yf) if np.max(yf) > 0 else yf
+        
+        # Grafik limitleri
+        ax1.set_xlim(0, s_xlim.val)
+        ax1.set_ylim(-s_ylim.val, s_ylim.val)
         
         # Grafikleri güncelle
         line1.set_data(xdata, ydata)
@@ -184,9 +218,19 @@ def update_duration(val):
     DURATION = val
     restart_stream()
 
+def update_xlim(val):
+    ax1.set_xlim(0, val)
+    plt.draw()
+
+def update_ylim(val):
+    ax1.set_ylim(-val, val)
+    plt.draw()
+
 # Callback'leri bağla
 s_sample_rate.on_changed(update_sample_rate)
 s_duration.on_changed(update_duration)
+s_xlim.on_changed(update_xlim)
+s_ylim.on_changed(update_ylim)
 
 def baslat():
     global ani
