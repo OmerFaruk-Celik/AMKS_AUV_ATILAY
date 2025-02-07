@@ -34,14 +34,14 @@ plt.grid(True)
 axcolor = 'lightgoldenrodyellow'
 ax_duration = plt.axes([0.1, 0.1, 0.65, 0.03], facecolor=axcolor)
 ax_sample_rate = plt.axes([0.1, 0.15, 0.65, 0.03], facecolor=axcolor)
-ax_xlim = plt.axes([0.88, 0.25, 0.03, 0.63], facecolor=axcolor, orientation='vertical')
-ax_ylim = plt.axes([0.93, 0.25, 0.03, 0.63], facecolor=axcolor, orientation='vertical')
+ax_xlim = plt.axes([0.88, 0.25, 0.03, 0.63], facecolor=axcolor)
+ax_ylim = plt.axes([0.93, 0.25, 0.03, 0.63], facecolor=axcolor)
 
 # Sliderlar
 s_duration = Slider(ax_duration, 'Duration', 0.0001, 0.1, valinit=DURATION, valstep=0.0001)
 s_sample_rate = Slider(ax_sample_rate, 'Sample Rate', 20000, 200000, valinit=SAMPLE_RATE, valstep=1000)
-s_xlim = Slider(ax_xlim, 'X Lim', 0.01, 0.1, valinit=XLIM, valstep=0.001)
-s_ylim = Slider(ax_ylim, 'Y Lim', 0.1, 1, valinit=YLIM, valstep=0.01)
+s_xlim = Slider(ax_xlim, 'X Lim', 0.01, 0.1, valinit=XLIM, valstep=0.001, orientation='vertical')
+s_ylim = Slider(ax_ylim, 'Y Lim', 0.1, 1, valinit=YLIM, valstep=0.01, orientation='vertical')
 
 def init():
     ax.set_xlim(0, XLIM)
