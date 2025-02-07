@@ -4,7 +4,6 @@ import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
 import scipy.signal as signal
 import numpy.fft as fft
-import threading
 
 class Osiloskop:
     def __init__(self, sample_rate=44100, duration=0.1, max_queue_size=10):
@@ -88,18 +87,17 @@ class Osiloskop:
             cache_frame_data=False
         )
         
-        # Run plt.show() in a separate thread
-        def show_plot():
-            plt.show()
-        
-        plot_thread = threading.Thread(target=show_plot)
-        plot_thread.start()
+        plt.ion()  # Interactive mode
+        plt.show(block=False)
     
     def get_data(self):
         return self.audio_queue[-1] if self.audio_queue else None
     
     def apply_bandpass_filter(self, data, lowcut, highcut, order=5):
         """Apply bandpass filter to audio data"""
+        # Ensure data is a 1D numpy array
+        data = np.asarray(data).flatten()
+        
         nyq = 0.5 * self.SAMPLE_RATE
         low = lowcut / nyq
         high = highcut / nyq
@@ -108,10 +106,14 @@ class Osiloskop:
     
     def reduce_noise(self, data, noise_threshold=0.1):
         """Simple noise reduction using amplitude thresholding"""
+        data = np.asarray(data).flatten()
         return np.where(np.abs(data) > noise_threshold, data, 0)
     
     def estimate_dominant_frequency(self, data):
         """Estimate dominant frequency using FFT"""
+        # Ensure data is a 1D numpy array
+        data = np.asarray(data).flatten()
+        
         fft_data = fft.fft(data)
         freqs = fft.fftfreq(len(data), 1/self.SAMPLE_RATE)
         
@@ -123,5 +125,7 @@ class Osiloskop:
     
     def spectral_density(self, data):
         """Compute power spectral density"""
+        # Ensure data is a 1D numpy array
+        data = np.asarray(data).flatten()
         f, Pxx = signal.welch(data, self.SAMPLE_RATE)
         return f, Pxx
