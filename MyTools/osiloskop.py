@@ -3,6 +3,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
 from matplotlib.widgets import Slider
+import threading
+import queue
 
 # Başlangıç örnekleme frekansı ve pencere süresi
 SAMPLE_RATE = 44100  # 44.1 kHz, CD kalitesinde ses
@@ -13,7 +15,7 @@ INTERVAL = 50  # Başlangıç interval değeri (ms)
 MAX_FRAMES = 1000  # Maksimum frame sayısı
 
 # Ses verisi için bir kuyruk
-audio_queue = []
+audio_queue = queue.Queue()
 
 # Ses stream nesnesi için global değişken
 audio_stream = None
@@ -22,9 +24,9 @@ def audio_callback(indata, frames, time, status):
     if status:
         print(status)
     # Kuyruğu sınırla
-    if len(audio_queue) > 10:  # Maksimum 10 veri paketi tut
-        audio_queue.pop(0)
-    audio_queue.append(indata[:, 0])
+    if audio_queue.qsize() > 10:  # Maksimum 10 veri paketi tut
+        audio_queue.get()
+    audio_queue.put(indata[:, 0])
 
 # Grafik oluşturma
 fig, ax = plt.subplots()
@@ -64,11 +66,11 @@ def update(frame):
     YLIM = s_ylim.val
     INTERVAL = int(s_interval.val)
     
-    if not audio_queue:
+    if audio_queue.empty():
         return ln,
         
     try:
-        ydata = audio_queue[-1]  # En son veriyi al
+        ydata = audio_queue.get()  # En son veriyi al
         xdata = np.linspace(0, DURATION, len(ydata))
         ln.set_data(xdata, ydata)
         ax.set_xlim(0, XLIM)
@@ -86,7 +88,8 @@ def restart_stream():
         audio_stream.close()
     
     # Kuyruğu temizle
-    audio_queue.clear()
+    with audio_queue.mutex:
+        audio_queue.queue.clear()
     
     # Yeni stream başlat
     try:
@@ -141,7 +144,7 @@ s_sample_rate.on_changed(update_sample_rate)
 s_duration.on_changed(update_duration)
 
 # Mikrofonu başlat
-def start_stream():
+def stream():
     global ani, audio_stream
     try:
         restart_stream()
@@ -158,9 +161,14 @@ def start_stream():
             audio_stream.stop()
             audio_stream.close()
 
+# stream fonksiyonunu thread ile başlatan fonksiyon
+def start_stream():
+    stream_thread = threading.Thread(target=stream)
+    stream_thread.start()
+
 # Ses verilerini döndüren fonksiyon
 def get():
-    if audio_queue:
-        return audio_queue[-1]
+    if not audio_queue.empty():
+        return audio_queue.get()
     else:
         return None
