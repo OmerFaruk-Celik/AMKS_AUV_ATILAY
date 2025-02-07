@@ -190,8 +190,7 @@ def update(frame):
         if smooth_window % 2 == 0:
             smooth_window += 1
         
-        # Orijinal veriyi göster
-        line1.set_data(xdata, ydata)
+        
         
         if show_filtered:
             # Filtreleme işlemleri
@@ -209,6 +208,8 @@ def update(frame):
             
             line_filtered.set_data(xdata, filtered_data)
         else:
+            # Orijinal veriyi göster
+            line1.set_data(xdata, ydata)
             line_filtered.set_data([], [])
             # FFT orijinal veri için
             yf = np.abs(fft(ydata))
