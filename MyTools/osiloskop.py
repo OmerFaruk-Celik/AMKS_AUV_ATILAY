@@ -16,7 +16,7 @@ MAX_FRAMES = 1000  # Maksimum frame sayısı
 audio_queue = []
 
 # Ses stream nesnesi için global değişken
-stream = None
+audio_stream = None
 
 def audio_callback(indata, frames, time, status):
     if status:
@@ -79,22 +79,22 @@ def update(frame):
     return ln,
 
 def restart_stream():
-    global stream, audio_queue
+    global audio_stream, audio_queue
     # Mevcut stream'i temizle
-    if stream is not None:
-        stream.stop()
-        stream.close()
+    if audio_stream is not None:
+        audio_stream.stop()
+        audio_stream.close()
     
     # Kuyruğu temizle
     audio_queue.clear()
     
     # Yeni stream başlat
     try:
-        stream = sd.InputStream(callback=audio_callback, 
+        audio_stream = sd.InputStream(callback=audio_callback, 
                               channels=1, 
                               samplerate=SAMPLE_RATE,
                               blocksize=int(SAMPLE_RATE * DURATION))
-        stream.start()
+        audio_stream.start()
     except Exception as e:
         print(f"Stream error: {e}")
 
@@ -141,8 +141,8 @@ s_sample_rate.on_changed(update_sample_rate)
 s_duration.on_changed(update_duration)
 
 # Mikrofonu başlat
-def stream():
-    global ani, stream
+def start_stream():
+    global ani, audio_stream
     try:
         restart_stream()
         ani = FuncAnimation(fig, update, init_func=init, 
@@ -154,9 +154,9 @@ def stream():
     except Exception as e:
         print(f"Bir hata oluştu: {e}")
     finally:
-        if stream:
-            stream.stop()
-            stream.close()
+        if audio_stream:
+            audio_stream.stop()
+            audio_stream.close()
 
 # Ses verilerini döndüren fonksiyon
 def get():
