@@ -7,15 +7,15 @@ import threading
 # Ayarlar
 SAMPLE_RATE = 300000  # Örnekleme frekansı
 DURATION = 0.005  # 10 ms pencere
-FREQ_MIN = 17000  # Minimum frekans sınırı
-FREQ_MAX = 20000  # Maksimum frekans sınırı
-TOLERANCE = 200  # Frekans toleransı
+FREQ_MIN = 15000  # Minimum frekans sınırı
+FREQ_MAX = 17000  # Maksimum frekans sınırı
+TOLERANCE = 100  # Frekans toleransı
 
 # Özel bit frekansları
-START_BIT = 20000
-SEPARATOR_BIT = 17800
-BIT_0 = 18600
-BIT_1 = 19500
+START_BIT = 16000
+SEPARATOR_BIT = 15100
+BIT_0 = 15400
+BIT_1 = 15700
 ilk=False
 # Ses verisi kuyruğu
 audio_queue = queue.Queue()
