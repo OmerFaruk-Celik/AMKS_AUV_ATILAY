@@ -11,7 +11,7 @@ from matplotlib.gridspec import GridSpec
 # Modern stil ayarları
 plt.style.use('default')
 plt.rcParams.update({
-    'font.family': 'sans-serif',
+    'font.family': 'serif',
     'font.sans-serif': ['Arial'],
     'axes.grid': True,
     'grid.alpha': 0.3,
