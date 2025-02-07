@@ -132,7 +132,7 @@ b_interval.on_changed(update_interval)
 
 def baslat():
     # Mikrofonu başlat
-    global INTERVAL,SAMPLE_RATE
+    global INTERVAL,SAMPLE_RATE,ani
     try:
         print(INTERVAL)
         with sd.InputStream(callback=audio_callback, channels=1, samplerate=SAMPLE_RATE):
