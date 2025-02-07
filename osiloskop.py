@@ -71,7 +71,6 @@ def update(frame):
 def update_duration(val):
     global DURATION
     DURATION = val
-  
 
 def update_sample_rate(val):
     global SAMPLE_RATE
@@ -88,7 +87,8 @@ def update_ylim(val):
 def update_interval(val):
     global INTERVAL
     INTERVAL = int(val)
-    return INTERVAL
+    if 'ani' in globals() and ani:
+        ani.event_source.interval = INTERVAL
 
 s_duration.on_changed(update_duration)
 s_sample_rate.on_changed(update_sample_rate)
@@ -97,13 +97,26 @@ s_ylim.on_changed(update_ylim)
 s_interval.on_changed(update_interval)
 
 # Mikrofonu başlat
-try:
-    print(INTERVAL)
-    with sd.InputStream(callback=audio_callback, channels=1, samplerate=INTERVAL):
-        ani = FuncAnimation(fig, update, init_func=init, blit=True, interval=interval())
-        plt.show()
+def baslat():
+    global ani
+    try:
+        print(INTERVAL)
+        ani = FuncAnimation(fig, update, init_func=init, blit=True, interval=INTERVAL)
+        with sd.InputStream(callback=audio_callback, channels=1, samplerate=SAMPLE_RATE):
+            plt.show()
+    except KeyboardInterrupt:
+        print("Ses verisi alımı durduruldu.")
+    except Exception as e:
+        print(f"Bir hata oluştu: {e}")
 
-except KeyboardInterrupt:
-    print("Ses verisi alımı durduruldu.")
-except Exception as e:
-    print(f"Bir hata oluştu: {e}")
+def stop():
+    global ani
+    if 'ani' in globals() and ani:
+        ani.event_source.stop()
+        plt.close(fig)
+        print("Ses verisi alımı durduruldu ve grafik kapatıldı.")
+
+# Başlat ve durdur fonksiyonlarını test etmek için
+baslat()
+# stop() fonksiyonunu çağırmak için bir yol ekleyebilirsiniz
+# Örneğin, bir tuşa basıldığında stop() fonksiyonunu çağırabilirsiniz
