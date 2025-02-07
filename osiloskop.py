@@ -69,6 +69,8 @@ audio_queue = []
 
 # Ses verisini işlemek için bir geri çağırma fonksiyonu
 def audio_callback(indata, frames, time, status):
+    global INTERVAL
+    print(INTERVAL)
     if status:
         print(status)
     # Alınan ses verisini kuyruğa ekle
@@ -126,7 +128,7 @@ def update(frame):
 def update_interval(val):
     global INTERVAL
     INTERVAL = int(val)
-    baslat()
+   
     if 'ani' in globals() and ani:
         ani.event_source.interval = INTERVAL
 
