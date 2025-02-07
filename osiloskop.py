@@ -14,6 +14,9 @@ INTERVAL = 50  # Başlangıç interval değeri (ms)
 # Ses verisi için bir kuyruk
 audio_queue = []
 
+# Ses stream nesnesi için global değişken
+stream = None
+
 # Ses verisini işlemek için bir geri çağırma fonksiyonu
 def audio_callback(indata, frames, time, status):
     if status:
@@ -70,27 +73,65 @@ def update(frame):
 def update_interval(val):
     global INTERVAL, ani
     INTERVAL = int(val)
-    print(f"New interval: {INTERVAL}")  # Debug için
+    print(f"New interval: {INTERVAL}")
     
     if 'ani' in globals() and ani:
         ani.event_source.stop()
         ani = FuncAnimation(fig, update, init_func=init, blit=True, interval=INTERVAL)
-        print(f"Animation interval: {ani.event_source.interval}")  # Debug için
         plt.draw()
 
+def update_sample_rate(val):
+    global SAMPLE_RATE, stream, ani
+    SAMPLE_RATE = int(val)
+    print(f"New sample rate: {SAMPLE_RATE}")
+    
+    # Mevcut stream'i durdur
+    if stream:
+        stream.stop()
+        stream.close()
+    
+    # Yeni sample rate ile stream'i yeniden başlat
+    stream = sd.InputStream(callback=audio_callback, channels=1, samplerate=SAMPLE_RATE)
+    stream.start()
+    
+    # Animasyonu yenile
+    if 'ani' in globals() and ani:
+        ani.event_source.stop()
+        ani = FuncAnimation(fig, update, init_func=init, blit=True, interval=INTERVAL)
+        plt.draw()
+
+def update_duration(val):
+    global DURATION, ani
+    DURATION = val
+    print(f"New duration: {DURATION}")
+    
+    # Animasyonu yenile
+    if 'ani' in globals() and ani:
+        ani.event_source.stop()
+        ani = FuncAnimation(fig, update, init_func=init, blit=True, interval=INTERVAL)
+        plt.draw()
+
+# Slider callback'leri
 s_interval.on_changed(update_interval)
+s_sample_rate.on_changed(update_sample_rate)
+s_duration.on_changed(update_duration)
 
 # Mikrofonu başlat
 def baslat():
-    global ani
+    global ani, stream
     try:
+        stream = sd.InputStream(callback=audio_callback, channels=1, samplerate=SAMPLE_RATE)
+        stream.start()
         ani = FuncAnimation(fig, update, init_func=init, blit=True, interval=INTERVAL)
-        with sd.InputStream(callback=audio_callback, channels=1, samplerate=SAMPLE_RATE) as listen:
-            plt.show()
+        plt.show()
     except KeyboardInterrupt:
         print("Ses verisi alımı durduruldu.")
     except Exception as e:
         print(f"Bir hata oluştu: {e}")
+    finally:
+        if stream:
+            stream.stop()
+            stream.close()
 
 # Başlat
 baslat()
