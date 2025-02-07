@@ -1,7 +1,7 @@
-from osiloskop import stream, get
+from osiloskop import start_stream, get
 
 # Grafiği başlat
-stream()
+start_stream()
 
 # Bir süre sonra ses verilerini almak için
 import time
