@@ -71,6 +71,7 @@ def update(frame):
 def update_duration(val):
     global DURATION
     DURATION = val
+  
 
 def update_sample_rate(val):
     global SAMPLE_RATE
@@ -87,7 +88,7 @@ def update_ylim(val):
 def update_interval(val):
     global INTERVAL
     INTERVAL = int(val)
-    ani.event_source.interval = INTERVAL
+
 
 s_duration.on_changed(update_duration)
 s_sample_rate.on_changed(update_sample_rate)
