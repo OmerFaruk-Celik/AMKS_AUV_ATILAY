@@ -2,7 +2,7 @@ import sounddevice as sd
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
-from matplotlib.widgets import Slider, TextBox
+from matplotlib.widgets import Slider, TextBox, CheckButtons
 from scipy import signal
 from scipy.fft import fft, fftfreq
 import matplotlib.style as style
@@ -34,10 +34,12 @@ FILTER_ORDER = 4
 DEFAULT_LOWCUT = 5000
 DEFAULT_HIGHCUT = 20000
 DEFAULT_NOISE_THRESHOLD = 0.1
+DEFAULT_SMOOTHING = 51  # Savitzky-Golay filtresi için pencere boyutu
 
 # Veri kuyruğu
 audio_queue = []
 stream = None
+show_filtered = True  # Filtrelenmiş veriyi gösterme kontrolü
 
 def audio_callback(indata, frames, time, status):
     if status:
@@ -71,6 +73,12 @@ def apply_noise_filter(data, threshold):
     filtered_data = data.copy()
     filtered_data[~mask] = 0
     return filtered_data
+
+def apply_smoothing(data, window_length):
+    # window_length tek sayı olmalı
+    if window_length % 2 == 0:
+        window_length += 1
+    return signal.savgol_filter(data, window_length, 3)
 
 # Grafik oluşturma
 fig = plt.figure(figsize=(12, 8))
@@ -114,6 +122,10 @@ ax_ylim = plt.axes([0.12, 0.7, 0.03, 0.2], facecolor=slider_color)
 ax_lowcut = plt.axes([0.05, 0.45, 0.1, 0.03], facecolor=slider_color)
 ax_highcut = plt.axes([0.05, 0.4, 0.1, 0.03], facecolor=slider_color)
 ax_noise = plt.axes([0.05, 0.35, 0.1, 0.03], facecolor=slider_color)
+ax_smooth = plt.axes([0.05, 0.3, 0.1, 0.03], facecolor=slider_color)  # Yeni smoothing slider
+
+# Toggle button için axes
+ax_toggle = plt.axes([0.05, 0.25, 0.1, 0.03])
 
 # Alt kısımdaki kontrol sliderları
 ax_duration = plt.axes([0.25, 0.05, 0.5, 0.02], facecolor=slider_color)
@@ -130,6 +142,11 @@ s_sample_rate = Slider(ax_sample_rate, 'Sample Rate', 20000, 400000, valinit=SAM
                       color='#2196F3')
 s_noise = Slider(ax_noise, 'Noise', 0, 0.005, valinit=DEFAULT_NOISE_THRESHOLD,
                 color='#FF9800')
+s_smooth = Slider(ax_smooth, 'Smooth', 3, 99, valinit=DEFAULT_SMOOTHING,
+                 color='#9C27B0')  # Yeni smoothing slider
+
+# Toggle button
+check = CheckButtons(ax_toggle, ['Filtre'], [True])
 
 # Text boxlar
 t_lowcut = TextBox(ax_lowcut, 'Low Cut Hz', initial=str(DEFAULT_LOWCUT),
@@ -150,6 +167,11 @@ def init():
     ax2.set_ylim(0, 1)
     return line1, line_filtered, line2
 
+def toggle_filter(label):
+    global show_filtered
+    show_filtered = not show_filtered
+    plt.draw()
+
 def update(frame):
     global SAMPLE_RATE, DURATION
     
@@ -164,27 +186,42 @@ def update(frame):
         lowcut = float(t_lowcut.text)
         highcut = float(t_highcut.text)
         noise_threshold = s_noise.val
+        smooth_window = int(s_smooth.val)
+        if smooth_window % 2 == 0:
+            smooth_window += 1
         
-        filtered_data = apply_bandpass_filter(ydata, lowcut, highcut, SAMPLE_RATE)
-        filtered_data = apply_noise_filter(filtered_data, noise_threshold)
+        # Orijinal veriyi göster
+        line1.set_data(xdata, ydata)
         
-        # Dominant frekans
-        dominant_freq = calculate_dominant_frequency(filtered_data, SAMPLE_RATE)
-        freq_text.set_text(f'Dominant Frekans:\n{dominant_freq:.1f} Hz')
-        
-        # FFT
-        yf = np.abs(fft(filtered_data))
-        xf = fftfreq(len(filtered_data), 1/SAMPLE_RATE)
+        if show_filtered:
+            # Filtreleme işlemleri
+            filtered_data = apply_bandpass_filter(ydata, lowcut, highcut, SAMPLE_RATE)
+            filtered_data = apply_noise_filter(filtered_data, noise_threshold)
+            filtered_data = apply_smoothing(filtered_data, smooth_window)
+            
+            # Dominant frekans
+            dominant_freq = calculate_dominant_frequency(filtered_data, SAMPLE_RATE)
+            freq_text.set_text(f'Dominant Frekans:\n{dominant_freq:.1f} Hz')
+            
+            # FFT
+            yf = np.abs(fft(filtered_data))
+            xf = fftfreq(len(filtered_data), 1/SAMPLE_RATE)
+            
+            line_filtered.set_data(xdata, filtered_data)
+        else:
+            line_filtered.set_data([], [])
+            # FFT orijinal veri için
+            yf = np.abs(fft(ydata))
+            xf = fftfreq(len(ydata), 1/SAMPLE_RATE)
+            
+            dominant_freq = calculate_dominant_frequency(ydata, SAMPLE_RATE)
+            freq_text.set_text(f'Dominant Frekans:\n{dominant_freq:.1f} Hz')
         
         positive_freq_mask = xf >= 0
         yf = yf[positive_freq_mask]
         xf = xf[positive_freq_mask]
         
         yf = yf / np.max(yf) if np.max(yf) > 0 else yf
-        
-        # Grafikleri güncelle
-        #line1.set_data(xdata, ydata)
-        line_filtered.set_data(xdata, filtered_data)
         line2.set_data(xf, yf)
         
     except Exception as e:
@@ -209,12 +246,11 @@ def restart_stream():
         print(f"Stream error: {e}")
 
 def update_sample_rate(val):
-    global SAMPLE_RATE,DURATION,t_highcut
+    global SAMPLE_RATE
     SAMPLE_RATE = int(val)
     highcut = float(t_highcut.text)
     restart_stream()
     ax2.set_xlim(0, highcut)
-    #ax1.set_xlim(0, SAMPLE_RATE*DURATION)
     plt.draw()
 
 def update_duration(val):
@@ -222,7 +258,6 @@ def update_duration(val):
     DURATION = val
     XLIM = val
     
-    # xlim slider'ını güncelle
     if s_xlim.val > DURATION:
         s_xlim.set_val(DURATION)
     
@@ -245,6 +280,7 @@ s_sample_rate.on_changed(update_sample_rate)
 s_duration.on_changed(update_duration)
 s_xlim.on_changed(update_xlim)
 s_ylim.on_changed(update_ylim)
+check.on_clicked(toggle_filter)
 
 def baslat():
     global ani
