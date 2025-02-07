@@ -82,7 +82,7 @@ with sd.InputStream(callback=audio_callback, channels=1, samplerate=SAMPLE_RATE,
             dominant_freq = filtered_freqs[dominant_index]
             filtered_freq = kalman_filter.update(dominant_freq)
             #print(global_time)  # 🛠 Test için global_time yazdır
-            #print(dominant_freq)
+            print(filtered_freq)
 
             # **Start biti (20000 Hz) algılandı mı?**
             if frequency_in_range(filtered_freq, START_BIT):
