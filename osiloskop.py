@@ -140,8 +140,11 @@ def baslat():
     try:
         print(INTERVAL)
         ani = FuncAnimation(fig, update, init_func=init, blit=True, interval=INTERVAL)
+   
         with sd.InputStream(callback=audio_callback, channels=1, samplerate=SAMPLE_RATE) as listen:
             plt.show()
+
+        
 
         
     except KeyboardInterrupt:
