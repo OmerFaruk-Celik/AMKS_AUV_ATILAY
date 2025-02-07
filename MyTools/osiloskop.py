@@ -183,7 +183,7 @@ def update(frame):
         yf = yf / np.max(yf) if np.max(yf) > 0 else yf
         
         # Grafikleri güncelle
-        line1.set_data(xdata, ydata)
+        #line1.set_data(xdata, ydata)
         line_filtered.set_data(xdata, filtered_data)
         line2.set_data(xf, yf)
         
