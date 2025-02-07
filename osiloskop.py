@@ -140,8 +140,10 @@ def baslat():
     try:
         print(INTERVAL)
         ani = FuncAnimation(fig, update, init_func=init, blit=True, interval=INTERVAL)
-        with sd.InputStream(callback=audio_callback, channels=1, samplerate=SAMPLE_RATE):
+        with sd.InputStream(callback=audio_callback, channels=1, samplerate=SAMPLE_RATE) as listen:
             plt.show()
+
+        listen.stop()
     except KeyboardInterrupt:
         print("Ses verisi alımı durduruldu.")
     except Exception as e:
