@@ -128,6 +128,7 @@ def update(frame):
 def update_interval(val):
     global INTERVAL
     INTERVAL = int(val)
+    stop()
    
     if 'ani' in globals() and ani:
         ani.event_source.interval = INTERVAL
@@ -149,7 +150,7 @@ def baslat():
 
 def stop():
     global ani
-    if 'ani' in globals() and ani:
+    if 'ani' in globals() and ani is not None:
         ani.event_source.stop()
         plt.close(fig)
         print("Ses verisi alımı durduruldu ve grafik kapatıldı.")
