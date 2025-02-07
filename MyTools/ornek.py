@@ -10,7 +10,8 @@ osc.start_stream()
 data = osc.get_data()
 
 # Send data (if needed)
+print(data)
 processed_data = osc.send_data()
 
 # Visualize
-osc.visualize()
+#osc.visualize()
