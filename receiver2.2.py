@@ -10,7 +10,7 @@ SAMPLE_RATE = 300000  # Örnekleme frekansı
 DURATION = 0.005  # 5 ms pencere
 FREQ_MIN = 17000  # Minimum frekans sınırı
 FREQ_MAX = 20000  # Maksimum frekans sınırı
-TOLERANCE = 200  # Frekans toleransı
+TOLERANCE = 300  # Frekans toleransı
 
 # Özel bit frekansları
 START_BIT = 20000
