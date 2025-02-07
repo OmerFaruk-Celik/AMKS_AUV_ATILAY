@@ -66,11 +66,7 @@ def update(frame):
     DURATION = s_duration.val
     XLIM = s_xlim.val
     YLIM = s_ylim.val
-    new_interval = int(s_interval.val)
-    if INTERVAL != new_interval:
-        INTERVAL = new_interval
-        start_microphone()
-        ani.event_source.interval = INTERVAL
+    INTERVAL = int(s_interval.val)
     if not audio_queue:
         return ln,
     ydata = audio_queue.pop(0)
@@ -101,14 +97,8 @@ def update_ylim(val):
 
 def update_interval(val):
     global INTERVAL
-    new_interval = int(val)
-    if INTERVAL != new_interval:
-        INTERVAL = new_interval
-        start_microphone()
-        ani.event_source.interval = INTERVAL
-        start_microphone()
-        ani = FuncAnimation(fig, update, init_func=init, blit=True, interval=INTERVAL)
-        plt.show()
+    INTERVAL = int(val)
+    ani.event_source.interval = INTERVAL
 
 s_duration.on_changed(update_duration)
 s_sample_rate.on_changed(update_sample_rate)
