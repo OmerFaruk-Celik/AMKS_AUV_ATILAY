@@ -223,11 +223,12 @@ def update(frame):
             line_filtered.set_data(xdata, filtered_data)
             data_for_fft = filtered_data
         else:
+			# Her zaman orijinal veriyi göster
+            line1.set_data(xdata, ydata)
             line_filtered.set_data([], [])
             data_for_fft = ydata
             
-        # Her zaman orijinal veriyi göster
-        line1.set_data(xdata, ydata)
+
             
         # FFT hesaplama
         yf = np.abs(fft(data_for_fft))
