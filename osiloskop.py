@@ -79,6 +79,7 @@ def update(frame):
     return ln,
 
 
+def restart_stream():
     global stream, audio_queue
     # Mevcut stream'i temizle
     if stream is not None:
@@ -97,7 +98,10 @@ def update(frame):
         stream.start()
     except Exception as e:
         print(f"Stream error: {e}")
-        
+
+
+
+
 def update_interval(val):
     global INTERVAL, ani
     INTERVAL = int(val)
@@ -113,7 +117,9 @@ def update_interval(val):
                           blit=True, interval=INTERVAL,
                           cache_frame_data=False, save_count=MAX_FRAMES)
         plt.draw()  # Grafiği yenile
-def restart_stream():
+        restart_stream()
+
+
 def update_sample_rate(val):
     global SAMPLE_RATE
     SAMPLE_RATE = int(val)
