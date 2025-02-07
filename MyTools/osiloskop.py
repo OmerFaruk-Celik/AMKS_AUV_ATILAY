@@ -322,7 +322,7 @@ s_duration.on_changed(update_duration)
 s_xlim.on_changed(update_xlim)
 s_ylim.on_changed(update_ylim)
 check_time.on_clicked(toggle_time_filter)
-check_freq.on_clicked(toggle_time_filter)
+check_freq.on_clicked(toggle_freq_filter)
 
 def baslat():
     global ani
