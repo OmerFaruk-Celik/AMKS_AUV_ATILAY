@@ -75,7 +75,7 @@ def update_duration(val):
 def update_sample_rate(val):
     global SAMPLE_RATE
     SAMPLE_RATE = int(val)
-        if 'ani' in globals() and ani:
+    if 'ani' in globals() and ani:
         ani.event_source.samplerate = SAMPLE_RATE
 
 def update_xlim(val):
