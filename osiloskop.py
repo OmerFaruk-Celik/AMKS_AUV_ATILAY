@@ -2,67 +2,14 @@ import sounddevice as sd
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
-from matplotlib.widgets import Slider, AxesWidget
-
-class Bar(AxesWidget):
-    """
-    A bar widget for matplotlib.
-    """
-    def __init__(self, ax, label, valmin, valmax, valinit=0.5, orientation='horizontal', **kwargs):
-        AxesWidget.__init__(self, ax)
-
-        self.valmin = valmin
-        self.valmax = valmax
-        self.val = valinit
-        self.orientation = orientation
-        self.poly = ax.barh if orientation == 'horizontal' else ax.bar
-
-        self.bar = self.poly([label], [valinit], **kwargs)
-        ax.set_xlim(valmin, valmax) if orientation == 'horizontal' else ax.set_ylim(valmin, valmax)
-        self.connect_event('button_press_event', self._update)
-        self.connect_event('motion_notify_event', self._update)
-        self.connect_event('button_release_event', self._release)
-        self.callbacks = {}
-
-    def _update(self, event):
-        if self.ignore(event):
-            return
-        if not self.ax.contains(event)[0]:
-            return
-
-        value = event.xdata if self.orientation == 'horizontal' else event.ydata
-        self.set_val(value)
-
-    def _release(self, event):
-        if not self.eventson:
-            return
-        self._update(event)
-
-    def set_val(self, val):
-        val = max(self.valmin, min(self.valmax, val))
-        self.val = val
-        if self.orientation == 'vertical':
-            self.bar[0].set_height(val)
-        else:
-            self.bar[0].set_width(val)
-        self.ax.figure.canvas.draw_idle()  # Çubuğun yeniden çizilmesini sağlar
-        if not self.eventson:
-            return
-        if 'change' in self.callbacks:
-            for callback in self.callbacks['change']:
-                callback(self.val)
-
-    def on_changed(self, callback):
-        if 'change' not in self.callbacks:
-            self.callbacks['change'] = []
-        self.callbacks['change'].append(callback)
+from matplotlib.widgets import Slider
 
 # Başlangıç örnekleme frekansı ve pencere süresi
 SAMPLE_RATE = 44100  # 44.1 kHz, CD kalitesinde ses
 DURATION = 0.1  # 100 ms
 XLIM = DURATION  # Başlangıç xlim
 YLIM = 1  # Başlangıç ylim
-INTERVAL = 500  # Başlangıç interval değeri (ms)
+INTERVAL = 50  # Başlangıç interval değeri (ms)
 
 # Ses verisi için bir kuyruk
 audio_queue = []
@@ -94,12 +41,10 @@ ax_interval = plt.axes([0.05, 0.25, 0.03, 0.63], facecolor=axcolor)
 
 # Sliderlar
 s_duration = Slider(ax_duration, 'Duration', 0.0001, 0.1, valinit=DURATION, valstep=0.0001)
-s_sample_rate = Slider(ax_sample_rate, 'Sample Rate', 20000, 900000, valinit=SAMPLE_RATE, valstep=1000)
+s_sample_rate = Slider(ax_sample_rate, 'Sample Rate', 20000, 200000, valinit=SAMPLE_RATE, valstep=1000)
 s_xlim = Slider(ax_xlim, 'X Lim', 0.001, 0.1, valinit=XLIM, valstep=0.001, orientation='vertical')
 s_ylim = Slider(ax_ylim, 'Y Lim', 0.001, 1, valinit=YLIM, valstep=0.01, orientation='vertical')
-
-# Bar
-b_interval = Bar(ax_interval, 'Interval', 10, 200, valinit=INTERVAL, orientation='vertical', color='blue')
+s_interval = Slider(ax_interval, 'Interval', 10, 200, valinit=INTERVAL, valstep=10, orientation='vertical')
 
 def init():
     ax.set_xlim(0, XLIM)
@@ -112,7 +57,7 @@ def update(frame):
     DURATION = s_duration.val
     XLIM = s_xlim.val
     YLIM = s_ylim.val
-    INTERVAL = int(b_interval.val)
+    INTERVAL = int(s_interval.val)
     if not audio_queue:
         return ln,
     ydata = audio_queue.pop(0)
@@ -122,26 +67,42 @@ def update(frame):
     ax.set_ylim(-YLIM, YLIM)
     return ln,
 
-# Bar güncelleme fonksiyonu
+# Slider güncelleme fonksiyonları
+def update_duration(val):
+    global DURATION
+    DURATION = val
+
+def update_sample_rate(val):
+    global SAMPLE_RATE
+    SAMPLE_RATE = int(val)
+
+def update_xlim(val):
+    global XLIM
+    XLIM = val
+
+def update_ylim(val):
+    global YLIM
+    YLIM = val
+
 def update_interval(val):
     global INTERVAL
     INTERVAL = int(val)
     ani.event_source.interval = INTERVAL
 
-b_interval.on_changed(update_interval)
+s_duration.on_changed(update_duration)
+s_sample_rate.on_changed(update_sample_rate)
+s_xlim.on_changed(update_xlim)
+s_ylim.on_changed(update_ylim)
+s_interval.on_changed(update_interval)
 
-def baslat():
-    # Mikrofonu başlat
-    global INTERVAL,SAMPLE_RATE,ani
-    try:
-        print(INTERVAL)
-        with sd.InputStream(callback=audio_callback, channels=1, samplerate=SAMPLE_RATE):
-            ani = FuncAnimation(fig, update, init_func=init, blit=True, interval=INTERVAL)
-            plt.show()
+# Mikrofonu başlat
+try:
+    print(INTERVAL)
+    with sd.InputStream(callback=audio_callback, channels=1, samplerate=SAMPLE_RATE):
+        ani = FuncAnimation(fig, update, init_func=init, blit=True, interval=INTERVAL)
+        plt.show()
 
-    except KeyboardInterrupt:
-        print("Ses verisi alımı durduruldu.")
-    except Exception as e:
-        print(f"Bir hata oluştu: {e}")
-baslat()
-
+except KeyboardInterrupt:
+    print("Ses verisi alımı durduruldu.")
+except Exception as e:
+    print(f"Bir hata oluştu: {e}")
