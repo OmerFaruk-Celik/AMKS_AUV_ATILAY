@@ -8,8 +8,8 @@ from scipy.fft import fft, fftfreq
 import matplotlib.style as style
 from matplotlib.gridspec import GridSpec
 
-# Modern stil ayarları - güncel matplotlib versiyonu için
-plt.style.use('default')  # Temel stil
+# Modern stil ayarları
+plt.style.use('default')
 plt.rcParams.update({
     'font.family': 'sans-serif',
     'font.sans-serif': ['Arial'],
@@ -85,7 +85,7 @@ ax_controls.set_visible(False)
 ax1 = plt.subplot(gs[0, 1])
 ax2 = plt.subplot(gs[1, 1])
 
-# Zaman domain grafiği
+# Grafik ayarları
 line1, = ax1.plot([], [], '#2196F3', label='Orijinal Sinyal', linewidth=1.5)
 line_filtered, = ax1.plot([], [], '#FF4081', label='Filtrelenmiş Sinyal', alpha=0.7, linewidth=1.5)
 freq_text = ax1.text(0.02, 0.95, '', transform=ax1.transAxes, 
@@ -96,33 +96,30 @@ ax1.set_ylabel('Genlik', fontsize=10)
 ax1.set_title('Zaman Domain Analizi', fontsize=12, pad=10)
 ax1.legend(loc='upper right', framealpha=0.9)
 
-# Frekans domain grafiği
 line2, = ax2.plot([], [], '#4CAF50', linewidth=1.5)
 ax2.grid(True, alpha=0.3)
 ax2.set_xlabel('Frekans (Hz)', fontsize=10)
 ax2.set_ylabel('Genlik', fontsize=10)
 ax2.set_title('Frekans Domain Analizi', fontsize=12, pad=10)
 
-# Slider stil ayarları
+# Slider ve textbox stil ayarları
 slider_color = '#f8f9fa'
 text_box_style = {'boxstyle': 'round,pad=0.5', 
                  'facecolor': slider_color,
                  'edgecolor': '#dee2e6'}
 
-# Sol taraftaki kontrol sliderları
-ax_xlim = plt.axes([0.05, 0.6, 0.03, 0.3], facecolor=slider_color)
-ax_ylim = plt.axes([0.12, 0.6, 0.03, 0.3], facecolor=slider_color)
+# Sol taraftaki kontroller için yeni konumlar
+ax_xlim = plt.axes([0.05, 0.7, 0.03, 0.2], facecolor=slider_color)
+ax_ylim = plt.axes([0.12, 0.7, 0.03, 0.2], facecolor=slider_color)
+ax_lowcut = plt.axes([0.05, 0.45, 0.1, 0.03], facecolor=slider_color)
+ax_highcut = plt.axes([0.05, 0.4, 0.1, 0.03], facecolor=slider_color)
+ax_noise = plt.axes([0.05, 0.35, 0.1, 0.03], facecolor=slider_color)
 
 # Alt kısımdaki kontrol sliderları
 ax_duration = plt.axes([0.25, 0.05, 0.5, 0.02], facecolor=slider_color)
 ax_sample_rate = plt.axes([0.25, 0.09, 0.5, 0.02], facecolor=slider_color)
 
-# Sağ taraftaki filtre kontrolleri
-ax_lowcut = plt.axes([0.82, 0.8, 0.12, 0.03], facecolor=slider_color)
-ax_highcut = plt.axes([0.82, 0.75, 0.12, 0.03], facecolor=slider_color)
-ax_noise = plt.axes([0.82, 0.7, 0.12, 0.03], facecolor=slider_color)
-
-# Sliderlar
+# Kontrol elemanları
 s_xlim = Slider(ax_xlim, 'X Lim', 0.001, 0.5, valinit=XLIM, orientation='vertical',
                 color='#4CAF50')
 s_ylim = Slider(ax_ylim, 'Y Lim', 0.1, 2.0, valinit=YLIM, orientation='vertical',
@@ -131,13 +128,13 @@ s_duration = Slider(ax_duration, 'Duration', 0.0001, 0.1, valinit=DURATION,
                    color='#2196F3')
 s_sample_rate = Slider(ax_sample_rate, 'Sample Rate', 20000, 400000, valinit=SAMPLE_RATE,
                       color='#2196F3')
-s_noise = Slider(ax_noise, 'Noise Threshold', 0, 1, valinit=DEFAULT_NOISE_THRESHOLD,
+s_noise = Slider(ax_noise, 'Noise', 0, 1, valinit=DEFAULT_NOISE_THRESHOLD,
                 color='#FF9800')
 
-# Modern stil text boxlar
-t_lowcut = TextBox(ax_lowcut, 'Low Cut (Hz)', initial=str(DEFAULT_LOWCUT),
+# Text boxlar
+t_lowcut = TextBox(ax_lowcut, 'Low Cut Hz', initial=str(DEFAULT_LOWCUT),
                   textalignment="center", label_pad=0.1)
-t_highcut = TextBox(ax_highcut, 'High Cut (Hz)', initial=str(DEFAULT_HIGHCUT),
+t_highcut = TextBox(ax_highcut, 'High Cut Hz', initial=str(DEFAULT_HIGHCUT),
                    textalignment="center", label_pad=0.1)
 
 # Text box stilleri
@@ -185,10 +182,6 @@ def update(frame):
         
         yf = yf / np.max(yf) if np.max(yf) > 0 else yf
         
-        # Grafik limitleri
-        ax1.set_xlim(0, s_xlim.val)
-        ax1.set_ylim(-s_ylim.val, s_ylim.val)
-        
         # Grafikleri güncelle
         line1.set_data(xdata, ydata)
         line_filtered.set_data(xdata, filtered_data)
@@ -215,16 +208,27 @@ def restart_stream():
     except Exception as e:
         print(f"Stream error: {e}")
 
-# Callback fonksiyonları
 def update_sample_rate(val):
     global SAMPLE_RATE
     SAMPLE_RATE = int(val)
     restart_stream()
+    ax2.set_xlim(0, SAMPLE_RATE/2)
+    plt.draw()
 
 def update_duration(val):
-    global DURATION
+    global DURATION, XLIM
     DURATION = val
+    XLIM = val
+    
+    # xlim slider'ını güncelle
+    if s_xlim.val > DURATION:
+        s_xlim.set_val(DURATION)
+    
+    s_xlim.valmax = DURATION
+    ax_xlim.set_ylim(s_xlim.valmin, DURATION)
+    
     restart_stream()
+    plt.draw()
 
 def update_xlim(val):
     ax1.set_xlim(0, val)
