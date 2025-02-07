@@ -105,21 +105,14 @@ def restart_stream():
 def update_interval(val):
     global INTERVAL, ani
     INTERVAL = int(val)
-    print(f"New interval: {INTERVAL}")
+    print(f"New interval: {INTERVAL}")  # Debug için
     
-    # Mevcut animasyonu durdur ve yeniden başlat
-    if hasattr(ani, 'event_source'):
-        ani.event_source.stop()
-        plt.close()  # Mevcut figürü kapat
-        
-        # Yeni animasyon oluştur
-        
-        ani = FuncAnimation(fig, update, init_func=init, 
-                          blit=True, interval=INTERVAL,
-                          cache_frame_data=False, save_count=MAX_FRAMES)
-        plt.draw()  # Grafiği yenile
-       
-        
+    if 'ani' in globals() and ani:
+        ani.event_source.interval = INTERVAL
+        print(f"Animation interval: {ani.event_source.interval}")  # Debug için
+        plt.draw()
+
+s_interval.on_changed(update_interval)
 
 
 def update_sample_rate(val):
