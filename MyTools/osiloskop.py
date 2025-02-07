@@ -3,7 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
 import scipy.signal as signal
-import scipy.fftpack as fftpack
+import numpy.fft as fft
 
 class Osiloskop:
     def __init__(self, sample_rate=44100, duration=0.1, max_queue_size=10):
@@ -110,8 +110,8 @@ class Osiloskop:
     
     def estimate_dominant_frequency(self, data):
         """Estimate dominant frequency using FFT"""
-        fft_data = signal.fft(data)
-        freqs = signal.fftfreq(len(data), 1/self.SAMPLE_RATE)
+        fft_data = fft.fft(data)
+        freqs = fft.fftfreq(len(data), 1/self.SAMPLE_RATE)
         
         positive_freqs = freqs[:len(freqs)//2]
         positive_amplitudes = np.abs(fft_data[:len(fft_data)//2])
