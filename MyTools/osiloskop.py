@@ -95,22 +95,37 @@ class Osiloskop:
     
     def apply_bandpass_filter(self, data, lowcut, highcut, order=5):
         """Apply bandpass filter to audio data"""
+        # Check for None or empty data
+        if data is None or len(data) == 0:
+            return np.array([])
+        
         # Ensure data is a 1D numpy array
         data = np.asarray(data).flatten()
         
+        # Ensure lowcut and highcut are valid
         nyq = 0.5 * self.SAMPLE_RATE
-        low = lowcut / nyq
-        high = highcut / nyq
+        low = max(0.001, min(lowcut / nyq, 0.999))
+        high = max(low + 0.001, min(highcut / nyq, 0.999))
+        
+        # Apply filter
         b, a = signal.butter(order, [low, high], btype='band')
         return signal.lfilter(b, a, data)
     
     def reduce_noise(self, data, noise_threshold=0.1):
         """Simple noise reduction using amplitude thresholding"""
+        # Check for None or empty data
+        if data is None or len(data) == 0:
+            return np.array([])
+        
         data = np.asarray(data).flatten()
         return np.where(np.abs(data) > noise_threshold, data, 0)
     
     def estimate_dominant_frequency(self, data):
         """Estimate dominant frequency using FFT"""
+        # Check for None or empty data
+        if data is None or len(data) == 0:
+            return 0
+        
         # Ensure data is a 1D numpy array
         data = np.asarray(data).flatten()
         
@@ -120,11 +135,19 @@ class Osiloskop:
         positive_freqs = freqs[:len(freqs)//2]
         positive_amplitudes = np.abs(fft_data[:len(fft_data)//2])
         
+        # Handle case of no significant frequencies
+        if len(positive_amplitudes) == 0:
+            return 0
+        
         dominant_index = np.argmax(positive_amplitudes)
         return positive_freqs[dominant_index]
     
     def spectral_density(self, data):
         """Compute power spectral density"""
+        # Check for None or empty data
+        if data is None or len(data) == 0:
+            return np.array([]), np.array([])
+        
         # Ensure data is a 1D numpy array
         data = np.asarray(data).flatten()
         f, Pxx = signal.welch(data, self.SAMPLE_RATE)
