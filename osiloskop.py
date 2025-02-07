@@ -7,6 +7,8 @@ from matplotlib.widgets import Slider
 # Başlangıç örnekleme frekansı ve pencere süresi
 SAMPLE_RATE = 44100  # 44.1 kHz, CD kalitesinde ses
 DURATION = 0.1  # 100 ms
+XLIM = DURATION  # Başlangıç xlim
+YLIM = 1  # Başlangıç ylim
 
 # Ses verisi için bir kuyruk
 audio_queue = []
@@ -20,7 +22,7 @@ def audio_callback(indata, frames, time, status):
 
 # Grafik oluşturma
 fig, ax = plt.subplots()
-plt.subplots_adjust(left=0.1, bottom=0.25)
+plt.subplots_adjust(left=0.1, bottom=0.25, right=0.85)
 xdata, ydata = [], []
 ln, = plt.plot([], [], 'b-')
 plt.xlabel('Zaman (saniye)')
@@ -32,26 +34,33 @@ plt.grid(True)
 axcolor = 'lightgoldenrodyellow'
 ax_duration = plt.axes([0.1, 0.1, 0.65, 0.03], facecolor=axcolor)
 ax_sample_rate = plt.axes([0.1, 0.15, 0.65, 0.03], facecolor=axcolor)
+ax_xlim = plt.axes([0.88, 0.25, 0.03, 0.63], facecolor=axcolor, orientation='vertical')
+ax_ylim = plt.axes([0.93, 0.25, 0.03, 0.63], facecolor=axcolor, orientation='vertical')
 
 # Sliderlar
 s_duration = Slider(ax_duration, 'Duration', 0.0001, 0.1, valinit=DURATION, valstep=0.0001)
 s_sample_rate = Slider(ax_sample_rate, 'Sample Rate', 20000, 200000, valinit=SAMPLE_RATE, valstep=1000)
+s_xlim = Slider(ax_xlim, 'X Lim', 0.01, 0.1, valinit=XLIM, valstep=0.001)
+s_ylim = Slider(ax_ylim, 'Y Lim', 0.1, 1, valinit=YLIM, valstep=0.01)
 
 def init():
-    ax.set_xlim(0, DURATION)
-    ax.set_ylim(-1, 1)
+    ax.set_xlim(0, XLIM)
+    ax.set_ylim(-YLIM, YLIM)
     return ln,
 
 def update(frame):
-    global SAMPLE_RATE, DURATION
+    global SAMPLE_RATE, DURATION, XLIM, YLIM
     SAMPLE_RATE = int(s_sample_rate.val)
     DURATION = s_duration.val
+    XLIM = s_xlim.val
+    YLIM = s_ylim.val
     if not audio_queue:
         return ln,
     ydata = audio_queue.pop(0)
     xdata = np.linspace(0, DURATION, len(ydata))
     ln.set_data(xdata, ydata)
-    ax.set_xlim(0, DURATION)
+    ax.set_xlim(0, XLIM)
+    ax.set_ylim(-YLIM, YLIM)
     return ln,
 
 # Slider güncelleme fonksiyonları
@@ -63,8 +72,18 @@ def update_sample_rate(val):
     global SAMPLE_RATE
     SAMPLE_RATE = int(val)
 
+def update_xlim(val):
+    global XLIM
+    XLIM = val
+
+def update_ylim(val):
+    global YLIM
+    YLIM = val
+
 s_duration.on_changed(update_duration)
 s_sample_rate.on_changed(update_sample_rate)
+s_xlim.on_changed(update_xlim)
+s_ylim.on_changed(update_ylim)
 
 # Mikrofonu başlat
 try:
