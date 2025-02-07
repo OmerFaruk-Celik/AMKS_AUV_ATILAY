@@ -2,7 +2,48 @@ import sounddevice as sd
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
-from matplotlib.widgets import Slider
+from matplotlib.widgets import Slider, AxesWidget
+
+class Bar(AxesWidget):
+    """
+    A bar widget for matplotlib.
+    """
+    def __init__(self, ax, label, valmin, valmax, valinit=0.5, orientation='horizontal', **kwargs):
+        AxesWidget.__init__(self, ax)
+
+        self.valmin = valmin
+        self.valmax = valmax
+        self.val = valinit
+        self.orientation = orientation
+        self.poly = ax.barh if orientation == 'horizontal' else ax.bar
+
+        self.bar = self.poly([label], [valinit], **kwargs)
+        ax.set_xlim(valmin, valmax) if orientation == 'horizontal' else ax.set_ylim(valmin, valmax)
+        self.connect_event('button_press_event', self._update)
+        self.connect_event('motion_notify_event', self._update)
+        self.connect_event('button_release_event', self._release)
+
+    def _update(self, event):
+        if self.ignore(event):
+            return
+        if not self.ax.contains(event)[0]:
+            return
+
+        value = event.xdata if self.orientation == 'horizontal' else event.ydata
+        self.set_val(value)
+
+    def _release(self, event):
+        if not self.eventson:
+            return
+        self._update(event)
+
+    def set_val(self, val):
+        val = max(self.valmin, min(self.valmax, val))
+        self.val = val
+        self.bar[0].set_height(val) if self.orientation == 'vertical' else self.bar[0].set_width(val)
+        if not self.eventson:
+            return
+        self._callbacks.process('change', self.val)
 
 # Başlangıç örnekleme frekansı ve pencere süresi
 SAMPLE_RATE = 44100  # 44.1 kHz, CD kalitesinde ses
@@ -44,7 +85,9 @@ s_duration = Slider(ax_duration, 'Duration', 0.0001, 0.1, valinit=DURATION, vals
 s_sample_rate = Slider(ax_sample_rate, 'Sample Rate', 20000, 900000, valinit=SAMPLE_RATE, valstep=1000)
 s_xlim = Slider(ax_xlim, 'X Lim', 0.001, 0.1, valinit=XLIM, valstep=0.001, orientation='vertical')
 s_ylim = Slider(ax_ylim, 'Y Lim', 0.001, 1, valinit=YLIM, valstep=0.01, orientation='vertical')
-s_interval = Slider(ax_interval, 'Interval', 10, 200, valinit=INTERVAL, valstep=10, orientation='vertical')
+
+# Bar
+b_interval = Bar(ax_interval, 'Interval', 10, 200, valinit=INTERVAL, orientation='vertical', color='blue')
 
 def init():
     ax.set_xlim(0, XLIM)
@@ -57,7 +100,7 @@ def update(frame):
     DURATION = s_duration.val
     XLIM = s_xlim.val
     YLIM = s_ylim.val
-    INTERVAL = int(s_interval.val)
+    INTERVAL = int(b_interval.val)
     if not audio_queue:
         return ln,
     ydata = audio_queue.pop(0)
@@ -67,33 +110,13 @@ def update(frame):
     ax.set_ylim(-YLIM, YLIM)
     return ln,
 
-# Slider güncelleme fonksiyonları
-def update_duration(val):
-    global DURATION
-    DURATION = val
-
-def update_sample_rate(val):
-    global SAMPLE_RATE
-    SAMPLE_RATE = int(val)
-
-def update_xlim(val):
-    global XLIM
-    XLIM = val
-
-def update_ylim(val):
-    global YLIM
-    YLIM = val
-
+# Bar güncelleme fonksiyonu
 def update_interval(val):
     global INTERVAL
     INTERVAL = int(val)
     ani.event_source.interval = INTERVAL
 
-s_duration.on_changed(update_duration)
-s_sample_rate.on_changed(update_sample_rate)
-s_xlim.on_changed(update_xlim)
-s_ylim.on_changed(update_ylim)
-s_interval.on_changed(update_interval)
+b_interval.on_changed(update_interval)
 
 # Mikrofonu başlat
 try:
