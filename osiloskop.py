@@ -10,6 +10,7 @@ DURATION = 0.1  # 100 ms
 XLIM = DURATION  # Başlangıç xlim
 YLIM = 1  # Başlangıç ylim
 INTERVAL = 50  # Başlangıç interval değeri (ms)
+MAX_FRAMES = 1000  # Maksimum frame sayısı
 
 # Ses verisi için bir kuyruk
 audio_queue = []
@@ -17,11 +18,12 @@ audio_queue = []
 # Ses stream nesnesi için global değişken
 stream = None
 
-# Ses verisini işlemek için bir geri çağırma fonksiyonu
 def audio_callback(indata, frames, time, status):
     if status:
         print(status)
-    # Alınan ses verisini kuyruğa ekle
+    # Kuyruğu sınırla
+    if len(audio_queue) > 10:  # Maksimum 10 veri paketi tut
+        audio_queue.pop(0)
     audio_queue.append(indata[:, 0])
 
 # Grafik oluşturma
@@ -61,56 +63,58 @@ def update(frame):
     XLIM = s_xlim.val
     YLIM = s_ylim.val
     INTERVAL = int(s_interval.val)
+    
     if not audio_queue:
         return ln,
-    ydata = audio_queue.pop(0)
-    xdata = np.linspace(0, DURATION, len(ydata))
-    ln.set_data(xdata, ydata)
-    ax.set_xlim(0, XLIM)
-    ax.set_ylim(-YLIM, YLIM)
+        
+    try:
+        ydata = audio_queue[-1]  # En son veriyi al
+        xdata = np.linspace(0, DURATION, len(ydata))
+        ln.set_data(xdata, ydata)
+        ax.set_xlim(0, XLIM)
+        ax.set_ylim(-YLIM, YLIM)
+    except Exception as e:
+        print(f"Update error: {e}")
+        
     return ln,
 
 def update_interval(val):
     global INTERVAL, ani
     INTERVAL = int(val)
-    print(f"New interval: {INTERVAL}")
-    
-    if 'ani' in globals() and ani:
-        ani.event_source.stop()
-        ani = FuncAnimation(fig, update, init_func=init, blit=True, interval=INTERVAL)
-        plt.draw()
+    if hasattr(ani, 'event_source'):
+        ani.event_source.interval = INTERVAL
 
-def update_sample_rate(val):
-    global SAMPLE_RATE, stream, ani
-    SAMPLE_RATE = int(val)
-    print(f"New sample rate: {SAMPLE_RATE}")
-    
-    # Mevcut stream'i durdur
-    if stream:
+def restart_stream():
+    global stream, audio_queue
+    # Mevcut stream'i temizle
+    if stream is not None:
         stream.stop()
         stream.close()
     
-    # Yeni sample rate ile stream'i yeniden başlat
-    stream = sd.InputStream(callback=audio_callback, channels=1, samplerate=SAMPLE_RATE)
-    stream.start()
-
+    # Kuyruğu temizle
+    audio_queue.clear()
     
-    # Animasyonu yenile
-    if 'ani' in globals() and ani:
-        ani.event_source.stop()
-        ani = FuncAnimation(fig, update, init_func=init, blit=True, interval=INTERVAL)
-        plt.draw()
+    # Yeni stream başlat
+    try:
+        stream = sd.InputStream(callback=audio_callback, 
+                              channels=1, 
+                              samplerate=SAMPLE_RATE,
+                              blocksize=int(SAMPLE_RATE * DURATION))
+        stream.start()
+    except Exception as e:
+        print(f"Stream error: {e}")
+
+def update_sample_rate(val):
+    global SAMPLE_RATE
+    SAMPLE_RATE = int(val)
+    print(f"New sample rate: {SAMPLE_RATE}")
+    restart_stream()
 
 def update_duration(val):
-    global DURATION, ani
+    global DURATION
     DURATION = val
     print(f"New duration: {DURATION}")
-    
-    # Animasyonu yenile
-    if 'ani' in globals() and ani:
-        ani.event_source.stop()
-        ani = FuncAnimation(fig, update, init_func=init, blit=True, interval=INTERVAL)
-        plt.draw()
+    restart_stream()
 
 # Slider callback'leri
 s_interval.on_changed(update_interval)
@@ -121,9 +125,10 @@ s_duration.on_changed(update_duration)
 def baslat():
     global ani, stream
     try:
-        stream = sd.InputStream(callback=audio_callback, channels=1, samplerate=SAMPLE_RATE)
-        stream.start()
-        ani = FuncAnimation(fig, update, init_func=init, blit=True, interval=INTERVAL)
+        restart_stream()
+        ani = FuncAnimation(fig, update, init_func=init, 
+                          blit=True, interval=INTERVAL,
+                          cache_frame_data=False, save_count=MAX_FRAMES)
         plt.show()
     except KeyboardInterrupt:
         print("Ses verisi alımı durduruldu.")
