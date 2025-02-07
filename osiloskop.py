@@ -45,7 +45,7 @@ class Bar(AxesWidget):
             self.bar[0].set_height(val)
         else:
             self.bar[0].set_width(val)
-        self.ax.figure.canvas.draw_idle()  # Çubuğun yeniden çizilmesini sağlar
+        self.ax.figure.canvas.draw_idle()
         if not self.eventson:
             return
         if 'change' in self.callbacks:
@@ -58,7 +58,7 @@ class Bar(AxesWidget):
         self.callbacks['change'].append(callback)
 
 # Başlangıç örnekleme frekansı ve pencere süresi
-SAMPLE_RATE = 44100# 44.1 kHz, CD kalitesinde ses
+SAMPLE_RATE = 44100  # 44.1 kHz, CD kalitesinde ses
 DURATION = 0.1  # 100 ms
 XLIM = DURATION  # Başlangıç xlim
 YLIM = 1  # Başlangıç ylim
@@ -69,8 +69,6 @@ audio_queue = []
 
 # Ses verisini işlemek için bir geri çağırma fonksiyonu
 def audio_callback(indata, frames, time, status):
-    global INTERVAL
-    print(INTERVAL)
     if status:
         print(status)
     # Alınan ses verisini kuyruğa ekle
@@ -124,13 +122,16 @@ def update(frame):
     ax.set_ylim(-YLIM, YLIM)
     return ln,
 
-# Bar güncelleme fonksiyonu
 def update_interval(val):
-    global INTERVAL
+    global INTERVAL, ani
     INTERVAL = int(val)
-   
+    print(f"New interval: {INTERVAL}")  # Debug için
+    
     if 'ani' in globals() and ani:
-        ani.event_source.interval = INTERVAL
+        ani.event_source.stop()
+        ani = FuncAnimation(fig, update, init_func=init, blit=True, interval=INTERVAL)
+        print(f"Animation interval: {ani.event_source.interval}")  # Debug için
+        plt.draw()
 
 b_interval.on_changed(update_interval)
 
@@ -138,22 +139,13 @@ b_interval.on_changed(update_interval)
 def baslat():
     global ani
     try:
-        print(INTERVAL)
         ani = FuncAnimation(fig, update, init_func=init, blit=True, interval=INTERVAL)
-   
         with sd.InputStream(callback=audio_callback, channels=1, samplerate=SAMPLE_RATE) as listen:
             plt.show()
-
-        
-
-        
     except KeyboardInterrupt:
         print("Ses verisi alımı durduruldu.")
     except Exception as e:
         print(f"Bir hata oluştu: {e}")
 
-
-# Başlat ve durdur fonksiyonlarını test etmek için
+# Başlat
 baslat()
-# stop() fonksiyonunu çağırmak için bir yol ekleyebilirsiniz
-# Örneğin, bir tuşa basıldığında stop() fonksiyonunu çağırabilirsiniz
