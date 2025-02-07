@@ -62,11 +62,17 @@ def init():
 
 def update(frame):
     global SAMPLE_RATE, DURATION, XLIM, YLIM, INTERVAL
-    SAMPLE_RATE = int(s_sample_rate.val)
-    DURATION = s_duration.val
+    new_sample_rate = int(s_sample_rate.val)
+    new_duration = s_duration.val
+    new_interval = int(s_interval.val)
+    if SAMPLE_RATE != new_sample_rate or DURATION != new_duration or INTERVAL != new_interval:
+        SAMPLE_RATE = new_sample_rate
+        DURATION = new_duration
+        INTERVAL = new_interval
+        start_microphone()
+        ani.event_source.interval = INTERVAL
     XLIM = s_xlim.val
     YLIM = s_ylim.val
-    INTERVAL = int(s_interval.val)
     if not audio_queue:
         return ln,
     ydata = audio_queue.pop(0)
@@ -97,8 +103,11 @@ def update_ylim(val):
 
 def update_interval(val):
     global INTERVAL
-    INTERVAL = int(val)
-    ani.event_source.interval = INTERVAL
+    new_interval = int(val)
+    if INTERVAL != new_interval:
+        INTERVAL = new_interval
+        start_microphone()
+        ani.event_source.interval = INTERVAL
 
 s_duration.on_changed(update_duration)
 s_sample_rate.on_changed(update_sample_rate)
