@@ -8,10 +8,18 @@ from scipy.fft import fft, fftfreq
 import matplotlib.style as style
 from matplotlib.gridspec import GridSpec
 
-# Modern stil ayarları
-style.use('seaborn-darkgrid')
-plt.rcParams['font.family'] = 'sans-serif'
-plt.rcParams['font.sans-serif'] = ['Arial']
+# Modern stil ayarları - güncel matplotlib versiyonu için
+plt.style.use('default')  # Temel stil
+plt.rcParams.update({
+    'font.family': 'sans-serif',
+    'font.sans-serif': ['Arial'],
+    'axes.grid': True,
+    'grid.alpha': 0.3,
+    'axes.facecolor': '#f0f0f0',
+    'figure.facecolor': 'white',
+    'axes.edgecolor': '#cccccc',
+    'grid.color': '#cccccc'
+})
 
 # Başlangıç parametreleri
 SAMPLE_RATE = 44100
@@ -78,8 +86,8 @@ ax1 = plt.subplot(gs[0, 1])
 ax2 = plt.subplot(gs[1, 1])
 
 # Zaman domain grafiği
-line1, = ax1.plot([], [], 'b-', label='Orijinal Sinyal', linewidth=1.5)
-line_filtered, = ax1.plot([], [], 'r-', label='Filtrelenmiş Sinyal', alpha=0.7, linewidth=1.5)
+line1, = ax1.plot([], [], '#2196F3', label='Orijinal Sinyal', linewidth=1.5)
+line_filtered, = ax1.plot([], [], '#FF4081', label='Filtrelenmiş Sinyal', alpha=0.7, linewidth=1.5)
 freq_text = ax1.text(0.02, 0.95, '', transform=ax1.transAxes, 
                     bbox=dict(facecolor='white', alpha=0.8, edgecolor='none'))
 ax1.grid(True, alpha=0.3)
@@ -89,17 +97,17 @@ ax1.set_title('Zaman Domain Analizi', fontsize=12, pad=10)
 ax1.legend(loc='upper right', framealpha=0.9)
 
 # Frekans domain grafiği
-line2, = ax2.plot([], [], 'g-', linewidth=1.5)
+line2, = ax2.plot([], [], '#4CAF50', linewidth=1.5)
 ax2.grid(True, alpha=0.3)
 ax2.set_xlabel('Frekans (Hz)', fontsize=10)
 ax2.set_ylabel('Genlik', fontsize=10)
 ax2.set_title('Frekans Domain Analizi', fontsize=12, pad=10)
 
 # Slider stil ayarları
-slider_color = '#f0f0f0'
+slider_color = '#f8f9fa'
 text_box_style = {'boxstyle': 'round,pad=0.5', 
                  'facecolor': slider_color,
-                 'edgecolor': '#cccccc'}
+                 'edgecolor': '#dee2e6'}
 
 # Sol taraftaki kontrol sliderları
 ax_xlim = plt.axes([0.05, 0.6, 0.03, 0.3], facecolor=slider_color)
@@ -116,15 +124,15 @@ ax_noise = plt.axes([0.82, 0.7, 0.12, 0.03], facecolor=slider_color)
 
 # Sliderlar
 s_xlim = Slider(ax_xlim, 'X Lim', 0.001, 0.5, valinit=XLIM, orientation='vertical',
-                track_color='#e0e0e0', handle_style={'facecolor': '#4CAF50'})
+                color='#4CAF50')
 s_ylim = Slider(ax_ylim, 'Y Lim', 0.1, 2.0, valinit=YLIM, orientation='vertical',
-                track_color='#e0e0e0', handle_style={'facecolor': '#4CAF50'})
+                color='#4CAF50')
 s_duration = Slider(ax_duration, 'Duration', 0.0001, 0.1, valinit=DURATION,
-                   track_color='#e0e0e0', handle_style={'facecolor': '#2196F3'})
+                   color='#2196F3')
 s_sample_rate = Slider(ax_sample_rate, 'Sample Rate', 20000, 400000, valinit=SAMPLE_RATE,
-                      track_color='#e0e0e0', handle_style={'facecolor': '#2196F3'})
+                      color='#2196F3')
 s_noise = Slider(ax_noise, 'Noise Threshold', 0, 1, valinit=DEFAULT_NOISE_THRESHOLD,
-                track_color='#e0e0e0', handle_style={'facecolor': '#FF9800'})
+                color='#FF9800')
 
 # Modern stil text boxlar
 t_lowcut = TextBox(ax_lowcut, 'Low Cut (Hz)', initial=str(DEFAULT_LOWCUT),
