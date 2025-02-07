@@ -22,6 +22,7 @@ class Bar(AxesWidget):
         self.connect_event('button_press_event', self._update)
         self.connect_event('motion_notify_event', self._update)
         self.connect_event('button_release_event', self._release)
+        self.callbacks = {}
 
     def _update(self, event):
         if self.ignore(event):
@@ -43,7 +44,14 @@ class Bar(AxesWidget):
         self.bar[0].set_height(val) if self.orientation == 'vertical' else self.bar[0].set_width(val)
         if not self.eventson:
             return
-        self._callbacks.process('change', self.val)
+        if 'change' in self.callbacks:
+            for callback in self.callbacks['change']:
+                callback(self.val)
+
+    def on_changed(self, callback):
+        if 'change' not in self.callbacks:
+            self.callbacks['change'] = []
+        self.callbacks['change'].append(callback)
 
 # Başlangıç örnekleme frekansı ve pencere süresi
 SAMPLE_RATE = 44100  # 44.1 kHz, CD kalitesinde ses
