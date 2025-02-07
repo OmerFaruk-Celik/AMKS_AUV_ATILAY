@@ -127,6 +127,7 @@ def update_interval(val):
     global INTERVAL
     INTERVAL = int(val)
     ani.event_source.interval = INTERVAL
+    stop()
 
 b_interval.on_changed(update_interval)
 
@@ -143,4 +144,14 @@ def baslat():
         print("Ses verisi alımı durduruldu.")
     except Exception as e:
         print(f"Bir hata oluştu: {e}")
+
+def stop():
+    # Mikrofonu ve grafiği durdur
+    global ani
+    if ani:
+        ani.event_source.stop()
+        plt.close(fig)
+        print("Ses verisi alımı durduruldu ve grafik kapatıldı.")
+
 baslat()
+stop()
