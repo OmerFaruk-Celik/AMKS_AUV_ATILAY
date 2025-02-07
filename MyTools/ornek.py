@@ -1,10 +1,16 @@
-from osiloskop import start_stream, get
+from osiloskop import Osiloskop
 
-# Grafiği başlat
-start_stream()
+# Create an instance
+osc = Osiloskop()
 
-# Bir süre sonra ses verilerini almak için
-import time
-time.sleep(5)  # 5 saniye bekleyin
-data = get()
-print(data)
+# Start streaming
+osc.start_stream()
+
+# Get microphone data
+data = osc.get_data()
+
+# Send data (if needed)
+processed_data = osc.send_data()
+
+# Visualize
+osc.visualize()
