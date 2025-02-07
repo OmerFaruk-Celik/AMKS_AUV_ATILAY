@@ -143,7 +143,6 @@ s_interval.on_changed(update_interval)
 s_sample_rate.on_changed(update_sample_rate)
 s_duration.on_changed(update_duration)
 
-# Mikrofonu başlat
 def stream():
     global ani, audio_stream
     try:
@@ -161,10 +160,22 @@ def stream():
             audio_stream.stop()
             audio_stream.close()
 
+# GUI işlemlerini başlatan fonksiyon
+def start_gui():
+    ani = FuncAnimation(fig, update, init_func=init, 
+                      blit=True, interval=INTERVAL,
+                      cache_frame_data=False, save_count=MAX_FRAMES)
+    plt.show()
+
 # stream fonksiyonunu thread ile başlatan fonksiyon
 def start_stream():
     stream_thread = threading.Thread(target=stream)
     stream_thread.start()
+
+# GUI işlemlerini ana thread'de başlatan fonksiyon
+def start():
+    start_stream()
+    start_gui()
 
 # Ses verilerini döndüren fonksiyon
 def get():
