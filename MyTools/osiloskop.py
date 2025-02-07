@@ -193,6 +193,7 @@ def update(frame):
         
         
         if show_filtered:
+            line1.set_data([], [])
             # Filtreleme işlemleri
             filtered_data = apply_bandpass_filter(ydata, lowcut, highcut, SAMPLE_RATE)
             filtered_data = apply_noise_filter(filtered_data, noise_threshold)
