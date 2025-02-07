@@ -89,9 +89,6 @@ def update_interval(val):
     global INTERVAL
     INTERVAL = int(val)
     return INTERVAL
-def interval():
-    global INTERVAL
-    return INTERVAL
 
 s_duration.on_changed(update_duration)
 s_sample_rate.on_changed(update_sample_rate)
