@@ -122,7 +122,7 @@ ax_sample_rate = plt.axes([0.25, 0.09, 0.5, 0.02], facecolor=slider_color)
 # Kontrol elemanları
 s_xlim = Slider(ax_xlim, 'X Lim', 0.001, 0.5, valinit=XLIM, orientation='vertical',
                 color='#4CAF50')
-s_ylim = Slider(ax_ylim, 'Y Lim', 0.01, 1.0, valinit=YLIM, orientation='vertical',
+s_ylim = Slider(ax_ylim, 'Y Lim', 0.001, 0.05, valinit=YLIM, orientation='vertical',
                 color='#4CAF50')
 s_duration = Slider(ax_duration, 'Duration', 0.0001, 0.1, valinit=DURATION,
                    color='#2196F3')
