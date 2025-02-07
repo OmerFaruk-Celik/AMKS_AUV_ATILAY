@@ -103,7 +103,8 @@ def update_ylim(val):
 
 def update_interval(val):
     global INTERVAL
-    new_interval = int(val)
+    INTERVAL = int(val)
+    start_microphone()
 
 s_duration.on_changed(update_duration)
 s_sample_rate.on_changed(update_sample_rate)
