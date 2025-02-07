@@ -128,7 +128,6 @@ def update(frame):
 def update_interval(val):
     global INTERVAL
     INTERVAL = int(val)
-    stop()
    
     if 'ani' in globals() and ani:
         ani.event_source.interval = INTERVAL
@@ -148,12 +147,6 @@ def baslat():
     except Exception as e:
         print(f"Bir hata oluştu: {e}")
 
-def stop():
-    global ani
-    if 'ani' in globals() and ani is not None:
-        ani.event_source.stop()
-        plt.close(fig)
-        print("Ses verisi alımı durduruldu ve grafik kapatıldı.")
 
 # Başlat ve durdur fonksiyonlarını test etmek için
 baslat()
