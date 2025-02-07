@@ -100,18 +100,18 @@ with sd.InputStream(callback=audio_callback, channels=1, samplerate=SAMPLE_RATE,
                 # **Ayraç biti (17800 Hz) algılandı mı?**
                 if waiting_for_separator and frequency_in_range(filtered_freq, SEPARATOR_BIT):
                     waiting_for_separator = False  # Artık veri bekliyoruz
-                    print("[info] Ayrac Algılandı ...")
+                    #print("[info] Ayrac Algılandı ...")
                 
                 # **Ayraç algılandıktan sonra bit okunuyor**
                 elif not waiting_for_separator:
                     if frequency_in_range(filtered_freq, BIT_0):
                         bit_array.append(0)
                         waiting_for_separator = True  # Yeniden ayraç bekle
-                        print("[info] added 0")
+                        #print("[info] added 0")
                     elif frequency_in_range(filtered_freq, BIT_1):
                         bit_array.append(1)
                         waiting_for_separator = True  # Yeniden ayraç bekle
-                        print("[info] added 1")
+                        #print("[info] added 1")
 
                 # **20 bit tamamlandıysa**
                 if len(bit_array) == 20:
@@ -128,7 +128,7 @@ with sd.InputStream(callback=audio_callback, channels=1, samplerate=SAMPLE_RATE,
                     delay = abs(t - decimal_value) * 100 / (1000)
                     
                     # Sonuçları yazdır
-                    print(f"Decimal: {decimal_value}, Gecikme: {delay:.2f} ms")
+                    #print(f"Decimal: {decimal_value}, Gecikme: {delay:.2f} ms")
                     #print(int(1/(delay*400/10000000)*100))
                     
                     is_receiving = False  # Veri alımını durdur
