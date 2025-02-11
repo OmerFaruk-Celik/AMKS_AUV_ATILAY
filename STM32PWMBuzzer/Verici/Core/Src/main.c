@@ -80,17 +80,19 @@ static void MX_TIM3_Init(void);
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
     if (GPIO_Pin == GPIO_PIN_3) {
         if (GPIOA->IDR & GPIO_IDR_IDR3) {
+        	frekans+=ekle;
 
         	txData++;
 
-        	ARR=(8000000/(frekans*(2-1)))+1;
+        	ARR=(8000000/(frekans*(PSC-1)))+1;
       	    TIM1->CCR4=ARR*0.5;
       	    TIM1->ARR=ARR;
+      	    TIM1->PSC=PSC;
 
 
 
 
-        	frekans+=ekle;
+
 
 
         	if(frekans>=80000){
@@ -163,7 +165,10 @@ int main(void)
   HAL_TIM_Base_Start_IT(&htim3);
   HAL_TIM_Base_Start(&htim1);
   HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_4);
-  TIM1->CCR4=deger;
+  ARR=(8000000/(frekans*(PSC-1)))+1;
+  TIM1->CCR4=ARR*0.5;
+  TIM1->ARR=ARR;
+  TIM1->PSC=PSC;
 
   //MX_USART3_UART_Init();
 
