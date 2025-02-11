@@ -54,6 +54,8 @@ int frekans=5000;
 
 //periot=(psc-1)*(arr-1)/8000000
 //frekans=8000000/((psc-1)*(arr-1))
+//frekans*((psc-1)*(arr-1))=8000000
+//arr-1=8000000/(frekans*(psc-1))
 
 // Gönderilecek veri
 uint8_t txData = 0x00; // Örneğin, 8 bitlik 0x55 verisi (01010101)
