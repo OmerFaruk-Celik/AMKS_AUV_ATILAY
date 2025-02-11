@@ -48,7 +48,7 @@ TIM_HandleTypeDef htim3;
 /* USER CODE BEGIN PV */
 float deger=400;
 float carpan=0.2;
-float ekle=100;
+float ekle=20;
 int ARR=4000;
 
 // Gönderilecek veri
@@ -78,9 +78,14 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
         	ARR+=ekle;
 
 
-        	if(ARR>=4000{
-        		ekle=-100;
+        	if(ARR>=4000){
+        		ekle=-10;
         		HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_13);
+        	}
+
+        	else if(ARR <= 100){
+        		HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_13);
+        		ekle=10;
         	}
 
 
