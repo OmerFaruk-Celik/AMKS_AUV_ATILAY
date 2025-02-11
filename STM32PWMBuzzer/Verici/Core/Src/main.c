@@ -48,9 +48,10 @@ TIM_HandleTypeDef htim3;
 /* USER CODE BEGIN PV */
 float deger=400;
 float carpan=0.2;
-float ekle=500;
+float ekle=100;
 int ARR=4000;
-int frekans=1000;
+int PSC=2;
+int frekans=5000;
 
 //periot=(psc-1)*(arr-1)/8000000
 //frekans=8000000/((psc-1)*(arr-1))
@@ -93,13 +94,13 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
 
 
         	if(frekans>=80000){
-        		ekle=-500;
+        		ekle=-100;
         		HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_13);
         	}
 
-        	else if(frekans <= 5000){
+        	else if(frekans <= 4000){
         		HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_13);
-        		ekle=-500;
+        		ekle=-100;
         	}
 
 
