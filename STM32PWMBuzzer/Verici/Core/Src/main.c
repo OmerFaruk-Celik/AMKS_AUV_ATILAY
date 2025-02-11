@@ -73,13 +73,12 @@ static void MX_TIM3_Init(void);
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
     if (GPIO_Pin == GPIO_PIN_3) {
         if (GPIOA->IDR & GPIO_IDR_IDR3) {
-        	deger+=ekle;
         	HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_13);
         	txData++;
         	ARR+=ekle;
 
 
-        	if(deger>=800 || deger <=0){
+        	if(ARR>=4000 || ARR <=100){
         		ekle=ekle*-1;
         	}
 
@@ -157,7 +156,8 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-	  TIM1->CCR4=deger;
+	  TIM1->CCR4=ARR*0.5;
+	  TIM1->ARR=ARR;
 
 
       // 8 bitlik veri gönderme
