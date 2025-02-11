@@ -1427,3 +1427,21 @@ org.eclipse.ui.PartInitException: Invalid State: Most probably trying to open 'B
 	at org.eclipse.equinox.launcher.Main.main(Main.java:1432)
 !SUBENTRY 1 org.eclipse.ui 4 0 2025-02-11 19:34:05.516
 !MESSAGE Invalid State: Most probably trying to open 'BluePill3.ioc' file from an abnomal previous IDE session exit. Please close such editor and have a new try to recover properly.
+
+!ENTRY com.st.stm32cube.ide.mcu.ide 1 1 2025-02-11 19:34:09.636
+!MESSAGE Started RMI Server, listening on port 41337
+!SESSION 2025-02-11 19:34:42.448 -----------------------------------------------
+eclipse.buildId=Version 1.16.1
+java.version=17.0.11
+java.vendor=Eclipse Adoptium
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=en_US
+Command-line arguments:  -data /home/celik/github/AMKS_AUV_ATILAY/STM32PWMBuzzer -os linux -ws gtk -arch x86_64
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 4 4 2025-02-11 19:34:47.515
+!MESSAGE CubeMX plugin appears to be active, Log4j initialization might be too late.
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 1 1 2025-02-11 19:34:47.516
+!MESSAGE Log4j2 initialized with config file /home/celik/github/AMKS_AUV_ATILAY/STM32PWMBuzzer/.metadata/.log4j2.xml
+
+!ENTRY com.st.stm32cube.ide.mcu.ide 1 1 2025-02-11 19:34:52.305
+!MESSAGE Started RMI Server, listening on port 41337
