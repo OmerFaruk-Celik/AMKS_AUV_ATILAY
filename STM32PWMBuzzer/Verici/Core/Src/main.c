@@ -106,10 +106,9 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
     if (GPIO_Pin == GPIO_PIN_3) {
         if (GPIOA->IDR & GPIO_IDR_IDR3) {
         	deger+=ekle;
-        	HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_13);
+        	//HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_13);
+        	HAL_GPIO_WritePin(GPIOC,GPIO_PIN_13,SET);
         	txData++;
-
-        	deger+=ekle;
 
 
         	if(deger>=800 || deger <=100){
@@ -190,7 +189,8 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-	  TIM1->CCR4=deger;
+	  TIM1->ARR=deger;
+	  TIM1->CCR4=deger*0.5;
 
 
       // 8 bitlik veri gönderme
@@ -384,6 +384,7 @@ static void MX_GPIO_Init(void)
 /* USER CODE END MX_GPIO_Init_1 */
 
   /* GPIO Ports Clock Enable */
+  __HAL_RCC_GPIOC_CLK_ENABLE();
   __HAL_RCC_GPIOD_CLK_ENABLE();
   __HAL_RCC_GPIOA_CLK_ENABLE();
 
