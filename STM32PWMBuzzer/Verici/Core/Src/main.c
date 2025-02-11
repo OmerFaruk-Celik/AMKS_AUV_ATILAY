@@ -49,6 +49,7 @@ TIM_HandleTypeDef htim3;
 float deger=400;
 float carpan=0.2;
 float ekle=100;
+int ARR=4000;
 
 // Gönderilecek veri
 uint8_t txData = 0x00; // Örneğin, 8 bitlik 0x55 verisi (01010101)
@@ -75,6 +76,7 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
         	deger+=ekle;
         	HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_13);
         	txData++;
+        	ARR+=ekle;
 
 
         	if(deger>=800 || deger <=0){
