@@ -50,7 +50,7 @@ float deger=400;
 float carpan=0.2;
 float ekle=500;
 int ARR=4000;
-int frekans=5000;
+int frekans=1000;
 
 //periot=(psc-1)*(arr-1)/8000000
 //frekans=8000000/((psc-1)*(arr-1))
@@ -97,7 +97,7 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
         		HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_13);
         	}
 
-        	else if(frekans <= 100){
+        	else if(frekans <= 5000){
         		HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_13);
         		ekle=-500;
         	}
