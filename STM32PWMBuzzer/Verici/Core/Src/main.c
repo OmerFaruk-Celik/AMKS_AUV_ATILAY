@@ -75,7 +75,7 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
         if (GPIOA->IDR & GPIO_IDR_IDR3) {
 
         	txData++;
-        	ARR+=;
+        	ARR+=ekle;
 
 
         	if(ARR>=4000){
