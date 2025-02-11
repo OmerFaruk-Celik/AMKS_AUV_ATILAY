@@ -50,6 +50,9 @@ float deger=400;
 float carpan=0.2;
 float ekle=20;
 int ARR=4000;
+int frekans=5000;
+
+//periot=(psc-1)*(arr-1)/8000000
 
 // Gönderilecek veri
 uint8_t txData = 0x00; // Örneğin, 8 bitlik 0x55 verisi (01010101)
@@ -75,6 +78,8 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
         if (GPIOA->IDR & GPIO_IDR_IDR3) {
 
         	txData++;
+
+
         	ARR+=ekle;
 
 
