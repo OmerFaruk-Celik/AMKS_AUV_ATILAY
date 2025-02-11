@@ -75,17 +75,17 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
         if (GPIOA->IDR & GPIO_IDR_IDR3) {
 
         	txData++;
-        	ARR+=ekle;
+        	ARR+=;
 
 
         	if(ARR>=4000){
-        		ekle=-10;
+        		ekle=-1;
         		HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_13);
         	}
 
         	else if(ARR <= 100){
         		HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_13);
-        		ekle=10;
+        		ekle=-1;
         	}
 
 
