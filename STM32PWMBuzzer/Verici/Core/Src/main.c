@@ -50,11 +50,11 @@ float deger=400;
 float carpan=0.2;
 float ekle=100;
 int ARR=4000;
-int PSC=2;
+int PSC=1;
 int frekans=40000;
 
 #define TIMCLOCK 8000000
-#define PRESCALAR 2
+#define PRESCALAR 1
 uint32_t IC_Val1=0;
 uint32_t IC_Val2=0;
 uint32_t Difference=0;
@@ -103,7 +103,7 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
 
 
 
-        	if(frekans>=45000){
+        	if(frekans>=60000){
         		ekle=-100;
 
         	}
@@ -415,9 +415,9 @@ static void MX_TIM4_Init(void)
 
   /* USER CODE END TIM4_Init 1 */
   htim4.Instance = TIM4;
-  htim4.Init.Prescaler = 2-1;
+  htim4.Init.Prescaler = 1-1;
   htim4.Init.CounterMode = TIM_COUNTERMODE_UP;
-  htim4.Init.Period = 40-1;
+  htim4.Init.Period = 100-1;
   htim4.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
   htim4.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
   if (HAL_TIM_Base_Init(&htim4) != HAL_OK)
