@@ -48,13 +48,13 @@ TIM_HandleTypeDef htim4;
 /* USER CODE BEGIN PV */
 float deger=400;
 float carpan=0.2;
-float ekle=100;
+float ekle=200;
 int ARR=4000;
 int PSC=1;
 int frekans=40000;
 
 #define TIMCLOCK 8000000
-#define PRESCALAR 1
+#define PRESCALAR 72
 uint32_t IC_Val1=0;
 uint32_t IC_Val2=0;
 uint32_t Difference=0;
@@ -104,12 +104,12 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
 
 
         	if(frekans>=60000){
-        		ekle=-100;
+        		ekle=-200;
 
         	}
 
-        	else if(frekans <= 30000){
-        		ekle=100;
+        	else if(frekans <= 20000){
+        		ekle=200;
         	}
 
 
@@ -138,13 +138,13 @@ void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim){
 
 		if(is_first_captured==0){
 
-			IC_Val1=HAL_TIM_ReadCapturedValue(htim,TIM_CHANNEL_1);
+			IC_Val1=__HAL_TIM_GET_COMPARE(htim,TIM_CHANNEL_1);  //HAL_TIM_ReadCapturedValue(htim,TIM_CHANNEL_1);
 			is_first_captured=1;
 		}
 
 
 		else{
-			IC_Val2=HAL_TIM_ReadCapturedValue(htim,TIM_CHANNEL_1);
+			IC_Val2=__HAL_TIM_GET_COMPARE(htim,TIM_CHANNEL_1); //HAL_TIM_ReadCapturedValue(htim,TIM_CHANNEL_1);
 			if(IC_Val2 > IC_Val1){
 				Difference=IC_Val2-IC_Val1;
 
@@ -155,7 +155,8 @@ void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim){
 				Difference=(0xffffffff - IC_Val1) + IC_Val2;
 			}
 
-			refClock = TIMCLOCK/(PRESCALAR);
+			refClock = TIMCLOCK / (htim->Instance->PSC + 1);
+
 			freq=refClock/Difference;
 			__HAL_TIM_SET_COUNTER(htim,0);
 			is_first_captured=0;
@@ -415,9 +416,9 @@ static void MX_TIM4_Init(void)
 
   /* USER CODE END TIM4_Init 1 */
   htim4.Instance = TIM4;
-  htim4.Init.Prescaler = 1-1;
+  htim4.Init.Prescaler = 72-1;
   htim4.Init.CounterMode = TIM_COUNTERMODE_UP;
-  htim4.Init.Period = 100-1;
+  htim4.Init.Period = 65535;
   htim4.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
   htim4.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
   if (HAL_TIM_Base_Init(&htim4) != HAL_OK)
