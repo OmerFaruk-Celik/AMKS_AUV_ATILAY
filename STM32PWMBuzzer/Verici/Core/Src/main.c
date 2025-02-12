@@ -54,7 +54,8 @@ int ARR=4000;
 int PSC=2;
 int frekans=40000;
 
-
+#define TIMCLOCK 8000000;,
+#define PRESCALAR 2;
 uint32_t IC_Val1=0;
 uint32_t IC_Val2=0;
 uint32_t Difference=0;
@@ -156,6 +157,8 @@ void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim){
 
 				Difference=(0xffffffff - IC_Val1) + IC_VAL2;
 			}
+
+			float ref_clock=TIM
 
 		}
 	}
