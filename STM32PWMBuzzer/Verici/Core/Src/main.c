@@ -227,6 +227,13 @@ int main(void)
 
     /* USER CODE BEGIN 3 */
 
+	  if(freq >= 40000){
+		  HAL_GPIO_WritePin(GPIOC, GPIO_PIN_13, RESET);
+	  }
+	  else{
+		  HAL_GPIO_WritePin(GPIOC, GPIO_PIN_13, SET);
+	  }
+
 
 
 
