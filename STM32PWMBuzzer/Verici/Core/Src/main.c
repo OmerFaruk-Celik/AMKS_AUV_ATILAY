@@ -54,13 +54,13 @@ int ARR=4000;
 int PSC=2;
 int frekans=40000;
 
-#define TIMCLOCK 8000000;,
-#define PRESCALAR 2;
+#define TIMCLOCK 8000000
+#define PRESCALAR 2
 uint32_t IC_Val1=0;
 uint32_t IC_Val2=0;
 uint32_t Difference=0;
 int is_first_captured=0;
-
+float refClock;
 float freq=0;
 //periot=(psc-1)*(arr-1)/8000000
 //frekans=8000000/((psc-1)*(arr-1))
@@ -155,11 +155,13 @@ void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim){
 
 			else{
 
-				Difference=(0xffffffff - IC_Val1) + IC_VAL2;
+				Difference=(0xffffffff - IC_Val1) + IC_Val2;
 			}
 
-			float ref_clock=TIM
-
+			refClock = TIMCLOCK/(PRESCALAR);
+			freq=refClock/Difference;
+			__HAL_TIM_SET_COUNTER(htim,0);
+			is_first_captured=0;
 		}
 	}
 
