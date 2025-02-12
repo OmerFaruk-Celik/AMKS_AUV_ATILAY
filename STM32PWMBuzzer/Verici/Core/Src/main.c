@@ -128,6 +128,11 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
 }
 
 
+void HAL_TIM_IC_Start_IT(TIM_HandleTypeDef *htim, uint32_t Channel){
+
+
+}
+
 
 /* USER CODE END 0 */
 
