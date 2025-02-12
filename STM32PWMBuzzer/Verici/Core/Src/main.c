@@ -212,7 +212,7 @@ int main(void)
   TIM1->PSC=PSC;
 
 
-  HAL_GPIO_WritePin(GPIOC, GPIO_PIN_13, RESET);
+  HAL_GPIO_WritePin(GPIOC, GPIO_PIN_13, SET);
 
   //MX_USART3_UART_Init();
 
