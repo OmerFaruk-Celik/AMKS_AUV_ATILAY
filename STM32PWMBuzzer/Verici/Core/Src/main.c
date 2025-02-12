@@ -147,7 +147,15 @@ void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim){
 
 		else{
 			IC_Val2=HAL_TIM_ReadCapturedValue(htim,TIM_CHANNEL_1);
+			if(IC_Val2 > IC_Val1){
+				Difference=IC_Val2-IC_Val1;
 
+			}
+
+			else{
+
+				Difference=(0xffffffff - IC_Val1) + IC_VAL2;
+			}
 
 		}
 	}
