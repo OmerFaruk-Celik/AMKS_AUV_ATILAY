@@ -51,7 +51,7 @@ float carpan=0.2;
 float ekle=100;
 int ARR=4000;
 int PSC=2;
-int frekans=5000;
+int frekans=40000;
 
 //periot=(psc-1)*(arr-1)/8000000
 //frekans=8000000/((psc-1)*(arr-1))
@@ -84,7 +84,7 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
 
         	txData++;
 
-        	ARR=(8000000/(frekans*(PSC-1)))+1;
+        	ARR=(8000000/(frekans*(PSC+1)))-1;
       	    TIM1->CCR4=ARR*0.5;
       	    TIM1->ARR=ARR;
       	    TIM1->PSC=PSC;
@@ -95,14 +95,14 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
 
 
 
-        	if(frekans>=80000){
+        	if(frekans>=40000){
         		ekle=-100;
         		HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_13);
         	}
 
-        	else if(frekans <= 4000){
+        	else if(frekans <= 30000){
         		HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_13);
-        		ekle=-100;
+        		ekle=100;
         	}
 
 
@@ -165,7 +165,7 @@ int main(void)
   HAL_TIM_Base_Start_IT(&htim3);
   HAL_TIM_Base_Start(&htim1);
   HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_4);
-  ARR=(8000000/(frekans*(PSC-1)))+1;
+  ARR=(8000000/(frekans*(PSC+1)))-1;
   TIM1->CCR4=ARR*0.5;
   TIM1->ARR=ARR;
   TIM1->PSC=PSC;
@@ -182,6 +182,14 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
+	  for(int frekans=20000; frekans<50000;frekans++){
+
+      	ARR=(8000000/(frekans*(PSC+1)))-1;
+    	TIM1->CCR4=ARR*0.5;
+    	TIM1->ARR=ARR;
+    	TIM1->PSC=PSC;
+    	HAL_Delay(1);
+	  }
 
 
       // 8 bitlik veri gönderme
