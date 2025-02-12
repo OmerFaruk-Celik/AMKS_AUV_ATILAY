@@ -54,6 +54,10 @@ int ARR=4000;
 int PSC=2;
 int frekans=40000;
 
+
+uint32_t IC_Val1=0;
+uint32_t IC_Val2=0;
+
 //periot=(psc-1)*(arr-1)/8000000
 //frekans=8000000/((psc-1)*(arr-1))
 //frekans*((psc-1)*(arr-1))=8000000
@@ -127,8 +131,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
 
 }
 
-
-void HAL_TIM_IC_Start_IT(TIM_HandleTypeDef *htim, uint32_t Channel){
+void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim){
 
 
 }
