@@ -107,11 +107,10 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
 
         	if(frekans>=45000){
         		ekle=-100;
-        		HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_13);
+
         	}
 
         	else if(frekans <= 30000){
-        		HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_13);
         		ekle=100;
         	}
 
@@ -228,7 +227,7 @@ int main(void)
 
     /* USER CODE BEGIN 3 */
 
-
+    /*
 	  for(int frekans=20000; frekans<=50000;frekans+=100){
 
       	ARR=(8000000/(frekans*(PSC+1)))-1;
@@ -247,7 +246,11 @@ int main(void)
     	HAL_Delay(100);
 	  }
 
+	*/
 
+	  if (freq==40000){
+
+	  }
 
 
       // 8 bitlik veri gönderme
