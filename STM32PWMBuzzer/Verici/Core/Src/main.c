@@ -57,7 +57,10 @@ int frekans=40000;
 
 uint32_t IC_Val1=0;
 uint32_t IC_Val2=0;
+uint32_t Difference=0;
+int is_first_captured=0;
 
+float freq=0;
 //periot=(psc-1)*(arr-1)/8000000
 //frekans=8000000/((psc-1)*(arr-1))
 //frekans*((psc-1)*(arr-1))=8000000
@@ -132,6 +135,22 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
 }
 
 void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim){
+
+	if(htim->Channel==HAL_TIM_ACTIVE_CHANNEL_1){
+
+		if(is_first_captured==0){
+
+			IC_Val1=HAL_TIM_ReadCapturedValue(htim,TIM_CHANNEL_1);
+			is_first_captured=1;
+		}
+
+
+		else{
+			IC_Val2=HAL_TIM_ReadCapturedValue(htim,TIM_CHANNEL_1);
+
+
+		}
+	}
 
 
 }
