@@ -48,13 +48,13 @@ TIM_HandleTypeDef htim4;
 /* USER CODE BEGIN PV */
 float deger=400;
 float carpan=0.2;
-float ekle=200;
+float ekle=100;
 int ARR=4000;
 int PSC=1;
-int frekans=40000;
+int frekans=38000;
 
-#define TIMCLOCK 8000000
-#define PRESCALAR 72
+#define TIMCLOCK 8000000.0
+#define PRESCALAR 8.0
 uint32_t IC_Val1=0;
 uint32_t IC_Val2=0;
 uint32_t Difference=0;
@@ -92,7 +92,7 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
 
         	txData++;
 
-        	ARR=(8000000/(frekans*(PSC+1)))-1;
+        	ARR=(TIMCLOCK/(frekans*(PSC+1)))-1;
       	    TIM1->CCR4=ARR*0.5;
       	    TIM1->ARR=ARR;
       	    TIM1->PSC=PSC;
@@ -103,13 +103,13 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
 
 
 
-        	if(frekans>=60000){
-        		ekle=-200;
+        	if(frekans>=45000){
+        		ekle=-50;
 
         	}
 
-        	else if(frekans <= 20000){
-        		ekle=200;
+        	else if(frekans <= 36000){
+        		ekle=50;
         	}
 
 
@@ -155,8 +155,7 @@ void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim){
 				Difference=(0xffffffff - IC_Val1) + IC_Val2;
 			}
 
-			refClock = TIMCLOCK / (htim->Instance->PSC + 1);
-
+			refClock = TIMCLOCK/(PRESCALAR);
 			freq=refClock/Difference;
 			__HAL_TIM_SET_COUNTER(htim,0);
 			is_first_captured=0;
@@ -207,7 +206,7 @@ int main(void)
   HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_4);
   HAL_TIM_IC_Start_IT(&htim4, TIM_CHANNEL_1);
 
-  ARR=(8000000/(frekans*(PSC+1)))-1;
+  ARR=(TIMCLOCK/(frekans*(PSC+1)))-1;
   TIM1->CCR4=ARR*0.5;
   TIM1->ARR=ARR;
   TIM1->PSC=PSC;
@@ -228,7 +227,7 @@ int main(void)
 
     /* USER CODE BEGIN 3 */
 
-	  if(freq >= 40000){
+	  if((freq >= 300000) && (freq <= 42000)){
 		  HAL_GPIO_WritePin(GPIOC, GPIO_PIN_13, RESET);
 	  }
 	  else{
@@ -298,9 +297,8 @@ void SystemClock_Config(void)
   /** Initializes the RCC Oscillators according to the specified parameters
   * in the RCC_OscInitTypeDef structure.
   */
-  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSI;
-  RCC_OscInitStruct.HSIState = RCC_HSI_ON;
-  RCC_OscInitStruct.HSICalibrationValue = RCC_HSICALIBRATION_DEFAULT;
+  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSE;
+  RCC_OscInitStruct.HSEState = RCC_HSE_ON;
   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_NONE;
   if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
   {
@@ -311,7 +309,7 @@ void SystemClock_Config(void)
   */
   RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
                               |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2;
-  RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_HSI;
+  RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_HSE;
   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
   RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV1;
   RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
@@ -416,7 +414,7 @@ static void MX_TIM4_Init(void)
 
   /* USER CODE END TIM4_Init 1 */
   htim4.Instance = TIM4;
-  htim4.Init.Prescaler = 72-1;
+  htim4.Init.Prescaler = 8-1;
   htim4.Init.CounterMode = TIM_COUNTERMODE_UP;
   htim4.Init.Period = 65535;
   htim4.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
