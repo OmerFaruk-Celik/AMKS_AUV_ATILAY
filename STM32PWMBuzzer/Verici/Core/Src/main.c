@@ -206,15 +206,17 @@ int main(void)
 
  // HAL_TIM_Base_Start_IT(&htim3);
   HAL_TIM_Base_Start(&htim1);
-  HAL_TIM_Base_Start(&htim2);
   HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_4);
+
+  HAL_TIM_Base_Start(&htim2);
   HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_4);
+  TIM2->CCR4=200*0.5;
+
+
   HAL_TIM_IC_Start_IT(&htim4, TIM_CHANNEL_1);
 
   ARR=(TIMCLOCK/(frekans*(PSC+1)))-1;
-  int ARR2=(TIMCLOCK/(15000*(PSC+1)))-1;
   TIM1->CCR4=ARR*0.5;
-  TIM2->CCR4=ARR2*0.5;
   TIM1->ARR=ARR;
   TIM1->PSC=PSC;
 
