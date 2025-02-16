@@ -53,7 +53,7 @@ float ekle=100;
 int ARR=4000;
 int PSC=1;
 int frekans=38400;
-
+int F_sayisi=0
 #define TIMCLOCK 8000000.0
 #define PRESCALAR 8.0
 uint32_t IC_Val1=0;
@@ -61,7 +61,7 @@ uint32_t IC_Val2=0;
 uint32_t Difference=0;
 int is_first_captured=0;
 float refClock;
-float freq=0;
+int freq=0;
 //periot=(psc-1)*(arr-1)/8000000
 //frekans=8000000/((psc-1)*(arr-1))
 //frekans*((psc-1)*(arr-1))=8000000
@@ -239,7 +239,6 @@ int main(void)
 	  if((freq >= 38000) && (freq <= 40000)){
 		  HAL_GPIO_WritePin(GPIOC, GPIO_PIN_13, RESET);
 		  HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_4);
-		  HAL_Delay(30);
 
 	  }
 	  else{
