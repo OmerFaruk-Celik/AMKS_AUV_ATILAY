@@ -1,4 +1,4 @@
-23:04:29 **** Incremental Build of configuration Debug for project Verici ****
+01:44:04 **** Incremental Build of configuration Debug for project Verici ****
 make -j4 all 
 arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
 arm-none-eabi-gcc -o "Verici.elf" @"objects.list"   -mcpu=cortex-m3 -T"/home/celik/github/AMKS_AUV_ATILAY/STM32PWMBuzzer/Verici/STM32F103C8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Verici.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -Wl,--end-group
@@ -6,15 +6,15 @@ Finished building target: Verici.elf
  
 arm-none-eabi-size  Verici.elf 
 arm-none-eabi-objdump -h -S Verici.elf  > "Verici.list"
-arm-none-eabi-objcopy  -O ihex Verici.elf  "Verici.hex"
    text	   data	    bss	    dec	    hex	filename
-  37144	    484	   2184	  39812	   9b84	Verici.elf
-arm-none-eabi-objcopy  -O binary Verici.elf  "Verici.bin"
+  37064	    484	   2184	  39732	   9b34	Verici.elf
+arm-none-eabi-objcopy  -O ihex Verici.elf  "Verici.hex"
 Finished building: default.size.stdout
- 
-Finished building: Verici.hex
+arm-none-eabi-objcopy  -O binary Verici.elf  "Verici.bin"
  
 Finished building: Verici.bin
+Finished building: Verici.hex
+ 
  
 Finished building: Verici.list
  
