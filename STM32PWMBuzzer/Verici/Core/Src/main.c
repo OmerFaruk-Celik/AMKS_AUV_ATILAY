@@ -214,8 +214,8 @@ int main(void)
   ARR=(TIMCLOCK/(frekans*(PSC+1)))-1;
   int ARR2=(TIMCLOCK/(15000*(PSC+1)))-1;
   TIM1->CCR4=ARR*0.5;
-  TIM1->CCR3=ARR2*0.5;
-  TIM1->ARR=ARR2;
+  TIM2->CCR4=ARR2*0.5;
+  TIM1->ARR=ARR;
   TIM1->PSC=PSC;
 
 
