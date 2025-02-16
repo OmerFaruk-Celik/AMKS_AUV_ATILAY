@@ -1,0 +1,23 @@
+23:49:47 **** Incremental Build of configuration Debug for project BluePill3 ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc -o "BluePill3.elf" @"objects.list"   -mcpu=cortex-m3 -T"/home/celik/STM32CubeIDE/STM32PWMBuzzer/BluePill3/STM32F103C8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="BluePill3.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: BluePill3.elf
+ 
+arm-none-eabi-size  BluePill3.elf 
+arm-none-eabi-objdump -h -S BluePill3.elf  > "BluePill3.list"
+arm-none-eabi-objcopy  -O ihex BluePill3.elf  "BluePill3.hex"
+   text	   data	    bss	    dec	    hex	filename
+  33248	    488	   2064	  35800	   8bd8	BluePill3.elf
+arm-none-eabi-objcopy  -O binary BluePill3.elf  "BluePill3.bin"
+Finished building: default.size.stdout
+ 
+Finished building: BluePill3.hex
+ 
+Finished building: BluePill3.bin
+ 
+Finished building: BluePill3.list
+ 
+
+23:49:47 Build Finished. 0 errors, 0 warnings. (took 420ms)
+

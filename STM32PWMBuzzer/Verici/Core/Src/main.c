@@ -94,10 +94,10 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
 
         	txData++;
 
-        	ARR=(TIMCLOCK/(frekans*(PSC+1)))-1;
-      	    TIM1->CCR4=ARR*0.5;
-      	    TIM1->ARR=ARR;
-      	    TIM1->PSC=PSC;
+        	//ARR=(TIMCLOCK/(frekans*(PSC+1)))-1;
+      	    //TIM1->CCR4=ARR*0.5;
+      	    //TIM1->ARR=ARR;
+      	    //TIM1->PSC=PSC;
 
 
 
@@ -238,13 +238,16 @@ int main(void)
 
 	  if((freq >= 38000) && (freq <= 40000)){
 		  HAL_GPIO_WritePin(GPIOC, GPIO_PIN_13, RESET);
+		  HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_4);
+		  HAL_Delay(30);
 
 	  }
 	  else{
+		  HAL_TIM_PWM_Stop(&htim2, TIM_CHANNEL_4);
 		 HAL_GPIO_WritePin(GPIOC, GPIO_PIN_13, SET);
 	  }
 
-	  //HAL_Delay(10);
+
 
 
 

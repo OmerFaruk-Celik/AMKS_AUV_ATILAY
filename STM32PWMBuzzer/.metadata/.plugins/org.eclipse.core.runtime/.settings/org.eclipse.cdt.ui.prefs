@@ -1,4 +1,8 @@
 eclipse.preferences.version=1
+org.eclipse.cdt.ui.outline.groupincludes=true
+org.eclipse.cdt.ui.outline.groupmacros=true
+org.eclipse.cdt.ui.outline.groupmembers=true
+org.eclipse.cdt.ui.outline.hidePragmaMark=true
 scalability.contentAssistAutoActivation=true
 scalability.enableAll=true
 scalability.parserBasedContentAssist=true
