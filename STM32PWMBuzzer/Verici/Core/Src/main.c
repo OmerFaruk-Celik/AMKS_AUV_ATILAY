@@ -51,7 +51,7 @@ float carpan=0.2;
 float ekle=100;
 int ARR=4000;
 int PSC=1;
-int frekans=38000;
+int frekans=38400;
 
 #define TIMCLOCK 8000000.0
 #define PRESCALAR 8.0
@@ -103,13 +103,13 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
 
 
 
-        	if(frekans>=45000){
-        		ekle=-50;
+        	if(frekans>=42000){
+        		ekle=-100;
 
         	}
 
-        	else if(frekans <= 36000){
-        		ekle=50;
+        	else if(frekans <= 38000){
+        		ekle=100;
         	}
 
 
@@ -227,12 +227,15 @@ int main(void)
 
     /* USER CODE BEGIN 3 */
 
-	  if((freq >= 300000) && (freq <= 42000)){
+	  if((freq >= 38000) && (freq <= 40000)){
 		  HAL_GPIO_WritePin(GPIOC, GPIO_PIN_13, RESET);
+
 	  }
 	  else{
-		  HAL_GPIO_WritePin(GPIOC, GPIO_PIN_13, SET);
+		 HAL_GPIO_WritePin(GPIOC, GPIO_PIN_13, SET);
 	  }
+
+	  //HAL_Delay(10);
 
 
 
