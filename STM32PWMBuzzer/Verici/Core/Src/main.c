@@ -52,8 +52,10 @@ float carpan=0.2;
 float ekle=100;
 int ARR=4000;
 int PSC=1;
-int frekans=38400;
-int F_sayisi=0
+int frekans=38000;
+float F_sayisi=0;
+float toplam=0;
+float oran=0;
 #define TIMCLOCK 8000000.0
 #define PRESCALAR 8.0
 uint32_t IC_Val1=0;
@@ -94,10 +96,10 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
 
         	txData++;
 
-        	//ARR=(TIMCLOCK/(frekans*(PSC+1)))-1;
-      	    //TIM1->CCR4=ARR*0.5;
-      	    //TIM1->ARR=ARR;
-      	    //TIM1->PSC=PSC;
+        	ARR=(TIMCLOCK/(frekans*(PSC+1)))-1;
+      	    TIM1->CCR4=ARR*0.5;
+      	    TIM1->ARR=ARR;
+      	    TIM1->PSC=PSC;
 
 
 
@@ -105,7 +107,7 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
 
 
 
-        	if(frekans>=42000){
+        	if(frekans>=40000){
         		ekle=-100;
 
         	}
@@ -235,16 +237,19 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
+	  toplam++;
 
-	  if((freq >= 38000) && (freq <= 40000)){
+	  if((freq == 38000){
 		  HAL_GPIO_WritePin(GPIOC, GPIO_PIN_13, RESET);
 		  HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_4);
+		  F_sayisi++;
 
 	  }
 	  else{
 		  HAL_TIM_PWM_Stop(&htim2, TIM_CHANNEL_4);
 		 HAL_GPIO_WritePin(GPIOC, GPIO_PIN_13, SET);
 	  }
+	  oran=F_sayisi/toplam;
 
 
 
