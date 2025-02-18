@@ -1,10 +1,10 @@
-02:05:59 **** Incremental Build of configuration Debug for project Verici ****
+19:24:06 **** Incremental Build of configuration Debug for project Verici ****
 make -j4 all 
 arm-none-eabi-size  Verici.elf 
    text	   data	    bss	    dec	    hex	filename
-  36832	    484	   2192	  39508	   9a54	Verici.elf
+  36896	    484	   2200	  39580	   9a9c	Verici.elf
 Finished building: default.size.stdout
  
 
-02:05:59 Build Finished. 0 errors, 0 warnings. (took 224ms)
+19:24:06 Build Finished. 0 errors, 0 warnings. (took 226ms)
 
