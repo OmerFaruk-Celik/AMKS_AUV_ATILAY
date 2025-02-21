@@ -52,7 +52,7 @@ float carpan=0.2;
 float ekle=100;
 int ARR=4000;
 int PSC=1;
-int frekans=38000;
+int frekans=39000;
 float F_sayisi=0;
 float toplam=0;
 float oran=0;
@@ -64,6 +64,7 @@ uint32_t Difference=0;
 int is_first_captured=0;
 float refClock;
 int freq=0;
+float carpan=0.5;
 //periot=(psc-1)*(arr-1)/8000000
 //frekans=8000000/((psc-1)*(arr-1))
 //frekans*((psc-1)*(arr-1))=8000000
@@ -101,6 +102,8 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
       	    TIM1->ARR=ARR;
       	    TIM1->PSC=PSC;
 
+      	    HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_13);
+
 
 
 
@@ -112,7 +115,7 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
 
         	}
 
-        	else if(frekans <= 38000){
+        	else if(frekans <= 37000){
         		ekle=100;
         	}
 
@@ -239,7 +242,7 @@ int main(void)
     /* USER CODE BEGIN 3 */
 	  toplam++;
 
-	  if((freq == 38000){
+	  if(freq == 38461){
 		  HAL_GPIO_WritePin(GPIOC, GPIO_PIN_13, RESET);
 		  HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_4);
 		  F_sayisi++;
