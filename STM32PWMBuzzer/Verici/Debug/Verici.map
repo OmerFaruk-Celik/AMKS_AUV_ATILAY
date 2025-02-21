@@ -2496,7 +2496,7 @@ LOAD /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externa
                 0x08000000                g_pfnVectors
                 0x0800010c                        . = ALIGN (0x4)
 
-.text           0x08000110     0x8cec
+.text           0x08000110     0x8ce4
                 0x08000110                        . = ALIGN (0x4)
  *(.text)
  .text          0x08000110       0x40 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v7-m/nofp/crtbegin.o
@@ -2591,719 +2591,719 @@ LOAD /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externa
                 0x0800124c       0xc0 ./Core/Src/main.o
                 0x0800124c                HAL_TIM_IC_CaptureCallback
  *fill*         0x0800130c        0x4 
- .text.main     0x08001310      0x2d8 ./Core/Src/main.o
+ .text.main     0x08001310      0x2d0 ./Core/Src/main.o
                 0x08001310                main
  .text.SystemClock_Config
-                0x080015e8       0x74 ./Core/Src/main.o
-                0x080015e8                SystemClock_Config
+                0x080015e0       0x74 ./Core/Src/main.o
+                0x080015e0                SystemClock_Config
  .text.MX_TIM1_Init
-                0x0800165c      0x13c ./Core/Src/main.o
+                0x08001654      0x13c ./Core/Src/main.o
  .text.MX_TIM2_Init
-                0x08001798       0xe8 ./Core/Src/main.o
+                0x08001790       0xe8 ./Core/Src/main.o
  .text.MX_TIM4_Init
-                0x08001880       0xe0 ./Core/Src/main.o
+                0x08001878       0xe0 ./Core/Src/main.o
  .text.MX_GPIO_Init
-                0x08001960       0xe0 ./Core/Src/main.o
+                0x08001958       0xe0 ./Core/Src/main.o
  .text.Error_Handler
-                0x08001a40        0xc ./Core/Src/main.o
-                0x08001a40                Error_Handler
+                0x08001a38        0xc ./Core/Src/main.o
+                0x08001a38                Error_Handler
  .text.HAL_MspInit
-                0x08001a4c       0x84 ./Core/Src/stm32f1xx_hal_msp.o
-                0x08001a4c                HAL_MspInit
+                0x08001a44       0x84 ./Core/Src/stm32f1xx_hal_msp.o
+                0x08001a44                HAL_MspInit
  .text.HAL_TIM_Base_MspInit
-                0x08001ad0      0x128 ./Core/Src/stm32f1xx_hal_msp.o
-                0x08001ad0                HAL_TIM_Base_MspInit
+                0x08001ac8      0x128 ./Core/Src/stm32f1xx_hal_msp.o
+                0x08001ac8                HAL_TIM_Base_MspInit
  .text.HAL_TIM_MspPostInit
-                0x08001bf8       0xd0 ./Core/Src/stm32f1xx_hal_msp.o
-                0x08001bf8                HAL_TIM_MspPostInit
+                0x08001bf0       0xd0 ./Core/Src/stm32f1xx_hal_msp.o
+                0x08001bf0                HAL_TIM_MspPostInit
  .text.NMI_Handler
-                0x08001cc8        0x8 ./Core/Src/stm32f1xx_it.o
-                0x08001cc8                NMI_Handler
+                0x08001cc0        0x8 ./Core/Src/stm32f1xx_it.o
+                0x08001cc0                NMI_Handler
  .text.HardFault_Handler
-                0x08001cd0        0x8 ./Core/Src/stm32f1xx_it.o
-                0x08001cd0                HardFault_Handler
+                0x08001cc8        0x8 ./Core/Src/stm32f1xx_it.o
+                0x08001cc8                HardFault_Handler
  .text.MemManage_Handler
-                0x08001cd8        0x8 ./Core/Src/stm32f1xx_it.o
-                0x08001cd8                MemManage_Handler
+                0x08001cd0        0x8 ./Core/Src/stm32f1xx_it.o
+                0x08001cd0                MemManage_Handler
  .text.BusFault_Handler
-                0x08001ce0        0x8 ./Core/Src/stm32f1xx_it.o
-                0x08001ce0                BusFault_Handler
+                0x08001cd8        0x8 ./Core/Src/stm32f1xx_it.o
+                0x08001cd8                BusFault_Handler
  .text.UsageFault_Handler
-                0x08001ce8        0x8 ./Core/Src/stm32f1xx_it.o
-                0x08001ce8                UsageFault_Handler
+                0x08001ce0        0x8 ./Core/Src/stm32f1xx_it.o
+                0x08001ce0                UsageFault_Handler
  .text.SVC_Handler
-                0x08001cf0        0xc ./Core/Src/stm32f1xx_it.o
-                0x08001cf0                SVC_Handler
+                0x08001ce8        0xc ./Core/Src/stm32f1xx_it.o
+                0x08001ce8                SVC_Handler
  .text.DebugMon_Handler
-                0x08001cfc        0xc ./Core/Src/stm32f1xx_it.o
-                0x08001cfc                DebugMon_Handler
+                0x08001cf4        0xc ./Core/Src/stm32f1xx_it.o
+                0x08001cf4                DebugMon_Handler
  .text.PendSV_Handler
-                0x08001d08        0xc ./Core/Src/stm32f1xx_it.o
-                0x08001d08                PendSV_Handler
+                0x08001d00        0xc ./Core/Src/stm32f1xx_it.o
+                0x08001d00                PendSV_Handler
  .text.SysTick_Handler
-                0x08001d14        0xc ./Core/Src/stm32f1xx_it.o
-                0x08001d14                SysTick_Handler
+                0x08001d0c        0xc ./Core/Src/stm32f1xx_it.o
+                0x08001d0c                SysTick_Handler
  .text.FLASH_IRQHandler
-                0x08001d20        0xc ./Core/Src/stm32f1xx_it.o
-                0x08001d20                FLASH_IRQHandler
+                0x08001d18        0xc ./Core/Src/stm32f1xx_it.o
+                0x08001d18                FLASH_IRQHandler
  .text.RCC_IRQHandler
-                0x08001d2c        0xc ./Core/Src/stm32f1xx_it.o
-                0x08001d2c                RCC_IRQHandler
+                0x08001d24        0xc ./Core/Src/stm32f1xx_it.o
+                0x08001d24                RCC_IRQHandler
  .text.EXTI3_IRQHandler
-                0x08001d38        0xe ./Core/Src/stm32f1xx_it.o
-                0x08001d38                EXTI3_IRQHandler
- *fill*         0x08001d46        0x2 
+                0x08001d30        0xe ./Core/Src/stm32f1xx_it.o
+                0x08001d30                EXTI3_IRQHandler
+ *fill*         0x08001d3e        0x2 
  .text.TIM1_BRK_IRQHandler
-                0x08001d48       0x14 ./Core/Src/stm32f1xx_it.o
-                0x08001d48                TIM1_BRK_IRQHandler
+                0x08001d40       0x14 ./Core/Src/stm32f1xx_it.o
+                0x08001d40                TIM1_BRK_IRQHandler
  .text.TIM1_UP_IRQHandler
-                0x08001d5c       0x14 ./Core/Src/stm32f1xx_it.o
-                0x08001d5c                TIM1_UP_IRQHandler
+                0x08001d54       0x14 ./Core/Src/stm32f1xx_it.o
+                0x08001d54                TIM1_UP_IRQHandler
  .text.TIM1_TRG_COM_IRQHandler
-                0x08001d70       0x14 ./Core/Src/stm32f1xx_it.o
-                0x08001d70                TIM1_TRG_COM_IRQHandler
+                0x08001d68       0x14 ./Core/Src/stm32f1xx_it.o
+                0x08001d68                TIM1_TRG_COM_IRQHandler
  .text.TIM1_CC_IRQHandler
-                0x08001d84       0x14 ./Core/Src/stm32f1xx_it.o
-                0x08001d84                TIM1_CC_IRQHandler
+                0x08001d7c       0x14 ./Core/Src/stm32f1xx_it.o
+                0x08001d7c                TIM1_CC_IRQHandler
  .text.TIM2_IRQHandler
-                0x08001d98       0x14 ./Core/Src/stm32f1xx_it.o
-                0x08001d98                TIM2_IRQHandler
+                0x08001d90       0x14 ./Core/Src/stm32f1xx_it.o
+                0x08001d90                TIM2_IRQHandler
  .text.TIM4_IRQHandler
-                0x08001dac       0x14 ./Core/Src/stm32f1xx_it.o
-                0x08001dac                TIM4_IRQHandler
- .text._getpid  0x08001dc0        0xe ./Core/Src/syscalls.o
-                0x08001dc0                _getpid
- .text._kill    0x08001dce       0x20 ./Core/Src/syscalls.o
-                0x08001dce                _kill
- .text._exit    0x08001dee       0x16 ./Core/Src/syscalls.o
-                0x08001dee                _exit
- .text._read    0x08001e04       0x3a ./Core/Src/syscalls.o
-                0x08001e04                _read
- .text._write   0x08001e3e       0x38 ./Core/Src/syscalls.o
-                0x08001e3e                _write
- .text._close   0x08001e76       0x16 ./Core/Src/syscalls.o
-                0x08001e76                _close
- .text._fstat   0x08001e8c       0x1e ./Core/Src/syscalls.o
-                0x08001e8c                _fstat
- .text._isatty  0x08001eaa       0x14 ./Core/Src/syscalls.o
-                0x08001eaa                _isatty
- .text._lseek   0x08001ebe       0x18 ./Core/Src/syscalls.o
-                0x08001ebe                _lseek
- *fill*         0x08001ed6        0x2 
- .text._sbrk    0x08001ed8       0x6c ./Core/Src/sysmem.o
-                0x08001ed8                _sbrk
+                0x08001da4       0x14 ./Core/Src/stm32f1xx_it.o
+                0x08001da4                TIM4_IRQHandler
+ .text._getpid  0x08001db8        0xe ./Core/Src/syscalls.o
+                0x08001db8                _getpid
+ .text._kill    0x08001dc6       0x20 ./Core/Src/syscalls.o
+                0x08001dc6                _kill
+ .text._exit    0x08001de6       0x16 ./Core/Src/syscalls.o
+                0x08001de6                _exit
+ .text._read    0x08001dfc       0x3a ./Core/Src/syscalls.o
+                0x08001dfc                _read
+ .text._write   0x08001e36       0x38 ./Core/Src/syscalls.o
+                0x08001e36                _write
+ .text._close   0x08001e6e       0x16 ./Core/Src/syscalls.o
+                0x08001e6e                _close
+ .text._fstat   0x08001e84       0x1e ./Core/Src/syscalls.o
+                0x08001e84                _fstat
+ .text._isatty  0x08001ea2       0x14 ./Core/Src/syscalls.o
+                0x08001ea2                _isatty
+ .text._lseek   0x08001eb6       0x18 ./Core/Src/syscalls.o
+                0x08001eb6                _lseek
+ *fill*         0x08001ece        0x2 
+ .text._sbrk    0x08001ed0       0x6c ./Core/Src/sysmem.o
+                0x08001ed0                _sbrk
  .text.SystemInit
-                0x08001f44        0xc ./Core/Src/system_stm32f1xx.o
-                0x08001f44                SystemInit
+                0x08001f3c        0xc ./Core/Src/system_stm32f1xx.o
+                0x08001f3c                SystemInit
  .text.Reset_Handler
-                0x08001f50       0x48 ./Core/Startup/startup_stm32f103c8tx.o
-                0x08001f50                Reset_Handler
+                0x08001f48       0x48 ./Core/Startup/startup_stm32f103c8tx.o
+                0x08001f48                Reset_Handler
  .text.Default_Handler
-                0x08001f98        0x2 ./Core/Startup/startup_stm32f103c8tx.o
-                0x08001f98                RTC_Alarm_IRQHandler
-                0x08001f98                EXTI2_IRQHandler
-                0x08001f98                PVD_IRQHandler
-                0x08001f98                EXTI0_IRQHandler
-                0x08001f98                I2C2_EV_IRQHandler
-                0x08001f98                ADC1_2_IRQHandler
-                0x08001f98                SPI1_IRQHandler
-                0x08001f98                TAMPER_IRQHandler
-                0x08001f98                DMA1_Channel4_IRQHandler
-                0x08001f98                USART3_IRQHandler
-                0x08001f98                RTC_IRQHandler
-                0x08001f98                DMA1_Channel7_IRQHandler
-                0x08001f98                CAN1_RX1_IRQHandler
-                0x08001f98                I2C1_EV_IRQHandler
-                0x08001f98                DMA1_Channel6_IRQHandler
-                0x08001f98                TIM3_IRQHandler
-                0x08001f98                DMA1_Channel1_IRQHandler
-                0x08001f98                Default_Handler
-                0x08001f98                EXTI15_10_IRQHandler
-                0x08001f98                EXTI9_5_IRQHandler
-                0x08001f98                SPI2_IRQHandler
-                0x08001f98                DMA1_Channel5_IRQHandler
-                0x08001f98                EXTI4_IRQHandler
-                0x08001f98                USB_LP_CAN1_RX0_IRQHandler
-                0x08001f98                USB_HP_CAN1_TX_IRQHandler
-                0x08001f98                DMA1_Channel3_IRQHandler
-                0x08001f98                WWDG_IRQHandler
-                0x08001f98                EXTI1_IRQHandler
-                0x08001f98                USART2_IRQHandler
-                0x08001f98                I2C2_ER_IRQHandler
-                0x08001f98                DMA1_Channel2_IRQHandler
-                0x08001f98                CAN1_SCE_IRQHandler
-                0x08001f98                USART1_IRQHandler
-                0x08001f98                I2C1_ER_IRQHandler
-                0x08001f98                USBWakeUp_IRQHandler
- *fill*         0x08001f9a        0x2 
+                0x08001f90        0x2 ./Core/Startup/startup_stm32f103c8tx.o
+                0x08001f90                RTC_Alarm_IRQHandler
+                0x08001f90                EXTI2_IRQHandler
+                0x08001f90                PVD_IRQHandler
+                0x08001f90                EXTI0_IRQHandler
+                0x08001f90                I2C2_EV_IRQHandler
+                0x08001f90                ADC1_2_IRQHandler
+                0x08001f90                SPI1_IRQHandler
+                0x08001f90                TAMPER_IRQHandler
+                0x08001f90                DMA1_Channel4_IRQHandler
+                0x08001f90                USART3_IRQHandler
+                0x08001f90                RTC_IRQHandler
+                0x08001f90                DMA1_Channel7_IRQHandler
+                0x08001f90                CAN1_RX1_IRQHandler
+                0x08001f90                I2C1_EV_IRQHandler
+                0x08001f90                DMA1_Channel6_IRQHandler
+                0x08001f90                TIM3_IRQHandler
+                0x08001f90                DMA1_Channel1_IRQHandler
+                0x08001f90                Default_Handler
+                0x08001f90                EXTI15_10_IRQHandler
+                0x08001f90                EXTI9_5_IRQHandler
+                0x08001f90                SPI2_IRQHandler
+                0x08001f90                DMA1_Channel5_IRQHandler
+                0x08001f90                EXTI4_IRQHandler
+                0x08001f90                USB_LP_CAN1_RX0_IRQHandler
+                0x08001f90                USB_HP_CAN1_TX_IRQHandler
+                0x08001f90                DMA1_Channel3_IRQHandler
+                0x08001f90                WWDG_IRQHandler
+                0x08001f90                EXTI1_IRQHandler
+                0x08001f90                USART2_IRQHandler
+                0x08001f90                I2C2_ER_IRQHandler
+                0x08001f90                DMA1_Channel2_IRQHandler
+                0x08001f90                CAN1_SCE_IRQHandler
+                0x08001f90                USART1_IRQHandler
+                0x08001f90                I2C1_ER_IRQHandler
+                0x08001f90                USBWakeUp_IRQHandler
+ *fill*         0x08001f92        0x2 
  .text.HAL_Init
-                0x08001f9c       0x2c ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.o
-                0x08001f9c                HAL_Init
+                0x08001f94       0x2c ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.o
+                0x08001f94                HAL_Init
  .text.HAL_InitTick
-                0x08001fc8       0x60 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.o
-                0x08001fc8                HAL_InitTick
+                0x08001fc0       0x60 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.o
+                0x08001fc0                HAL_InitTick
  .text.HAL_IncTick
-                0x08002028       0x24 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.o
-                0x08002028                HAL_IncTick
+                0x08002020       0x24 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.o
+                0x08002020                HAL_IncTick
  .text.HAL_GetTick
-                0x0800204c       0x14 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.o
-                0x0800204c                HAL_GetTick
+                0x08002044       0x14 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.o
+                0x08002044                HAL_GetTick
  .text.HAL_Delay
-                0x08002060       0x48 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.o
-                0x08002060                HAL_Delay
+                0x08002058       0x48 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.o
+                0x08002058                HAL_Delay
  .text.__NVIC_SetPriorityGrouping
-                0x080020a8       0x48 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.o
+                0x080020a0       0x48 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.o
  .text.__NVIC_GetPriorityGrouping
-                0x080020f0       0x1c ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.o
+                0x080020e8       0x1c ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.o
  .text.__NVIC_EnableIRQ
-                0x0800210c       0x38 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.o
+                0x08002104       0x38 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.o
  .text.__NVIC_SetPriority
-                0x08002144       0x54 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.o
+                0x0800213c       0x54 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.o
  .text.NVIC_EncodePriority
-                0x08002198       0x64 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.o
+                0x08002190       0x64 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.o
  .text.SysTick_Config
-                0x080021fc       0x44 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.o
+                0x080021f4       0x44 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.o
  .text.HAL_NVIC_SetPriorityGrouping
-                0x08002240       0x16 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.o
-                0x08002240                HAL_NVIC_SetPriorityGrouping
+                0x08002238       0x16 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.o
+                0x08002238                HAL_NVIC_SetPriorityGrouping
  .text.HAL_NVIC_SetPriority
-                0x08002256       0x38 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.o
-                0x08002256                HAL_NVIC_SetPriority
+                0x0800224e       0x38 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.o
+                0x0800224e                HAL_NVIC_SetPriority
  .text.HAL_NVIC_EnableIRQ
-                0x0800228e       0x1c ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.o
-                0x0800228e                HAL_NVIC_EnableIRQ
+                0x08002286       0x1c ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.o
+                0x08002286                HAL_NVIC_EnableIRQ
  .text.HAL_SYSTICK_Config
-                0x080022aa       0x18 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.o
-                0x080022aa                HAL_SYSTICK_Config
- *fill*         0x080022c2        0x2 
+                0x080022a2       0x18 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.o
+                0x080022a2                HAL_SYSTICK_Config
+ *fill*         0x080022ba        0x2 
  .text.HAL_FLASH_IRQHandler
-                0x080022c4      0x1c0 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_flash.o
-                0x080022c4                HAL_FLASH_IRQHandler
+                0x080022bc      0x1c0 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_flash.o
+                0x080022bc                HAL_FLASH_IRQHandler
  .text.HAL_FLASH_EndOfOperationCallback
-                0x08002484       0x12 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_flash.o
-                0x08002484                HAL_FLASH_EndOfOperationCallback
+                0x0800247c       0x12 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_flash.o
+                0x0800247c                HAL_FLASH_EndOfOperationCallback
  .text.HAL_FLASH_OperationErrorCallback
-                0x08002496       0x12 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_flash.o
-                0x08002496                HAL_FLASH_OperationErrorCallback
+                0x0800248e       0x12 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_flash.o
+                0x0800248e                HAL_FLASH_OperationErrorCallback
  .text.FLASH_Program_HalfWord
-                0x080024a8       0x38 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_flash.o
+                0x080024a0       0x38 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_flash.o
  .text.FLASH_SetErrorCode
-                0x080024e0       0xa0 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_flash.o
+                0x080024d8       0xa0 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_flash.o
  .text.FLASH_PageErase
-                0x08002580       0x40 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_flash_ex.o
-                0x08002580                FLASH_PageErase
+                0x08002578       0x40 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_flash_ex.o
+                0x08002578                FLASH_PageErase
  .text.HAL_GPIO_Init
-                0x080025c0      0x308 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio.o
-                0x080025c0                HAL_GPIO_Init
+                0x080025b8      0x308 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio.o
+                0x080025b8                HAL_GPIO_Init
  .text.HAL_GPIO_WritePin
-                0x080028c8       0x30 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio.o
-                0x080028c8                HAL_GPIO_WritePin
+                0x080028c0       0x30 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio.o
+                0x080028c0                HAL_GPIO_WritePin
  .text.HAL_GPIO_TogglePin
-                0x080028f8       0x32 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio.o
-                0x080028f8                HAL_GPIO_TogglePin
- *fill*         0x0800292a        0x2 
+                0x080028f0       0x32 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio.o
+                0x080028f0                HAL_GPIO_TogglePin
+ *fill*         0x08002922        0x2 
  .text.HAL_GPIO_EXTI_IRQHandler
-                0x0800292c       0x30 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio.o
-                0x0800292c                HAL_GPIO_EXTI_IRQHandler
+                0x08002924       0x30 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio.o
+                0x08002924                HAL_GPIO_EXTI_IRQHandler
  .text.HAL_RCC_OscConfig
-                0x0800295c      0x504 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rcc.o
-                0x0800295c                HAL_RCC_OscConfig
+                0x08002954      0x504 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rcc.o
+                0x08002954                HAL_RCC_OscConfig
  .text.HAL_RCC_ClockConfig
-                0x08002e60      0x1d4 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rcc.o
-                0x08002e60                HAL_RCC_ClockConfig
+                0x08002e58      0x1d4 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rcc.o
+                0x08002e58                HAL_RCC_ClockConfig
  .text.HAL_RCC_GetSysClockFreq
-                0x08003034       0xa8 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rcc.o
-                0x08003034                HAL_RCC_GetSysClockFreq
+                0x0800302c       0xa8 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rcc.o
+                0x0800302c                HAL_RCC_GetSysClockFreq
  .text.RCC_Delay
-                0x080030dc       0x3c ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rcc.o
+                0x080030d4       0x3c ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rcc.o
  .text.HAL_TIM_Base_Init
-                0x08003118       0x9e ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim.o
-                0x08003118                HAL_TIM_Base_Init
- *fill*         0x080031b6        0x2 
+                0x08003110       0x9e ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim.o
+                0x08003110                HAL_TIM_Base_Init
+ *fill*         0x080031ae        0x2 
  .text.HAL_TIM_Base_Start
-                0x080031b8       0x94 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim.o
-                0x080031b8                HAL_TIM_Base_Start
+                0x080031b0       0x94 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim.o
+                0x080031b0                HAL_TIM_Base_Start
  .text.HAL_TIM_PWM_Init
-                0x0800324c       0x9e ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim.o
-                0x0800324c                HAL_TIM_PWM_Init
+                0x08003244       0x9e ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim.o
+                0x08003244                HAL_TIM_PWM_Init
  .text.HAL_TIM_PWM_MspInit
-                0x080032ea       0x12 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim.o
-                0x080032ea                HAL_TIM_PWM_MspInit
+                0x080032e2       0x12 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim.o
+                0x080032e2                HAL_TIM_PWM_MspInit
  .text.HAL_TIM_PWM_Start
-                0x080032fc      0x144 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim.o
-                0x080032fc                HAL_TIM_PWM_Start
+                0x080032f4      0x144 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim.o
+                0x080032f4                HAL_TIM_PWM_Start
  .text.HAL_TIM_PWM_Stop
-                0x08003440       0xc8 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim.o
-                0x08003440                HAL_TIM_PWM_Stop
+                0x08003438       0xc8 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim.o
+                0x08003438                HAL_TIM_PWM_Stop
  .text.HAL_TIM_IC_Init
-                0x08003508       0x9e ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim.o
-                0x08003508                HAL_TIM_IC_Init
+                0x08003500       0x9e ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim.o
+                0x08003500                HAL_TIM_IC_Init
  .text.HAL_TIM_IC_MspInit
-                0x080035a6       0x12 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim.o
-                0x080035a6                HAL_TIM_IC_MspInit
+                0x0800359e       0x12 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim.o
+                0x0800359e                HAL_TIM_IC_MspInit
  .text.HAL_TIM_IC_Start_IT
-                0x080035b8      0x218 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim.o
-                0x080035b8                HAL_TIM_IC_Start_IT
+                0x080035b0      0x218 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim.o
+                0x080035b0                HAL_TIM_IC_Start_IT
  .text.HAL_TIM_IRQHandler
-                0x080037d0      0x1e0 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim.o
-                0x080037d0                HAL_TIM_IRQHandler
+                0x080037c8      0x1e0 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim.o
+                0x080037c8                HAL_TIM_IRQHandler
  .text.HAL_TIM_IC_ConfigChannel
-                0x080039b0      0x138 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim.o
-                0x080039b0                HAL_TIM_IC_ConfigChannel
+                0x080039a8      0x138 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim.o
+                0x080039a8                HAL_TIM_IC_ConfigChannel
  .text.HAL_TIM_PWM_ConfigChannel
-                0x08003ae8      0x184 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim.o
-                0x08003ae8                HAL_TIM_PWM_ConfigChannel
+                0x08003ae0      0x184 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim.o
+                0x08003ae0                HAL_TIM_PWM_ConfigChannel
  .text.HAL_TIM_ConfigClockSource
-                0x08003c6c      0x18e ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim.o
-                0x08003c6c                HAL_TIM_ConfigClockSource
+                0x08003c64      0x18e ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim.o
+                0x08003c64                HAL_TIM_ConfigClockSource
  .text.HAL_TIM_OC_DelayElapsedCallback
-                0x08003dfa       0x12 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim.o
-                0x08003dfa                HAL_TIM_OC_DelayElapsedCallback
+                0x08003df2       0x12 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim.o
+                0x08003df2                HAL_TIM_OC_DelayElapsedCallback
  .text.HAL_TIM_PWM_PulseFinishedCallback
-                0x08003e0c       0x12 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim.o
-                0x08003e0c                HAL_TIM_PWM_PulseFinishedCallback
+                0x08003e04       0x12 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim.o
+                0x08003e04                HAL_TIM_PWM_PulseFinishedCallback
  .text.HAL_TIM_TriggerCallback
-                0x08003e1e       0x12 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim.o
-                0x08003e1e                HAL_TIM_TriggerCallback
+                0x08003e16       0x12 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim.o
+                0x08003e16                HAL_TIM_TriggerCallback
  .text.TIM_Base_SetConfig
-                0x08003e30       0xdc ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim.o
-                0x08003e30                TIM_Base_SetConfig
+                0x08003e28       0xdc ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim.o
+                0x08003e28                TIM_Base_SetConfig
  .text.TIM_OC1_SetConfig
-                0x08003f0c       0xcc ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim.o
+                0x08003f04       0xcc ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim.o
  .text.TIM_OC2_SetConfig
-                0x08003fd8       0xd4 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim.o
-                0x08003fd8                TIM_OC2_SetConfig
+                0x08003fd0       0xd4 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim.o
+                0x08003fd0                TIM_OC2_SetConfig
  .text.TIM_OC3_SetConfig
-                0x080040ac       0xd4 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim.o
+                0x080040a4       0xd4 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim.o
  .text.TIM_OC4_SetConfig
-                0x08004180       0x9c ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim.o
+                0x08004178       0x9c ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim.o
  .text.TIM_TI1_SetConfig
-                0x0800421c       0xb4 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim.o
-                0x0800421c                TIM_TI1_SetConfig
+                0x08004214       0xb4 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim.o
+                0x08004214                TIM_TI1_SetConfig
  .text.TIM_TI1_ConfigInputStage
-                0x080042d0       0x5c ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim.o
+                0x080042c8       0x5c ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim.o
  .text.TIM_TI2_SetConfig
-                0x0800432c       0x78 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim.o
+                0x08004324       0x78 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim.o
  .text.TIM_TI2_ConfigInputStage
-                0x080043a4       0x5e ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim.o
+                0x0800439c       0x5e ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim.o
  .text.TIM_TI3_SetConfig
-                0x08004402       0x76 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim.o
+                0x080043fa       0x76 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim.o
  .text.TIM_TI4_SetConfig
-                0x08004478       0x78 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim.o
+                0x08004470       0x78 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim.o
  .text.TIM_ITRx_SetConfig
-                0x080044f0       0x34 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim.o
+                0x080044e8       0x34 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim.o
  .text.TIM_ETR_SetConfig
-                0x08004524       0x3e ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim.o
-                0x08004524                TIM_ETR_SetConfig
+                0x0800451c       0x3e ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim.o
+                0x0800451c                TIM_ETR_SetConfig
  .text.TIM_CCxChannelCmd
-                0x08004562       0x48 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim.o
-                0x08004562                TIM_CCxChannelCmd
- *fill*         0x080045aa        0x2 
+                0x0800455a       0x48 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim.o
+                0x0800455a                TIM_CCxChannelCmd
+ *fill*         0x080045a2        0x2 
  .text.HAL_TIMEx_MasterConfigSynchronization
-                0x080045ac       0xbc ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim_ex.o
-                0x080045ac                HAL_TIMEx_MasterConfigSynchronization
+                0x080045a4       0xbc ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim_ex.o
+                0x080045a4                HAL_TIMEx_MasterConfigSynchronization
  .text.HAL_TIMEx_ConfigBreakDeadTime
-                0x08004668       0xa2 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim_ex.o
-                0x08004668                HAL_TIMEx_ConfigBreakDeadTime
+                0x08004660       0xa2 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim_ex.o
+                0x08004660                HAL_TIMEx_ConfigBreakDeadTime
  .text.HAL_TIMEx_CommutCallback
-                0x0800470a       0x12 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim_ex.o
-                0x0800470a                HAL_TIMEx_CommutCallback
+                0x08004702       0x12 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim_ex.o
+                0x08004702                HAL_TIMEx_CommutCallback
  .text.HAL_TIMEx_BreakCallback
-                0x0800471c       0x12 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim_ex.o
-                0x0800471c                HAL_TIMEx_BreakCallback
- .text.__cvt    0x0800472e       0xc8 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-nano-vfprintf_float.o)
-                0x0800472e                __cvt
+                0x08004714       0x12 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim_ex.o
+                0x08004714                HAL_TIMEx_BreakCallback
+ .text.__cvt    0x08004726       0xc8 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-nano-vfprintf_float.o)
+                0x08004726                __cvt
  .text.__exponent
-                0x080047f6       0x74 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-nano-vfprintf_float.o)
-                0x080047f6                __exponent
- *fill*         0x0800486a        0x2 
+                0x080047ee       0x74 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-nano-vfprintf_float.o)
+                0x080047ee                __exponent
+ *fill*         0x08004862        0x2 
  .text._printf_float
-                0x0800486c      0x458 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-nano-vfprintf_float.o)
-                0x0800486c                _printf_float
+                0x08004864      0x458 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-nano-vfprintf_float.o)
+                0x08004864                _printf_float
  .text._printf_common
-                0x08004cc4       0xe4 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-nano-vfprintf_i.o)
-                0x08004cc4                _printf_common
+                0x08004cbc       0xe4 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-nano-vfprintf_i.o)
+                0x08004cbc                _printf_common
  .text._printf_i
-                0x08004da8      0x240 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-nano-vfprintf_i.o)
-                0x08004da8                _printf_i
+                0x08004da0      0x240 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-nano-vfprintf_i.o)
+                0x08004da0                _printf_i
  .text._scanf_float
-                0x08004fe8      0x420 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-nano-vfscanf_float.o)
-                0x08004fe8                _scanf_float
- .text.std      0x08005408       0x6c /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-findfp.o)
+                0x08004fe0      0x420 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-nano-vfscanf_float.o)
+                0x08004fe0                _scanf_float
+ .text.std      0x08005400       0x6c /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-findfp.o)
  .text.stdio_exit_handler
-                0x08005474       0x18 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-findfp.o)
+                0x0800546c       0x18 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-findfp.o)
  .text.cleanup_stdio
-                0x0800548c       0x40 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-findfp.o)
+                0x08005484       0x40 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-findfp.o)
  .text.global_stdio_init.part.0
-                0x080054cc       0x3c /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-findfp.o)
+                0x080054c4       0x3c /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-findfp.o)
  .text.__sfp_lock_acquire
-                0x08005508        0xc /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-findfp.o)
-                0x08005508                __sfp_lock_acquire
+                0x08005500        0xc /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-findfp.o)
+                0x08005500                __sfp_lock_acquire
  .text.__sfp_lock_release
-                0x08005514        0xc /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-findfp.o)
-                0x08005514                __sfp_lock_release
- .text.__sinit  0x08005520       0x30 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-findfp.o)
-                0x08005520                __sinit
+                0x0800550c        0xc /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-findfp.o)
+                0x0800550c                __sfp_lock_release
+ .text.__sinit  0x08005518       0x30 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-findfp.o)
+                0x08005518                __sinit
  .text._fwalk_sglue
-                0x08005550       0x3c /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-fwalk.o)
-                0x08005550                _fwalk_sglue
- .text.sprintf  0x0800558c       0x40 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-sprintf.o)
-                0x0800558c                sprintf
-                0x0800558c                siprintf
- .text.__sread  0x080055cc       0x22 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-stdio.o)
-                0x080055cc                __sread
+                0x08005548       0x3c /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-fwalk.o)
+                0x08005548                _fwalk_sglue
+ .text.sprintf  0x08005584       0x40 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-sprintf.o)
+                0x08005584                sprintf
+                0x08005584                siprintf
+ .text.__sread  0x080055c4       0x22 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-stdio.o)
+                0x080055c4                __sread
  .text.__swrite
-                0x080055ee       0x38 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-stdio.o)
-                0x080055ee                __swrite
- .text.__sseek  0x08005626       0x24 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-stdio.o)
-                0x08005626                __sseek
+                0x080055e6       0x38 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-stdio.o)
+                0x080055e6                __swrite
+ .text.__sseek  0x0800561e       0x24 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-stdio.o)
+                0x0800561e                __sseek
  .text.__sclose
-                0x0800564a        0x8 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-stdio.o)
-                0x0800564a                __sclose
- .text.memset   0x08005652       0x10 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-memset.o)
-                0x08005652                memset
- *fill*         0x08005662        0x2 
+                0x08005642        0x8 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-stdio.o)
+                0x08005642                __sclose
+ .text.memset   0x0800564a       0x10 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-memset.o)
+                0x0800564a                memset
+ *fill*         0x0800565a        0x2 
  .text._localeconv_r
-                0x08005664        0x8 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-localeconv.o)
-                0x08005664                _localeconv_r
+                0x0800565c        0x8 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-localeconv.o)
+                0x0800565c                _localeconv_r
  .text._close_r
-                0x0800566c       0x20 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-closer.o)
-                0x0800566c                _close_r
+                0x08005664       0x20 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-closer.o)
+                0x08005664                _close_r
  .text._lseek_r
-                0x0800568c       0x24 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-lseekr.o)
-                0x0800568c                _lseek_r
- .text._read_r  0x080056b0       0x24 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-readr.o)
-                0x080056b0                _read_r
+                0x08005684       0x24 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-lseekr.o)
+                0x08005684                _lseek_r
+ .text._read_r  0x080056a8       0x24 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-readr.o)
+                0x080056a8                _read_r
  .text._write_r
-                0x080056d4       0x24 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-writer.o)
-                0x080056d4                _write_r
- .text.__errno  0x080056f8        0xc /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-errno.o)
-                0x080056f8                __errno
+                0x080056cc       0x24 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-writer.o)
+                0x080056cc                _write_r
+ .text.__errno  0x080056f0        0xc /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-errno.o)
+                0x080056f0                __errno
  .text.__libc_init_array
-                0x08005704       0x48 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-init.o)
-                0x08005704                __libc_init_array
+                0x080056fc       0x48 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-init.o)
+                0x080056fc                __libc_init_array
  .text.__retarget_lock_init_recursive
-                0x0800574c        0x2 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-lock.o)
-                0x0800574c                __retarget_lock_init_recursive
+                0x08005744        0x2 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-lock.o)
+                0x08005744                __retarget_lock_init_recursive
  .text.__retarget_lock_acquire_recursive
-                0x0800574e        0x2 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-lock.o)
-                0x0800574e                __retarget_lock_acquire_recursive
+                0x08005746        0x2 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-lock.o)
+                0x08005746                __retarget_lock_acquire_recursive
  .text.__retarget_lock_release_recursive
-                0x08005750        0x2 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-lock.o)
-                0x08005750                __retarget_lock_release_recursive
- .text.memchr   0x08005752       0x1c /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-memchr-stub.o)
-                0x08005752                memchr
- *fill*         0x0800576e        0x2 
- .text.nanf     0x08005770        0x8 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libm_a-sf_nan.o)
-                0x08005770                nanf
- .text.quorem   0x08005778      0x110 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-dtoa.o)
- .text._dtoa_r  0x08005888      0xb90 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-dtoa.o)
-                0x08005888                _dtoa_r
- .text._free_r  0x08006418       0x90 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-freer.o)
-                0x08006418                _free_r
- .text.malloc   0x080064a8       0x10 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-malloc.o)
-                0x080064a8                malloc
+                0x08005748        0x2 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-lock.o)
+                0x08005748                __retarget_lock_release_recursive
+ .text.memchr   0x0800574a       0x1c /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-memchr-stub.o)
+                0x0800574a                memchr
+ *fill*         0x08005766        0x2 
+ .text.nanf     0x08005768        0x8 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libm_a-sf_nan.o)
+                0x08005768                nanf
+ .text.quorem   0x08005770      0x110 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-dtoa.o)
+ .text._dtoa_r  0x08005880      0xb90 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-dtoa.o)
+                0x08005880                _dtoa_r
+ .text._free_r  0x08006410       0x90 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-freer.o)
+                0x08006410                _free_r
+ .text.malloc   0x080064a0       0x10 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-malloc.o)
+                0x080064a0                malloc
  .text.sbrk_aligned
-                0x080064b8       0x44 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-mallocr.o)
+                0x080064b0       0x44 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-mallocr.o)
  .text._malloc_r
-                0x080064fc      0x100 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-mallocr.o)
-                0x080064fc                _malloc_r
+                0x080064f4      0x100 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-mallocr.o)
+                0x080064f4                _malloc_r
  .text.__malloc_lock
-                0x080065fc        0xc /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-mlock.o)
-                0x080065fc                __malloc_lock
+                0x080065f4        0xc /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-mlock.o)
+                0x080065f4                __malloc_lock
  .text.__malloc_unlock
-                0x08006608        0xc /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-mlock.o)
-                0x08006608                __malloc_unlock
- .text._Balloc  0x08006614       0x80 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-mprec.o)
-                0x08006614                _Balloc
- .text._Bfree   0x08006694       0x44 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-mprec.o)
-                0x08006694                _Bfree
+                0x08006600        0xc /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-mlock.o)
+                0x08006600                __malloc_unlock
+ .text._Balloc  0x0800660c       0x80 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-mprec.o)
+                0x0800660c                _Balloc
+ .text._Bfree   0x0800668c       0x44 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-mprec.o)
+                0x0800668c                _Bfree
  .text.__multadd
-                0x080066d8       0x8c /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-mprec.o)
-                0x080066d8                __multadd
- .text.__s2b    0x08006764       0x94 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-mprec.o)
-                0x08006764                __s2b
+                0x080066d0       0x8c /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-mprec.o)
+                0x080066d0                __multadd
+ .text.__s2b    0x0800675c       0x94 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-mprec.o)
+                0x0800675c                __s2b
  .text.__hi0bits
-                0x080067f8       0x3e /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-mprec.o)
-                0x080067f8                __hi0bits
+                0x080067f0       0x3e /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-mprec.o)
+                0x080067f0                __hi0bits
  .text.__lo0bits
-                0x08006836       0x5a /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-mprec.o)
-                0x08006836                __lo0bits
- .text.__i2b    0x08006890       0x2c /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-mprec.o)
-                0x08006890                __i2b
+                0x0800682e       0x5a /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-mprec.o)
+                0x0800682e                __lo0bits
+ .text.__i2b    0x08006888       0x2c /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-mprec.o)
+                0x08006888                __i2b
  .text.__multiply
-                0x080068bc      0x150 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-mprec.o)
-                0x080068bc                __multiply
+                0x080068b4      0x150 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-mprec.o)
+                0x080068b4                __multiply
  .text.__pow5mult
-                0x08006a0c       0xb4 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-mprec.o)
-                0x08006a0c                __pow5mult
+                0x08006a04       0xb4 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-mprec.o)
+                0x08006a04                __pow5mult
  .text.__lshift
-                0x08006ac0       0xd8 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-mprec.o)
-                0x08006ac0                __lshift
- .text.__mcmp   0x08006b98       0x36 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-mprec.o)
-                0x08006b98                __mcmp
- *fill*         0x08006bce        0x2 
- .text.__mdiff  0x08006bd0      0x128 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-mprec.o)
-                0x08006bd0                __mdiff
- .text.__ulp    0x08006cf8       0x40 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-mprec.o)
-                0x08006cf8                __ulp
- .text.__b2d    0x08006d38       0x90 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-mprec.o)
-                0x08006d38                __b2d
- .text.__d2b    0x08006dc8       0xb0 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-mprec.o)
-                0x08006dc8                __d2b
- .text.__ratio  0x08006e78       0x60 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-mprec.o)
-                0x08006e78                __ratio
+                0x08006ab8       0xd8 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-mprec.o)
+                0x08006ab8                __lshift
+ .text.__mcmp   0x08006b90       0x36 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-mprec.o)
+                0x08006b90                __mcmp
+ *fill*         0x08006bc6        0x2 
+ .text.__mdiff  0x08006bc8      0x128 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-mprec.o)
+                0x08006bc8                __mdiff
+ .text.__ulp    0x08006cf0       0x40 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-mprec.o)
+                0x08006cf0                __ulp
+ .text.__b2d    0x08006d30       0x90 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-mprec.o)
+                0x08006d30                __b2d
+ .text.__d2b    0x08006dc0       0xb0 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-mprec.o)
+                0x08006dc0                __d2b
+ .text.__ratio  0x08006e70       0x60 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-mprec.o)
+                0x08006e70                __ratio
  .text.__copybits
-                0x08006ed8       0x46 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-mprec.o)
-                0x08006ed8                __copybits
+                0x08006ed0       0x46 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-mprec.o)
+                0x08006ed0                __copybits
  .text.__any_on
-                0x08006f1e       0x42 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-mprec.o)
-                0x08006f1e                __any_on
- .text.sulp     0x08006f60       0x42 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-strtod.o)
- *fill*         0x08006fa2        0x6 
+                0x08006f16       0x42 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-mprec.o)
+                0x08006f16                __any_on
+ .text.sulp     0x08006f58       0x42 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-strtod.o)
+ *fill*         0x08006f9a        0x6 
  .text._strtod_l
-                0x08006fa8      0xbb0 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-strtod.o)
-                0x08006fa8                _strtod_l
+                0x08006fa0      0xbb0 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-strtod.o)
+                0x08006fa0                _strtod_l
  .text._strtod_r
-                0x08007b58        0xc /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-strtod.o)
-                0x08007b58                _strtod_r
+                0x08007b50        0xc /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-strtod.o)
+                0x08007b50                _strtod_r
  .text._strtol_l.constprop.0
-                0x08007b64       0xf4 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-strtol.o)
+                0x08007b5c       0xf4 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-strtol.o)
  .text._strtol_r
-                0x08007c58        0x4 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-strtol.o)
-                0x08007c58                _strtol_r
+                0x08007c50        0x4 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-strtol.o)
+                0x08007c50                _strtol_r
  .text.__ssputs_r
-                0x08007c5c       0xb6 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-nano-svfprintf.o)
-                0x08007c5c                __ssputs_r
- *fill*         0x08007d12        0x2 
+                0x08007c54       0xb6 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-nano-svfprintf.o)
+                0x08007c54                __ssputs_r
+ *fill*         0x08007d0a        0x2 
  .text._svfprintf_r
-                0x08007d14      0x1f8 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-nano-svfprintf.o)
-                0x08007d14                _svfprintf_r
-                0x08007d14                _svfiprintf_r
+                0x08007d0c      0x1f8 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-nano-svfprintf.o)
+                0x08007d0c                _svfprintf_r
+                0x08007d0c                _svfiprintf_r
  .text.__sflush_r
-                0x08007f0c      0x100 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-fflush.o)
-                0x08007f0c                __sflush_r
+                0x08007f04      0x100 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-fflush.o)
+                0x08007f04                __sflush_r
  .text._fflush_r
-                0x0800800c       0x50 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-fflush.o)
-                0x0800800c                _fflush_r
- .text.memmove  0x0800805c       0x34 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-memmove.o)
-                0x0800805c                memmove
- .text.strncmp  0x08008090       0x24 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-strncmp.o)
-                0x08008090                strncmp
- .text._sbrk_r  0x080080b4       0x20 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-sbrkr.o)
-                0x080080b4                _sbrk_r
- .text.memcpy   0x080080d4       0x1c /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-memcpy-stub.o)
-                0x080080d4                memcpy
- .text.nan      0x080080f0        0xc /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libm_a-s_nan.o)
-                0x080080f0                nan
+                0x08008004       0x50 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-fflush.o)
+                0x08008004                _fflush_r
+ .text.memmove  0x08008054       0x34 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-memmove.o)
+                0x08008054                memmove
+ .text.strncmp  0x08008088       0x24 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-strncmp.o)
+                0x08008088                strncmp
+ .text._sbrk_r  0x080080ac       0x20 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-sbrkr.o)
+                0x080080ac                _sbrk_r
+ .text.memcpy   0x080080cc       0x1c /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-memcpy-stub.o)
+                0x080080cc                memcpy
+ .text.nan      0x080080e8        0xc /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libm_a-s_nan.o)
+                0x080080e8                nan
  .text.__assert_func
-                0x080080fc       0x3c /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-assert.o)
-                0x080080fc                __assert_func
+                0x080080f4       0x3c /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-assert.o)
+                0x080080f4                __assert_func
  .text._calloc_r
-                0x08008138       0x28 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-callocr.o)
-                0x08008138                _calloc_r
- .text.rshift   0x08008160       0xa6 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-gdtoa-gethex.o)
+                0x08008130       0x28 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-callocr.o)
+                0x08008130                _calloc_r
+ .text.rshift   0x08008158       0xa6 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-gdtoa-gethex.o)
  .text.__hexdig_fun
-                0x08008206       0x2a /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-gdtoa-gethex.o)
-                0x08008206                __hexdig_fun
+                0x080081fe       0x2a /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-gdtoa-gethex.o)
+                0x080081fe                __hexdig_fun
  .text.__gethex
-                0x08008230      0x420 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-gdtoa-gethex.o)
-                0x08008230                __gethex
- .text.L_shift  0x08008650       0x24 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-gdtoa-hexnan.o)
- .text.__match  0x08008674       0x28 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-gdtoa-hexnan.o)
-                0x08008674                __match
+                0x08008228      0x420 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-gdtoa-gethex.o)
+                0x08008228                __gethex
+ .text.L_shift  0x08008648       0x24 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-gdtoa-hexnan.o)
+ .text.__match  0x0800866c       0x28 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-gdtoa-hexnan.o)
+                0x0800866c                __match
  .text.__hexnan
-                0x0800869c      0x136 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-gdtoa-hexnan.o)
-                0x0800869c                __hexnan
+                0x08008694      0x136 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-gdtoa-hexnan.o)
+                0x08008694                __hexnan
  .text.__ascii_mbtowc
-                0x080087d2       0x24 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-mbtowc_r.o)
-                0x080087d2                __ascii_mbtowc
+                0x080087ca       0x24 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-mbtowc_r.o)
+                0x080087ca                __ascii_mbtowc
  .text._realloc_r
-                0x080087f6       0x5c /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-reallocr.o)
-                0x080087f6                _realloc_r
+                0x080087ee       0x5c /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-reallocr.o)
+                0x080087ee                _realloc_r
  .text.__ascii_wctomb
-                0x08008852       0x1a /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-wctomb_r.o)
-                0x08008852                __ascii_wctomb
- .text.fprintf  0x0800886c       0x24 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-fprintf.o)
-                0x0800886c                fprintf
-                0x0800886c                fiprintf
- .text.abort    0x08008890        0xe /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-abort.o)
-                0x08008890                abort
+                0x0800884a       0x1a /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-wctomb_r.o)
+                0x0800884a                __ascii_wctomb
+ .text.fprintf  0x08008864       0x24 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-fprintf.o)
+                0x08008864                fprintf
+                0x08008864                fiprintf
+ .text.abort    0x08008888        0xe /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-abort.o)
+                0x08008888                abort
  .text._malloc_usable_size_r
-                0x0800889e       0x10 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-msizer.o)
-                0x0800889e                _malloc_usable_size_r
+                0x08008896       0x10 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-msizer.o)
+                0x08008896                _malloc_usable_size_r
  .text.__sfputc_r
-                0x080088ae       0x2a /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-nano-vfprintf.o)
+                0x080088a6       0x2a /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-nano-vfprintf.o)
  .text.__sfputs_r
-                0x080088d8       0x24 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-nano-vfprintf.o)
-                0x080088d8                __sfputs_r
+                0x080088d0       0x24 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-nano-vfprintf.o)
+                0x080088d0                __sfputs_r
  .text._vfprintf_r
-                0x080088fc      0x230 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-nano-vfprintf.o)
-                0x080088fc                _vfiprintf_r
-                0x080088fc                _vfprintf_r
+                0x080088f4      0x230 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-nano-vfprintf.o)
+                0x080088f4                _vfiprintf_r
+                0x080088f4                _vfprintf_r
  .text.__swbuf_r
-                0x08008b2c       0x7c /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-wbuf.o)
-                0x08008b2c                __swbuf_r
+                0x08008b24       0x7c /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-wbuf.o)
+                0x08008b24                __swbuf_r
  .text.__swsetup_r
-                0x08008ba8       0xac /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-wsetup.o)
-                0x08008ba8                __swsetup_r
+                0x08008ba0       0xac /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-wsetup.o)
+                0x08008ba0                __swsetup_r
  .text._raise_r
-                0x08008c54       0x50 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-signal.o)
-                0x08008c54                _raise_r
- .text.raise    0x08008ca4       0x10 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-signal.o)
-                0x08008ca4                raise
- .text._kill_r  0x08008cb4       0x24 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-signalr.o)
-                0x08008cb4                _kill_r
+                0x08008c4c       0x50 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-signal.o)
+                0x08008c4c                _raise_r
+ .text.raise    0x08008c9c       0x10 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-signal.o)
+                0x08008c9c                raise
+ .text._kill_r  0x08008cac       0x24 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-signalr.o)
+                0x08008cac                _kill_r
  .text._getpid_r
-                0x08008cd8        0x4 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-signalr.o)
-                0x08008cd8                _getpid_r
+                0x08008cd0        0x4 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-signalr.o)
+                0x08008cd0                _getpid_r
  .text.__swhatbuf_r
-                0x08008cdc       0x4a /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-makebuf.o)
-                0x08008cdc                __swhatbuf_r
+                0x08008cd4       0x4a /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-makebuf.o)
+                0x08008cd4                __swhatbuf_r
  .text.__smakebuf_r
-                0x08008d26       0x78 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-makebuf.o)
-                0x08008d26                __smakebuf_r
- *fill*         0x08008d9e        0x2 
+                0x08008d1e       0x78 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-makebuf.o)
+                0x08008d1e                __smakebuf_r
+ *fill*         0x08008d96        0x2 
  .text._fstat_r
-                0x08008da0       0x24 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-fstatr.o)
-                0x08008da0                _fstat_r
+                0x08008d98       0x24 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-fstatr.o)
+                0x08008d98                _fstat_r
  .text._isatty_r
-                0x08008dc4       0x20 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-isattyr.o)
-                0x08008dc4                _isatty_r
+                0x08008dbc       0x20 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-isattyr.o)
+                0x08008dbc                _isatty_r
  *(.glue_7)
- .glue_7        0x08008de4        0x0 linker stubs
+ .glue_7        0x08008ddc        0x0 linker stubs
  *(.glue_7t)
- .glue_7t       0x08008de4        0x0 linker stubs
+ .glue_7t       0x08008ddc        0x0 linker stubs
  *(.eh_frame)
- .eh_frame      0x08008de4        0x0 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v7-m/nofp/crtbegin.o
+ .eh_frame      0x08008ddc        0x0 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v7-m/nofp/crtbegin.o
  *(.init)
- .init          0x08008de4        0x4 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v7-m/nofp/crti.o
-                0x08008de4                _init
- .init          0x08008de8        0x8 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v7-m/nofp/crtn.o
+ .init          0x08008ddc        0x4 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v7-m/nofp/crti.o
+                0x08008ddc                _init
+ .init          0x08008de0        0x8 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v7-m/nofp/crtn.o
  *(.fini)
- .fini          0x08008df0        0x4 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v7-m/nofp/crti.o
-                0x08008df0                _fini
- .fini          0x08008df4        0x8 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v7-m/nofp/crtn.o
-                0x08008dfc                        . = ALIGN (0x4)
-                0x08008dfc                        _etext = .
+ .fini          0x08008de8        0x4 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v7-m/nofp/crti.o
+                0x08008de8                _fini
+ .fini          0x08008dec        0x8 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v7-m/nofp/crtn.o
+                0x08008df4                        . = ALIGN (0x4)
+                0x08008df4                        _etext = .
 
-.vfp11_veneer   0x08008dfc        0x0
- .vfp11_veneer  0x08008dfc        0x0 linker stubs
+.vfp11_veneer   0x08008df4        0x0
+ .vfp11_veneer  0x08008df4        0x0 linker stubs
 
-.v4_bx          0x08008dfc        0x0
- .v4_bx         0x08008dfc        0x0 linker stubs
+.v4_bx          0x08008df4        0x0
+ .v4_bx         0x08008df4        0x0 linker stubs
 
-.iplt           0x08008dfc        0x0
- .iplt          0x08008dfc        0x0 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v7-m/nofp/crtbegin.o
+.iplt           0x08008df4        0x0
+ .iplt          0x08008df4        0x0 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v7-m/nofp/crtbegin.o
 
-.rodata         0x08008e00      0x450
-                0x08008e00                        . = ALIGN (0x4)
+.rodata         0x08008df8      0x450
+                0x08008df8                        . = ALIGN (0x4)
  *(.rodata)
  *(.rodata*)
  .rodata.AHBPrescTable
-                0x08008e00       0x10 ./Core/Src/system_stm32f1xx.o
-                0x08008e00                AHBPrescTable
+                0x08008df8       0x10 ./Core/Src/system_stm32f1xx.o
+                0x08008df8                AHBPrescTable
  .rodata.aPLLMULFactorTable.1
-                0x08008e10       0x10 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rcc.o
+                0x08008e08       0x10 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rcc.o
  .rodata.aPredivFactorTable.0
-                0x08008e20        0x2 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rcc.o
+                0x08008e18        0x2 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rcc.o
  .rodata._printf_float.str1.1
-                0x08008e22       0x12 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-nano-vfprintf_float.o)
+                0x08008e1a       0x12 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-nano-vfprintf_float.o)
  .rodata._printf_i.str1.1
-                0x08008e34       0x22 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-nano-vfprintf_i.o)
+                0x08008e2c       0x22 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-nano-vfprintf_i.o)
  .rodata._scanf_float.str1.1
-                0x08008e56        0x5 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-nano-vfscanf_float.o)
+                0x08008e4e        0x5 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-nano-vfscanf_float.o)
                                   0x6 (size before relaxing)
  .rodata._dtoa_r.str1.1
-                0x08008e5b       0x8d /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-dtoa.o)
+                0x08008e53       0x8d /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-dtoa.o)
                                  0x8f (size before relaxing)
  .rodata._Balloc.str1.1
-                0x08008ee8       0x59 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-mprec.o)
+                0x08008ee0       0x59 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-mprec.o)
                                  0x70 (size before relaxing)
  .rodata.__multadd.str1.1
-                0x08008f41       0x11 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-mprec.o)
- *fill*         0x08008f41        0x3 
- .rodata.p05.0  0x08008f44        0xc /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-mprec.o)
+                0x08008f39       0x11 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-mprec.o)
+ *fill*         0x08008f39        0x3 
+ .rodata.p05.0  0x08008f3c        0xc /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-mprec.o)
  .rodata.__mprec_bigtens
-                0x08008f50       0x28 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-mprec.o)
-                0x08008f50                __mprec_bigtens
+                0x08008f48       0x28 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-mprec.o)
+                0x08008f48                __mprec_bigtens
  .rodata.__mprec_tens
-                0x08008f78       0xc8 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-mprec.o)
-                0x08008f78                __mprec_tens
+                0x08008f70       0xc8 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-mprec.o)
+                0x08008f70                __mprec_tens
  .rodata._strtod_l.str1.1
-                0x08009040        0x2 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-strtod.o)
+                0x08009038        0x2 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-strtod.o)
                                   0xf (size before relaxing)
- *fill*         0x08009042        0x2 
+ *fill*         0x0800903a        0x2 
  .rodata.fpinan.0
-                0x08009044       0x14 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-strtod.o)
- .rodata.fpi.1  0x08009058       0x14 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-strtod.o)
- *fill*         0x0800906c        0x4 
+                0x0800903c       0x14 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-strtod.o)
+ .rodata.fpi.1  0x08009050       0x14 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-strtod.o)
+ *fill*         0x08009064        0x4 
  .rodata.tinytens
-                0x08009070       0x28 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-strtod.o)
+                0x08009068       0x28 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-strtod.o)
  .rodata._ctype_
-                0x08009098      0x101 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-ctype_.o)
-                0x08009098                _ctype_
+                0x08009090      0x101 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-ctype_.o)
+                0x08009090                _ctype_
  .rodata._svfprintf_r.str1.1
-                0x08009199       0x11 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-nano-svfprintf.o)
+                0x08009191       0x11 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-nano-svfprintf.o)
  .rodata._setlocale_r.str1.1
-                0x080091aa        0x8 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-locale.o)
+                0x080091a2        0x8 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-locale.o)
                                   0x9 (size before relaxing)
  .rodata.str1.1
-                0x080091b2        0x2 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-locale.o)
+                0x080091aa        0x2 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-locale.o)
  .rodata.__assert_func.str1.1
-                0x080091b2       0x3c /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-assert.o)
+                0x080091aa       0x3c /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-assert.o)
                                  0x3d (size before relaxing)
  .rodata.__gethex.str1.1
-                0x080091ee       0x60 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-gdtoa-gethex.o)
+                0x080091e6       0x60 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-gdtoa-gethex.o)
                                  0x73 (size before relaxing)
  .rodata._vfprintf_r.str1.1
-                0x0800924e       0x11 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-nano-vfprintf.o)
-                0x08009260                        . = ALIGN (0x4)
- *fill*         0x0800924e        0x2 
+                0x08009246       0x11 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-nano-vfprintf.o)
+                0x08009258                        . = ALIGN (0x4)
+ *fill*         0x08009246        0x2 
 
-.ARM.extab      0x08009250        0x0
-                0x08009250                        . = ALIGN (0x4)
+.ARM.extab      0x08009248        0x0
+                0x08009248                        . = ALIGN (0x4)
  *(.ARM.extab* .gnu.linkonce.armextab.*)
-                0x08009250                        . = ALIGN (0x4)
+                0x08009248                        . = ALIGN (0x4)
 
-.ARM            0x08009250        0x8
-                0x08009250                        . = ALIGN (0x4)
-                0x08009250                        __exidx_start = .
+.ARM            0x08009248        0x8
+                0x08009248                        . = ALIGN (0x4)
+                0x08009248                        __exidx_start = .
  *(.ARM.exidx*)
- .ARM.exidx     0x08009250        0x8 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-strlen.o)
-                0x08009258                        __exidx_end = .
-                0x08009258                        . = ALIGN (0x4)
+ .ARM.exidx     0x08009248        0x8 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-strlen.o)
+                0x08009250                        __exidx_end = .
+                0x08009250                        . = ALIGN (0x4)
 
-.preinit_array  0x08009258        0x0
-                0x08009258                        . = ALIGN (0x4)
-                0x08009258                        PROVIDE (__preinit_array_start = .)
+.preinit_array  0x08009250        0x0
+                0x08009250                        . = ALIGN (0x4)
+                0x08009250                        PROVIDE (__preinit_array_start = .)
  *(.preinit_array*)
-                0x08009258                        PROVIDE (__preinit_array_end = .)
-                0x08009258                        . = ALIGN (0x4)
+                0x08009250                        PROVIDE (__preinit_array_end = .)
+                0x08009250                        . = ALIGN (0x4)
 
-.init_array     0x08009258        0x4
-                0x08009258                        . = ALIGN (0x4)
-                0x08009258                        PROVIDE (__init_array_start = .)
+.init_array     0x08009250        0x4
+                0x08009250                        . = ALIGN (0x4)
+                0x08009250                        PROVIDE (__init_array_start = .)
  *(SORT_BY_NAME(.init_array.*))
  *(.init_array*)
- .init_array    0x08009258        0x4 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v7-m/nofp/crtbegin.o
-                0x0800925c                        PROVIDE (__init_array_end = .)
-                0x0800925c                        . = ALIGN (0x4)
+ .init_array    0x08009250        0x4 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v7-m/nofp/crtbegin.o
+                0x08009254                        PROVIDE (__init_array_end = .)
+                0x08009254                        . = ALIGN (0x4)
 
-.fini_array     0x0800925c        0x4
-                0x0800925c                        . = ALIGN (0x4)
+.fini_array     0x08009254        0x4
+                0x08009254                        . = ALIGN (0x4)
                 [!provide]                        PROVIDE (__fini_array_start = .)
  *(SORT_BY_NAME(.fini_array.*))
  *(.fini_array*)
- .fini_array    0x0800925c        0x4 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v7-m/nofp/crtbegin.o
+ .fini_array    0x08009254        0x4 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v7-m/nofp/crtbegin.o
                 [!provide]                        PROVIDE (__fini_array_end = .)
-                0x08009260                        . = ALIGN (0x4)
-                0x08009260                        _sidata = LOADADDR (.data)
+                0x08009258                        . = ALIGN (0x4)
+                0x08009258                        _sidata = LOADADDR (.data)
 
-.rel.dyn        0x08009260        0x0
- .rel.iplt      0x08009260        0x0 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v7-m/nofp/crtbegin.o
+.rel.dyn        0x08009258        0x0
+ .rel.iplt      0x08009258        0x0 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v7-m/nofp/crtbegin.o
 
-.data           0x20000000      0x1e4 load address 0x08009260
+.data           0x20000000      0x1e4 load address 0x08009258
                 0x20000000                        . = ALIGN (0x4)
                 0x20000000                        _sdata = .
  *(.data)
@@ -3342,11 +3342,11 @@ LOAD /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externa
                 0x200001e4                        . = ALIGN (0x4)
                 0x200001e4                        _edata = .
 
-.igot.plt       0x200001e4        0x0 load address 0x08009444
+.igot.plt       0x200001e4        0x0 load address 0x0800943c
  .igot.plt      0x200001e4        0x0 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v7-m/nofp/crtbegin.o
                 0x200001e4                        . = ALIGN (0x4)
 
-.bss            0x200001e8      0x294 load address 0x08009444
+.bss            0x200001e8      0x294 load address 0x0800943c
                 0x200001e8                        _sbss = .
                 0x200001e8                        __bss_start__ = _sbss
  *(.bss)
@@ -3414,7 +3414,7 @@ LOAD /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externa
                 0x2000047c                        __bss_end__ = _ebss
 
 ._user_heap_stack
-                0x2000047c      0x604 load address 0x08009444
+                0x2000047c      0x604 load address 0x0800943c
                 0x20000480                        . = ALIGN (0x8)
  *fill*         0x2000047c        0x4 
                 [!provide]                        PROVIDE (end = .)
