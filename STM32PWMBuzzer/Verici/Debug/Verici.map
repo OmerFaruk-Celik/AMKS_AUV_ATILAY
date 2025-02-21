@@ -2584,15 +2584,14 @@ LOAD /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externa
  *(.text*)
  *fill*         0x080010dc        0x4 
  .text.HAL_GPIO_EXTI_Callback
-                0x080010e0      0x140 ./Core/Src/main.o
+                0x080010e0      0x144 ./Core/Src/main.o
                 0x080010e0                HAL_GPIO_EXTI_Callback
  .text.HAL_TIM_PeriodElapsedCallback
-                0x08001220       0x2c ./Core/Src/main.o
-                0x08001220                HAL_TIM_PeriodElapsedCallback
+                0x08001224       0x2c ./Core/Src/main.o
+                0x08001224                HAL_TIM_PeriodElapsedCallback
  .text.HAL_TIM_IC_CaptureCallback
-                0x0800124c       0xc0 ./Core/Src/main.o
-                0x0800124c                HAL_TIM_IC_CaptureCallback
- *fill*         0x0800130c        0x4 
+                0x08001250       0xc0 ./Core/Src/main.o
+                0x08001250                HAL_TIM_IC_CaptureCallback
  .text.main     0x08001310      0x190 ./Core/Src/main.o
                 0x08001310                main
  .text.SystemClock_Config
