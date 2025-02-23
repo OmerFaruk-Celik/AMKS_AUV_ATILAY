@@ -52,7 +52,7 @@ float carpan=0.2;
 float ekle=100;
 int ARR=4000;
 int PSC=1;
-int frekans=36000;
+int frekans=38000;
 float F_sayisi=0;
 float toplam=0;
 float oran=0;
@@ -64,6 +64,7 @@ uint32_t Difference=0;
 int is_first_captured=0;
 float refClock;
 int freq=0;
+int gpio9=0;
 //periot=(psc-1)*(arr-1)/8000000
 //frekans=8000000/((psc-1)*(arr-1))
 //frekans*((psc-1)*(arr-1))=8000000
@@ -115,7 +116,7 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
         	if(frekans>=40000){
         		ekle=-100;
         	}
-        	else if(frekans <= 37000){
+        	else if(frekans <= 35000){
         		ekle=100;
         	}
 
@@ -240,8 +241,8 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-/*
-  	for(int frekans=38400;frekans<=40000;frekans+=1600){
+
+  	for(int frekans=38400;frekans<=44000;frekans+=5600){
 
 			ARR=(TIMCLOCK/(frekans*(PSC+1)))-1;
 			TIM1->CCR4=ARR*0.5;
@@ -249,10 +250,10 @@ int main(void)
 			TIM1->PSC=PSC;
 
 			HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_13);
-			HAL_Delay(50);
+			HAL_Delay(5);
   	}
 
-  	for(int frekans=40000;frekans>=38400;frekans-=1600){
+  	for(int frekans=44000;frekans>=38400;frekans-=5600){
 
 			ARR=(TIMCLOCK/(frekans*(PSC+1)))-1;
 			TIM1->CCR4=ARR*0.5;
@@ -260,9 +261,17 @@ int main(void)
 			TIM1->PSC=PSC;
 
 			HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_13);
-			HAL_Delay(50);
+			HAL_Delay(10);
   	}
-  	*/
+
+	  gpio9=HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_9);
+
+	  if(gpio9){
+		  HAL_GPIO_WritePin(GPIOC, GPIO_PIN_13, RESET);
+	  }
+	  else{
+		  HAL_GPIO_WritePin(GPIOC, GPIO_PIN_13, SET);
+	  }
 	  toplam++;
 
 	  if(freq == 38461){
@@ -586,6 +595,12 @@ static void MX_GPIO_Init(void)
   /*Configure GPIO pin : PA3 */
   GPIO_InitStruct.Pin = GPIO_PIN_3;
   GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+
+  /*Configure GPIO pin : PA9 */
+  GPIO_InitStruct.Pin = GPIO_PIN_9;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
