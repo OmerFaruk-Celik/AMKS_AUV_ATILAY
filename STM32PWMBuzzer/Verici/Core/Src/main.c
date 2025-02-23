@@ -102,7 +102,7 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
       	    TIM1->ARR=ARR;
       	    TIM1->PSC=PSC;
 
-      	    HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_13);
+      	    //HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_13);
 
 
 
