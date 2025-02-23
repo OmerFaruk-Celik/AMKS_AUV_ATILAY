@@ -47,12 +47,12 @@ TIM_HandleTypeDef htim2;
 TIM_HandleTypeDef htim4;
 
 /* USER CODE BEGIN PV */
-float deger=400;
+float deger=100;
 float carpan=0.2;
 float ekle=100;
 int ARR=4000;
 int PSC=1;
-int frekans=39000;
+int frekans=36000;
 float F_sayisi=0;
 float toplam=0;
 float oran=0;
@@ -64,7 +64,6 @@ uint32_t Difference=0;
 int is_first_captured=0;
 float refClock;
 int freq=0;
-float carpan=0.5;
 //periot=(psc-1)*(arr-1)/8000000
 //frekans=8000000/((psc-1)*(arr-1))
 //frekans*((psc-1)*(arr-1))=8000000
@@ -110,11 +109,12 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
 
 
 
+
+
+
         	if(frekans>=40000){
         		ekle=-100;
-
         	}
-
         	else if(frekans <= 37000){
         		ekle=100;
         	}
@@ -221,7 +221,7 @@ int main(void)
   HAL_TIM_IC_Start_IT(&htim4, TIM_CHANNEL_1);
 
   ARR=(TIMCLOCK/(frekans*(PSC+1)))-1;
-  TIM1->CCR4=ARR*0.5;
+  TIM1->CCR4=ARR*0.6;
   TIM1->ARR=ARR;
   TIM1->PSC=PSC;
 
@@ -240,6 +240,29 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
+/*
+  	for(int frekans=38400;frekans<=40000;frekans+=1600){
+
+			ARR=(TIMCLOCK/(frekans*(PSC+1)))-1;
+			TIM1->CCR4=ARR*0.5;
+			TIM1->ARR=ARR;
+			TIM1->PSC=PSC;
+
+			HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_13);
+			HAL_Delay(50);
+  	}
+
+  	for(int frekans=40000;frekans>=38400;frekans-=1600){
+
+			ARR=(TIMCLOCK/(frekans*(PSC+1)))-1;
+			TIM1->CCR4=ARR*0.5;
+			TIM1->ARR=ARR;
+			TIM1->PSC=PSC;
+
+			HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_13);
+			HAL_Delay(50);
+  	}
+  	*/
 	  toplam++;
 
 	  if(freq == 38461){
