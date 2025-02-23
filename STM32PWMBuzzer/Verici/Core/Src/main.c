@@ -52,7 +52,7 @@ float carpan=0.2;
 float ekle=100;
 int ARR=4000;
 int PSC=1;
-int frekans=38000;
+int frekans=38400;
 float F_sayisi=0;
 float toplam=0;
 float oran=0;
@@ -221,13 +221,14 @@ int main(void)
 
   HAL_TIM_IC_Start_IT(&htim4, TIM_CHANNEL_1);
 
+
+
   ARR=(TIMCLOCK/(frekans*(PSC+1)))-1;
   TIM1->CCR4=ARR*0.6;
   TIM1->ARR=ARR;
   TIM1->PSC=PSC;
 
 
-  HAL_GPIO_WritePin(GPIOC, GPIO_PIN_13, SET);
 
   //MX_USART3_UART_Init();
 
@@ -243,7 +244,7 @@ int main(void)
     /* USER CODE BEGIN 3 */
 
 
-
+/*
   	for(int frekans=38400;frekans<=44000;frekans+=5600){
 
 			ARR=(TIMCLOCK/(frekans*(PSC+1)))-1;
@@ -252,7 +253,7 @@ int main(void)
 			TIM1->PSC=PSC;
 
 			//HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_13);
-			HAL_Delay(10);
+			HAL_Delay(100);
   	}
 
   	for(int frekans=44000;frekans>=38400;frekans-=5600){
@@ -263,9 +264,9 @@ int main(void)
 			TIM1->PSC=PSC;
 
 			//HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_13);
-			HAL_Delay(20);
+			HAL_Delay(0.5);
   	}
-
+*/
 	  gpio9=HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_9);
 
 	  if(gpio9){
@@ -282,9 +283,6 @@ int main(void)
 
 	  }
 
-	  else{
-		  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_8, 0);
-	  }
 
 
 
