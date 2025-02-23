@@ -242,6 +242,8 @@ int main(void)
 
     /* USER CODE BEGIN 3 */
 
+
+
   	for(int frekans=38400;frekans<=44000;frekans+=5600){
 
 			ARR=(TIMCLOCK/(frekans*(PSC+1)))-1;
@@ -249,8 +251,8 @@ int main(void)
 			TIM1->ARR=ARR;
 			TIM1->PSC=PSC;
 
-			HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_13);
-			HAL_Delay(5);
+			//HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_13);
+			HAL_Delay(10);
   	}
 
   	for(int frekans=44000;frekans>=38400;frekans-=5600){
@@ -260,30 +262,46 @@ int main(void)
 			TIM1->ARR=ARR;
 			TIM1->PSC=PSC;
 
-			HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_13);
-			HAL_Delay(10);
+			//HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_13);
+			HAL_Delay(20);
   	}
 
 	  gpio9=HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_9);
 
 	  if(gpio9){
 		  HAL_GPIO_WritePin(GPIOC, GPIO_PIN_13, RESET);
+		  F_sayisi++;
 	  }
 	  else{
 		  HAL_GPIO_WritePin(GPIOC, GPIO_PIN_13, SET);
+		  toplam++;
 	  }
-	  toplam++;
+
+	  if(F_sayisi==500){
+		  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_8, 1);
+
+	  }
+
+	  else{
+		  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_8, 0);
+	  }
+
+
+
+	  /*
 
 	  if(freq == 38461){
 		  HAL_GPIO_WritePin(GPIOC, GPIO_PIN_13, RESET);
 		  HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_4);
-		  F_sayisi++;
+
 
 	  }
 	  else{
 		  HAL_TIM_PWM_Stop(&htim2, TIM_CHANNEL_4);
 		 HAL_GPIO_WritePin(GPIOC, GPIO_PIN_13, SET);
 	  }
+
+	  */
 	  oran=F_sayisi/toplam;
 
 
@@ -585,6 +603,9 @@ static void MX_GPIO_Init(void)
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOC, GPIO_PIN_13, GPIO_PIN_RESET);
 
+  /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_8, GPIO_PIN_RESET);
+
   /*Configure GPIO pin : PC13 */
   GPIO_InitStruct.Pin = GPIO_PIN_13;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
@@ -596,6 +617,13 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Pin = GPIO_PIN_3;
   GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
+  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+
+  /*Configure GPIO pin : PA8 */
+  GPIO_InitStruct.Pin = GPIO_PIN_8;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
   /*Configure GPIO pin : PA9 */
