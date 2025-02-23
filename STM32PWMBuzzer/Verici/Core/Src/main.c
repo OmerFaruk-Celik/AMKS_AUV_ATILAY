@@ -93,7 +93,7 @@ static void MX_TIM2_Init(void);
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
     if (GPIO_Pin == GPIO_PIN_3) {
         if (GPIOA->IDR & GPIO_IDR_IDR3) {
-        	frekans+=ekle;
+
 
         	txData++;
 
@@ -113,11 +113,13 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
 
 
 
-        	if(frekans>=40000){
+        	if(frekans==38400){
         		ekle=-100;
+        		frekans=30000;
         	}
-        	else if(frekans <= 35000){
+        	else if(frekans <= 30000){
         		ekle=100;
+        		frekans=38400;
         	}
 
 
@@ -180,6 +182,8 @@ void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim){
   * @brief  The application entry point.
   * @retval int
   */
+HAL_GPIO_WritePin(GPIOA, GPIO_PIN_8, 0);
+
 int main(void)
 {
 
@@ -272,16 +276,15 @@ int main(void)
 	  if(gpio9){
 		  HAL_GPIO_WritePin(GPIOC, GPIO_PIN_13, RESET);
 		  F_sayisi++;
+		  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_8, 1);
 	  }
 	  else{
 		  HAL_GPIO_WritePin(GPIOC, GPIO_PIN_13, SET);
 		  toplam++;
+		  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_8, 0);
 	  }
 
-	  if(F_sayisi==500){
-		  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_8, 1);
 
-	  }
 
 
 
