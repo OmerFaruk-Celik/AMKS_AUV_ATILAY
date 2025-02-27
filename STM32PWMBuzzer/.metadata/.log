@@ -3362,3 +3362,30 @@ java.lang.Exception: The project description file (.project) for 'Verici' is mis
 
 !ENTRY com.st.stm32cube.ide.mcu.ide 1 1 2025-02-27 22:10:59.966
 !MESSAGE Started RMI Server, listening on port 41337
+!SESSION 2025-02-27 23:28:46.125 -----------------------------------------------
+eclipse.buildId=Version 1.17.0
+java.version=21.0.3
+java.vendor=Eclipse Adoptium
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=en_US
+Command-line arguments:  -os linux -ws gtk -arch x86_64
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 4 4 2025-02-27 23:28:59.291
+!MESSAGE CubeMX plugin appears to be active, Log4j initialization might be too late.
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 1 1 2025-02-27 23:28:59.293
+!MESSAGE Log4j2 initialized with config file /home/celik/github/AMKS_AUV_ATILAY/STM32PWMBuzzer/.metadata/.log4j2.xml
+
+!ENTRY com.st.stm32cube.ide.mcu.ide 1 1 2025-02-27 23:29:09.176
+!MESSAGE Started RMI Server, listening on port 41338
+!SESSION 2025-02-27 23:29:52.464 -----------------------------------------------
+eclipse.buildId=Version 1.17.0
+java.version=21.0.3
+java.vendor=Eclipse Adoptium
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=en_US
+Command-line arguments:  -os linux -ws gtk -arch x86_64
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 4 4 2025-02-27 23:30:03.669
+!MESSAGE CubeMX plugin appears to be active, Log4j initialization might be too late.
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 1 1 2025-02-27 23:30:03.670
+!MESSAGE Log4j2 initialized with config file /home/celik/github/AMKS_AUV_ATILAY/STM32PWMBuzzer/.metadata/.log4j2.xml
