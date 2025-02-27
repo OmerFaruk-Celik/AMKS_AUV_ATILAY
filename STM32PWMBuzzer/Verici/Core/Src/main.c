@@ -89,7 +89,7 @@ static void MX_TIM1_Init(void);
 /* USER CODE BEGIN 0 */
 int row=0;
 int col=0;
-/*
+
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
     if (GPIO_Pin == GPIO_PIN_3) {
         if (GPIOA->IDR & GPIO_IDR_IDR3) {
@@ -129,7 +129,7 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
 
 }
 
-
+/*
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
     if (htim->Instance == TIM3) {
 
@@ -141,6 +141,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
     }
 
 }
+*/
 
 void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim){
 
@@ -174,7 +175,7 @@ void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim){
 
 
 }
-*/
+
 
 /* USER CODE END 0 */
 
@@ -215,25 +216,32 @@ int main(void)
   /* USER CODE BEGIN 2 */
 
   HAL_TIM_Base_Start(&htim1);
+  lcd_clear();
+  HAL_Delay(2000);
 
   lcd_init ();
   lcd_put_cur(0, 0);
-  lcd_send_string("HELLO ");
-  lcd_send_string("WORLD ");
-  lcd_send_string("FROM");
+  lcd_send_string("GUZEL ");
+  lcd_send_string("GUNLER");
+
 
   lcd_put_cur(1, 0);
-  lcd_send_string("CONTROLLERS TECH");
+  lcd_send_string("Bizi Bekliyor");
   HAL_Delay(1500);
   lcd_clear();
 
   lcd_put_cur(0, 0);
-  lcd_send_string("Omer Faruk Celik");
-  lcd_put_cur(1, 0);
-  lcd_send_string("Kalp Ciziliyor");
+  lcd_send_string("Omer");
   HAL_Delay(2000);
-  lcd_put_cur(0, 15);
-  draw("heart");  // LCD'de kalp çizer
+
+  draw("heart",0,5);  // LCD'de kalp çizer
+  HAL_Delay(2000);
+  lcd_put_cur(0, 7);
+  lcd_send_string("Irem");
+
+  HAL_Delay(1000);
+  lcd_put_cur(1, 3);
+  lcd_send_string("CELIK");
 /*
  // HAL_TIM_Base_Start_IT(&htim3);
   HAL_TIM_Base_Start(&htim1);
