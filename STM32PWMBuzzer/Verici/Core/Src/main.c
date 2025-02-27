@@ -87,6 +87,8 @@ static void MX_TIM1_Init(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
+
+/*
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
     if (GPIO_Pin == GPIO_PIN_3) {
         if (GPIOA->IDR & GPIO_IDR_IDR3) {
@@ -171,7 +173,7 @@ void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim){
 
 
 }
-
+*/
 
 /* USER CODE END 0 */
 
@@ -210,7 +212,7 @@ int main(void)
   MX_GPIO_Init();
   MX_TIM1_Init();
   /* USER CODE BEGIN 2 */
-
+/*
  // HAL_TIM_Base_Start_IT(&htim3);
   HAL_TIM_Base_Start(&htim1);
   HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_4);
@@ -231,7 +233,7 @@ int main(void)
   HAL_GPIO_WritePin(GPIOA, GPIO_PIN_8, 0);
 
 
-
+*/
 
   //MX_USART3_UART_Init();
 
@@ -425,7 +427,7 @@ static void MX_TIM1_Init(void)
   htim1.Instance = TIM1;
   htim1.Init.Prescaler = 72-1;
   htim1.Init.CounterMode = TIM_COUNTERMODE_UP;
-  htim1.Init.Period = 4000-1;
+  htim1.Init.Period = 65535-1;
   htim1.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
   htim1.Init.RepetitionCounter = 0;
   htim1.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_ENABLE;
