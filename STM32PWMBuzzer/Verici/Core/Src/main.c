@@ -149,13 +149,13 @@ void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim){
 
 		if(is_first_captured==0){
 
-			IC_Val1=__HAL_TIM_GET_COMPARE(htim,TIM_CHANNEL_1);  //HAL_TIM_ReadCapturedValue(htim,TIM_CHANNEL_1);
+			IC_Val1= HAL_TIM_ReadCapturedValue(htim,TIM_CHANNEL_4); //__HAL_TIM_GET_COMPARE(htim,TIM_CHANNEL_1);  //HAL_TIM_ReadCapturedValue(htim,TIM_CHANNEL_1);
 			is_first_captured=1;
 		}
 
 
 		else{
-			IC_Val2=__HAL_TIM_GET_COMPARE(htim,TIM_CHANNEL_1); //HAL_TIM_ReadCapturedValue(htim,TIM_CHANNEL_1);
+			IC_Val2=HAL_TIM_ReadCapturedValue(htim,TIM_CHANNEL_1); //__HAL_TIM_GET_COMPARE(htim,TIM_CHANNEL_1); //HAL_TIM_ReadCapturedValue(htim,TIM_CHANNEL_1);
 			if(IC_Val2 > IC_Val1){
 				Difference=IC_Val2-IC_Val1;
 
