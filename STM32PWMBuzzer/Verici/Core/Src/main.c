@@ -93,6 +93,7 @@ static void MX_TIM4_Init(void);
 /* USER CODE BEGIN 0 */
 int row=0;
 int col=0;
+uint32_t data[32];
 
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
     if (GPIO_Pin == GPIO_PIN_4) {
