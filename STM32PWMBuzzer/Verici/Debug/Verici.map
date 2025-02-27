@@ -3297,9 +3297,8 @@ LOAD /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externa
 .rodata         0x08007a80      0x460
                 0x08007a80                        . = ALIGN (0x4)
  *(.rodata)
- .rodata        0x08007a80        0xf ./Core/Src/main.o
+ .rodata        0x08007a80       0x10 ./Core/Src/main.o
  *(.rodata*)
- *fill*         0x08007a8f        0x1 
  .rodata.AHBPrescTable
                 0x08007a90       0x10 ./Core/Src/system_stm32f1xx.o
                 0x08007a90                AHBPrescTable
@@ -3438,7 +3437,7 @@ LOAD /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externa
  .igot.plt      0x200001d4        0x0 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/thumb/v7-m/nofp/crtbegin.o
                 0x200001d4                        . = ALIGN (0x4)
 
-.bss            0x200001d8      0x2b4 load address 0x080080c4
+.bss            0x200001d8      0x254 load address 0x080080c4
                 0x200001d8                        _sbss = .
                 0x200001d8                        __bss_start__ = _sbss
  *(.bss)
@@ -3458,51 +3457,51 @@ LOAD /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externa
  .bss.is_first_captured
                 0x20000290        0x4 ./Core/Src/main.o
                 0x20000290                is_first_captured
- .bss.data      0x20000294       0x80 ./Core/Src/main.o
+ .bss.data      0x20000294       0x20 ./Core/Src/main.o
                 0x20000294                data
  .bss.__sbrk_heap_end
-                0x20000314        0x4 ./Core/Src/sysmem.o
- .bss.uwTick    0x20000318        0x4 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.o
-                0x20000318                uwTick
- *fill*         0x2000031c        0x4 
- .bss.pFlash    0x20000320       0x20 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_flash.o
-                0x20000320                pFlash
- .bss.__sf      0x20000340      0x138 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-findfp.o)
-                0x20000340                __sf
+                0x200002b4        0x4 ./Core/Src/sysmem.o
+ .bss.uwTick    0x200002b8        0x4 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.o
+                0x200002b8                uwTick
+ *fill*         0x200002bc        0x4 
+ .bss.pFlash    0x200002c0       0x20 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_flash.o
+                0x200002c0                pFlash
+ .bss.__sf      0x200002e0      0x138 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-findfp.o)
+                0x200002e0                __sf
  .bss.__stdio_exit_handler
-                0x20000478        0x4 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-findfp.o)
-                0x20000478                __stdio_exit_handler
- .bss.errno     0x2000047c        0x4 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-reent.o)
-                0x2000047c                errno
+                0x20000418        0x4 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-findfp.o)
+                0x20000418                __stdio_exit_handler
+ .bss.errno     0x2000041c        0x4 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-reent.o)
+                0x2000041c                errno
  .bss.__lock___malloc_recursive_mutex
-                0x20000480        0x1 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-lock.o)
-                0x20000480                __lock___malloc_recursive_mutex
+                0x20000420        0x1 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-lock.o)
+                0x20000420                __lock___malloc_recursive_mutex
  .bss.__lock___sfp_recursive_mutex
-                0x20000481        0x1 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-lock.o)
-                0x20000481                __lock___sfp_recursive_mutex
- *fill*         0x20000482        0x2 
+                0x20000421        0x1 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-lock.o)
+                0x20000421                __lock___sfp_recursive_mutex
+ *fill*         0x20000422        0x2 
  .bss.__malloc_sbrk_start
-                0x20000484        0x4 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-mallocr.o)
-                0x20000484                __malloc_sbrk_start
+                0x20000424        0x4 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-mallocr.o)
+                0x20000424                __malloc_sbrk_start
  .bss.__malloc_free_list
-                0x20000488        0x4 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-mallocr.o)
-                0x20000488                __malloc_free_list
+                0x20000428        0x4 /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.linux64_1.1.0.202410170702/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(libc_a-mallocr.o)
+                0x20000428                __malloc_free_list
  *(COMMON)
-                0x2000048c                        . = ALIGN (0x4)
-                0x2000048c                        _ebss = .
-                0x2000048c                        __bss_end__ = _ebss
+                0x2000042c                        . = ALIGN (0x4)
+                0x2000042c                        _ebss = .
+                0x2000042c                        __bss_end__ = _ebss
 
 ._user_heap_stack
-                0x2000048c      0x604 load address 0x080080c4
-                0x20000490                        . = ALIGN (0x8)
- *fill*         0x2000048c        0x4 
+                0x2000042c      0x604 load address 0x080080c4
+                0x20000430                        . = ALIGN (0x8)
+ *fill*         0x2000042c        0x4 
                 [!provide]                        PROVIDE (end = .)
-                0x20000490                        PROVIDE (_end = .)
-                0x20000690                        . = (. + _Min_Heap_Size)
- *fill*         0x20000490      0x200 
-                0x20000a90                        . = (. + _Min_Stack_Size)
- *fill*         0x20000690      0x400 
-                0x20000a90                        . = ALIGN (0x8)
+                0x20000430                        PROVIDE (_end = .)
+                0x20000630                        . = (. + _Min_Heap_Size)
+ *fill*         0x20000430      0x200 
+                0x20000a30                        . = (. + _Min_Stack_Size)
+ *fill*         0x20000630      0x400 
+                0x20000a30                        . = ALIGN (0x8)
 
 /DISCARD/
  libc.a(*)
