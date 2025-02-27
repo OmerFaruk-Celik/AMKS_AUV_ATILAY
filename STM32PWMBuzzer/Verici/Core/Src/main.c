@@ -198,9 +198,9 @@ int main(void)
   HAL_Init();
 
   /* USER CODE BEGIN Init */
-  lcd_init(LCD_4BIT,LCD_FONT_5X8,_LCD_2LINE);
-  lcd_print(1, 1,"lcd çalış");
-  lcd_print(2, 1,"ayarlanıyor...");
+  lcd_init(_LCD_4BIT, _LCD_FONT_5x8, _LCD_2LINE);
+  lcd_clear();
+
   /* USER CODE END Init */
 
   /* Configure the system clock */
@@ -242,7 +242,9 @@ int main(void)
 
   //MX_USART3_UART_Init();
 
-
+  //lcd_print(1, 1,"LCD");
+  //lcd_print(2, 1,"ayarlanıyor...");
+ // HAL_Delay(250);
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -252,6 +254,8 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
+
+
 
 
 /*
@@ -382,7 +386,7 @@ void SystemClock_Config(void)
   RCC_OscInitStruct.HSIState = RCC_HSI_ON;
   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
   RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSE;
-  RCC_OscInitStruct.PLL.PLLMUL = RCC_PLL_MUL9;
+  RCC_OscInitStruct.PLL.PLLMUL = RCC_PLL_MUL4;
   if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
   {
     Error_Handler();
@@ -397,7 +401,7 @@ void SystemClock_Config(void)
   RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV2;
   RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
 
-  if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_2) != HAL_OK)
+  if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_1) != HAL_OK)
   {
     Error_Handler();
   }
