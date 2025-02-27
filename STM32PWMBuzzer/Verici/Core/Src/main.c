@@ -266,6 +266,14 @@ int main(void)
 
     /* USER CODE BEGIN 3 */
 
+	  sprintf(data,"%d",Difference);
+
+	  lcd_put_cur(row, col)
+
+	  lcd_send_string(data);
+	  HAL_Delay(100);
+
+
 	  /*
 	  for (int i=0;i<128;i++)
 	  {
