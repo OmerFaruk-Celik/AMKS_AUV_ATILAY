@@ -121,11 +121,10 @@ uint8_t heart[8] = {
 };
 
 /* draw() fonksiyonu */
-void draw(char *shape) {
-    lcd_clear();
+void draw(char *shape, int row, int column) {
     if (strcmp(shape, "heart") == 0) {
         lcd_create_char(0, heart);
-        lcd_put_cur(0, 3);
+        lcd_put_cur(row, column);
         lcd_send_data(0);
     }
 }
