@@ -1,213 +1,139 @@
 /*
- Karakter LCD Kütüphanesi
- Hüseyin Cemre Yilmaz
- hcemreyilmaz@gmail.com
+ * LCD1602.c
+ *
+ *  Created on: 21-Jan-2020
+ *      Author: Controllerstech
+ */
 
-        Düzenleyen
-        Bahadir Aydinoglu  19.02.19
-        bahadirayd@gmail.com
-
- Kullanim : CubeMX ile proje olustururken 6 adet GPIO pini
-       asagidaki gibi tanimlanmalidir.
-
-  No.  | Pin Name| Type | Alt. Func. | Label
-  ----------------------------------------------
-        xx  | Pxx   | I/O  | GPIO_Output | LCD_RS
-  xx  | Pxx   | I/O  | GPIO_Output | LCD_EN
-  xx  | Pxx   | I/O  | GPIO_Output | LCD_D4
-  xx  | Pxx   | I/O  | GPIO_Output | LCD_D5
-  xx  | Pxx   | I/O  | GPIO_Output | LCD_D6
-  xx  | Pxx   | I/O  | GPIO_Output | LCD_D7
-
-  Pin ve port farketmeksizin, Output olarak tanimlanan pinler
-  yukaridaki gibi isimlendirilmeli ve baglanti gerektigi gibi
-  yapilmalidir.
-
-  Init Örnegi:
-  lcd_init(_LCD_4BIT, _LCD_FONT_5x8, _LCD_2LINE);
-
-  4-Bit, 5x8 Font'lu, 2 satirli display kullanilacagi belirtiliyor.
-  Farkli varyasyonlara LCD.h dosyasindan bakabilirsiniz.
-
-        Kontrast ayari için pot kullanmak istemiyorsaniz baglantiniz asagidaki
-        gibi olmalidir.
-
-        VDD-------------LCD VDD
-        |
-        10K
-        |
-        |---------------LCD VEE
-        |
-        1K
-        |
-        GND-------------LCD VSS
-*/
+#include <LCD1602.h>
 
 #include "stm32f1xx_hal.h"
-#include "main.h"
-#include "LCD.h"
 
-void Delay(uint32_t nCount)
+/*********** Define the LCD PINS below ****************/
+
+#define RS_Pin GPIO_PIN_1
+#define RS_GPIO_Port GPIOA
+#define RW_Pin GPIO_PIN_2
+#define RW_GPIO_Port GPIOA
+#define EN_Pin GPIO_PIN_3
+#define EN_GPIO_Port GPIOA
+#define D4_Pin GPIO_PIN_4
+#define D4_GPIO_Port GPIOA
+#define D5_Pin GPIO_PIN_5
+#define D5_GPIO_Port GPIOA
+#define D6_Pin GPIO_PIN_6
+#define D6_GPIO_Port GPIOA
+#define D7_Pin GPIO_PIN_7
+#define D7_GPIO_Port GPIOA
+
+/****************** define the timer handler below  **************/
+#define timer htim1
+
+
+extern TIM_HandleTypeDef timer;
+void delay (uint16_t us)
 {
-  for(; nCount != 0; nCount--);
+	__HAL_TIM_SET_COUNTER(&timer, 0);
+	while (__HAL_TIM_GET_COUNTER(&timer) < us);
 }
-void lcd_delay(void)
+
+/****************************************************************************************************************************************************************/
+
+void send_to_lcd (char data, int rs)
 {
- Delay(1000);
+	HAL_GPIO_WritePin(RS_GPIO_Port, RS_Pin, rs);  // rs = 1 for data, rs=0 for command
+
+	/* write the data to the respective pin */
+	HAL_GPIO_WritePin(D7_GPIO_Port, D7_Pin, ((data>>3)&0x01));
+	HAL_GPIO_WritePin(D6_GPIO_Port, D6_Pin, ((data>>2)&0x01));
+	HAL_GPIO_WritePin(D5_GPIO_Port, D5_Pin, ((data>>1)&0x01));
+	HAL_GPIO_WritePin(D4_GPIO_Port, D4_Pin, ((data>>0)&0x01));
+
+	/* Toggle EN PIN to send the data
+	 * if the HCLK > 100 MHz, use the  20 us delay
+	 * if the LCD still doesn't work, increase the delay to 50, 80 or 100..
+	 */
+	HAL_GPIO_WritePin(EN_GPIO_Port, EN_Pin, 1);
+	delay (20);
+	HAL_GPIO_WritePin(EN_GPIO_Port, EN_Pin, 0);
+	delay (20);
 }
 
-void lcd_cmd(char out_char)
+void lcd_send_cmd (char cmd)
 {
- LCD_RS_GPIO_Port->BRR  = LCD_RS_Pin;
+    char datatosend;
 
- LCD_EN_GPIO_Port->BRR  = LCD_EN_Pin;
- LCD_D4_GPIO_Port->BRR  = LCD_D4_Pin;
- LCD_D5_GPIO_Port->BRR  = LCD_D5_Pin;
- LCD_D6_GPIO_Port->BRR  = LCD_D6_Pin;
- LCD_D7_GPIO_Port->BRR  = LCD_D7_Pin;
+    /* send upper nibble first */
+    datatosend = ((cmd>>4)&0x0f);
+    send_to_lcd(datatosend,0);  // RS must be 0 while sending command
 
- lcd_delay();
-
- LCD_EN_GPIO_Port->ODR |= LCD_EN_Pin;
-
- if((out_char & 0x10)>>4) LCD_D4_GPIO_Port->BSRR = LCD_D4_Pin; else LCD_D4_GPIO_Port->BSRR = (uint32_t)LCD_D4_Pin << 16;
- if((out_char & 0x20)>>5) LCD_D5_GPIO_Port->BSRR = LCD_D5_Pin; else LCD_D5_GPIO_Port->BSRR = (uint32_t)LCD_D5_Pin << 16;
- if((out_char & 0x40)>>6) LCD_D6_GPIO_Port->BSRR = LCD_D6_Pin; else LCD_D6_GPIO_Port->BSRR = (uint32_t)LCD_D6_Pin << 16;
- if((out_char & 0x80)>>7) LCD_D7_GPIO_Port->BSRR = LCD_D7_Pin; else LCD_D7_GPIO_Port->BSRR = (uint32_t)LCD_D7_Pin << 16;
-
- lcd_delay();
-
- LCD_EN_GPIO_Port->BRR = LCD_EN_Pin;
- LCD_D4_GPIO_Port->BRR = LCD_D4_Pin;
- LCD_D5_GPIO_Port->BRR = LCD_D5_Pin;
- LCD_D6_GPIO_Port->BRR = LCD_D6_Pin;
- LCD_D7_GPIO_Port->BRR = LCD_D7_Pin;
-
- lcd_delay();
-
- LCD_EN_GPIO_Port->ODR |= LCD_EN_Pin;
-
- if(out_char & 0x01) LCD_D4_GPIO_Port->BSRR = LCD_D4_Pin; else LCD_D4_GPIO_Port->BSRR = (uint32_t)LCD_D4_Pin << 16;
- if((out_char & 0x02)>>1) LCD_D5_GPIO_Port->BSRR = LCD_D5_Pin; else LCD_D5_GPIO_Port->BSRR = (uint32_t)LCD_D5_Pin << 16;
- if((out_char & 0x04)>>2) LCD_D6_GPIO_Port->BSRR = LCD_D6_Pin; else LCD_D6_GPIO_Port->BSRR = (uint32_t)LCD_D6_Pin << 16;
- if((out_char & 0x08)>>3) LCD_D7_GPIO_Port->BSRR = LCD_D7_Pin; else LCD_D7_GPIO_Port->BSRR = (uint32_t)LCD_D7_Pin << 16;
-
- lcd_delay();
-
- LCD_EN_GPIO_Port->BRR = LCD_EN_Pin;
- LCD_D4_GPIO_Port->BRR = LCD_D4_Pin;
- LCD_D5_GPIO_Port->BRR = LCD_D5_Pin;
- LCD_D6_GPIO_Port->BRR = LCD_D6_Pin;
- LCD_D7_GPIO_Port->BRR = LCD_D7_Pin;
+    /* send Lower Nibble */
+    datatosend = ((cmd)&0x0f);
+	send_to_lcd(datatosend, 0);
 }
 
-void lcd_char_cp(char out_char)
+void lcd_send_data (char data)
 {
- LCD_RS_GPIO_Port->ODR |= LCD_RS_Pin;
+	char datatosend;
 
- LCD_EN_GPIO_Port->BRR  = LCD_EN_Pin;
- LCD_D4_GPIO_Port->BRR  = LCD_D4_Pin;
- LCD_D5_GPIO_Port->BRR  = LCD_D5_Pin;
- LCD_D6_GPIO_Port->BRR  = LCD_D6_Pin;
- LCD_D7_GPIO_Port->BRR  = LCD_D7_Pin;
+	/* send higher nibble */
+	datatosend = ((data>>4)&0x0f);
+	send_to_lcd(datatosend, 1);  // rs =1 for sending data
 
- lcd_delay();
-
- LCD_EN_GPIO_Port->ODR |= LCD_EN_Pin;
-
- if((out_char & 0x10)>>4) LCD_D4_GPIO_Port->BSRR = LCD_D4_Pin; else LCD_D4_GPIO_Port->BSRR = (uint32_t)LCD_D4_Pin << 16;
- if((out_char & 0x20)>>5) LCD_D5_GPIO_Port->BSRR = LCD_D5_Pin; else LCD_D5_GPIO_Port->BSRR = (uint32_t)LCD_D5_Pin << 16;
- if((out_char & 0x40)>>6) LCD_D6_GPIO_Port->BSRR = LCD_D6_Pin; else LCD_D6_GPIO_Port->BSRR = (uint32_t)LCD_D6_Pin << 16;
- if((out_char & 0x80)>>7) LCD_D7_GPIO_Port->BSRR = LCD_D7_Pin; else LCD_D7_GPIO_Port->BSRR = (uint32_t)LCD_D7_Pin << 16;
-
- lcd_delay();
-
- LCD_EN_GPIO_Port->BRR = LCD_EN_Pin;
- LCD_D4_GPIO_Port->BRR = LCD_D4_Pin;
- LCD_D5_GPIO_Port->BRR = LCD_D5_Pin;
- LCD_D6_GPIO_Port->BRR = LCD_D6_Pin;
- LCD_D7_GPIO_Port->BRR = LCD_D7_Pin;
-
- lcd_delay();
-
- LCD_EN_GPIO_Port->ODR |= LCD_EN_Pin;
-
- if(out_char & 0x01) LCD_D4_GPIO_Port->BSRR = LCD_D4_Pin; else LCD_D4_GPIO_Port->BSRR = (uint32_t)LCD_D4_Pin << 16;
- if((out_char & 0x02)>>1) LCD_D5_GPIO_Port->BSRR = LCD_D5_Pin; else LCD_D5_GPIO_Port->BSRR = (uint32_t)LCD_D5_Pin << 16;
- if((out_char & 0x04)>>2) LCD_D6_GPIO_Port->BSRR = LCD_D6_Pin; else LCD_D6_GPIO_Port->BSRR = (uint32_t)LCD_D6_Pin << 16;
- if((out_char & 0x08)>>3) LCD_D7_GPIO_Port->BSRR = LCD_D7_Pin; else LCD_D7_GPIO_Port->BSRR = (uint32_t)LCD_D7_Pin << 16;
-
- lcd_delay();
-
- LCD_EN_GPIO_Port->BRR = LCD_EN_Pin;
- LCD_D4_GPIO_Port->BRR = LCD_D4_Pin;
- LCD_D5_GPIO_Port->BRR = LCD_D5_Pin;
- LCD_D6_GPIO_Port->BRR = LCD_D6_Pin;
- LCD_D7_GPIO_Port->BRR = LCD_D7_Pin;
+	/* send Lower nibble */
+	datatosend = ((data)&0x0f);
+	send_to_lcd(datatosend, 1);
 }
 
-void lcd_out_cp(char *out_char)
+void lcd_clear (void)
 {
- while(*out_char)
- {
-  lcd_delay();
-  lcd_char_cp(*out_char++);
- }
- lcd_delay();
+	lcd_send_cmd(0x01);
+	HAL_Delay(2);
 }
 
-
-void lcd_init(char bits, char font, char lines)
+void lcd_put_cur(int row, int col)
 {
-    HAL_Delay(250);
- lcd_cmd(_RETURN_HOME);
-    HAL_Delay(50);
-    lcd_cmd(0x20 | bits | font | lines);
-    HAL_Delay(50);
-    lcd_cmd(_LCD_INIT);
-    HAL_Delay(50);
-    lcd_cmd(0x0E);
-    HAL_Delay(50);
-    lcd_cmd(0x0C);
-    HAL_Delay(50);
-    lcd_cmd(0x01);
-    HAL_Delay(100);
+    switch (row)
+    {
+        case 0:
+            col |= 0x80;
+            break;
+        case 1:
+            col |= 0xC0;
+            break;
+    }
+
+    lcd_send_cmd (col);
 }
 
-void lcd_gotoxy(unsigned char row, unsigned char column)
+
+void lcd_init (void)
 {
- if(row == 1)
- {
-  lcd_cmd(0x80 + (column - 1));
- }
- else if(row == 2)
- {
-  lcd_cmd(0xC0 + (column - 1));
- }
+	// 4 bit initialisation
+	HAL_Delay(50);  // wait for >40ms
+	lcd_send_cmd (0x30);
+	HAL_Delay(5);  // wait for >4.1ms
+	lcd_send_cmd (0x30);
+	HAL_Delay(1);  // wait for >100us
+	lcd_send_cmd (0x30);
+	HAL_Delay(10);
+	lcd_send_cmd (0x20);  // 4bit mode
+	HAL_Delay(10);
+
+  // dislay initialisation
+	lcd_send_cmd (0x28); // Function set --> DL=0 (4 bit mode), N = 1 (2 line display) F = 0 (5x8 characters)
+	HAL_Delay(1);
+	lcd_send_cmd (0x08); //Display on/off control --> D=0,C=0, B=0  ---> display off
+	HAL_Delay(1);
+	lcd_send_cmd (0x01);  // clear display
+	HAL_Delay(1);
+	HAL_Delay(1);
+	lcd_send_cmd (0x06); //Entry mode set --> I/D = 1 (increment cursor) & S = 0 (no shift)
+	HAL_Delay(1);
+	lcd_send_cmd (0x0C); //Display on/off control --> D = 1, C and B = 0. (Cursor and blink, last two bits)
 }
 
-void lcd_char(unsigned char row, unsigned char column, char out_char)
+void lcd_send_string (char *str)
 {
- lcd_gotoxy(row, column);
- lcd_char_cp(out_char);
+	while (*str) lcd_send_data (*str++);
 }
-
-void lcd_print(unsigned char row, unsigned char column, char *out_char)
-{
- lcd_gotoxy(row, column);
- lcd_out_cp(out_char);
-}
-void lcd_clear(void) {
-
- lcd_cmd(_CLEAR);
-    HAL_Delay(2);
-
-}
-void lcd_line1(void) {
- lcd_cmd(0x80);
-}
-
-void lcd_line2(void) {
- lcd_cmd(0xC0);
-}
-
