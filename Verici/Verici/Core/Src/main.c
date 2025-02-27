@@ -33,7 +33,8 @@
 /* USER CODE BEGIN PD */
 int ARR=200;
 int PSC=1;
-int ekle=100
+int ekle=100;
+int TIMCLOCK=8000000;
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
