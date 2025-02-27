@@ -17,13 +17,13 @@
   */
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
-#include <LCD1602.h>
 #include "main.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include <math.h> // Sinüs hesaplamaları için gerekli
 #include "stdio.h"
+#include "LCD1602.h"
 
 /* USER CODE END Includes */
 
@@ -44,6 +44,7 @@
 
 /* Private variables ---------------------------------------------------------*/
 TIM_HandleTypeDef htim1;
+TIM_HandleTypeDef htim4;
 
 /* USER CODE BEGIN PV */
 float deger=100;
@@ -57,9 +58,11 @@ float toplam=0;
 float oran=0;
 #define TIMCLOCK 8000000.0
 #define PRESCALAR 8.0
+
 uint32_t IC_Val1=0;
 uint32_t IC_Val2=0;
 uint32_t Difference=0;
+
 int is_first_captured=0;
 float refClock;
 int freq=0;
@@ -81,6 +84,7 @@ uint8_t rxData;
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
 static void MX_TIM1_Init(void);
+static void MX_TIM4_Init(void);
 /* USER CODE BEGIN PFP */
 
 /* USER CODE END PFP */
@@ -91,10 +95,10 @@ int row=0;
 int col=0;
 
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
-    if (GPIO_Pin == GPIO_PIN_3) {
-        if (GPIOA->IDR & GPIO_IDR_IDR3) {
+    if (GPIO_Pin == GPIO_PIN_4) {
+        if (GPIOB->IDR & GPIO_IDR_IDR4) {
 
-
+/*
         	txData++;
 
         	ARR=(TIMCLOCK/(frekans*(PSC+1)))-1;
@@ -121,7 +125,7 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
         		ekle=100;
         		frekans=38400;
         	}
-
+*/
 
 
         }
@@ -151,26 +155,22 @@ void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim){
 
 			IC_Val1= HAL_TIM_ReadCapturedValue(htim,TIM_CHANNEL_4); //__HAL_TIM_GET_COMPARE(htim,TIM_CHANNEL_1);  //HAL_TIM_ReadCapturedValue(htim,TIM_CHANNEL_1);
 			is_first_captured=1;
+
+			__HAL_TIM_SET_CAPTUREPOLARITY(htim,TIM_CHANNEL_4,TIM_INPUTCHANNELPOLARITY_FALLING);
 		}
 
 
-		else{
-			IC_Val2=HAL_TIM_ReadCapturedValue(htim,TIM_CHANNEL_1); //__HAL_TIM_GET_COMPARE(htim,TIM_CHANNEL_1); //HAL_TIM_ReadCapturedValue(htim,TIM_CHANNEL_1);
+		else if(is_first_captured==1){
+			IC_Val2=HAL_TIM_ReadCapturedValue(htim,TIM_CHANNEL_4); //__HAL_TIM_GET_COMPARE(htim,TIM_CHANNEL_1); //HAL_TIM_ReadCapturedValue(htim,TIM_CHANNEL_1);
+			__HAL_TIM_SET_COUNTER(htim, 0);
 			if(IC_Val2 > IC_Val1){
 				Difference=IC_Val2-IC_Val1;
 
 			}
-
-			else{
-
-				Difference=(0xffffffff - IC_Val1) + IC_Val2;
-			}
-
-			refClock = TIMCLOCK/(PRESCALAR);
-			freq=refClock/Difference;
-			__HAL_TIM_SET_COUNTER(htim,0);
 			is_first_captured=0;
-		}
+			__HAL_TIM_SET_CAPTUREPOLARITY(htim,TIM_CHANNEL_4,TIM_INPUTCHANNELPOLARITY_RISING);
+
+	      }
 	}
 
 
@@ -213,35 +213,19 @@ int main(void)
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
   MX_TIM1_Init();
+  MX_TIM4_Init();
   /* USER CODE BEGIN 2 */
 
+  lcd_init();
+
+  lcd_put_cur(0, 0);
+  lcd_send_string("Frekans:");
+
   HAL_TIM_Base_Start(&htim1);
-  lcd_clear();
-  HAL_Delay(2000);
-
-  lcd_init ();
-  lcd_put_cur(0, 0);
-  lcd_send_string("GUZEL ");
-  lcd_send_string("GUNLER");
 
 
-  lcd_put_cur(1, 0);
-  lcd_send_string("Bizi Bekliyor");
-  HAL_Delay(1500);
-  lcd_clear();
 
-  lcd_put_cur(0, 0);
-  lcd_send_string("Omer");
-  HAL_Delay(2000);
 
-  draw("heart",0,5);  // LCD'de kalp çizer
-  HAL_Delay(2000);
-  lcd_put_cur(0, 7);
-  lcd_send_string("Irem");
-
-  HAL_Delay(1000);
-  lcd_put_cur(1, 3);
-  lcd_send_string("CELIK");
 /*
  // HAL_TIM_Base_Start_IT(&htim3);
   HAL_TIM_Base_Start(&htim1);
@@ -468,7 +452,7 @@ static void MX_TIM1_Init(void)
   htim1.Instance = TIM1;
   htim1.Init.Prescaler = 72-1;
   htim1.Init.CounterMode = TIM_COUNTERMODE_UP;
-  htim1.Init.Period = 65535-1;
+  htim1.Init.Period = 65535;
   htim1.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
   htim1.Init.RepetitionCounter = 0;
   htim1.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_ENABLE;
@@ -494,6 +478,64 @@ static void MX_TIM1_Init(void)
 }
 
 /**
+  * @brief TIM4 Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_TIM4_Init(void)
+{
+
+  /* USER CODE BEGIN TIM4_Init 0 */
+
+  /* USER CODE END TIM4_Init 0 */
+
+  TIM_ClockConfigTypeDef sClockSourceConfig = {0};
+  TIM_MasterConfigTypeDef sMasterConfig = {0};
+  TIM_IC_InitTypeDef sConfigIC = {0};
+
+  /* USER CODE BEGIN TIM4_Init 1 */
+
+  /* USER CODE END TIM4_Init 1 */
+  htim4.Instance = TIM4;
+  htim4.Init.Prescaler = 72-1;
+  htim4.Init.CounterMode = TIM_COUNTERMODE_UP;
+  htim4.Init.Period = 0xffff-1;
+  htim4.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
+  htim4.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
+  if (HAL_TIM_Base_Init(&htim4) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  sClockSourceConfig.ClockSource = TIM_CLOCKSOURCE_INTERNAL;
+  if (HAL_TIM_ConfigClockSource(&htim4, &sClockSourceConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  if (HAL_TIM_IC_Init(&htim4) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  sMasterConfig.MasterOutputTrigger = TIM_TRGO_RESET;
+  sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;
+  if (HAL_TIMEx_MasterConfigSynchronization(&htim4, &sMasterConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  sConfigIC.ICPolarity = TIM_INPUTCHANNELPOLARITY_RISING;
+  sConfigIC.ICSelection = TIM_ICSELECTION_DIRECTTI;
+  sConfigIC.ICPrescaler = TIM_ICPSC_DIV1;
+  sConfigIC.ICFilter = 0;
+  if (HAL_TIM_IC_ConfigChannel(&htim4, &sConfigIC, TIM_CHANNEL_4) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN TIM4_Init 2 */
+
+  /* USER CODE END TIM4_Init 2 */
+
+}
+
+/**
   * @brief GPIO Initialization Function
   * @param None
   * @retval None
@@ -508,6 +550,7 @@ static void MX_GPIO_Init(void)
   __HAL_RCC_GPIOC_CLK_ENABLE();
   __HAL_RCC_GPIOD_CLK_ENABLE();
   __HAL_RCC_GPIOA_CLK_ENABLE();
+  __HAL_RCC_GPIOB_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOC, GPIO_PIN_13, GPIO_PIN_RESET);
