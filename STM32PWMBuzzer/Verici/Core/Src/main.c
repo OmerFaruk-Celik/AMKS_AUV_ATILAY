@@ -57,14 +57,14 @@ float F_sayisi=0;
 float toplam=0;
 float oran=0;
 #define TIMCLOCK 72000000.0
-#define PRESCALAR 8.0
+#define PRESCALAR 72
 
 uint32_t IC_Val1=0;
 uint32_t IC_Val2=0;
 uint32_t Difference=0;
 
 int Is_First_Captured=0;
-float refClock;
+
 int freq=0;
 float frequency = 0;
 int gpio9=0;
@@ -153,17 +153,17 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
 
 void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim)
 {
-	if (htim->Channel == HAL_TIM_ACTIVE_CHANNEL_1)
+	if (htim->Channel == HAL_TIM_ACTIVE_CHANNEL_4)
 	{
 		if (Is_First_Captured==0) // if the first rising edge is not captured
 		{
-			IC_Val1 = HAL_TIM_ReadCapturedValue(htim, TIM_CHANNEL_1); // read the first value
+			IC_Val1 = HAL_TIM_ReadCapturedValue(htim, TIM_CHANNEL_4); // read the first value
 			Is_First_Captured = 1;  // set the first captured as true
 		}
 
 		else   // If the first rising edge is captured, now we will capture the second edge
 		{
-			IC_Val2 = HAL_TIM_ReadCapturedValue(htim, TIM_CHANNEL_1);  // read second value
+			IC_Val2 = HAL_TIM_ReadCapturedValue(htim, TIM_CHANNEL_4);  // read second value
 
 			if (IC_Val2 > IC_Val1)
 			{
@@ -254,6 +254,7 @@ int main(void)
   MX_TIM4_Init();
   /* USER CODE BEGIN 2 */
   HAL_TIM_Base_Start(&htim1);
+  HAL_TIM_IC_Start_IT(&htim4, TIM_CHANNEL_4);
 
   lcd_init();
    lcd_put_cur(0, 0);
@@ -313,14 +314,25 @@ int main(void)
 
     /* USER CODE BEGIN 3 */
 
-	  sprintf(data, "%lu Hz", (unsigned long)Difference);
+	  //sprintf(data, "%lu Hz", (unsigned long)Difference);
+	  sprintf(data, "%d Hz", (int)frequency);  // %.2f = 2 basamak hassasiyet
 	   lcd_put_cur(0, 0);
 	   lcd_send_string("Frekans:");
 	   lcd_put_cur(0, 8);
 	   lcd_send_string(data);
-	   HAL_Delay(250);
+	   HAL_Delay(10);
 	   lcd_clear();
 
+	   int f=(int)frequency;
+
+	   if(abs(f-38000) <=500){
+		   HAL_GPIO_WritePin(GPIOB, GPIO_PIN_13, RESET);
+		   HAL_GPIO_WritePin(GPIOB, GPIO_PIN_12, SET);
+	   }
+	   else if(abs(f-37000) <=500){
+		   HAL_GPIO_WritePin(GPIOB, GPIO_PIN_12, RESET);
+		   HAL_GPIO_WritePin(GPIOB, GPIO_PIN_13, SET);
+	   }
 	  /*
 	  for (int i=0;i<128;i++)
 	  {
@@ -577,7 +589,7 @@ static void MX_TIM4_Init(void)
   {
     Error_Handler();
   }
-  sConfigIC.ICPolarity = TIM_INPUTCHANNELPOLARITY_RISING;
+  sConfigIC.ICPolarity = TIM_INPUTCHANNELPOLARITY_FALLING;
   sConfigIC.ICSelection = TIM_ICSELECTION_DIRECTTI;
   sConfigIC.ICPrescaler = TIM_ICPSC_DIV1;
   sConfigIC.ICFilter = 0;
@@ -615,6 +627,9 @@ static void MX_GPIO_Init(void)
   HAL_GPIO_WritePin(GPIOA, GPIO_PIN_1|GPIO_PIN_2|GPIO_PIN_3|GPIO_PIN_4
                           |GPIO_PIN_5|GPIO_PIN_6|GPIO_PIN_7, GPIO_PIN_RESET);
 
+  /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_12|GPIO_PIN_13, GPIO_PIN_RESET);
+
   /*Configure GPIO pin : PC13 */
   GPIO_InitStruct.Pin = GPIO_PIN_13;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
@@ -630,6 +645,13 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+
+  /*Configure GPIO pins : PB12 PB13 */
+  GPIO_InitStruct.Pin = GPIO_PIN_12|GPIO_PIN_13;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
 /* USER CODE BEGIN MX_GPIO_Init_2 */
 /* USER CODE END MX_GPIO_Init_2 */
