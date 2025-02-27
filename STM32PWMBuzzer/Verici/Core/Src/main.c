@@ -213,6 +213,27 @@ int main(void)
   MX_GPIO_Init();
   MX_TIM1_Init();
   /* USER CODE BEGIN 2 */
+
+  HAL_TIM_Base_Start(&htim1);
+
+  lcd_init ();
+  lcd_put_cur(0, 0);
+  lcd_send_string("HELLO ");
+  lcd_send_string("WORLD ");
+  lcd_send_string("FROM");
+
+  lcd_put_cur(1, 0);
+  lcd_send_string("CONTROLLERS TECH");
+  HAL_Delay(1500);
+  lcd_clear();
+
+  lcd_put_cur(0, 0);
+  lcd_send_string("Omer Faruk Celik");
+  lcd_put_cur(1, 0);
+  lcd_send_string("Kalp Ciziliyor");
+  HAL_Delay(2000);
+  lcd_put_cur(0, 15);
+  draw("heart");  // LCD'de kalp çizer
 /*
  // HAL_TIM_Base_Start_IT(&htim3);
   HAL_TIM_Base_Start(&htim1);
@@ -245,17 +266,28 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  LCD_SetCursor(0, 0);
-  LCD_SendString("Merhaba!");
+
   while (1)
   {
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-	  LCD_SetCursor(0, 0);
-	  LCD_SendString("Merhaba!");
-	  HAL_Delay(50);
 
+	  /*
+	  for (int i=0;i<128;i++)
+	  {
+		  lcd_put_cur(row, col);
+
+		  lcd_send_data(i+48);
+
+		  col++;
+
+		  if (col > 15) {row++; col = 0;}
+		  if (row > 1) row=0;
+
+		  HAL_Delay(250);
+	  }
+*/
 
 /*
   	for(int frekans=38400;frekans<=44000;frekans+=5600){
