@@ -741,3 +741,38 @@
 2025-02-27 22:42:04,402 [INFO] NvicIntPanel:101 - NVIC parent = com.st.microxplorer.plugins.ip.nvic.MultiNvicIntPanel[,0,0,0x0,invalid,layout=javax.swing.BoxLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=9,maximumSize=,minimumSize=,preferredSize=]
 2025-02-27 22:42:07,026 [INFO] UtilMem:75 - End SaveConfig() Used Memory: 666885256 Bytes (996147200)
 2025-02-27 22:42:08,789 [INFO] UtilMem:75 - End SaveConfig() Used Memory: 324760424 Bytes (996147200)
+2025-02-27 22:42:11,340 [INFO] UtilMem:75 - End SaveConfig() Used Memory: 510358376 Bytes (996147200)
+2025-02-27 22:42:11,509 [INFO] BlockDiagram:2766 - set Specific Code input for plugin: NVIC
+2025-02-27 22:42:11,509 [INFO] BlockDiagram:2766 - set Specific Code input for plugin: TIM1_8F1
+2025-02-27 22:42:11,509 [INFO] BlockDiagram:2766 - set Specific Code input for plugin: SYS
+2025-02-27 22:42:11,510 [INFO] BlockDiagram:2766 - set Specific Code input for plugin: GPIO
+2025-02-27 22:42:11,510 [INFO] BlockDiagram:2766 - set Specific Code input for plugin: RCC
+2025-02-27 22:42:11,510 [INFO] CodeGenerator:896 - code generatio: config db path: /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.common.mx_6.13.0.202411220809//db/
+2025-02-27 22:42:11,686 [INFO] CodeEngine:255 - oldGeneratedFile, /home/celik/github/AMKS_AUV_ATILAY/Verici/Verici/MXTmpFiles/license.tmp_save
+2025-02-27 22:42:11,809 [INFO] CodeEngine:279 - Generated code: /home/celik/github/AMKS_AUV_ATILAY/Verici/Verici/MXTmpFiles/license.tmp
+2025-02-27 22:42:11,825 [INFO] CodeEngine:255 - oldGeneratedFile, /home/celik/github/AMKS_AUV_ATILAY/Verici/Verici/MXTmpFiles/gpio.tmp_save
+2025-02-27 22:42:11,943 [INFO] CodeEngine:279 - Generated code: /home/celik/github/AMKS_AUV_ATILAY/Verici/Verici/MXTmpFiles/gpio.tmp
+2025-02-27 22:42:12,073 [INFO] CodeEngine:255 - oldGeneratedFile, /home/celik/github/AMKS_AUV_ATILAY/Verici/Verici/Core/Src/stm32f1xx_it.c_save
+2025-02-27 22:42:12,278 [INFO] CodeEngine:279 - Generated code: /home/celik/github/AMKS_AUV_ATILAY/Verici/Verici/Core/Src/stm32f1xx_it.c
+2025-02-27 22:42:12,282 [INFO] CodeEngine:255 - oldGeneratedFile, /home/celik/github/AMKS_AUV_ATILAY/Verici/Verici/Core/Inc/stm32f1xx_it.h_save
+2025-02-27 22:42:12,404 [INFO] CodeEngine:279 - Generated code: /home/celik/github/AMKS_AUV_ATILAY/Verici/Verici/Core/Inc/stm32f1xx_it.h
+2025-02-27 22:42:12,407 [INFO] CodeEngine:255 - oldGeneratedFile, /home/celik/github/AMKS_AUV_ATILAY/Verici/Verici/Core/Src/stm32f1xx_hal_msp.c_save
+2025-02-27 22:42:12,481 [INFO] CodeEngine:279 - Generated code: /home/celik/github/AMKS_AUV_ATILAY/Verici/Verici/Core/Src/stm32f1xx_hal_msp.c
+2025-02-27 22:42:12,482 [INFO] CodeEngine:255 - oldGeneratedFile, /home/celik/github/AMKS_AUV_ATILAY/Verici/Verici/MXTmpFiles/system.tmp_save
+2025-02-27 22:42:12,531 [INFO] CodeEngine:279 - Generated code: /home/celik/github/AMKS_AUV_ATILAY/Verici/Verici/MXTmpFiles/system.tmp
+2025-02-27 22:42:12,533 [INFO] CodeEngine:311 - oldGeneratedFile, /home/celik/github/AMKS_AUV_ATILAY/Verici/Verici/Core/Inc/stm32f1xx_hal_conf.h_save
+2025-02-27 22:42:12,586 [INFO] CodeEngine:335 - Generated code: /home/celik/github/AMKS_AUV_ATILAY/Verici/Verici/Core/Inc/stm32f1xx_hal_conf.h
+2025-02-27 22:42:12,594 [WARN] IPConfigManager:3618 - IP not found : TIM
+2025-02-27 22:42:12,594 [WARN] CodeGenerator:4152 - IP not found : null
+2025-02-27 22:42:12,596 [INFO] CodeEngine:255 - oldGeneratedFile, /home/celik/github/AMKS_AUV_ATILAY/Verici/Verici/Core/Inc/main.h_save
+2025-02-27 22:42:12,647 [INFO] CodeEngine:279 - Generated code: /home/celik/github/AMKS_AUV_ATILAY/Verici/Verici/Core/Inc/main.h
+2025-02-27 22:42:12,648 [INFO] CodeEngine:255 - oldGeneratedFile, /home/celik/github/AMKS_AUV_ATILAY/Verici/Verici/Core/Src/main.c_save
+2025-02-27 22:42:12,749 [INFO] CodeEngine:279 - Generated code: /home/celik/github/AMKS_AUV_ATILAY/Verici/Verici/Core/Src/main.c
+2025-02-27 22:42:12,999 [INFO] ProjectBuilder:3289 - Time for Copy HAL[1] : 20mS.
+2025-02-27 22:42:13,001 [INFO] ProjectBuilder:4876 - Project Generator version: 4.5.0-RC5
+2025-02-27 22:42:13,116 [INFO] ConfigFileManager:1579 - The Die is : DIE410
+2025-02-27 22:42:14,083 [INFO] ProjectBuilder:5154 - Time for Generating toolchain IDE Files: 1082mS.
+2025-02-27 22:42:14,084 [INFO] ProjectBuilder:3146 - Time for Copy CMSIS : 0mS.
+2025-02-27 22:42:14,084 [INFO] ProjectBuilder:3146 - Time for Copy CMSIS : 0mS.
+2025-02-27 22:43:49,476 [ERROR] ConfigurationRetriever:142 - IOException on connection: Read timed out
+2025-02-27 22:43:51,872 [ERROR] ConfigurationRetriever:142 - IOException on connection: Read timed out
