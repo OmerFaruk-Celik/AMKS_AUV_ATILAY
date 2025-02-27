@@ -56,16 +56,17 @@ int frekans=38400;
 float F_sayisi=0;
 float toplam=0;
 float oran=0;
-#define TIMCLOCK 8000000.0
+#define TIMCLOCK 72000000.0
 #define PRESCALAR 8.0
 
 uint32_t IC_Val1=0;
 uint32_t IC_Val2=0;
 uint32_t Difference=0;
 
-int is_first_captured=0;
+int Is_First_Captured=0;
 float refClock;
 int freq=0;
+float frequency = 0;
 int gpio9=0;
 //periot=(psc-1)*(arr-1)/8000000
 //frekans=8000000/((psc-1)*(arr-1))
@@ -93,7 +94,7 @@ static void MX_TIM4_Init(void);
 /* USER CODE BEGIN 0 */
 int row=0;
 int col=0;
-uint32_t data[32];
+char data[32];
 
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
     if (GPIO_Pin == GPIO_PIN_4) {
@@ -148,6 +149,42 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
 }
 */
 
+
+
+void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim)
+{
+	if (htim->Channel == HAL_TIM_ACTIVE_CHANNEL_1)
+	{
+		if (Is_First_Captured==0) // if the first rising edge is not captured
+		{
+			IC_Val1 = HAL_TIM_ReadCapturedValue(htim, TIM_CHANNEL_1); // read the first value
+			Is_First_Captured = 1;  // set the first captured as true
+		}
+
+		else   // If the first rising edge is captured, now we will capture the second edge
+		{
+			IC_Val2 = HAL_TIM_ReadCapturedValue(htim, TIM_CHANNEL_1);  // read second value
+
+			if (IC_Val2 > IC_Val1)
+			{
+				Difference = IC_Val2-IC_Val1;
+			}
+
+			else if (IC_Val1 > IC_Val2)
+			{
+				Difference = (0xffffffff - IC_Val1) + IC_Val2;
+			}
+
+			float refClock = TIMCLOCK/(PRESCALAR);
+
+			frequency = refClock/Difference;
+
+			__HAL_TIM_SET_COUNTER(htim, 0);  // reset the counter
+			Is_First_Captured = 0; // set it back to false
+		}
+	}
+}
+/*
 void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim){
 
 	if(htim->Channel==HAL_TIM_ACTIVE_CHANNEL_4){
@@ -165,7 +202,7 @@ void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim){
 			IC_Val2=HAL_TIM_ReadCapturedValue(htim,TIM_CHANNEL_4); //__HAL_TIM_GET_COMPARE(htim,TIM_CHANNEL_1); //HAL_TIM_ReadCapturedValue(htim,TIM_CHANNEL_1);
 			__HAL_TIM_SET_COUNTER(htim, 0);
 			if(IC_Val2 > IC_Val1){
-				Difference=IC_Val2-IC_Val1;
+				Difference=(IC_Val2-IC_Val1)/100000;
 
 			}
 			is_first_captured=0;
@@ -177,7 +214,7 @@ void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim){
 
 }
 
-
+*/
 /* USER CODE END 0 */
 
 /**
@@ -216,13 +253,22 @@ int main(void)
   MX_TIM1_Init();
   MX_TIM4_Init();
   /* USER CODE BEGIN 2 */
+  HAL_TIM_Base_Start(&htim1);
 
   lcd_init();
+   lcd_put_cur(0, 0);
+   lcd_send_string("TUBITAK2209-A ");
+   HAL_Delay(1000);
+   lcd_put_cur(1, 0);
+   lcd_send_string("----->AMKS<----- ");
+   HAL_Delay(2000);
+   lcd_clear();
 
-  lcd_put_cur(0, 0);
-  lcd_send_string("Frekans:");
+   lcd_put_cur(0, 0);
+   lcd_send_string("Frekans:");
 
-  HAL_TIM_Base_Start(&htim1);
+
+
 
 
 
@@ -260,19 +306,20 @@ int main(void)
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
 
+
   while (1)
   {
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
 
-	  sprintf(data,"%d",Difference);
-
-	  lcd_put_cur(row, col)
-
-	  lcd_send_string(data);
-	  HAL_Delay(100);
-
+	  sprintf(data, "%lu Hz", (unsigned long)Difference);
+	   lcd_put_cur(0, 0);
+	   lcd_send_string("Frekans:");
+	   lcd_put_cur(0, 8);
+	   lcd_send_string(data);
+	   HAL_Delay(250);
+	   lcd_clear();
 
 	  /*
 	  for (int i=0;i<128;i++)
@@ -461,10 +508,10 @@ static void MX_TIM1_Init(void)
   htim1.Instance = TIM1;
   htim1.Init.Prescaler = 72-1;
   htim1.Init.CounterMode = TIM_COUNTERMODE_UP;
-  htim1.Init.Period = 65535;
+  htim1.Init.Period = 0xffff-1;
   htim1.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
   htim1.Init.RepetitionCounter = 0;
-  htim1.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_ENABLE;
+  htim1.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
   if (HAL_TIM_Base_Init(&htim1) != HAL_OK)
   {
     Error_Handler();
