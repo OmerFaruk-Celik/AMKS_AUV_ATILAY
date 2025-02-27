@@ -87,7 +87,8 @@ static void MX_TIM1_Init(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-
+int row=0;
+int col=0;
 /*
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
     if (GPIO_Pin == GPIO_PIN_3) {
@@ -195,7 +196,7 @@ int main(void)
 
   /* USER CODE BEGIN Init */
 
-  LCD_Init();
+  //LCD_Init();
   //lcd_init(_LCD_4BIT, _LCD_FONT_5x8, _LCD_2LINE);
   //lcd_clear();
 
