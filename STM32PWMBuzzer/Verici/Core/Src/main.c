@@ -17,13 +17,13 @@
   */
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
+#include <LCD1602.h>
 #include "main.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include <math.h> // Sinüs hesaplamaları için gerekli
 #include "stdio.h"
-#include "LCD.h"
 
 /* USER CODE END Includes */
 
