@@ -31,8 +31,8 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-int ARR=200-1;
-int PSC=1-1;
+int ARR=1000;
+int PSC=1;
 int ekle=100;
 int TIMCLOCK=8000000;
 int frekans=38400;
@@ -135,8 +135,8 @@ int main(void)
 
 	//ARR=(TIMCLOCK/(frekans*(PSC+1)))-1;
     TIM1->CCR4=ARR*0.5;
-    TIM1->ARR=ARR;
-    TIM1->PSC=PSC;
+    //TIM1->ARR=ARR;
+  //  TIM1->PSC=PSC;
   /* USER CODE END 2 */
 
   /* Infinite loop */
