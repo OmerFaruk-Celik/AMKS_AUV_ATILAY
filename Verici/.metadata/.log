@@ -13,3 +13,27 @@ Command-line arguments:  -os linux -ws gtk -arch x86_64
 
 !ENTRY com.st.stm32cube.ide.mcu.ide 1 1 2025-02-27 22:13:07.255
 !MESSAGE Started RMI Server, listening on port 41337
+
+!ENTRY org.eclipse.cdt.core 1 0 2025-02-27 22:14:55.849
+!MESSAGE Indexed 'Verici' (17 sources, 78 headers) in 4.83 sec: 3,643 declarations; 13,251 references; 0 unresolved inclusions; 1 syntax errors; 2 unresolved names (0.012%)
+
+!ENTRY org.eclipse.cdt.core 1 0 2025-02-27 22:43:34.750
+!MESSAGE Indexed 'Verici' (19 sources, 80 headers) in 1.08 sec: 4,909 declarations; 29,522 references; 0 unresolved inclusions; 1 syntax errors; 2 unresolved names (0.0058%)
+
+!ENTRY org.eclipse.cdt.core 1 0 2025-02-27 22:43:40.716
+!MESSAGE Indexed 'Verici' (19 sources, 80 headers) in 1.11 sec: 4,909 declarations; 29,522 references; 0 unresolved inclusions; 1 syntax errors; 2 unresolved names (0.0058%)
+!SESSION 2025-02-28 00:01:44.487 -----------------------------------------------
+eclipse.buildId=Version 1.17.0
+java.version=21.0.3
+java.vendor=Eclipse Adoptium
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=en_US
+Command-line arguments:  -os linux -ws gtk -arch x86_64
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 4 4 2025-02-28 00:01:56.626
+!MESSAGE CubeMX plugin appears to be active, Log4j initialization might be too late.
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 1 1 2025-02-28 00:01:56.630
+!MESSAGE Log4j2 initialized with config file /home/celik/github/AMKS_AUV_ATILAY/Verici/.metadata/.log4j2.xml
+
+!ENTRY com.st.stm32cube.ide.mcu.ide 1 1 2025-02-28 00:02:04.193
+!MESSAGE Started RMI Server, listening on port 41338
