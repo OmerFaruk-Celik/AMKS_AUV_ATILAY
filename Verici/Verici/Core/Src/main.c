@@ -141,6 +141,7 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
+    ekle=100;
   while (1)
   {
     /* USER CODE END WHILE */
@@ -152,15 +153,15 @@ int main(void)
 	    TIM1->CCR4=ARR*0.5;
 	    TIM1->ARR=ARR;
 	    TIM1->PSC=PSC;
-	    if (frekans>=80000){
+	    if (frekans>=40000){
 	    	ekle=-100;
 	    }
-	    else if(frekans <=10000){
+	    else if(frekans <=37000){
 	    	ekle=100;
 	    }
-	    HAL_Delay(50);
+	    HAL_Delay(100);
+*/
 
-	    */
   }
   /* USER CODE END 3 */
 }
