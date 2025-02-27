@@ -3326,8 +3326,9 @@ LOAD /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.ide.mcu.externa
 .rodata         0x08009050      0x468
                 0x08009050                        . = ALIGN (0x4)
  *(.rodata)
- .rodata        0x08009050       0x14 ./Core/Src/main.o
+ .rodata        0x08009050       0x13 ./Core/Src/main.o
  *(.rodata*)
+ *fill*         0x08009063        0x1 
  .rodata.AHBPrescTable
                 0x08009064       0x10 ./Core/Src/system_stm32f1xx.o
                 0x08009064                AHBPrescTable
