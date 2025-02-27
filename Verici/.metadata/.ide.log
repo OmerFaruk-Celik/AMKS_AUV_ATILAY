@@ -625,3 +625,44 @@
 2025-02-27 22:16:35,813 [INFO] NvicIntPanel:101 - NVIC parent = com.st.microxplorer.plugins.ip.nvic.MultiNvicIntPanel[,0,0,0x0,invalid,layout=javax.swing.BoxLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=9,maximumSize=,minimumSize=,preferredSize=]
 2025-02-27 22:16:43,462 [INFO] NvicIntPanel:101 - NVIC parent = com.st.microxplorer.plugins.ip.nvic.MultiNvicIntPanel[,0,0,0x0,invalid,layout=javax.swing.BoxLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=9,maximumSize=,minimumSize=,preferredSize=]
 2025-02-27 22:16:54,584 [INFO] NvicIntPanel:101 - NVIC parent = com.st.microxplorer.plugins.ip.nvic.MultiNvicIntPanel[,0,0,0x0,invalid,layout=javax.swing.BoxLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=9,maximumSize=,minimumSize=,preferredSize=]
+2025-02-27 22:17:13,563 [INFO] NvicIntPanel:101 - NVIC parent = com.st.microxplorer.plugins.ip.nvic.MultiNvicIntPanel[,0,0,0x0,invalid,layout=javax.swing.BoxLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=9,maximumSize=,minimumSize=,preferredSize=]
+2025-02-27 22:17:22,580 [INFO] NvicIntPanel:101 - NVIC parent = com.st.microxplorer.plugins.ip.nvic.MultiNvicIntPanel[,0,0,0x0,invalid,layout=javax.swing.BoxLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=9,maximumSize=,minimumSize=,preferredSize=]
+2025-02-27 22:17:24,699 [INFO] NvicIntPanel:101 - NVIC parent = com.st.microxplorer.plugins.ip.nvic.MultiNvicIntPanel[,0,0,0x0,invalid,layout=javax.swing.BoxLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=9,maximumSize=,minimumSize=,preferredSize=]
+2025-02-27 22:17:25,878 [INFO] UtilMem:75 - End SaveConfig() Used Memory: 883361384 Bytes (1073741824)
+2025-02-27 22:17:28,342 [INFO] UtilMem:75 - End SaveConfig() Used Memory: 901851256 Bytes (1073741824)
+2025-02-27 22:17:30,345 [INFO] UtilMem:75 - End SaveConfig() Used Memory: 965826256 Bytes (1073741824)
+2025-02-27 22:17:30,575 [INFO] BlockDiagram:2766 - set Specific Code input for plugin: NVIC
+2025-02-27 22:17:30,575 [INFO] BlockDiagram:2766 - set Specific Code input for plugin: TIM1_8F1
+2025-02-27 22:17:30,575 [INFO] BlockDiagram:2766 - set Specific Code input for plugin: SYS
+2025-02-27 22:17:30,576 [INFO] BlockDiagram:2766 - set Specific Code input for plugin: GPIO
+2025-02-27 22:17:30,576 [INFO] BlockDiagram:2766 - set Specific Code input for plugin: RCC
+2025-02-27 22:17:30,576 [INFO] CodeGenerator:896 - code generatio: config db path: /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.common.mx_6.13.0.202411220809//db/
+2025-02-27 22:17:30,719 [INFO] CodeEngine:255 - oldGeneratedFile, /home/celik/github/AMKS_AUV_ATILAY/Verici/Verici/MXTmpFiles/license.tmp_save
+2025-02-27 22:17:30,832 [INFO] CodeEngine:279 - Generated code: /home/celik/github/AMKS_AUV_ATILAY/Verici/Verici/MXTmpFiles/license.tmp
+2025-02-27 22:17:30,898 [INFO] CodeEngine:255 - oldGeneratedFile, /home/celik/github/AMKS_AUV_ATILAY/Verici/Verici/MXTmpFiles/gpio.tmp_save
+2025-02-27 22:17:31,008 [INFO] CodeEngine:279 - Generated code: /home/celik/github/AMKS_AUV_ATILAY/Verici/Verici/MXTmpFiles/gpio.tmp
+2025-02-27 22:17:31,169 [INFO] CodeEngine:255 - oldGeneratedFile, /home/celik/github/AMKS_AUV_ATILAY/Verici/Verici/Core/Src/stm32f1xx_it.c_save
+2025-02-27 22:17:31,272 [INFO] CodeEngine:279 - Generated code: /home/celik/github/AMKS_AUV_ATILAY/Verici/Verici/Core/Src/stm32f1xx_it.c
+2025-02-27 22:17:31,274 [INFO] CodeEngine:255 - oldGeneratedFile, /home/celik/github/AMKS_AUV_ATILAY/Verici/Verici/Core/Inc/stm32f1xx_it.h_save
+2025-02-27 22:17:31,361 [INFO] CodeEngine:279 - Generated code: /home/celik/github/AMKS_AUV_ATILAY/Verici/Verici/Core/Inc/stm32f1xx_it.h
+2025-02-27 22:17:31,367 [INFO] CodeEngine:255 - oldGeneratedFile, /home/celik/github/AMKS_AUV_ATILAY/Verici/Verici/Core/Src/stm32f1xx_hal_msp.c_save
+2025-02-27 22:17:31,519 [INFO] CodeEngine:279 - Generated code: /home/celik/github/AMKS_AUV_ATILAY/Verici/Verici/Core/Src/stm32f1xx_hal_msp.c
+2025-02-27 22:17:31,520 [INFO] CodeEngine:255 - oldGeneratedFile, /home/celik/github/AMKS_AUV_ATILAY/Verici/Verici/MXTmpFiles/system.tmp_save
+2025-02-27 22:17:31,622 [INFO] CodeEngine:279 - Generated code: /home/celik/github/AMKS_AUV_ATILAY/Verici/Verici/MXTmpFiles/system.tmp
+2025-02-27 22:17:31,626 [INFO] CodeEngine:311 - oldGeneratedFile, /home/celik/github/AMKS_AUV_ATILAY/Verici/Verici/Core/Inc/stm32f1xx_hal_conf.h_save
+2025-02-27 22:17:31,702 [INFO] CodeEngine:335 - Generated code: /home/celik/github/AMKS_AUV_ATILAY/Verici/Verici/Core/Inc/stm32f1xx_hal_conf.h
+2025-02-27 22:17:31,775 [INFO] ApiDbMcu:508 - Load IP Config File for TIM1
+2025-02-27 22:17:31,776 [WARN] IPConfigManager:3618 - IP not found : TIM
+2025-02-27 22:17:31,776 [WARN] CodeGenerator:4152 - IP not found : null
+2025-02-27 22:17:31,778 [INFO] CodeEngine:255 - oldGeneratedFile, /home/celik/github/AMKS_AUV_ATILAY/Verici/Verici/Core/Inc/main.h_save
+2025-02-27 22:17:31,845 [INFO] CodeEngine:279 - Generated code: /home/celik/github/AMKS_AUV_ATILAY/Verici/Verici/Core/Inc/main.h
+2025-02-27 22:17:31,846 [INFO] CodeEngine:255 - oldGeneratedFile, /home/celik/github/AMKS_AUV_ATILAY/Verici/Verici/Core/Src/main.c_save
+2025-02-27 22:17:31,977 [INFO] CodeEngine:279 - Generated code: /home/celik/github/AMKS_AUV_ATILAY/Verici/Verici/Core/Src/main.c
+2025-02-27 22:17:32,140 [INFO] ProjectBuilder:3289 - Time for Copy HAL[1] : 15mS.
+2025-02-27 22:17:32,141 [INFO] ProjectBuilder:4876 - Project Generator version: 4.5.0-RC5
+2025-02-27 22:17:32,217 [INFO] ConfigFileManager:1579 - The Die is : DIE410
+2025-02-27 22:17:33,142 [INFO] ProjectBuilder:5154 - Time for Generating toolchain IDE Files: 1001mS.
+2025-02-27 22:17:33,143 [INFO] ProjectBuilder:3146 - Time for Copy CMSIS : 0mS.
+2025-02-27 22:17:33,143 [INFO] ProjectBuilder:3146 - Time for Copy CMSIS : 0mS.
+2025-02-27 22:27:59,001 [ERROR] ConfigurationRetriever:142 - IOException on connection: Read timed out
+2025-02-27 22:28:01,398 [ERROR] ConfigurationRetriever:142 - IOException on connection: Read timed out
