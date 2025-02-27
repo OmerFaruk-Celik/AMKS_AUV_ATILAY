@@ -31,10 +31,11 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-int ARR=200;
-int PSC=1;
+int ARR=200-1;
+int PSC=1-1;
 int ekle=100;
 int TIMCLOCK=8000000;
+int frekans=38400;
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -63,8 +64,6 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
     if (GPIO_Pin == GPIO_PIN_4) {
         if (GPIOB->IDR & GPIO_IDR_IDR4) {
 
-
-        	txData++;
 
         	frekans+=ekle;
 
@@ -132,6 +131,12 @@ int main(void)
   MX_TIM1_Init();
   /* USER CODE BEGIN 2 */
 
+  HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_4);
+
+	//ARR=(TIMCLOCK/(frekans*(PSC+1)))-1;
+    TIM1->CCR4=ARR*0.5;
+    TIM1->ARR=ARR;
+    TIM1->PSC=PSC;
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -141,6 +146,21 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
+/*
+	  frekans+=ekle;
+		ARR=(TIMCLOCK/(frekans*(PSC+1)))-1;
+	    TIM1->CCR4=ARR*0.5;
+	    TIM1->ARR=ARR;
+	    TIM1->PSC=PSC;
+	    if (frekans>=80000){
+	    	ekle=-100;
+	    }
+	    else if(frekans <=10000){
+	    	ekle=100;
+	    }
+	    HAL_Delay(50);
+
+	    */
   }
   /* USER CODE END 3 */
 }
