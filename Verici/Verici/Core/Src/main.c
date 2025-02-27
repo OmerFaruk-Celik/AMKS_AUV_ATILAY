@@ -31,11 +31,11 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-int ARR=1000;
+int ARR=100;
 int PSC=1;
 int ekle=100;
 int TIMCLOCK=8000000;
-int frekans=38400;
+int frekans=37000;
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -61,8 +61,8 @@ static void MX_TIM1_Init(void);
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
-    if (GPIO_Pin == GPIO_PIN_4) {
-        if (GPIOB->IDR & GPIO_IDR_IDR4) {
+    if (GPIO_Pin == GPIO_PIN_3) {
+        if (GPIOA->IDR & GPIO_IDR_IDR3) {
 
 
         	frekans+=ekle;
@@ -133,10 +133,10 @@ int main(void)
 
   HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_4);
 
-	//ARR=(TIMCLOCK/(frekans*(PSC+1)))-1;
+	ARR=(TIMCLOCK/(frekans*(PSC+1)))-1;
     TIM1->CCR4=ARR*0.5;
-    //TIM1->ARR=ARR;
-  //  TIM1->PSC=PSC;
+    TIM1->ARR=ARR;
+    TIM1->PSC=PSC;
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -295,6 +295,10 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+
+  /* EXTI interrupt init*/
+  HAL_NVIC_SetPriority(EXTI3_IRQn, 0, 0);
+  HAL_NVIC_EnableIRQ(EXTI3_IRQn);
 
 /* USER CODE BEGIN MX_GPIO_Init_2 */
 /* USER CODE END MX_GPIO_Init_2 */
