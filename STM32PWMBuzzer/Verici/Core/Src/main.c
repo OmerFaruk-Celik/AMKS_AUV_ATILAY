@@ -145,7 +145,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
 
 void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim){
 
-	if(htim->Channel==HAL_TIM_ACTIVE_CHANNEL_1){
+	if(htim->Channel==HAL_TIM_ACTIVE_CHANNEL_4){
 
 		if(is_first_captured==0){
 
