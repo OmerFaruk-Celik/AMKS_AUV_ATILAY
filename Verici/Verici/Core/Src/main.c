@@ -83,14 +83,14 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
 
 
 
-        	if(frekans==39000){
+        	if(frekans==38400){
         		//ekle=-100;
-        		frekans=37150;
+        		frekans=37100;
 
         	}
-        	else if(frekans == 37150){
+        	else if(frekans == 37100){
         		//ekle=100;
-        		frekans=39000;
+        		frekans=38400;
         	}
 
 
@@ -150,27 +150,25 @@ int main(void)
 
     /* USER CODE BEGIN 3 */
 
-	  /*
+
 
 		ARR=(TIMCLOCK/(frekans*(PSC+1)))-1;
 	    TIM1->CCR4=ARR*0.5;
 	    TIM1->ARR=ARR;
 	    TIM1->PSC=PSC;
-	    if (frekans==39000){
-	    	frekans=37150;
-	    	HAL_Delay(2);
-	    }
-	    else if(frekans ==37150){
-	    	frekans=39000;
-	    	HAL_Delay(1);
+	    if (frekans==38400){
+	    	frekans=37100;
+	    	HAL_Delay(500);
 	    }
 
-		ARR=(TIMCLOCK/(40000*(PSC+1)))-1;
-	    TIM1->CCR4=ARR*0.5;
-	    TIM1->ARR=ARR;
-	    TIM1->PSC=PSC;
-
+	    /*
+	    else if(frekans ==37100){
+	    	frekans=38400;
+	    	HAL_Delay(500);
+	    }
 */
+
+
 
   }
   /* USER CODE END 3 */
