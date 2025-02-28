@@ -314,6 +314,7 @@ int f37;
 int f38;
 HAL_GPIO_WritePin(GPIOB, GPIO_PIN_13, RESET);
 HAL_GPIO_WritePin(GPIOB, GPIO_PIN_12, RESET);
+float oran;
   while (1)
   {
     /* USER CODE END WHILE */
@@ -352,6 +353,13 @@ HAL_GPIO_WritePin(GPIOB, GPIO_PIN_12, RESET);
 
 		   HAL_GPIO_WritePin(GPIOB, GPIO_PIN_13, SET);
 		   HAL_GPIO_WritePin(GPIOB, GPIO_PIN_12, RESET);
+	   }
+
+	   if(f37>=500){
+		   f37=0;
+	   }
+	   else if(f38>=500){
+		   f38=0;
 	   }
 	  /*
 	  for (int i=0;i<128;i++)
