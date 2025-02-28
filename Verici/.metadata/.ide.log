@@ -620,3 +620,4 @@
 2025-02-28 19:52:04,079 [INFO] ThirdParty:978 - Integrity check success = true
 2025-02-28 19:52:04,079 [INFO] IntegrityCheckThread:100 - exiting critical section [integrity check]
 2025-02-28 19:52:04,079 [INFO] IntegrityCheckThread:103 - End integrity checks thread
+2025-02-28 23:45:37,621 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 
