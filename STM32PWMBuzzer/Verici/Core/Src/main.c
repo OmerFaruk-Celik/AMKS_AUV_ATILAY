@@ -317,6 +317,8 @@ HAL_GPIO_WritePin(GPIOB, GPIO_PIN_12, RESET);
 float oran=0;
 float eskioran=0;
 int artis=0;
+int say1=0;
+int say0=0;
   while (1)
   {
     /* USER CODE END WHILE */
@@ -359,14 +361,15 @@ int artis=0;
 
 	   else{
 		   artis=-1;
-		   HAL_GPIO_WritePin(GPIOB, GPIO_PIN_13, RESET);
-		   HAL_GPIO_WritePin(GPIOB, GPIO_PIN_12, RESET);
+		   //HAL_GPIO_WritePin(GPIOB, GPIO_PIN_13, RESET);
+		   //HAL_GPIO_WritePin(GPIOB, GPIO_PIN_12, RESET);
 	   }
 
 	   if(artis==1){
 		   say1++;
-		   if(say1>=10){
+		   if(say1>=5){
 			   say1=0;
+			   say0=0;
 			   HAL_GPIO_WritePin(GPIOB, GPIO_PIN_13, RESET);
 			   HAL_GPIO_WritePin(GPIOB, GPIO_PIN_12, SET);
 		   }
@@ -375,13 +378,20 @@ int artis=0;
 
 	   else if(artis==0){
 		   say0++;
-		   if(say0>=10){
+		   if(say0>=5){
 			   say0=0;
+			   say1=0;
 			   HAL_GPIO_WritePin(GPIOB, GPIO_PIN_13, SET);
 			   HAL_GPIO_WritePin(GPIOB, GPIO_PIN_12, RESET);
 		   }
 	   }
 
+	   if(f38>=500){
+		   f38=1;
+	   }
+	   if(f37>=500){
+		   f37=1;
+	   }
 
 	   lcd_put_cur(1, 0);
 	   lcd_send_string("F_38/F_37:");
