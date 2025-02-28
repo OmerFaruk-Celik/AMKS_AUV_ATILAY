@@ -310,8 +310,8 @@ int main(void)
 
 int fark38;
 int fark37;
-int f37;
-int f38;
+float f37=1;
+float f38=1;
 HAL_GPIO_WritePin(GPIOB, GPIO_PIN_13, RESET);
 HAL_GPIO_WritePin(GPIOB, GPIO_PIN_12, RESET);
 float oran;
@@ -344,23 +344,33 @@ float oran;
 
 	   }
 
-	   if(f38>f37){
+	   if(oran>1){
 		   HAL_GPIO_WritePin(GPIOB, GPIO_PIN_13, RESET);
 		   HAL_GPIO_WritePin(GPIOB, GPIO_PIN_12, SET);
 	   }
 
-	   else if(f37>f38){
+	   else if(oran<1){
 
 		   HAL_GPIO_WritePin(GPIOB, GPIO_PIN_13, SET);
 		   HAL_GPIO_WritePin(GPIOB, GPIO_PIN_12, RESET);
 	   }
 
-	   if(f37>=500){
-		   f37=0;
+	   if(f37>=200){
+		   f37=1;
 	   }
-	   else if(f38>=500){
-		   f38=0;
+	   else if(f38>=200){
+		   f38=1;
 	   }
+
+	   oran=f38/(f37+f38);
+	   lcd_put_cur(1, 0);
+	   lcd_send_string("F_38/F_37:");
+	   sprintf(data, "%.2f", oran);
+	   lcd_put_cur(1, 10);
+	   lcd_send_string(data);
+
+
+
 	  /*
 	  for (int i=0;i<128;i++)
 	  {
