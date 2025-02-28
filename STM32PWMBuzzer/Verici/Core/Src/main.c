@@ -361,13 +361,14 @@ int say0=0;
 
 	   else{
 		   artis=-1;
-		   //HAL_GPIO_WritePin(GPIOB, GPIO_PIN_13, RESET);
-		   //HAL_GPIO_WritePin(GPIOB, GPIO_PIN_12, RESET);
+
+		   HAL_GPIO_WritePin(GPIOB, GPIO_PIN_13, RESET);
+		   HAL_GPIO_WritePin(GPIOB, GPIO_PIN_12, RESET);
 	   }
 
 	   if(artis==1){
 		   say1++;
-		   if(say1>=5){
+		   if(say1>=10){
 			   say1=0;
 			   say0=0;
 			   HAL_GPIO_WritePin(GPIOB, GPIO_PIN_13, RESET);
@@ -378,7 +379,7 @@ int say0=0;
 
 	   else if(artis==0){
 		   say0++;
-		   if(say0>=5){
+		   if(say0>=10){
 			   say0=0;
 			   say1=0;
 			   HAL_GPIO_WritePin(GPIOB, GPIO_PIN_13, SET);
@@ -386,10 +387,10 @@ int say0=0;
 		   }
 	   }
 
-	   if(f38>=500){
+	   if(f38>=200){
 		   f38=1;
 	   }
-	   if(f37>=500){
+	   if(f37>=200){
 		   f37=1;
 	   }
 
