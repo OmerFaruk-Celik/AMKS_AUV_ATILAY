@@ -362,7 +362,7 @@ float oran;
 		   f38=1;
 	   }
 
-	   oran=f38/(f37+f38);
+	   oran=f38/f37;
 	   lcd_put_cur(1, 0);
 	   lcd_send_string("F_38/F_37:");
 	   sprintf(data, "%.2f", oran);
