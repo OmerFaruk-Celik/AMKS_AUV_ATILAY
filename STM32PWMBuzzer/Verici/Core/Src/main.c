@@ -24,6 +24,7 @@
 #include <math.h> // Sinüs hesaplamaları için gerekli
 #include "stdio.h"
 #include "LCD1602.h"
+#include <stdlib.h>
 
 /* USER CODE END Includes */
 
@@ -307,7 +308,12 @@ int main(void)
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
 
-
+int fark38;
+int fark37;
+int f37;
+int f38;
+HAL_GPIO_WritePin(GPIOB, GPIO_PIN_13, RESET);
+HAL_GPIO_WritePin(GPIOB, GPIO_PIN_12, RESET);
   while (1)
   {
     /* USER CODE END WHILE */
@@ -323,15 +329,29 @@ int main(void)
 	   HAL_Delay(10);
 	   lcd_clear();
 
-	   int f=(int)frequency;
+	   fark38=(int)frequency-38000;
+	   fark37=(int)frequency-37000;
 
-	   if(abs(f-38000) <=500){
+
+
+	   if(abs(fark38) <=500){
+		   f38++;
+
+	   }
+	   else if(abs(fark37) <=500){
+		   f37++;
+
+	   }
+
+	   if(f38>f37){
 		   HAL_GPIO_WritePin(GPIOB, GPIO_PIN_13, RESET);
 		   HAL_GPIO_WritePin(GPIOB, GPIO_PIN_12, SET);
 	   }
-	   else if(abs(f-37000) <=500){
-		   HAL_GPIO_WritePin(GPIOB, GPIO_PIN_12, RESET);
+
+	   else if(f37>f38){
+
 		   HAL_GPIO_WritePin(GPIOB, GPIO_PIN_13, SET);
+		   HAL_GPIO_WritePin(GPIOB, GPIO_PIN_12, RESET);
 	   }
 	  /*
 	  for (int i=0;i<128;i++)
