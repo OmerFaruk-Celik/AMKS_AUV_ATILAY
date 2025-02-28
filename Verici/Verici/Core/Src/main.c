@@ -35,7 +35,7 @@ int ARR=100;
 int PSC=1;
 int ekle=100;
 int TIMCLOCK=8000000;
-int frekans=37000;
+int frekans=37100;
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -65,7 +65,7 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
         if (GPIOA->IDR & GPIO_IDR_IDR3) {
 
 
-        	frekans+=ekle;
+        	//frekans+=ekle;
 
         	ARR=(TIMCLOCK/(frekans*(PSC+1)))-1;
       	    TIM1->CCR4=ARR*0.5;
@@ -83,12 +83,14 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
 
 
 
-        	if(frekans>=40000){
-        		ekle=-100;
+        	if(frekans==39000){
+        		//ekle=-100;
+        		frekans=37150;
 
         	}
-        	else if(frekans <= 37000){
-        		ekle=100;
+        	else if(frekans == 37150){
+        		//ekle=100;
+        		frekans=39000;
         	}
 
 
@@ -141,25 +143,33 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-    ekle=100;
+
   while (1)
   {
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-/*
-	  frekans+=ekle;
+
+	  /*
+
 		ARR=(TIMCLOCK/(frekans*(PSC+1)))-1;
 	    TIM1->CCR4=ARR*0.5;
 	    TIM1->ARR=ARR;
 	    TIM1->PSC=PSC;
-	    if (frekans>=40000){
-	    	ekle=-100;
+	    if (frekans==39000){
+	    	frekans=37150;
+	    	HAL_Delay(2);
 	    }
-	    else if(frekans <=37000){
-	    	ekle=100;
+	    else if(frekans ==37150){
+	    	frekans=39000;
+	    	HAL_Delay(1);
 	    }
-	    HAL_Delay(100);
+
+		ARR=(TIMCLOCK/(40000*(PSC+1)))-1;
+	    TIM1->CCR4=ARR*0.5;
+	    TIM1->ARR=ARR;
+	    TIM1->PSC=PSC;
+
 */
 
   }
