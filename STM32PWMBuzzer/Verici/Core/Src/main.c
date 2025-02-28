@@ -314,7 +314,9 @@ float f37=1;
 float f38=1;
 HAL_GPIO_WritePin(GPIOB, GPIO_PIN_13, RESET);
 HAL_GPIO_WritePin(GPIOB, GPIO_PIN_12, RESET);
-float oran;
+float oran=0;
+float eskioran=0;
+int artis=0;
   while (1)
   {
     /* USER CODE END WHILE */
@@ -330,8 +332,8 @@ float oran;
 	   HAL_Delay(10);
 	   lcd_clear();
 
-	   fark38=(int)frequency-38000;
-	   fark37=(int)frequency-37000;
+	   fark38=(int)frequency-38400;
+	   fark37=(int)frequency-37100;
 
 
 
@@ -344,25 +346,35 @@ float oran;
 
 	   }
 
-	   if(oran>1){
+	   oran=f38/f37;
+	   if(oran>eskioran){
+		   artis=1;
+		   eskioran=oran;
+	   }
+
+	   else if(oran<eskioran){
+		   artis=0;
+		   eskioran=oran;
+	   }
+
+	   else{
+		   artis=-1;
+		   HAL_GPIO_WritePin(GPIOB, GPIO_PIN_13, RESET);
+		   HAL_GPIO_WritePin(GPIOB, GPIO_PIN_12, RESET);
+	   }
+
+	   if(artis==1){
 		   HAL_GPIO_WritePin(GPIOB, GPIO_PIN_13, RESET);
 		   HAL_GPIO_WritePin(GPIOB, GPIO_PIN_12, SET);
 	   }
 
-	   else if(oran<1){
+	   else if(artis==0){
 
 		   HAL_GPIO_WritePin(GPIOB, GPIO_PIN_13, SET);
 		   HAL_GPIO_WritePin(GPIOB, GPIO_PIN_12, RESET);
 	   }
 
-	   if(f37>=200){
-		   f37=1;
-	   }
-	   else if(f38>=200){
-		   f38=1;
-	   }
 
-	   oran=f38/f37;
 	   lcd_put_cur(1, 0);
 	   lcd_send_string("F_38/F_37:");
 	   sprintf(data, "%.2f", oran);
