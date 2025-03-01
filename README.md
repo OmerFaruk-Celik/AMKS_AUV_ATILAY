@@ -1,8 +1,13 @@
-# Proje Adı
+# Proje Adı: AMKS_AUV_ATILAY
 
-Bu proje, aşağıdaki dosyaları içermektedir:
+### Özet
+Bu projenin odak noktası, sualtı araçlarının güvenli bir şekilde konumlarını tespit etmelerini sağlamak amacıyla ses dalgalarını temel alan bir konumlandırma sisteminin tasarımı ve işleyişi üzerinedir. GPS sinyallerinin su altında etkisiz olması nedeniyle sualtı araçları, yolunu bulmak için alternatif teknolojilere ihtiyaç duymaktadırlar. Ancak, mevcut yöntemlerin çoğu ya ilkel ya da yüksek maliyetlidir ve sıklıkla su yüzeyine çıkarak GPS sinyallerini yakalamak zorunda kalırlar. Bu durum, güvenlik sorunlarına yol açabilmekte ve zaman ile enerji kaybına neden olabilmektedir.
 
-## İçindekiler
+Dünya'nın su üstü bölgeleri genellikle GPS sistemleri tarafından keşfedilirken, su altındaki bölgeler bu sinyallere erişememektedir. Bu nedenle birçok otonom sualtı aracı, konumlarını tespit edemediği için kaybolabilmektedir. Sualtı Araçları için Arttırılabilir Menzilli Konumlandırma Sistemi Tasarımı, bu problemi ortadan kaldırma amacı taşımaktadır. Ses dalgaları, uygun koşullar altında su altında binlerce kilometre yol alabilirler. Su yüzeyindeki konum belirleme başarısı elektromanyetik dalgalara dayalıyken, sualtı konum belirleme başarısı mekanik dalga olan ses dalgalarına dayalıdır. Bu sistem, sualtında iletişimin zayıfladığı alanlarda sinyallerin tekrar güçlendirilebileceği sinyal arttırıcılar kullanma yeteneği sunar. İlk olarak iki noktalı bir sonar verici, herhangi bir konumda kaynaklarını belirler, ardından sinyallerin zayıflamaya başladığı yerlere sinyal arttırıcılar konumlandırılır. LBL (Long Baseline), SBL (Short Baseline) ve USBL (Ultra Short Baseline) gibi mevcut sistemler konum belirlemek için iki yollu ölçüm yaparlar. İki sistem arasındaki mesafe; gidip gelen dalganın harcadığı zamanla bulunur. Bu projede yapılması planlanan tasarım ile tek yollu ölçüm yapılır ve saat bilgisi dalgaların içine ikili değerlerle kodlanır. Böylece sinyal gücünün genliğini arttırma potansiyeli yakalandığı gibi yoldan iki kat kazanılmış olur.
+
+Bu projede aynı zamanda sualtı araçlarının daha güvenli bir şekilde konumlandırılması amaçlanmaktadır. Böylece, bağımsızlık ve taşınabilirlik sağlanarak denizaltı haritalama ve konumlandırma operasyonlarına olanak tanınmaktadır. Temel olarak, 10 kHz ile 15 kHz arasında düşük frekansta kare dalga akustik sinyalleri ile bir tür su altı GPS sistemi geliştirmeyi de hedef almaktadır. Bu tasarım, tek yollu verici modülü ile yayın yapmaktadır. Modül, kare dalga akustik sinyaller üreterek alıcı modül tarafından yakalanmasını sağlamaktadır. İki vericili bir sistem tasarlanarak, vericilerin konumu aracın boyutlarına uygun bir şekilde ölçeklendirilebilmektedir. Alıcı, vericilerden gelen sinyallerin zaman farklarını hesaplayarak sualtı aracının konumunu hesaplamaktadır. Proje, 17 bitlik bir veri paketi kullanmaktadır ve her dalga titreşimi bu veriyi alıcıya ileterek saat bilgisini aktarmaktadır. Bu saat bilgisi, sualtı aracının konumunu hesaplamak için kullanılır. Ayrıca, menzil arttırıcı, sinyalin genliğini artırarak iletim mesafesini uzatmaktadır. Son olarak, yardım modülü, araçtan gelen sinyal ile su yüzeyine bir kapsül ateşleyerek GPS sinyalleri ile aracın küresel konumunun tespit edilmesi planlanmaktadır. Gerektiği durumlarda aracın su altındaki konumu küresel koordinatlara dönüştürülebilmektedir.
+
+### İçindekiler
 
 - [Pictures Klasörü](#pictures-klasörü)
 - [Jupyter Notebook Dosyası](#jupyter-notebook-dosyası)
@@ -23,7 +28,6 @@ Pictures klasöründeki resim dosyalarına buradan ulaşabilirsiniz:
 ![Resim 9](./Pictures/9.png)
 ![Resim 10](./Pictures/10.png)
 ![Resim 11](./Pictures/11.png)
-
 
 > Not: Resim dosyalarının isimlerini ve uzantılarını dosya adlarıyla eşleştirin.
 
