@@ -16,6 +16,9 @@ Derin su altında kullanılan üç temel teknoloji vardır: LBL (Long Baseline),
 #### AMKS'nin Avantajları
 AMKS, bu mevcut sistemlere kıyasla daha geniş bir menzil sunar ve maliyet etkin bir seçenektir. Sualtında referans verici noktalarına gerek duymadan istenilen yere konumlanabilen sualtı araçlarına olanak tanır. Yüksek hassasiyette zaman bilgisi içerir ve aynı anda birden fazla araca konum bilgisi sağlar. Ek maliyet gerektirmez ve sonar alıcıya sahip olan bütün araçlar bu teknolojiyi kullanabilir.
 
+#### Projenin Yöntemi
+Projede yapılması planlanan ses dalgalarıyla konumlandırma sistemi, deniz tabanına yerleştirilen istasyonlara kıyasla taşınabilir ve araca bağlı istenilen noktada haritalama ve konumlama operasyonu için bırakılabilir olacaktır. Bu yaklaşım su içinde basit haritalama imkânı sunduğu gibi sualtı araçları için herhangi bir istasyona bağlı kalmaksızın kendi istasyonlarını oluşturabilme imkanını sağlar. Ses dalgasının genliği mesafeye bağlı olarak logaritmik olarak azalır. Bu problemin çözümü için gerekli görüldüğü konumda araç tarafından sualtı tabanına bağımsız güçlendirici konumlandırılarak sinyalin tekrardan anlaşılıp, yakalanılabilmesi sağlanacaktır. Böylece ilk konuma bağlı olarak, sınırları aşan bir konumlandırma sistemi geliştirilecektir. İki vericiden oluşacak olan mini istasyon yapısında pasif sonar sistemi bulundurup, gerekli durumlarda araçtan aldığı bir sinyalle, su yüzeyine aracın bulunduğu koordinatları taşıyan bir kapsül ateşleyebilecektir. Bu kapsül, GPS sinyallerini alıp aracın global olarak en son görüldüğü konumu gerekli yerlere gönderecektir.
+
 ### İçindekiler
 
 - [Pictures Klasörü](#pictures-klasörü)
