@@ -7,6 +7,15 @@ Dünya'nın su üstü bölgeleri genellikle GPS sistemleri tarafından keşfedil
 
 Bu projede aynı zamanda sualtı araçlarının daha güvenli bir şekilde konumlandırılması amaçlanmaktadır. Böylece, bağımsızlık ve taşınabilirlik sağlanarak denizaltı haritalama ve konumlandırma operasyonlarına olanak tanınmaktadır. Temel olarak, 10 kHz ile 15 kHz arasında düşük frekansta kare dalga akustik sinyalleri ile bir tür su altı GPS sistemi geliştirmeyi de hedef almaktadır. Bu tasarım, tek yollu verici modülü ile yayın yapmaktadır. Modül, kare dalga akustik sinyaller üreterek alıcı modül tarafından yakalanmasını sağlamaktadır. İki vericili bir sistem tasarlanarak, vericilerin konumu aracın boyutlarına uygun bir şekilde ölçeklendirilebilmektedir. Alıcı, vericilerden gelen sinyallerin zaman farklarını hesaplayarak sualtı aracının konumunu hesaplamaktadır. Proje, 17 bitlik bir veri paketi kullanmaktadır ve her dalga titreşimi bu veriyi alıcıya ileterek saat bilgisini aktarmaktadır. Bu saat bilgisi, sualtı aracının konumunu hesaplamak için kullanılır. Ayrıca, menzil arttırıcı, sinyalin genliğini artırarak iletim mesafesini uzatmaktadır. Son olarak, yardım modülü, araçtan gelen sinyal ile su yüzeyine bir kapsül ateşleyerek GPS sinyalleri ile aracın küresel konumunun tespit edilmesi planlanmaktadır. Gerektiği durumlarda aracın su altındaki konumu küresel koordinatlara dönüştürülebilmektedir.
 
+### Proje Önemi ve Teknolojilerle Karşılaştırma
+Sualtı konumlandırma sistemleri, günümüzde hala yeterli bir seviyeye ulaşamamıştır. Sualtı keşifleri ve güvenli seyahat için, konum belirleme hassasiyetinin Küresel Navigasyon Uydu Sistemi (GNSS) ile karşılaştırılabilir düzeyde olması gerekmektedir. Sualtı araçlarının konumunu tespit etme sorunu, can ve araç kayıplarına neden olmaktadır. Örneğin, 18 Haziran Pazar günü Titan adlı denizaltı aracının kaybolup patlaması bu sorunun acı bir örneğidir.
+
+#### Mevcut Teknolojiler
+Derin su altında kullanılan üç temel teknoloji vardır: LBL (Long Baseline), SBL (Short Baseline), USBL (Ultra Short Baseline) ve bunların karışımları. Bu sistemler, su altındaki araçların konumlarını belirlemek için çeşitli yöntemler kullanır. LBL sistemler, en hassas ve güvenilir konum bilgisi sağlarken maliyet açısından en yüksek olanıdır. SBL sistemler, daha az maliyetli ve orta hassasiyette konum bilgisi sağlar. USBL sistemler ise maliyet açısından uygun olup, en büyük hataya sahip olan sistemlerdir.
+
+#### AMKS'nin Avantajları
+AMKS, bu mevcut sistemlere kıyasla daha geniş bir menzil sunar ve maliyet etkin bir seçenektir. Sualtında referans verici noktalarına gerek duymadan istenilen yere konumlanabilen sualtı araçlarına olanak tanır. Yüksek hassasiyette zaman bilgisi içerir ve aynı anda birden fazla araca konum bilgisi sağlar. Ek maliyet gerektirmez ve sonar alıcıya sahip olan bütün araçlar bu teknolojiyi kullanabilir.
+
 ### İçindekiler
 
 - [Pictures Klasörü](#pictures-klasörü)
