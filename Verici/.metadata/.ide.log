@@ -201,3 +201,82 @@
 2025-03-12 19:19:12,381 [INFO] Updater:1134 - Updater Version found : 6.13.0
 2025-03-12 19:19:12,401 [INFO] ApplicationProperties:184 - Using Application install path: /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.common.mx_6.13.0.202411220809
 2025-03-12 19:19:13,404 [INFO] ThirdPartyUpdaterWithRetryManager:70 - Updater plugin not ready yet. [2/15]
+2025-03-12 19:19:14,408 [INFO] MainUpdater:2872 - connection check result : 10
+2025-03-12 19:19:14,408 [INFO] MainUpdater:3566 - Updater definition file requires update
+2025-03-12 19:19:14,409 [INFO] MainUpdater:289 - Updater Check For Update Now.
+2025-03-12 19:19:14,409 [INFO] MicroXplorer:498 - Change Database Version : DB.6.0.130
+2025-03-12 19:19:14,466 [INFO] McuFinderGlobals:63 - Set McuFinder mode to 2 (CubeIDE integrated)
+2025-03-12 19:19:14,466 [INFO] UserAuth:171 - activating auth plugin
+2025-03-12 19:19:14,472 [INFO] UserAuth:486 - Internet connection configuration mode: 1
+2025-03-12 19:19:14,502 [INFO] JxBrowserEngine:152 - Initiate JxBrowser Engine with user profile folder
+2025-03-12 19:19:14,619 [INFO] ServerAccessManage:473 - Download File updaters.zip
+2025-03-12 19:19:14,786 [INFO] FileExtend:240 - Unzip File : updaters.zip
+2025-03-12 19:19:14,786 [INFO] FileExtend:255 - Standard Zip Deflate
+2025-03-12 19:19:15,353 [INFO] ServerAccessManage:473 - Download File PacksControlFlags.xml
+2025-03-12 19:19:15,653 [INFO] ServerAccessManage:473 - Download File cubemx.pidx
+2025-03-12 19:19:16,407 [WARN] MainUpdater:1193 - Updater busy. Cannot search thirdparties
+2025-03-12 19:19:16,407 [INFO] ThirdPartyUpdaterWithRetryManager:96 - Updater plugin is busy. [1/15]
+2025-03-12 19:19:16,525 [INFO] ServerAccessManage:473 - Download File STMicroelectronics.FP-SNS-FLIGHT1.pdsc
+2025-03-12 19:19:18,058 [INFO] ServerAccessManage:473 - Download File STMicroelectronics.X-CUBE-BLE1.pdsc
+2025-03-12 19:19:19,192 [INFO] WebApp:168 - Instantiating new browser for Auth
+2025-03-12 19:19:19,408 [WARN] MainUpdater:1193 - Updater busy. Cannot search thirdparties
+2025-03-12 19:19:19,408 [INFO] ThirdPartyUpdaterWithRetryManager:96 - Updater plugin is busy. [2/15]
+2025-03-12 19:19:22,408 [WARN] MainUpdater:1193 - Updater busy. Cannot search thirdparties
+2025-03-12 19:19:22,408 [INFO] ThirdPartyUpdaterWithRetryManager:96 - Updater plugin is busy. [3/15]
+2025-03-12 19:19:23,591 [ERROR] ServerAccessManage:1089 - Problem, file not found on Server
+2025-03-12 19:19:25,419 [WARN] MainUpdater:1193 - Updater busy. Cannot search thirdparties
+2025-03-12 19:19:25,419 [INFO] ThirdPartyUpdaterWithRetryManager:96 - Updater plugin is busy. [4/15]
+2025-03-12 19:19:26,545 [INFO] ServerAccessManage:473 - Download File STMicroelectronics.X-CUBE-TOUCHGFX.pdsc
+2025-03-12 19:19:27,619 [INFO] WebApp:449 - Apply proxy settings
+2025-03-12 19:19:27,620 [INFO] WebApp:534 - Chromium requires no authentication
+2025-03-12 19:19:28,478 [WARN] MainUpdater:1193 - Updater busy. Cannot search thirdparties
+2025-03-12 19:19:28,511 [INFO] ThirdPartyUpdaterWithRetryManager:96 - Updater plugin is busy. [5/15]
+2025-03-12 19:19:28,896 [INFO] WebApp:477 - Direct internet connection detected
+2025-03-12 19:19:30,379 [INFO] WebApp:880 - Register for checkConnection events
+2025-03-12 19:19:30,379 [INFO] WebApp:449 - Apply proxy settings
+2025-03-12 19:19:30,379 [INFO] WebApp:534 - Chromium requires no authentication
+2025-03-12 19:19:30,430 [INFO] WebApp:477 - Direct internet connection detected
+2025-03-12 19:19:30,990 [INFO] WebApp:221 - Starting web application
+2025-03-12 19:19:30,991 [INFO] WebApp:579 - Web application path used /home/celik/st/stm32cubeide_1.17.0/plugins/com.st.stm32cube.common.mx_6.13.0.202411220809/db/plugins/mcufinder/reactClient1/index.html
+2025-03-12 19:19:31,530 [WARN] MainUpdater:1193 - Updater busy. Cannot search thirdparties
+2025-03-12 19:19:31,530 [INFO] ThirdPartyUpdaterWithRetryManager:96 - Updater plugin is busy. [6/15]
+2025-03-12 19:19:34,536 [WARN] MainUpdater:1193 - Updater busy. Cannot search thirdparties
+2025-03-12 19:19:34,538 [INFO] ThirdPartyUpdaterWithRetryManager:96 - Updater plugin is busy. [7/15]
+2025-03-12 19:19:37,749 [WARN] MainUpdater:1193 - Updater busy. Cannot search thirdparties
+2025-03-12 19:19:37,890 [INFO] ThirdPartyUpdaterWithRetryManager:96 - Updater plugin is busy. [8/15]
+2025-03-12 19:19:41,897 [WARN] MainUpdater:1193 - Updater busy. Cannot search thirdparties
+2025-03-12 19:19:43,405 [INFO] ThirdPartyUpdaterWithRetryManager:96 - Updater plugin is busy. [9/15]
+2025-03-12 19:19:46,887 [WARN] MainUpdater:1193 - Updater busy. Cannot search thirdparties
+2025-03-12 19:19:47,007 [INFO] ThirdPartyUpdaterWithRetryManager:96 - Updater plugin is busy. [10/15]
+2025-03-12 19:19:50,239 [WARN] MainUpdater:1193 - Updater busy. Cannot search thirdparties
+2025-03-12 19:19:50,321 [INFO] ThirdPartyUpdaterWithRetryManager:96 - Updater plugin is busy. [11/15]
+2025-03-12 19:19:54,005 [WARN] MainUpdater:1193 - Updater busy. Cannot search thirdparties
+2025-03-12 19:19:54,308 [INFO] ThirdPartyUpdaterWithRetryManager:96 - Updater plugin is busy. [12/15]
+2025-03-12 19:19:57,372 [WARN] MainUpdater:1193 - Updater busy. Cannot search thirdparties
+2025-03-12 19:19:57,377 [INFO] ThirdPartyUpdaterWithRetryManager:96 - Updater plugin is busy. [13/15]
+2025-03-12 19:19:58,721 [WARN] PackLoader:240 - Cannot read IP mode file for STMicroelectronics.FP-SNS-FLIGHT1.5.1.0
+2025-03-12 19:19:58,760 [WARN] PackLoader:240 - Cannot read IP mode file for STMicroelectronics.X-CUBE-BLE1.7.1.0
+2025-03-12 19:19:58,775 [WARN] PackLoader:240 - Cannot read IP mode file for STMicroelectronics.X-CUBE-TOUCHGFX.4.25.0
+2025-03-12 19:19:58,775 [INFO] PopulateThirdPartyThread:66 - Ending populate Thread
+2025-03-12 19:19:58,784 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :STMicroelectronics FP-SNS-FLIGHT1 5.1.0
+2025-03-12 19:19:58,784 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :STMicroelectronics X-CUBE-BLE1 7.1.0
+2025-03-12 19:19:58,784 [INFO] ThirdParty:1030 - CMSIS Pack Vendor :STMicroelectronics X-CUBE-TOUCHGFX 4.25.0
+2025-03-12 19:19:58,785 [INFO] LoadServerUpdatesThread:375 - End of LoadServerUpdate Thread
+2025-03-12 19:19:58,823 [INFO] CheckServerUpdateThread:120 - End of CheckServer Thread
+2025-03-12 19:20:00,050 [INFO] WebApp:187 - Connection restablished
+2025-03-12 19:20:01,607 [WARN] PackLoader:240 - Cannot read IP mode file for STMicroelectronics.FP-SNS-MOTENVWB1.1.4.0
+2025-03-12 19:20:01,619 [WARN] PackLoader:240 - Cannot read IP mode file for STMicroelectronics.FP-ATR-ASTRA1.2.0.2
+2025-03-12 19:20:01,659 [WARN] PackLoader:240 - Cannot read IP mode file for STMicroelectronics.FP-ATR-ASTRA1.2.0.1
+2025-03-12 19:20:01,714 [WARN] PackLoader:240 - Cannot read IP mode file for STMicroelectronics.X-CUBE-SMBUS.2.1.0
+2025-03-12 19:20:01,759 [WARN] PackLoader:240 - Cannot read IP mode file for STMicroelectronics.X-CUBE-WB05N.1.1.0
+2025-03-12 19:20:01,933 [WARN] PackLoader:240 - Cannot read IP mode file for STMicroelectronics.X-CUBE-AZRTOS-F7.1.1.0
+2025-03-12 19:20:02,289 [WARN] PackLoader:240 - Cannot read IP mode file for STMicroelectronics.X-CUBE-MEMS1.11.0.0
+2025-03-12 19:20:05,682 [WARN] PackLoader:240 - Cannot read IP mode file for STMicroelectronics.FP-SNS-FLIGHT1.5.0.2
+2025-03-12 19:20:18,113 [WARN] PackLoader:240 - Cannot read IP mode file for STMicroelectronics.X-CUBE-DISPLAY.3.0.0
+2025-03-12 19:20:18,182 [WARN] PackLoader:240 - Cannot read IP mode file for STMicroelectronics.X-CUBE-BLE1.7.0.0
+2025-03-12 19:20:18,296 [WARN] PackLoader:240 - Cannot read IP mode file for STMicroelectronics.X-CUBE-NFC10.1.0.0
+2025-03-12 19:20:18,348 [WARN] PackLoader:240 - Cannot read IP mode file for STMicroelectronics.X-CUBE-BLEMGR.4.0.0
+2025-03-12 19:20:18,375 [WARN] PackLoader:240 - Cannot read IP mode file for emotas.I-CUBE-CANOPEN.1.3.0
+2025-03-12 19:20:18,392 [WARN] PackLoader:240 - Cannot read IP mode file for STMicroelectronics.X-CUBE-BLEMGR.3.1.0
+2025-03-12 19:20:18,407 [WARN] PackLoader:240 - Cannot read IP mode file for STMicroelectronics.X-CUBE-AI.10.0.0
+2025-03-12 19:20:18,431 [WARN] PackLoader:240 - Cannot read IP mode file for STMicroelectronics.FP-SNS-SMARTAG2.1.2.0
