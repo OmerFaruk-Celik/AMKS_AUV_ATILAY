@@ -143,7 +143,7 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-
+frekans=38400;
   while (1)
   {
     /* USER CODE END WHILE */
@@ -161,12 +161,12 @@ int main(void)
 	    	HAL_Delay(500);
 	    }
 
-	    /*
+
 	    else if(frekans ==37100){
 	    	frekans=38400;
 	    	HAL_Delay(500);
 	    }
-*/
+
 
 
 
