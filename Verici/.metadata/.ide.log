@@ -354,3 +354,6 @@
 2025-03-12 19:21:19,235 [WARN] PackLoader:240 - Cannot read IP mode file for STMicroelectronics.X-CUBE-TOF1.3.4.2
 2025-03-12 19:21:21,065 [WARN] PackLoader:240 - Cannot read IP mode file for Infineon.AIROC-Wi-Fi-Bluetooth-STM32.1.6.1
 2025-03-12 19:21:27,229 [WARN] PackLoader:240 - Cannot read IP mode file for wolfSSL.I-CUBE-wolfSSH.1.4.17
+2025-03-12 19:21:27,661 [INFO] ThirdParty:978 - Integrity check success = true
+2025-03-12 19:21:27,715 [INFO] IntegrityCheckThread:100 - exiting critical section [integrity check]
+2025-03-12 19:21:27,715 [INFO] IntegrityCheckThread:103 - End integrity checks thread
