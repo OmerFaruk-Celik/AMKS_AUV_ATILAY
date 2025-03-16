@@ -21,6 +21,8 @@ void lcd_put_cur(int row, int col);  // put cursor at the entered position row (
 
 void lcd_clear (void);
 
-void draw(char *shape);
+void draw(char *shape, int row, int column);
+
+void lcd_clear_area(int start_row, int start_col, int end_row, int end_col);
 
 #endif /* INC_LCD1602_H_ */

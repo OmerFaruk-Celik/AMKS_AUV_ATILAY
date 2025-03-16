@@ -132,3 +132,14 @@ void draw(char *shape, int row, int column) {
 void lcd_send_string(char *str) {
     while (*str) lcd_send_data(*str++);
 }
+
+
+void lcd_clear_area(int start_row, int start_col, int end_row, int end_col) {
+    for (int row = start_row; row <= end_row; row++) {
+        for (int col = start_col; col <= end_col; col++) {
+            lcd_put_cur(row, col);   // İmleci belirtilen konuma taşı
+            lcd_send_data(' ');      // Boşluk yaz
+        }
+    }
+}
+

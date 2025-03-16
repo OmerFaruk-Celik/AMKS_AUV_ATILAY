@@ -8,3 +8,4 @@
 ../Core/Src/LCD1602.c:103:6:lcd_create_char	2
 ../Core/Src/LCD1602.c:124:6:draw	2
 ../Core/Src/LCD1602.c:132:6:lcd_send_string	2
+../Core/Src/LCD1602.c:137:6:lcd_clear_area	3
