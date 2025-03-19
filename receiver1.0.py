@@ -148,7 +148,7 @@ def plot_recorded_signal(recorded_signal, sampling_rate):
 while True:
 	
     # Gelen sinyali dinle ve decode et
-    bit_array,v2= listen_and_decode(duration_per_bit=0.1, num_bits=8, sampling_rate=44100)
+    bit_array,v2= listen_and_decode(duration_per_bit=0.4, num_bits=8, sampling_rate=44100)
     hamming_array=hamming_8_4_decode(bit_array)
     #print("Alınan Bit Dizisi:", bit_array)
     binary_array = gray_to_bin(hamming_array)
