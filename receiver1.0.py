@@ -85,7 +85,7 @@ def listen_and_decode(duration_per_bit=0.5, num_bits=10, sampling_rate=44100):
         dominant_freq = abs(freq)
         if dominant_freq<1800 or dominant_freq > 46500:
             continue
-        print(dominant_freq )
+        #print(dominant_freq )
         if(abs(dominant_freq-StartBiti)<tolarance):
             bit_array=[]
             start_detected=True
@@ -109,11 +109,11 @@ def listen_and_decode(duration_per_bit=0.5, num_bits=10, sampling_rate=44100):
                 #print("Bitler Tespit ediliyor ...")
                 if abs(dominant_freq-BirBiti) < tolarance:
                     bit_array.append(1)
-                    print(f"Bit alındı: {bit_array[-1]}")
+                    #print(f"Bit alındı: {bit_array[-1]}")
                     
                 elif abs(dominant_freq-SifirBiti) < tolarance:
                     bit_array.append(0)
-                    print(f"Bit alındı: {bit_array[-1]}")
+                    #print(f"Bit alındı: {bit_array[-1]}")
                 start_detected=False
     #end_time=time.time()
     #elapsed_time=end_time-start_time
